@@ -1,8 +1,67 @@
-#container{
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 50px 3fr 1fr 4fr 1fr 5fr 1fr 1fr 3fr; 
-    row-gap: 10px;
-    column-gap: 10pxs;
+body{
     
 }
+
+nav{
+    background-color: blueviolet;
+    grid-area: 1/1/4/10;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    
+}
+
+nav>img{
+    height: 100px;
+    grid-area: 1/1/2/2;
+}
+
+h1{
+    grid-area: 4/2/5/4;
+}
+
+footer{
+    grid-area: 33/1/35/10;
+    background-color: gray;
+}
+
+#container{
+    display: grid;
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: auto;
+    grid-auto-rows: 40px;
+    gap: 1rem; 
+}
+
+#searchBar{
+    width: 300px;
+    height: 50px;
+    background-color: antiquewhite;
+    justify-content: center;
+}
+
+#carosello{
+    grid-area: 5/2/12/9;
+    background-color: blue;
+}
+
+#antipasti{
+    grid-area: 13/2/17/9;
+    background-color: aquamarine;
+}
+
+#primi{
+    grid-area: 18/2/22/9;
+    background-color: goldenrod;
+}
+
+#secondi{
+    grid-area: 23/2/27/9;
+    background-color: violet;
+}
+
+#dessert{
+    grid-area: 28/2/32/9;
+    background-color: slateblue;
+}
+
