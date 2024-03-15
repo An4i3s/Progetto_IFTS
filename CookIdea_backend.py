@@ -36,7 +36,7 @@ def getAllRecipes():
     return json.dumps(result)
 
 
-# web   (TUTTI I PIATTI)
+# WEB   (TUTTI I PIATTI)
 # http://192.168.1.94:8000/ricette
 @appWebApi.route("/ricette")
 def webGetRecipesfromName():
@@ -45,7 +45,7 @@ def webGetRecipesfromName():
     cursor.execute(query)
     result = cursor.fetchall()
 
-    return render_template("piatti.html", ricette = result)
+    return render_template("piatti_esempio.html", ricette = result)
 
 
 # api / RICERCA PER NOME PIATTO
