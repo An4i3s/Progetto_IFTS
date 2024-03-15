@@ -67,7 +67,6 @@ def getRecipesfromPortataAndDifficolta(portata, difficolta):
     query = "select * from piatti WHERE portata = %s AND difficolta = %s"
     cursor.execute(query, (portata, difficolta))
     result = cursor.fetchall()
-    print(result)
     return json.dumps(result)
 
 
@@ -80,7 +79,6 @@ def _getRecipesfromPortataAndDifficolta():
     query = "select * from piatti WHERE portata = %s AND difficolta = %s"
     cursor.execute(query, (portata, difficolta))
     result = cursor.fetchall()
-    print(result)
     return json.dumps(result)
 
 
