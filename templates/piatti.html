@@ -1,0 +1,12 @@
+<HTML>
+    <HEAD>
+        <TITLE>Esempio</TITLE>
+    </HEAD>
+    <BODY BGCOLOR="#BBFFBB">
+        <ul>
+        {% for piatto in ricette %}
+            <li>{{ piatto['nome_piatto'] }} {{ piatto['portata'] }}</li>
+        {% endfor %}
+    </ul>
+    </BODY>
+</HTML>
