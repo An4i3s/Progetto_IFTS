@@ -2,6 +2,7 @@ package com.example.cookidea_app;
 
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -33,6 +35,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main_drawer);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+
 
         bottomNavigationView.getOrCreateBadge(R.id.home_page).setVisible(true);
         bottomNavigationView.getOrCreateBadge(R.id.search).setVisible(true);
