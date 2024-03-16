@@ -1,0 +1,4 @@
+15/03/2024 @paolo
+- modificato nome tabella Piatti --> piatti  (minuscolo)
+- in tabella piatti aggiunta colonna image_url
+- in tabella piatti rinominata colonna difficoltà --> difficolta (senza accento che fa solo casini)
