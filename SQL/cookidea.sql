@@ -230,7 +230,7 @@ ADD COLUMN `image_url` TINYTEXT NULL AFTER `procedimento`;
 
 UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallozafferano.it/images/speciali/897/hd1200x800.jpg' WHERE (`id` = '10');
 UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallozafferano.it/images/speciali/897/hd1200x800.jpg' WHERE (`id` = '8');
-UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallozafferano.it/images/speciali/897/hd1200x800.jpg' WHERE (`id` = '9');
+UPDATE `bvl9qu0yricettarioquantita_ingrediente8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallozafferano.it/images/speciali/897/hd1200x800.jpg' WHERE (`id` = '9');
 UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallozafferano.it/images/speciali/897/hd1200x800.jpg' WHERE (`id` = '6');
 UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://i.pinimg.com/originals/0f/f2/9e/0ff29e3eb6a8276d7596e9de990a1751.jpg' WHERE (`id` = '1');
 UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://staticcookist.akamaized.net/wp-content/uploads/sites/21/2021/10/Risotto-ai-funghi-1200x675.jpg' WHERE (`id` = '2');
