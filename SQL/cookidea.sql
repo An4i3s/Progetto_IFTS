@@ -232,11 +232,11 @@ UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallo
 UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallozafferano.it/images/speciali/897/hd1200x800.jpg' WHERE (`id` = '8');
 UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallozafferano.it/images/speciali/897/hd1200x800.jpg' WHERE (`id` = '9');
 UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallozafferano.it/images/speciali/897/hd1200x800.jpg' WHERE (`id` = '6');
-UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallozafferano.it/images/speciali/897/hd1200x800.jpg' WHERE (`id` = '5');
-UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallozafferano.it/images/speciali/897/hd1200x800.jpg' WHERE (`id` = '4');
-UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallozafferano.it/images/speciali/897/hd1200x800.jpg' WHERE (`id` = '3');
-UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallozafferano.it/images/speciali/897/hd1200x800.jpg' WHERE (`id` = '2');
-UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallozafferano.it/images/speciali/897/hd1200x800.jpg' WHERE (`id` = '1');
+UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://i.pinimg.com/originals/0f/f2/9e/0ff29e3eb6a8276d7596e9de990a1751.jpg' WHERE (`id` = '1');
+UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://staticcookist.akamaized.net/wp-content/uploads/sites/21/2021/10/Risotto-ai-funghi-1200x675.jpg' WHERE (`id` = '2');
+UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://media-assets.lacucinaitaliana.it/photos/635169cdbc2c8a8e10d1f342/16:9/w_2560%2Cc_limit/GettyImages-482478191.jpg' WHERE (`id` = '3');
+UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://staticcookist.akamaized.net/wp-content/uploads/sites/21/2022/07/Cacio-e-pepe-0D6A4774.jpg' WHERE (`id` = '4');
+UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/640px-Eq_it-na_pizza-margherita_sep2005_sml.jpg' WHERE (`id` = '5');
 UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallozafferano.it/images/speciali/897/hd1200x800.jpg' WHERE (`id` = '7');
 
 
