@@ -3,18 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>cooKIdea</title>
-    <link rel="stylesheet" href="style.css">    
+    <title>CookIdea</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="slide.js"></script> 
 </head>
 <body>
     <div id="container">
         <nav>
             <img src="assets/rolling-pin.png" alt="logo cook Idea">
-            <div id="searchBar">searchBar</div>
-            <img src="assets/rolling-pin.png" alt="immagine profilo per Login">
+            <input type="text" id="searchBar" placeholder="CERCA...">
+            <button>Login</button>
+            <img src="assets/rolling-pin.png" alt="Immagine profilo per Login">
+
         </nav>
-        <h1>Scopri le nostre ricette</h1>
-        <div id="carosello">Carosello</div>
+        <div class="container">
+            <div class="carousel">
+              <div class="slide1">
+                <div class="item">
+                    <img src="https://www.ideabit.com/album/foto_full/formato-immagini-webp_710.jpg" height="200" width="350" style="border-radius: 10px;">
+                </div>
+              </div>
+              <div class="slide2">
+                <div class="item"><img src="https://www.ideabit.com/album/foto_full/formato-immagini-webp_710.jpg" height="200" width="350" style="border-radius: 10px;">
+                </div>
+              </div>
+              <div class="slide3">
+                <div class="item">
+                    <img src="https://www.ideabit.com/album/foto_full/formato-immagini-webp_710.jpg" height="200" width="350" style="border-radius: 10px;">
+                </div>
+              </div>
+              <div class="slide4">
+                <div class="item">
+                    <img src="https://www.ideabit.com/album/foto_full/formato-immagini-webp_710.jpg" height="200" width="350" style="border-radius: 10px;">
+                </div>
+              </div>
+              <div class="slide5">
+                <div class="item">
+                    <img src="https://www.ideabit.com/album/foto_full/formato-immagini-webp_710.jpg" height="200" width="350" style="border-radius: 10px;">
+                </div>
+              </div>
+              <div class="slide6">
+                <div class="item">
+                    <img src="https://www.ideabit.com/album/foto_full/formato-immagini-webp_710.jpg" height="200" width="350" style="border-radius: 10px;">
+                </div>
+              </div>
+            </div>
+          </div>
         <div id="antipasti">antipasti</div>
         <div id="primi">primi</div>
         <div id="secondi">secondi</div>
@@ -22,5 +57,8 @@
         <footer>footer</footer>
         
     </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="slide.js"></script>
 </body>
 </html>
