@@ -150,5 +150,5 @@ UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://staticcookist.
 UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/640px-Eq_it-na_pizza-margherita_sep2005_sml.jpg' WHERE (`id` = '5');
 UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallozafferano.it/images/speciali/897/hd1200x800.jpg' WHERE (`id` = '7');
 
-
+ --
 

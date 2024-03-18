@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS `preferiti`;
 DROP TABLE IF EXISTS `menu_settimanale`;
 DROP TABLE IF EXISTS `piatti`;
 DROP TABLE IF EXISTS `utenti`;
-DROP TABLE IF EXISTS `tipo_pasto`;
+DROP TABLE IF EXISTS `tipo_pasto`; 
 
 CREATE TABLE `ingredienti` (
   `id` int NOT NULL AUTO_INCREMENT,
