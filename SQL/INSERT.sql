@@ -9,14 +9,6 @@ DROP TABLE IF EXISTS `utenti`;
 DROP TABLE IF EXISTS `tipo_pasto`;
 
 
-
-CREATE TABLE `ingredienti` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nome_ingrediente` varchar(45) NOT NULL,
-  `categoria_ingrediente` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-);
-
 INSERT INTO ingredienti (nome_ingrediente, categoria_ingrediente) VALUES 
 ('Pomodori', 'Verdura'),
 ('Cipolle', 'Verdura'),
@@ -45,17 +37,6 @@ INSERT INTO ingredienti (nome_ingrediente, categoria_ingrediente) VALUES
 ('Caffè', 'Bevande');
 
 
-
-CREATE TABLE `piatti` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nome_piatto` varchar(45) NOT NULL,
-  `difficolta` int NOT NULL,
-  `tempo` int NOT NULL,
-  `provenienza` varchar(45) NOT NULL,
-  `portata` varchar(45) NOT NULL,
-  `procedimento` text NOT NULL,
-  PRIMARY KEY (`id`)
-);
 INSERT INTO `piatti` (`nome_piatto`, `difficolta`, `tempo`, `provenienza`, `portata`, `procedimento`) VALUES 
 ('Pasta alla Carbonara', 2, 25, 'Lazio', 'Primo', 'Cuocere la pasta, rosolare pancetta e aglio, aggiungere la pasta cotta e mescolare con uova e pecorino.'),
 ('Risotto ai Funghi Porcini', 2, 30, 'Piemonte', 'Primo', 'Soffriggere cipolla e funghi, aggiungere il riso e sfumare con il vino, cuocere aggiungendo brodo vegetale.'),
@@ -69,18 +50,6 @@ INSERT INTO `piatti` (`nome_piatto`, `difficolta`, `tempo`, `provenienza`, `port
 ('Tiramisù', 3, 60, 'Veneto', 'Dolce', 'Preparare una crema con uova, zucchero e mascarpone, inzuppare i biscotti nel caffè, alternare strati di biscotti e crema, spolverare con cacao amaro in polvere.');
 
 
-
-CREATE TABLE `ricettario` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_piatto` int NOT NULL,
-  `id_ingrediente` int NOT NULL,
-  `quantita_ingrediente` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_ingrediente_ricettario_idx` (`id_ingrediente`),
-  KEY `id_piatto_piatti_idx` (`id_piatto`),
-  CONSTRAINT `id_ingrediente_ricettario` FOREIGN KEY (`id_ingrediente`) REFERENCES `ingredienti` (`id`),
-  CONSTRAINT `id_piatto_ricettario` FOREIGN KEY (`id_piatto`) REFERENCES `piatti` (`id`)
-);
 -- Inserimento dei dati nel ricettario per il piatto 'Pasta alla Carbonara'
 INSERT INTO ricettario (id_piatto, id_ingrediente, quantita_ingrediente) VALUES 
 (1, 12, 200), -- Pasta per pizza
@@ -172,61 +141,13 @@ INSERT INTO ricettario (id_piatto, id_ingrediente, quantita_ingrediente) VALUES
 (10, 8, 1);   -- Pepe
 
 
-CREATE TABLE `utenti` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nome` varchar(45) NOT NULL,
-  `cognome` varchar(45) NOT NULL,
-  `data_nascita` date NOT NULL,
-  `email` varchar(45) NOT NULL,
-  `username` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username_UNIQUE` (`username`)
-);
+
 INSERT INTO `utenti` VALUES (1,'Mario','Rossi','1990-05-15','mario.rossi@example.com','mario123','password123'),(2,'Laura','Bianchi','1985-09-20','laura.bianchi@example.com','laura456','password456'),(3,'Giovanni','Verdi','1988-07-10','giovanni.verdi@example.com','giovanni789','password789');
 
 
-CREATE TABLE `tipo_pasto` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `nome_tipo_pasto` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-);
+
 INSERT INTO `tipo_pasto` VALUES (1,'Primo'),(2,'Secondo'),(3,'Contorno'),(4,'Dolce');
 
-
-CREATE TABLE `menu_settimanale` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_utente` int NOT NULL,
-  `id_piatto` int NOT NULL,
-  `id_pasto` int NOT NULL,
-  `data` date NOT NULL,
-  `numero_persone` int NOT NULL,
-  `comprato` tinyint NOT NULL DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `id_utente_menusettimanale_idx` (`id_utente`),
-  KEY `id_piatto_menusettimanale_idx` (`id_piatto`),
-  KEY `id_pasto_menusettimanale_idx` (`id_pasto`),
-  CONSTRAINT `id_pasto_menusettimanale` FOREIGN KEY (`id_pasto`) REFERENCES `tipo_pasto` (`id`),
-  CONSTRAINT `id_piatto_menusettimanale` FOREIGN KEY (`id_piatto`) REFERENCES `piatti` (`id`),
-  CONSTRAINT `id_utente_menusettimanale` FOREIGN KEY (`id_utente`) REFERENCES `utenti` (`id`)
-);
-
-
-
-CREATE TABLE `preferiti` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `id_utente` int NOT NULL,
-  `id_piatto` int NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `id_utente_preferiti_idx` (`id_utente`),
-  KEY `id_piatto_preferiti_idx` (`id_piatto`),
-  CONSTRAINT `id_piatto_preferiti` FOREIGN KEY (`id_piatto`) REFERENCES `piatti` (`id`),
-  CONSTRAINT `id_utente_preferiti` FOREIGN KEY (`id_utente`) REFERENCES `utenti` (`id`)
-);
-
-
-ALTER TABLE `bvl9qu0y8urzicrcjonj`.`piatti` 
-ADD COLUMN `image_url` TINYTEXT NULL AFTER `procedimento`;
 
 UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallozafferano.it/images/speciali/897/hd1200x800.jpg' WHERE (`id` = '10');
 UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallozafferano.it/images/speciali/897/hd1200x800.jpg' WHERE (`id` = '8');
@@ -241,17 +162,3 @@ UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_url` = 'https://ricette.giallo
 
 
 
-select * from menu_settimanale;
-select * from preferiti;
-select * from utenti;
-select * from tipo_pasto;
-select * from piatti;
-select * from ingredienti;
-select * from ricettario;
-
-
-SELECT p.id, p.nome_piatto, p.difficolta, p.tempo, p.provenienza, p.portata, p.procedimento, p.image_url, 
-       r.quantita_ingrediente, i.nome_ingrediente
-FROM piatti p
-JOIN ricettario r ON p.id = r.id_piatto
-JOIN ingredienti i ON r.id_ingrediente = i.id;
