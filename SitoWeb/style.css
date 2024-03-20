@@ -1,0 +1,202 @@
+body{
+    
+}
+
+nav{
+    overflow: hidden;
+    background-color: rgb(86, 49, 121);
+    border-radius: 10px;
+    grid-area: 1/1/4/10;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+   
+}
+
+nav>img{
+    height: 100px;
+    grid-area: 1/1/2/2;
+}
+
+#container{
+    display: grid;
+    grid-template-rows: auto;
+    grid-auto-rows: 40px;
+    gap: 1rem; 
+}
+
+#searchBar{
+    margin-top: 30px;
+    width: 300px;
+    height: 50px;
+    background-color: #ffffff;
+    font-size: 17px;
+    justify-content: center;
+    border: none;
+    text-align: center;
+    float: right;
+    border-radius: 6rem;
+}
+
+@keyframes carousel {
+    0% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-100%);
+    }
+    50% {
+        transform: translateX(-200%);
+    }
+    75% {
+        transform: translateX(-300%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+#carosello{
+    background-color: blue;
+    grid-area: 5/2/12/9;
+    background-color: blue;
+    overflow: hidden; /* Assicura che il contenuto non esca dalla visualizzazione */
+    white-space: nowrap; /* Impedisce la rottura del testo */
+    background-color: blue;
+}
+.container {
+    grid-area: 6/2/12/9;
+    margin: 0 auto;
+    width: 350px;
+    height: 200px;
+    position: relative;
+    perspective: 600px;
+  }
+  
+  .carousel {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+    user-select: none; /* Disable text selection */
+  }
+  .carousel div {
+    transform-style: preserve-3d;
+  }
+  
+  .item {
+    display: block;
+    position: absolute;
+    background: linear-gradient(to bottom, #f9f9f9, #e0e0e0);
+    width: 350px;
+    height: 200px;
+    line-height: 200px;
+    font-size: 2em;
+    text-align: center;
+    color: #333;
+    opacity: 0.8;
+    border-radius: 10px;
+    transition: transform 1s, opacity 0.5s;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .slide1 {
+    transform: rotateY(0deg) translateZ(250px);
+  }
+  .slide1 .item {
+    background: linear-gradient(to bottom, #e84c3d, #f66d49);
+    color: #fff; opacity:.93;
+  }
+  .slide2 {
+    transform: rotateY(60deg) translateZ(250px) rotateY(-60deg);
+  }
+  .slide2 .item {
+    background: linear-gradient(to bottom, #417ebf, #0072bc);
+    color: #fff; opacity:.93;
+  }
+  .slide3 {
+    transform: rotateY(120deg) translateZ(250px) rotateY(-120deg);
+  }
+  .slide3 .item {
+    background: linear-gradient(to bottom, #38c172, #36a165);
+    color: #fff; opacity:.93;
+  }
+  .slide4 {
+    transform: rotateY(180deg) translateZ(250px) rotateY(-180deg);
+  }
+  .slide4 .item {
+    background: linear-gradient(to bottom, #f0932b, #ed7600);
+    color: #fff; opacity:.93;
+  }
+  .slide5 {
+    transform: rotateY(240deg) translateZ(250px) rotateY(-240deg);
+  } 
+  .slide5 .item {
+    background: linear-gradient(to bottom, #9b59b6, #610093);
+    color: #fff; opacity:.93;
+  }
+  .slide6 {
+    transform: rotateY(300deg) translateZ(250px) rotateY(-300deg);
+  }
+  .slide6 .item {
+    background: linear-gradient(to bottom, #bf935a, #8c6239);
+    color: #fff; opacity:.93;
+  }
+
+#antipasti{
+    grid-area: 12/2/16/9;
+    border-radius: 10px;
+    background-color: rgb(30, 30, 112);
+}
+#antipasti:active{
+  opacity: 0.8s;
+}
+#antipasti:hover{
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  opacity: 0.8s;
+}
+
+#primi{
+    grid-area: 17/2/21/9;
+    border-radius: 10px;
+    background-color: goldenrod;
+}
+#primi:active{
+  opacity: 0.8s;
+}
+#primi:hover{
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  opacity: 0.8s;
+}
+
+#secondi{
+    grid-area: 22/2/26/9;
+    border-radius: 10px;
+    background-color: rgb(85, 34, 85);
+}
+#secondi:active{
+  opacity: 0.8s;
+}
+#secondi:hover{
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  opacity: 0.8s;
+}
+
+#dessert{
+    grid-area: 27/2/31/9;
+    border-radius: 10px;
+    background-color: rgb(27, 75, 45);
+}
+#dessert:active{
+  opacity: 0.8s;
+}
+#dessert:hover{
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+  opacity: 0.8s;
+}
+
+footer{
+  grid-area: 32/1/34/10;
+  background-color: gray;
+  border-radius: 10px;
+}
