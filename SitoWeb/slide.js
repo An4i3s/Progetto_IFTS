@@ -1,98 +1,116 @@
-   var carousel = $(".carousel"),
-        items = $(".item"),
-        currdeg = 0,
-        intervalId = null,
-        rotationInProgress = false;
+$(document).ready(function() {
+  var carousel = $(".carousel"),
+      items = $(".item"),
+      currdeg = 0,
+      intervalId = null,
+      rotationInProgress = false;
 
-    var mouseDownX = 0;
-    var mouseUpX = 0;
+  
+  function onBoxEnter() {
+      $(this).css("transform", "scale(1.1)");
+  }
 
-    $(".carousel").on("mousedown", function (event) {
-      mouseDownX = event.pageX;
-      stopRotation();
-    });
+  
+  function onBoxLeave() {
+      $(this).css("transform", "scale(1)");
+  }
 
-    $(".carousel").on("mousemove", function (event) {
+  
+  $(".box").on("mouseenter", onBoxEnter);
+  $(".box").on("mouseleave", onBoxLeave);
+
+  $(".carousel").on("mousedown", function() {
+      $(".box").off("mouseenter mouseleave");
+  });
+
+  carousel.on("mouseup", function() {
+      
+      $(".box").on("mouseenter", onBoxEnter);
+      $(".box").on("mouseleave", onBoxLeave);
+  });
+
+  $(".carousel").on("mousemove", function(event) {
       if (mouseDownX !== 0) {
-        mouseUpX = event.pageX;
+          mouseUpX = event.pageX;
       }
-    });
+  });
 
-    $(".carousel").on("mouseup", function (event) {
+  $(".carousel").on("mouseup", function(event) {
       if (mouseDownX !== 0) {
-        handleSwipe();
+          handleSwipe();
       }
       mouseDownX = 0;
       mouseUpX = 0;
       startRotation();
-    });
+  });
 
-    function handleSwipe() {
-      var swipeThreshold = 50; // Minimum swipe distance required to trigger a rotation
+  function handleSwipe() {
+      var swipeThreshold = 50;
 
       if (mouseUpX - mouseDownX > swipeThreshold) {
-        // Swipe right
-        rotate({ data: { d: "p" } });
+          // Swipe right
+          rotate({ data: { d: "p" } });
       } else if (mouseDownX - mouseUpX > swipeThreshold) {
-        // Swipe left
-        rotate({ data: { d: "n" } });
+          // Swipe left
+          rotate({ data: { d: "n" } });
       }
-    }
-    
-    function rotate(e) {
+  }
+  
+  function rotate(e) {
       if (rotationInProgress) {
-        return; // Ignora la richiesta di rotazione se già inizializzata
+          return; 
       }
 
       rotationInProgress = true;
 
       if (e.data.d == "n") {
-        currdeg = currdeg - 60;
+          currdeg = currdeg - 60;
       }
       if (e.data.d == "p") {
-        currdeg = currdeg + 60;
+          currdeg = currdeg + 60;
       }
       carousel.css({
-        "-webkit-transform": "rotateY(" + currdeg + "deg)",
-        "-moz-transform": "rotateY(" + currdeg + "deg)",
-        "-o-transform": "rotateY(" + currdeg + "deg)",
-        "transform": "rotateY(" + currdeg + "deg)"
+          "-webkit-transform": "rotateY(" + currdeg + "deg)",
+          "-moz-transform": "rotateY(" + currdeg + "deg)",
+          "-o-transform": "rotateY(" + currdeg + "deg)",
+          "transform": "rotateY(" + currdeg + "deg)"
       });
       items.css({
-        "-webkit-transform": "rotateY(" + (-currdeg) + "deg)",
-        "-moz-transform": "rotateY(" + (-currdeg) + "deg)",
-        "-o-transform": "rotateY(" + (-currdeg) + "deg)",
-        "transform": "rotateY(" + (-currdeg) + "deg)"
+          "-webkit-transform": "rotateY(" + (-currdeg) + "deg)",
+          "-moz-transform": "rotateY(" + (-currdeg) + "deg)",
+          "-o-transform": "rotateY(" + (-currdeg) + "deg)",
+          "transform": "rotateY(" + (-currdeg) + "deg)"
       });
 
       setTimeout(function() {
-        rotationInProgress = false;
-      }, 2000); // Imposta il tempo dopo il quale il carosello gira alla sequente slide
-    }
-    
-    function startRotation() {
+          rotationInProgress = false;
+      }, 2000); 
+  }
+  
+  function startRotation() {
       if (intervalId === null) {
-        intervalId = setInterval(function() {
-          rotate({ data: { d: "n" } });
-        }, 100); // Imposta il tempo dopo il quale il carosello gira alla sequente slide
+          intervalId = setInterval(function() {
+              rotate({ data: { d: "n" } });
+          }, 100); 
       }
-    }
-    
-    function stopRotation() {
+  }
+  
+  function stopRotation() {
       if (intervalId !== null) {
-        clearInterval(intervalId);
-        intervalId = null;
+          clearInterval(intervalId);
+          intervalId = null;
       }
-    }
+  }
 
-    // Inizia rotazione
-    startRotation();
+  
+  startRotation();
 
-    // Detect visibility change and stop/start rotation accordingly
-    document.addEventListener("visibilitychange", function() {
+  document.addEventListener("visibilitychange", function() {
       if (document.visibilityState === "hidden") {
-        stopRotation();
+          stopRotation();
       } else if (document.visibilityState === "visible") {
-        startRotation();
+          startRotation();
       }
-    });
+  });
+
+});
