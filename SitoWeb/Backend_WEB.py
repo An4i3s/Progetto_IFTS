@@ -17,7 +17,7 @@ config = {
     'database': 'bvl9qu0y8urzicrcjonj' #COOKIDEA #
 }
 
-# Connessione al database
+# Connessione al database #
 db = pymysql.connect(**config)
 cursor = db.cursor(pymysql.cursors.DictCursor)
 
