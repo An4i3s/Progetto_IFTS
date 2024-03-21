@@ -8,7 +8,7 @@ appWebApi = Flask(__name__)
 
 @appWebApi.route("/main")
 def principale():
-    return "ok funziona"
+    return "ok funziona "
 
 config = {
     'host': 'bvl9qu0y8urzicrcjonj-mysql.services.clever-cloud.com',
