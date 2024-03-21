@@ -14,7 +14,7 @@ config = {
     'host': 'bvl9qu0y8urzicrcjonj-mysql.services.clever-cloud.com',
     'user': 'udihp2ytyzgp09os',
     'password': 'Vy2duKaXFXncXE5gSwEh',
-    'database': 'bvl9qu0y8urzicrcjonj' #COOKIDEA
+    'database': 'bvl9qu0y8urzicrcjonj' #COOKIDEAfgfgfg
 }
 
 # Connessione al database
