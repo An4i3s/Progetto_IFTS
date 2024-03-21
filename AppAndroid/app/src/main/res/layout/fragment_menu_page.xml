@@ -6,10 +6,15 @@
     tools:context=".MenuPageFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:id="@+id/menuPage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Menu Page"
-        android:textSize="30dp"/>
+        android:orientation="vertical">
+
+
+
+    </LinearLayout>
+
 
 </FrameLayout>

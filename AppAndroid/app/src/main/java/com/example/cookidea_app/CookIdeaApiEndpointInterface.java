@@ -1,4 +1,4 @@
-package com.example.cookidea;
+package com.example.cookidea_app;
 
 import java.util.ArrayList;
 

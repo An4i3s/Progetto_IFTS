@@ -49,6 +49,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
+        //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+        //getSupportActionBar().setHomeButtonEnabled(false);
+
 
 
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -63,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         actionBarDrawerToggle = new ActionBarDrawerToggle(MainActivity.this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawerLayout.addDrawerListener(actionBarDrawerToggle);
         actionBarDrawerToggle.syncState();
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        actionBarDrawerToggle.setDrawerIndicatorEnabled(false);
 
 
     }
