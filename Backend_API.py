@@ -19,10 +19,7 @@ config = {
 
 # Connessione al database
 db = pymysql.connect(**config)
-cursor = db.cursor(pymysql.cursors.DictCursor)
-
-
-# endpoint
+cursor = db.cursor(pymysql)
 
 
 
@@ -30,31 +27,16 @@ cursor = db.cursor(pymysql.cursors.DictCursor)
 # http://192.168.1.94:8000/api/piatti
 @appWebApi.route("/api/piatti")
 def getAllRecipes():
-
     query = "select * from piatti"
     cursor.execute(query)
     result = cursor.fetchall()
-
     return json.dumps(result)
-
-
-# WEB   (TUTTI I PIATTI)
-# http://192.168.1.94:8000/piatti
-@appWebApi.route("/piatti")
-def webGetAllRecipes():
-
-    query = "select * from piatti"
-    cursor.execute(query)
-    result = cursor.fetchall()
-
-    return render_template("piatti_esempio.html", piatti = result)
-
 
 
 
 
 # api / RICERCA PER NOME PIATTO  (anche solo una parte del nome)
-# http://192.168.0.110:8000/api/ricercapiattopernome/funghi
+# http://192.168.0.110:8000/api/ricercaPerNome/funghi
 @appWebApi.route("/api/ricercaPerNome/<nome>")
 def getRecipesfromName(nome):
 
@@ -62,19 +44,7 @@ def getRecipesfromName(nome):
     cursor.execute(query, ('%' + nome+ '%',))
     result = cursor.fetchall()
    
-    return json.dumps(result)
-
-
-# web / RICERCA PER NOME PIATTO  (anche solo una parte del nome)
-# http://192.168.0.110:8000/ricercapiattopernome/Funghi
-@appWebApi.route("/ricercaPerNome/<nome>")
-def webGetRecipesfromName(nome):
-
-    query = "select * from piatti WHERE nome_piatto LIKE %s"
-    cursor.execute(query, ('%' + nome+ '%',))
-    result = cursor.fetchall()
-
-    return render_template("piatti_esempio.html", piatti = result)
+    return json.dumps(result, default=vars)
 
 
 # @@@@@PROVE VARIE PER RICERCA AVANZATA
@@ -101,11 +71,21 @@ def _getRecipesfromPortataAndDifficolta():
     return json.dumps(result)
 
 
+# api / RESTITUISCE ELENCO PORTATE
+@appWebApi.route("/api/portate/")
+def getPortate():
+    query = "SELECT DISTINCT piatti.portata FROM piatti"
+    cursor.execute(query)
+    result = cursor.fetchall()
+
+    return json.dumps(result)
+
+
+
 
 
 
 # api /restituisce tutti i piatti facendo join con ingredienti e ricettario
-# ***** ANCORA DA TERMINARE, C'E' DA CAPIRE SE FARE LE CLASSI MODELLO ANCHE DI RICETTARIO E INGREDIENTE
 # http://192.168.1.20:8000/api/piatti_ricette
 
 class Piatto:
@@ -137,17 +117,26 @@ class Ricettario:
     nome_ingrediente = None
     categoria_ingrediente = None
 
-    def __init__(self, id_p, q_i, n_i, c_i):
-        self.id_piatto = id_p
+    def __init__(self, q_i, n_i, c_i):
         self.quantita_ingrediente = q_i
         self.nome_ingrediente = n_i
         self.categoria_ingrediente = c_i
 
 
 
-
 @appWebApi.route("/api/piatti_ricette")
 def getPiattiRicette():
+    
+
+    filtroNome = request.args.get("nome_piatto")    
+    filtroIngrediente = request.args.getlist("listaIngredienti")
+    filtroDifficolta = request.args.getlist("listaDifficolta")
+    filtroTempoMinimo = request.args.get("tempoMinimo", type=int)
+    filtroTempoMassimo = request.args.get("tempoMassimo", type=int)
+    filtroProvenienza = request.args.getlist("listaProvenienza")
+    filtroPortata = request.args.getlist("listaPortata")
+
+
     query = """
         SELECT p.id, p.difficolta, p.tempo, p.nome_piatto, p.provenienza, p.portata, p.procedimento, p.image_url,
                r.quantita_ingrediente, i.nome_ingrediente, i.categoria_ingrediente
@@ -158,12 +147,19 @@ def getPiattiRicette():
     cursor.execute(query)
 
     results = cursor.fetchall()
+    #print(type(results), results)
 
-    listaPiatti = {}
+
+    listaPiatti = []
+    
 
     for row in results:
         piatto_id = row["id"]
-        if piatto_id not in listaPiatti:
+        inserito = False
+        for elemento in listaPiatti:
+            if elemento.id ==piatto_id:
+                inserito = True
+        if not inserito:
             id = row["id"]
             difficolta = row["difficolta"]
             tempo = row['tempo']
@@ -174,73 +170,54 @@ def getPiattiRicette():
             image_url = row['image_url']
             ricettario = []
 
-            listaPiatti[piatto_id] = {
-                "id": id,
-                "difficolta": difficolta,
-                "tempo" : tempo,
-                "nome_piatto" : nome_piatto,
-                "provenienza" : provenienza,
-                "portata": portata,
-                "procedimento" : procedimento,
-                "image_url" : image_url,
-                "ricettario" : ricettario
-            }
+            listaPiatti.append(Piatto(id, difficolta, tempo, nome_piatto, provenienza, portata, procedimento, image_url, ricettario))
 
-        ricettario = {
-            "nome_ingrediente" : row["nome_ingrediente"],
-            "categoria_ingrediente" : row["categoria_ingrediente"],
-            "quantita_ingrediente" : row["quantita_ingrediente"]
-        }
-        listaPiatti[piatto_id]["ricettario"].append(ricettario)
+    for row in results:   
+        for piatto in listaPiatti:
+            if piatto.id == row["id"]:
+                piatto.ricettario.append(Ricettario(row["quantita_ingrediente"], row["nome_ingrediente"], row["categoria_ingrediente"]))
+            
 
-
-   
-           
-    print(listaPiatti)
-    return json.dumps(list(listaPiatti.values()))
-
-
-
-
-
-    # piatto_id = 
-    
-    # for row in results:
-    #     piatto 
-    #     id = row['id']
-    #     nome_piatto = row['nome_piatto']
-    #     tempo = row['tempo']
-    #     provenienza = row['provenienza']
-    #     portata = row['portata']
-    #     procedimento= row['procedimento']
-    #     image_url = row['image_url']
+    # filtroNome = ""                 
+    # filtroIngrediente =["olio"]         #lista str
+    # filtroDifficolta = [2, 3, 1]           #lista int
+    # filtroTempo = None                #lista int
+    # filtroTempoMinimo = None          #lista int
+    # filtroTempoMassimo = None         #lista int
+    # filtroProvenienza = None            #lista str
+    # filtroPortata = None                #lista str
         
-    #     ricettario = Ricettario()
+
+    listaFiltrata  = [piatto for piatto in listaPiatti
+                      if (filtroNome is None or filtroNome.lower() in piatto.nome_piatto.lower())
+                      and
+                      all(ingrediente_filtrato(piatto, ingrediente) for ingrediente in filtroIngrediente)
+                      and
+                      (not filtroDifficolta or piatto.difficolta in filtroDifficolta)
+                      and
+                      ((filtroTempoMinimo is None or filtroTempoMassimo is None) or
+                      (filtroTempoMinimo <= piatto.tempo <= filtroTempoMassimo))
+                      and
+                      (not filtroProvenienza or any(p.lower() in piatto.provenienza.lower() for p in filtroProvenienza))
+                      and
+                      (not filtroPortata or any(p.lower() in piatto.portata.lower() for p in filtroPortata))
+                      ]
+    
+    for piatto in listaFiltrata:
+        print(piatto.nome_piatto)
+
+    return json.dumps(listaFiltrata, default=vars)
+
+def ingrediente_filtrato(piatto, ingrediente):
+    return any(ingrediente.strip().lower() in i.nome_ingrediente.strip().lower() for i in piatto.ricettario)
 
 
 
 
-    #     piatto_id = row['id']
-    #     if piatto_id not in piatti:
-    #         piatti[piatto_id] = {
-    #             "id": row['id'],
-    #             "nome_piatto": row['nome_piatto'],
-    #             "difficolta": row['difficolta'],
-    #             "tempo": row['tempo'],
-    #             "provenienza": row['provenienza'],
-    #             "portata": row['portata'],
-    #             "procedimento": row['procedimento'],
-    #             "image_url": row['image_url'],
-    #             "ricettario": []
-    #         }
 
-    #     ricettario = {
-    #         "quantita_ingrediente": row['quantita_ingrediente'],
-    #         "nome_ingrediente": row['nome_ingrediente']
-    #     }
-    #     piatti[piatto_id]["ricettario"].append(ricettario)
 
-    # return json.dumps(list(piatti.values()))
+
+
 
 
 
@@ -252,5 +229,6 @@ def getPiattiRicette():
 
 if __name__ == "__main__":
     appWebApi.run(host='0.0.0.0', port=8000, debug=True)
+
 
 
