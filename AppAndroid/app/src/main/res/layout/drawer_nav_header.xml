@@ -1,0 +1,7 @@
+<ImageView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="160dp"
+    android:layout_height="160dp"
+    android:background="@color/white"
+    android:scaleType="fitCenter"
+    android:src="@drawable/cookidea_logo" />

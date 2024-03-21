@@ -1,26 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    >
-
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/home_page"
-        android:icon="@drawable/home"
-        android:title="Home"
-        android:visible="true"
-        />
-
+        android:id="@+id/homePage"
+        android:title="@string/home"
+        android:icon="@drawable/home"/>
     <item
-        android:id="@+id/search"
-        android:icon="@drawable/search"
-        android:title="Cerca"
-        android:visible="true"
-        />
-
+        android:id="@+id/searchPage"
+        android:title="@string/cerca"
+        android:icon="@drawable/lente"/>
     <item
-        android:id="@+id/menu"
-        android:icon="@drawable/menu"
-        android:title="Menu"
-        android:visible="true"
-        />
+        android:id="@+id/shoppingListPage"
+        android:title="@string/spesa"
+        android:icon="@drawable/list"/>
+    <item
+        android:id="@+id/menuPage"
+        android:title="@string/men"
+        android:icon="@drawable/menu"/>
 
 </menu>
