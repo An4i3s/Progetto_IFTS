@@ -36,6 +36,7 @@ body{
 
 .recipe_ingredienti, .recipe_preparazione{
     margin-bottom: 20px;
+    
 }
 nav{
     overflow: hidden;
@@ -281,9 +282,12 @@ nav{
 }
 
 .recipe_name {
+    font-family: "Passion One", sans-serif;
+    font-weight: 400;
+    font-size: 70px;
+    font-style: normal;
     color: white;
-    font-size: 50px; 
-    font-weight: 800;
-    margin-left: 10px;
+     margin-left: 10px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
+
