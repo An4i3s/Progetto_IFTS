@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     implementare funzione di login
     implementare funzione di logout
     implementare fragment profiloUtente
-    collegre pagina profile utente con dati presi da db*/
+    collegre pagina profile utente con dati presi da db
+    per il momento niente SQLite*/
     BottomNavigationView bottomNavigationView;
     HomePageFragment homeFragment = new HomePageFragment();
     SearchPageFragment searchFragment = new SearchPageFragment();
