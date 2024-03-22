@@ -7,13 +7,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <androidx.viewpager.widget.ViewPager
-        android:id="@+id/carousel"
+        android:id="@+id/carouselViewPagerHomeFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="4"/>
 
     <ListView
-        android:id="@+id/categoryList"
+        android:id="@+id/categoryListHomeFragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="6" />

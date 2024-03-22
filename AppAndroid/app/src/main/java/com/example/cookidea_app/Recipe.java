@@ -3,6 +3,7 @@ package com.example.cookidea_app;
 import java.util.HashMap;
 
 public class Recipe {
+    private  int recipeId;
     private final String img_url;
     private final String name;
     private final String method;

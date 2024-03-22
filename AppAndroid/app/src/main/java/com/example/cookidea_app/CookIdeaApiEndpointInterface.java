@@ -10,6 +10,6 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface CookIdeaApiEndpointInterface {
-    @GET("/users/{username}")
+    @GET("/users/{}")
     Call<String> getUser(@Path("username") String username);
 }

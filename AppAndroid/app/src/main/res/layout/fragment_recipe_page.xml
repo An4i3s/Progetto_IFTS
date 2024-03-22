@@ -1,39 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RecipePageFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/recipeNameTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
         <ImageView
-            android:id="@+id/recipeImageView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.3"
+            android:id="@+id/imageRecipeView"
+            android:layout_width="175dp"
+            android:layout_height="175dp"
+            android:scaleType="fitCenter"
+            android:layout_margin="20dp" />
+
+        <TextView
+            android:id="@+id/nameRecipeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/imageRecipeView"
+            android:text="Pasta alla carbonara"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+
             />
 
-        <ListView
-            android:id="@+id/ingredientsListView"
+        <TextView
+            android:id="@+id/timeRecipeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tempo: "
+            android:layout_below="@+id/nameRecipeTextView"
+            android:layout_toEndOf="@+id/imageRecipeView"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/difficultyRecipeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Difficoltà: 😥"
+            android:layout_below="@+id/timeRecipeTextView"
+            android:layout_toEndOf="@+id/imageRecipeView"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/provenienceRecipeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Provenienza: "
+            android:layout_below="@+id/difficultyRecipeTextView"
+            android:layout_toEndOf="@+id/imageRecipeView"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/ingredientsRecipeListView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/imageRecipeView"
+            android:nestedScrollingEnabled="true"
+            android:text="Ingredienti:"
+            android:textSize="17sp"
+            android:padding="15dp"
             />
 
         <TextView
             android:id="@+id/recipeGuideTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
+            android:layout_below="@+id/ingredientsRecipeListView"
+            android:text="Procedimento:\n"
+            android:textSize="17sp"
+            android:padding="15dp"/>
 
-    </LinearLayout>
 
-</FrameLayout>
+
+    </RelativeLayout>
+
+</ScrollView>
