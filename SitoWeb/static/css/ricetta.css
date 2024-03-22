@@ -2,6 +2,12 @@ body{
     font-family: Arial, Helvetica, sans-serif;
     margin: 0;
     padding: 0;
+    background-image: url('../img/background_blur.jpg');
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;  
+    background-size: cover; /* Per adattare l'immagine alla dimensione dell'intera finestra del browser */
+    background-repeat: no-repeat; 
 }
 
 .container {
@@ -36,7 +42,7 @@ body{
 
 .recipe_ingredienti, .recipe_preparazione{
     margin-bottom: 20px;
-    
+
 }
 nav{
     overflow: hidden;
@@ -56,9 +62,10 @@ nav{
 #container{
     display: grid;
     position: relative;
+    grid-template-areas: "navbar" "login";
     grid-template-rows: auto;
     grid-template-columns: auto;
-    grid-auto-rows: 40px;
+    grid-auto-rows: auto auto;
     gap: 1rem; 
 }
 
@@ -128,24 +135,24 @@ nav{
 
 .wrapper {
     position: relative;
-    width: 400px;
-    height: 440px;
-    background: transparent;
-    border: 2px solid rgba(255, 255, 255, .5);
-    border-radius: 20px;
-    backdrop-filter: blur(20px);
-    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
-    display: grid;
-    grid-area: 3/5/5/5;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    transform: scale(0);
-    transition:transform .5s ease, height .2s ease;
+  width: 400px;
+  height: 440px;
+  background: transparent;
+  border: 2px solid rgba(255, 255, 255, .5);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+  display: grid;
+  grid-area: 3/5/5/5;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transform: scale(0);
+  transition:transform .5s ease, height .2s ease;
 }
 
 .wrapper.active-popup {
-    transform: translate(-100%, -50%) scale(1);
+    transform: translate(-100%, -100%) scale(1);
 }
 
 .wrapper.active {
@@ -286,8 +293,8 @@ nav{
     font-weight: 400;
     font-size: 70px;
     font-style: normal;
-    color: white;
+    color: #ececec;
      margin-left: 10px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1.0);
 }
 
