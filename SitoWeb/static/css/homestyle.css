@@ -3,14 +3,12 @@
   padding:0;
 }
 body{
-  background-color: rgb(187, 184, 182);
+  background-image: url('../img/background_blur.jpg');
   min-height: 100vh;
   background-size: cover;
   background-position: center;  
-  background-image: url('../img/background.jpg');
   background-size: cover; /* Per adattare l'immagine alla dimensione dell'intera finestra del browser */
   background-repeat: no-repeat; /* Per evitare la ripetizione dell'immagine */
-
 }
 
 nav{
@@ -26,6 +24,7 @@ nav{
 .nav img{
   margin-top: auto;
   margin-bottom: auto;
+  filter: blur(5px);
 }
 
 #container{
@@ -263,7 +262,6 @@ nav{
   grid-column: auto;
   grid-area: 8/3/12/8;
   border-radius: 10px;
-  background-color: rgb(10, 244, 252);
 }
 .antipasti-image {
   width: 100%; /* Imposta la larghezza al 100% dell'elemento padre */
@@ -288,7 +286,6 @@ nav{
   display: grid;
   grid-area: 12/3/16/8;
   border-radius: 10px;
-  background-color: goldenrod;
 }
 #primi:active{
   opacity: 0.8s;
@@ -308,7 +305,6 @@ nav{
   display: grid;
   grid-area: 16/3/20/8;
   border-radius: 10px;
-  background-color: rgb(24, 90, 211);
 }
 #secondi:active{
   opacity: 0.8s;
@@ -328,7 +324,6 @@ nav{
   display: grid;
   grid-area: 20/3/24/8;
   border-radius: 10px;
-  background-color: rgb(192, 60, 8);
 }
 #dessert:active{
   opacity: 0.8s;
