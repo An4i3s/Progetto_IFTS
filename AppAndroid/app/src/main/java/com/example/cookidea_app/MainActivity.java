@@ -25,7 +25,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-
+    /*fare activity di login
+    implementare splashpage
+    collegare gli endpoint
+    modificare risorse homePageFragment con dati presi da db
+    implementare funzione di login
+    implementare funzione di logout
+    implementare fragment profiloUtente
+    collegre pagina profile utente con dati presi da db
+    per il momento niente SQLite*/
     BottomNavigationView bottomNavigationView;
     HomePageFragment homeFragment = new HomePageFragment();
     SearchPageFragment searchFragment = new SearchPageFragment();
@@ -38,10 +46,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //aggiungere drawer da action bar
-        //togliere logo e immagine apertura drawer
-        //rifare drawer da action bar
-        //chiedere al prof come inserire logo nella action bar
+
 
         bottomNavigationView = findViewById((R.id.bottomNavBar));
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
