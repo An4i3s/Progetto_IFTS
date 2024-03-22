@@ -1,5 +1,6 @@
 from flask import Flask, request, render_template, json
 import pymysql
+from models import *
 
 
 appWebApi = Flask(__name__)
