@@ -1,32 +1,116 @@
 <!DOCTYPE html>
-<html lang="it">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Ricetta</title>
-        <link rel="stylesheet" href="../static/css/ricetta.css">
-    </head>
-    <body>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CookIdea</title>
+    <link rel="stylesheet" href="..\static\css\homestyle.css">
+    <link rel="stylesheet" href="..\static\css\ricetta.css">
+</head>
+<body>
 
-<div class="contaniner">
-    <div class="recipe">
-        <img src="foto ricetta" alt="Ricetta">
-        <div class="recipe_section">
-            <h2 class="recipe_title">Ingredienti</h2>
-            <div class="recipe_ingredienti">
-               
+<nav class="navigation">
+    <img src="assets/rolling-pin.png" alt="logo cook Idea">
+    <input type="text" id="searchBar" placeholder="CERCA...">
+    <a href="#">Home</a>
+    <button class="btnLogin-popup">Login</button>
+</nav>
+
+<div id="container">
+
+<div class="wrapper">
+    <span class="icon-close">
+        <ion-icon name="close"></ion-icon>
+    </span>
+    <div class="form-box login">
+        <h2>Login</h2>
+        <form action="#">
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="mail"></ion-icon>
+                </span>
+                <input type="email" required>
+                <label>Indirizzo email</label> 
             </div>
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="lock-closed"></ion-icon>
+                </span>
+                <input type="password" required>
+                <label>Password</label> 
+            </div>
+            <div class="remember-forgot">
+                <label><input type="checkbox"> Ricordami</label>
+                <a href="#">Password dimenticata?</a>
+            </div>
+            <button type="submit" class="btn">Accedi</button>
+            <div class="login-register">
+                <p>Non hai ancora un account?<a href="#" class="register-link"> Registrati</a></p>
+            </div>
+        </form>
+    </div>
+    <div class="form-box register">
+        <h2>Crea account</h2>
+        <form action="#">
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="person"></ion-icon>
+                </span>
+                <input type="text" required>
+                <label>Username</label>
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="mail"></ion-icon>
+                </span>
+                <input type="email" required>
+                <label>Indirizzo email</label>
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="lock-closed"></ion-icon>
+                </span>
+                <input type="password" required>
+                <label>Password</label> 
+            </div>
+            <div class="remember-forgot">
+                <label><input type="checkbox"> Accetto termini e condizioni</label>
+            </div>
+            <button type="submit" class="btn">Registrati</button>
+            <div class="login-register">
+                <p>Hai già un account?<a href="#" class="login-link"> Accedi</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="recipe">
+    <img src="percorso_della_tua_foto.jpg" alt="Ricetta" class="recipe__image">
+    <div class="recipe__section">
+        <h2 class="recipe__title">Ingredienti</h2>
+        <div class="recipe__ingredienti">
+            <ul>
+                <li>Ingrediente 1</li>
+                <li>Ingrediente 2</li>
+                <li>Ingrediente 3</li>
+                <!-- Aggiungi gli altri ingredienti -->
+            </ul>
         </div>
-        <div class="recipe_section">
-            <h2 class="recipe_title">preparazione</h2>
-            <div class="recipe_preparazione">
-
-
-            </div>
+    </div>
+    <div class="recipe__section">
+        <h2 class="recipe__title">Preparazione</h2>
+        <div class="recipe__preparazione">
+            <ol>
+                <li>Passo 1</li>
+                <li>Passo 2</li>
+                <li>Passo 3</li>
+                <!-- Aggiungi gli altri passaggi di preparazione -->
+            </ol>
         </div>
     </div>
 </div>
 
+</div>
 
-    </body>
+</body>
 </html>
