@@ -22,7 +22,7 @@ CREATE TABLE `piatti` (
   `provenienza` varchar(45) NOT NULL,
   `portata` varchar(45) NOT NULL,
   `procedimento` text NOT NULL,
-  `image_url` TINYTEXT,
+  `image_name` TINYTEXT,
   PRIMARY KEY (`id`)
 );
 
