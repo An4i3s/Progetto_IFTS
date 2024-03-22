@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
 
-    //LoginFragment loginFragment = new LoginFragment();
+
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             fragment = menuFragment;
         if (id == R.id.loginPage)
             fragment = new LoginFragment();
-
+        //if(id==R.id.) AggiungereFragment x Profilo
 
         getSupportFragmentManager()
                 .beginTransaction()
