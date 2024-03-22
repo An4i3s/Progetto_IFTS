@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request, render_template, json
 import pymysql
+import random
 
 
 appWebApi = Flask(__name__)
@@ -82,6 +83,17 @@ def getPortate():
         nomi_portate.append(record["portata"])
     return jsonify(nomi_portate)
 
+
+
+# api / RESTITUISCE ID + NOME_PIATTO + IMMAGINE (5 RANDOM)
+@appWebApi.route("/api/randomPiattoIdNomeImg")
+def getPiattiImmagini():
+    piattiDaRestituire = 5
+    query = """SELECT id, nome_piatto, image_name
+               FROM piatti ORDER BY RAND() LIMIT %s"""
+    cursor.execute(query, (piattiDaRestituire))
+    result = cursor.fetchall()
+    return jsonify(result)
 
 
 
