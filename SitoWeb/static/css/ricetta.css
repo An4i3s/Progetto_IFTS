@@ -125,30 +125,33 @@ nav{
   color: #162938;
 }
 
-.wrapper{
-  position: relative;
-  width: 400px;
-  height: 440px;
-  background: transparent;
-  border: 2px solid rgba(255, 255, 255, .5);
-  border-radius: 20px;
-  backdrop-filter: blur(20px);
-  box-shadow: 0 0 30px rgba(0, 0, 0, .5);
-  display: grid;
-  grid-area: 3/5/5/5;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  transform: scale(0);
-  transition:transform .5s ease, height .2s ease;
+.wrapper {
+    position: relative;
+    width: 400px;
+    height: 440px;
+    background: transparent;
+    border: 2px solid rgba(255, 255, 255, .5);
+    border-radius: 20px;
+    backdrop-filter: blur(20px);
+    box-shadow: 0 0 30px rgba(0, 0, 0, .5);
+    display: grid;
+    grid-area: 3/5/5/5;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transform: scale(0);
+    transition:transform .5s ease, height .2s ease;
 }
-.wrapper.active-popup{
-  transform: scale(1);
-}
-.wrapper.active{
-  height: 520px;
 
+.wrapper.active-popup {
+    transform: translate(-100%, -50%) scale(1);
 }
+
+.wrapper.active {
+    height: 520px;
+}
+
+
 .wrapper .form-box{
   width: 380px;
 
