@@ -5,7 +5,8 @@
             android:id="@+id/loginPage"
             android:title="Login"
             android:icon="@drawable/user_icon"
-            android:visible="true"/>
+            android:visible="true"
+            />
         <item
             android:id="@+id/userProfilePage"
             android:title="Profilo"

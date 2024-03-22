@@ -2,11 +2,18 @@ package com.example.cookidea_app;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
+
+import androidx.appcompat.view.menu.ActionMenuItemView;
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.activity.EdgeToEdge;
@@ -24,7 +31,8 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, NavigationView.OnNavigationItemSelectedListener {
     /*fare activity di login
     implementare splashpage
     collegare gli endpoint
@@ -41,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     MenuPageFragment menuFragment = new MenuPageFragment();
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
+
+    //LoginFragment loginFragment = new LoginFragment();
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,14 +84,20 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         actionBarDrawerToggle.syncState();
         actionBarDrawerToggle.setDrawerIndicatorEnabled(false);
 
+        NavigationView navigationView = findViewById(R.id.navView);
+        navigationView.setNavigationItemSelectedListener(this);
 
     }
 
 
-    @Override
+   @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        return true;
+
+       return true;
     }
+
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -96,14 +112,23 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             fragment = listaSpesaFragment;
         if (id == R.id.menuPage)
             fragment = menuFragment;
+        if (id == R.id.loginPage)
+            fragment = new LoginFragment();
 
-       getSupportFragmentManager()
+
+        getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.mainContent, fragment)
                 .commit();
 
+       DrawerLayout drawer = findViewById(R.id.drawerLayout);
+       drawer.closeDrawer(GravityCompat.END);
         return true;
     }
+
+
+
+
 
 
 }
