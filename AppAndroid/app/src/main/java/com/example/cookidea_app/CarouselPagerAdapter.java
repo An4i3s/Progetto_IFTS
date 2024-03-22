@@ -12,7 +12,9 @@ import android.widget.LinearLayout;
 import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 public class CarouselPagerAdapter extends PagerAdapter {
     private List<String> imagesURLs;
@@ -41,7 +43,13 @@ public class CarouselPagerAdapter extends PagerAdapter {
 
         int realPosition = position % imagesURLs.size();
         ImageView imageView = (ImageView) itemView.findViewById(R.id.carouselImageView);
-        new DownloadImageAsyncTask(imageView).execute(imagesURLs.get(realPosition));
+        try {
+            imageView.setImageBitmap(new DownloadImageAsyncTask().execute(imagesURLs.get(realPosition)).get());
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
 
 
         container.addView(itemView);

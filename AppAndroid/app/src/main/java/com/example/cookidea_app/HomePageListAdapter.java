@@ -1,6 +1,9 @@
 package com.example.cookidea_app;
 
+import static com.example.cookidea_app.MainActivity.BASE_URL;
+
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,16 +16,21 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 public class HomePageListAdapter extends ArrayAdapter<String> {
 
     Context context;
-    static private final String[] categoryName = {"Antipasti", "Primi", "Secondi", "Dessert"};
+    private List<String> categoryName;
+    private List<Bitmap> categoryImages;
 
 
-
-    public HomePageListAdapter(Context context) {
+    public HomePageListAdapter(Context context, List<String> categoryName, List<Bitmap> categoryImages) {
         super(context, R.layout.home_page_cateogry_list_layout, categoryName);
         this.context = context;
+        this.categoryName = categoryName;
+        this.categoryImages = categoryImages;
     }
 
     private static class CategoryViewHolder{
@@ -34,6 +42,8 @@ public class HomePageListAdapter extends ArrayAdapter<String> {
     public View getView(int position, View convertView, ViewGroup parent) {
         CategoryViewHolder categoryViewHolder;
         final View result;
+
+
 
         if (convertView == null) {
 
@@ -51,8 +61,19 @@ public class HomePageListAdapter extends ArrayAdapter<String> {
             result=convertView;
         }
 
-        categoryViewHolder.textViewVH.setText(categoryName[position]);
-        categoryViewHolder.imageViewVH.setImageResource(categoryImage[position]);
+        categoryViewHolder.textViewVH.setText(categoryName.get(position));
+        String imgUrl = BASE_URL + "/static/img/" + categoryName.get(position).toLowerCase() +".png";
+
+        try {
+            categoryViewHolder.imageViewVH.setImageBitmap(new DownloadImageAsyncTask().execute(imgUrl).get());
+        } catch (ExecutionException e) {
+            throw new RuntimeException(e);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        //categoryViewHolder.imageViewVH.setImageBitmap(categoryImages.get(position));
+
 
         return result;
     }
