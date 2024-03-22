@@ -1,6 +1,7 @@
 package com.example.cookidea_app;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -11,5 +12,5 @@ import retrofit2.http.Query;
 
 public interface CookIdeaApiEndpointInterface {
     @GET("/api/portate")
-    Call<String> getPortate(@Path("username") String username);
+    Call<List<String>> getPortate();
 }

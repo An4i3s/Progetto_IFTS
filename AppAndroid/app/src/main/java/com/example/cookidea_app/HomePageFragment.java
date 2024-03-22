@@ -1,5 +1,6 @@
 package com.example.cookidea_app;
 
+
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -24,6 +25,10 @@ import android.widget.Toast;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class HomePageFragment extends Fragment {
@@ -52,6 +57,7 @@ public class HomePageFragment extends Fragment {
         ListView listView = rootView.findViewById(R.id.categoryListHomeFragment);
         listView.setAdapter(hPLA);
 
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -67,6 +73,7 @@ public class HomePageFragment extends Fragment {
         carouselPagerAdapter = new CarouselPagerAdapter(rootView.getContext(), imageURLs);
         carouselViewPager = rootView.findViewById(R.id.carouselViewPagerHomeFragment);
         carouselViewPager.setAdapter(carouselPagerAdapter);
+
 
         return rootView;
     }
