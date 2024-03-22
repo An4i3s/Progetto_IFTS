@@ -13,7 +13,7 @@ public class Recipe {
     private final HashMap<String, Integer> ingredients;
 
     public Recipe(String name, String method, int time, int difficulty, String provenance, String serving, HashMap<String, Integer> ingredients) {
-        this.img_url = "http://127.0.0.1/assets/" + name;
+        this.img_url = "http://127.0.0.1/assets/static/" + name;
         this.name = name;
         this.method = method;
         this.time = time;

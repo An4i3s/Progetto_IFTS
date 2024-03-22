@@ -26,7 +26,7 @@ import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
     /*fare activity di login
-    implementare iniziale schermata di caricamento dell'app
+    implementare splashpage
     collegare gli endpoint
     modificare risorse homePageFragment con dati presi da db
     implementare funzione di login
