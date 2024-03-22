@@ -5,16 +5,19 @@
 body{
   background-color: rgb(187, 184, 182);
   min-height: 100vh;
-  background: url('https://cdn.pixabay.com/photo/2022/10/14/18/01/bell-7521867_1280.jpg') no-repeat;
   background-size: cover;
   background-position: center;  
+  background-image: url('../img/background.jpg');
+  background-size: cover; /* Per adattare l'immagine alla dimensione dell'intera finestra del browser */
+  background-repeat: no-repeat; /* Per evitare la ripetizione dell'immagine */
+
 }
 
 nav{
     overflow: hidden;
-    background-color: rgb(21, 97, 37);
+    background-color: rgb(128,128,128,0.95);
     display: flex;
-    height: 60px;
+    height: 100%;
     width: 100%;
     flex-direction: row;
     justify-content: space-evenly;
@@ -251,13 +254,20 @@ nav{
 }
 
 #antipasti{
+  background-image: url('/AppAndroid/app/src/main/res/drawable/category_antipasti.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 100%;
   height: 100%;
   display: grid;
   grid-column: auto;
-  grid-area: 6/2/9/9;
+  grid-area: 8/3/12/8;
   border-radius: 10px;
   background-color: rgb(10, 244, 252);
+}
+.antipasti-image {
+  width: 100%; /* Imposta la larghezza al 100% dell'elemento padre */
+  height: 200px; /* Imposta l'altezza in base all'aspetto originale dell'immagine */
 }
 #antipasti:active{
   opacity: 0.8s;
@@ -265,13 +275,18 @@ nav{
 #antipasti:hover{
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
   opacity: 0.8s;
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
 }
 
 #primi{
+  background-image: url('/AppAndroid/app/src/main/res/drawable/category_primi.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 100%;
   height: 100%;
   display: grid;
-  grid-area: 9/2/12/9;
+  grid-area: 12/3/16/8;
   border-radius: 10px;
   background-color: goldenrod;
 }
@@ -281,12 +296,17 @@ nav{
 #primi:hover{
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
   opacity: 0.8s;
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
 }
 #secondi{
+  background-image: url('/AppAndroid/app/src/main/res/drawable/category_secondi.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 100%;
   height: 100%;
   display: grid;
-  grid-area: 12/2/15/9;
+  grid-area: 16/3/20/8;
   border-radius: 10px;
   background-color: rgb(24, 90, 211);
 }
@@ -296,12 +316,17 @@ nav{
 #secondi:hover{
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
   opacity: 0.8s;
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
 }
 #dessert{
+  background-image: url('/AppAndroid/app/src/main/res/drawable/category_dessert.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   width: 100%;
   height: 100%;
   display: grid;
-  grid-area: 15/2/18/9;
+  grid-area: 20/3/24/8;
   border-radius: 10px;
   background-color: rgb(192, 60, 8);
 }
@@ -311,20 +336,11 @@ nav{
 #dessert:hover{
   box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
   opacity: 0.8s;
-}
-.box {
-  
-  transition: transform 0.3s ease; /* Transizione per l'animazione */
-}
-
-/* Effetto di ingrandimento al passaggio del cursore */
-.box:hover {
   transform: scale(1.1);
+  transition: transform 0.3s ease;
 }
 
 footer{
-  grid-area: 19/1/22/10;
-  background-color: gray;
+  grid-area: 24/1/26/10;
+  background-color: rgb(128,128,128,0.95);
 }
-Documenti\Visual Studio Code\Progetto_IFT
-
