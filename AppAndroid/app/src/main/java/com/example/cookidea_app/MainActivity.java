@@ -32,12 +32,6 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -66,8 +60,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             .build();
 
     Button registraBtn;
-
-
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -107,22 +99,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         NavigationView navigationView = findViewById(R.id.navView);
         navigationView.setNavigationItemSelectedListener(this);
 
-        List<String> listaPortate = new ArrayList<>();
-        Call<List<String>> call = apiService.getPortate();
-        call.enqueue(new Callback<List<String>>() {
-            @Override
-            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                List<String> risposta = response.body();
-                if(response!=null){
-                    listaPortate.addAll(risposta);
-                }
-            }
 
-            @Override
-            public void onFailure(Call<List<String>> call, Throwable t) {
-
-            }
-        });
     }
 
 
