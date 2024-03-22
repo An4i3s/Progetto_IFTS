@@ -279,3 +279,8 @@ nav{
 .login-register p a:hover{
   text-decoration: underline;
 }
+
+.recipe_name {
+    color: white;
+    font-size: 20px;
+}
