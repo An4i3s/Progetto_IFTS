@@ -17,7 +17,6 @@ public class HomePageListAdapter extends ArrayAdapter<String> {
 
     Context context;
     static private final String[] categoryName = {"Antipasti", "Primi", "Secondi", "Dessert"};
-    private final int[] categoryImage = {R.drawable.category_antipasti, R.drawable.category_primi, R.drawable.category_secondi, R.drawable.category_dessert};
 
 
 

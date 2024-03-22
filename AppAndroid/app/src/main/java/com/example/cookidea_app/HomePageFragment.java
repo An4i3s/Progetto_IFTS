@@ -62,6 +62,8 @@ public class HomePageFragment extends Fragment {
 
         List<String> imageURLs = new ArrayList<>();
         imageURLs.add("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/640px-Eq_it-na_pizza-margherita_sep2005_sml.jpg");
+        imageURLs.add("https://www.biochetasi.it/wp-content/uploads/2019/09/I-bambini-e-il-cibo-spazzatura.-Meglio-non-esagerare-1-biochetasi-1000x600.jpg");
+        imageURLs.add("https://inglesedinamico.net/wp-content/uploads/2021/01/cibo-in-inglese-fb.jpg");
         carouselPagerAdapter = new CarouselPagerAdapter(rootView.getContext(), imageURLs);
         carouselViewPager = rootView.findViewById(R.id.carouselViewPagerHomeFragment);
         carouselViewPager.setAdapter(carouselPagerAdapter);

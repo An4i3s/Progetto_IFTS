@@ -31,6 +31,9 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, NavigationView.OnNavigationItemSelectedListener {
     /*fare activity di login
@@ -49,6 +52,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     MenuPageFragment menuFragment = new MenuPageFragment();
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
+    public static final String BASE_URL = "http://192.168.0.102:8000/";
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -57,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        CookIdeaApiEndpointInterface apiService = retrofit.create(CookIdeaApiEndpointInterface.class);
 
         bottomNavigationView = findViewById((R.id.bottomNavBar));
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
