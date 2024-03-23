@@ -1,6 +1,7 @@
 package com.example.cookidea_app;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -27,9 +28,19 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+
+import java.util.List;
+import java.util.Objects;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, NavigationView.OnNavigationItemSelectedListener {
@@ -49,6 +60,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     MenuPageFragment menuFragment = new MenuPageFragment();
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
+    List<String> listPortate;
+
+    public static final String BASE_URL = "http://192.168.1.141:8000";
+    public static final Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
+    Button registraBtn;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -64,9 +84,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        //getSupportActionBar().setHomeButtonEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("");
+
 
 
 
@@ -86,6 +105,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         NavigationView navigationView = findViewById(R.id.navView);
         navigationView.setNavigationItemSelectedListener(this);
+
+
+
+
 
     }
 
@@ -115,6 +138,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (id == R.id.loginPage)
             fragment = new LoginFragment();
         //if(id==R.id.) AggiungereFragment x Profilo
+        //questo metodo controlla solo la bottom navigation bar, i fragment per il profilo richiedono un metodo a parte
 
         getSupportFragmentManager()
                 .beginTransaction()
@@ -127,8 +151,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
 
+    public void apriRegistrazione(){
 
-
-
-
+        Fragment fragment = new RegistrazioneFragment();
+        //? replace con loginPage o mai content
+        getSupportFragmentManager().beginTransaction().replace(R.id.mainContent, fragment).commit();
+       // DrawerLayout drawer = findViewById(R.id.drawerLayout);
+        //drawer.closeDrawer(GravityCompat.END);
+    }
 }
