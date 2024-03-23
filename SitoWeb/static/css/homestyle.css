@@ -253,7 +253,7 @@ nav{
 }
 
 #antipasti{
-  background-image: url('/AppAndroid/app/src/main/res/drawable/category_antipasti.png');
+  background-image: url('/static/img/category_antipasti.png');
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
@@ -278,7 +278,7 @@ nav{
 }
 
 #primi{
-  background-image: url('/AppAndroid/app/src/main/res/drawable/category_primi.png');
+  background-image: url('/static/img/category_primi.png');
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
@@ -297,7 +297,7 @@ nav{
   transition: transform 0.3s ease;
 }
 #secondi{
-  background-image: url('/AppAndroid/app/src/main/res/drawable/category_secondi.png');
+  background-image: url('/static/img/category_secondi.png');
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
@@ -316,7 +316,7 @@ nav{
   transition: transform 0.3s ease;
 }
 #dessert{
-  background-image: url('/AppAndroid/app/src/main/res/drawable/category_dessert.png');
+  background-image: url('/static/img/category_dessert.png');
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
