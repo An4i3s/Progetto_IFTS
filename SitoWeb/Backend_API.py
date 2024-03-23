@@ -24,7 +24,6 @@ db = pymysql.connect(**config)
 cursor = db.cursor(pymysql.cursors.DictCursor)
 
 
-
 # api   (TUTTI I PIATTI)
 # http://192.168.1.94:8000/api/piatti
 @appWebApi.route("/api/piatti")
@@ -33,8 +32,6 @@ def getAllRecipes():
     cursor.execute(query)
     result = cursor.fetchall()
     return json.dumps(result)
-
-
 
 
 # api / RICERCA PER NOME PIATTO  (anche solo una parte del nome)
@@ -49,30 +46,6 @@ def getRecipesfromName(nome):
     return json.dumps(result, default=vars)
 
 
-# @@@@@PROVE VARIE PER RICERCA AVANZATA
-# api / RICERCA PER PORTATA E DIFFICOLTA     // questa versione è meglio perchè viene indicizzata dai motori di ricerca//
-# http://192.168.0.110:8000/api/ricerca/primo/2
-@appWebApi.route("/api/ricerca/<portata>/<difficolta>")
-def getRecipesfromPortataAndDifficolta(portata, difficolta):
-    query = "select * from piatti WHERE portata = %s AND difficolta = %s"
-    cursor.execute(query, (portata, difficolta))
-    result = cursor.fetchall()
-    return json.dumps(result)
-
-
-# @@@@@PROVE VARIE PER RICERCA AVANZATA
-# api / RICERCA PER PORTATA E DIFFICOLTA VERSIONE 2   // questa versione è migliore nel caso di tanti parametri
-# http://192.168.1.94:8000/api/ricerca/?portata=primo&difficolta=2
-@appWebApi.route("/api/ricerca/")
-def _getRecipesfromPortataAndDifficolta():
-    portata = request.args.get('portata')
-    difficolta = request.args.get('difficolta')
-    query = "select * from piatti WHERE portata = %s AND difficolta = %s"
-    cursor.execute(query, (portata, difficolta))
-    result = cursor.fetchall()
-    return json.dumps(result)
-
-
 # api / RESTITUISCE ELENCO PORTATE
 @appWebApi.route("/api/portate")
 def getPortate():
@@ -85,7 +58,6 @@ def getPortate():
     return jsonify(nomi_portate)
 
 
-
 # api / RESTITUISCE ID + NOME_PIATTO + IMMAGINE (5 RANDOM)
 @appWebApi.route("/api/randomPiattoIdNomeImg")
 def getPiattiImmagini():
@@ -95,7 +67,6 @@ def getPiattiImmagini():
     cursor.execute(query, (piattiDaRestituire))
     result = cursor.fetchall()
     return jsonify(result)
-
 
 
 

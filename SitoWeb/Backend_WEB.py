@@ -23,6 +23,12 @@ db = pymysql.connect(**config)
 cursor = db.cursor(pymysql.cursors.DictCursor)
 
 
+# ENDPOINT WEB
+
+@appWebApi.route("/")
+def homepage():
+    return render_template("index.html")
+
 
 
 # WEB   (TUTTI I PIATTI)
@@ -48,6 +54,38 @@ def webGetRecipesfromName(nome):
     result = cursor.fetchall()
 
     return render_template("piatti_esempio.html", piatti = result)
+
+
+
+# web / RESTITUISCE UNA RICETTA COMPLETA (CON JOIN VARI) IN BASE ALL'ID
+@appWebApi.route("/web/ricerca/ricettaFromId")
+def webGetRicettaCompletaFromId():
+    idPiatto = request.args.get("id_piatto")
+
+    query = """SELECT p.id, p.difficolta, p.tempo, p.nome_piatto, p.provenienza, p.procedimento, p.image_name
+               FROM piatti p WHERE p.id = %s"""
+    
+    cursor.execute(query, (idPiatto,))
+    result = cursor.fetchone()
+
+    piatto = Piatto(**result)
+
+    query = """SELECT i.nome_ingrediente, r.quantita_ingrediente
+               FROM piatti p JOIN ricettario r ON p.id = r.id_piatto
+               JOIN ingredienti i ON r.id_ingrediente = i.id WHERE p.id = %s;""" 
+    
+    cursor.execute(query, (idPiatto,))
+    result = cursor.fetchall()
+    
+    
+    for row in result:
+        ricettario = Ricettario(**row)
+        piatto.ricettario.append(ricettario)
+        
+
+    return render_template("piatti_esempio.html", piatto=piatto)
+
+
 
 
 
