@@ -33,6 +33,15 @@ def getAllRecipes():
     result = cursor.fetchall()
     return json.dumps(result)
 
+# api   (TUTTI GLI UTENTI)
+# http://192.168.1.94:8000/api/utenti
+@appWebApi.route("/api/utenti")
+def getAllUsers():
+    query = "select * from utenti"
+    cursor.execute(query)
+    result = cursor.fetchall()
+    return json.dumps(result)
+
 
 # api / RICERCA PER NOME PIATTO  (anche solo una parte del nome)
 # http://192.168.0.110:8000/api/ricercaPerNome/funghi
