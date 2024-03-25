@@ -62,31 +62,7 @@ public class HomePageListAdapter extends ArrayAdapter<String> {
         }
 
         categoryViewHolder.textViewVH.setText(categoryNames.get(position));
-        /*String imgUrl = BASE_URL + "/static/img/" + categoryNames.get(position).toLowerCase() +".png";
-
-        categoryImages = new ArrayList<>();
-
-
-        if(categoryImages.size() < categoryNames.size()){
-            try {
-                Bitmap bitmapImg = new DownloadImageAsyncTask().execute(imgUrl).get();
-                categoryViewHolder.imageViewVH.setImageBitmap(bitmapImg);
-                categoryImages.add(bitmapImg);
-            } catch (ExecutionException e) {
-                throw new RuntimeException(e);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-
-        } else {*/
-            categoryViewHolder.imageViewVH.setImageBitmap(categoryImages.get(position));
-       // }
-
-
-
-
-
-
+        categoryViewHolder.imageViewVH.setImageBitmap(categoryImages.get(position));
         return convertView;
     }
 }

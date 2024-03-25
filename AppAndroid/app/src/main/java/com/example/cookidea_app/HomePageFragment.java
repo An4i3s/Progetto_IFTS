@@ -64,37 +64,41 @@ public class HomePageFragment extends Fragment {
 
         ListView listView = rootView.findViewById(R.id.categoryListHomeFragment);
 
-        Call<List<String>> callListPortate = apiService.getPortate();
-        callListPortate.enqueue(new Callback<List<String>>() {
-            @Override
-            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                listPortate = response.body();
+        if(listPortate == null && listPortateImages == null){
+            Call<List<String>> callListPortate = apiService.getPortate();
+            callListPortate.enqueue(new Callback<List<String>>() {
+                @Override
+                public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                    listPortate = response.body();
 
-                listPortateImages = new ArrayList<>();
+                    listPortateImages = new ArrayList<>();
 
-                for(int i = 0; i<listPortate.size(); i++){
-                    String imgUrl = BASE_URL + "/static/img/" + listPortate.get(i).toLowerCase() +".png";
-                    try {
-                        listPortateImages.add(new DownloadImageAsyncTask().execute(imgUrl).get());
-                    } catch (ExecutionException e) {
-                        throw new RuntimeException(e);
-                    } catch (InterruptedException e) {
-                        throw new RuntimeException(e);
+                    for(int i = 0; i<listPortate.size(); i++){
+                        String imgUrl = BASE_URL + "/static/img/" + listPortate.get(i).toLowerCase() +".png";
+                        try {
+                            listPortateImages.add(new DownloadImageAsyncTask().execute(imgUrl).get());
+                        } catch (ExecutionException e) {
+                            throw new RuntimeException(e);
+                        } catch (InterruptedException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
+
+                    homePageListAdapter = new HomePageListAdapter(ctx, listPortate, listPortateImages);
+                    listView.setAdapter(homePageListAdapter);
+                    homePageListAdapter.notifyDataSetChanged();
+
                 }
 
-                homePageListAdapter = new HomePageListAdapter(ctx, listPortate, listPortateImages);
-                listView.setAdapter(homePageListAdapter);
-                homePageListAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onFailure(Call<List<String>> call, Throwable t) {
-                Log.e("MainActivity", t.getMessage());
-            }
-        });
-
+                @Override
+                public void onFailure(Call<List<String>> call, Throwable t) {
+                    Log.e("MainActivity", t.getMessage());
+                }
+            });
+        }else{
+            homePageListAdapter = new HomePageListAdapter(ctx, listPortate, listPortateImages);
+            listView.setAdapter(homePageListAdapter);
+        }
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
@@ -118,3 +122,4 @@ public class HomePageFragment extends Fragment {
 
 
 }
+
