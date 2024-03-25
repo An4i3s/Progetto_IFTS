@@ -94,6 +94,7 @@ public class HomePageFragment extends Fragment {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                 listPortate = response.body();
+                homePageListAdapter.categoryNames = new ArrayList<>();
                 homePageListAdapter.categoryNames.addAll(listPortate);
 
                 homePageListAdapter.notifyDataSetChanged();
