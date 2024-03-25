@@ -42,7 +42,6 @@ public class HomePageFragment extends Fragment {
     ViewPager carouselViewPager;
     ListView listView;
     List<String> listPortate = new ArrayList<>();
-    List<String> listPortateImagesName = new ArrayList<>();
     List<Bitmap> listPortateImages = new ArrayList<>();
 
     public HomePageFragment(){

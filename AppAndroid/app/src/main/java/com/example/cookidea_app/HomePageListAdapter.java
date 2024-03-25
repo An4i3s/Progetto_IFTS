@@ -37,6 +37,7 @@ public class HomePageListAdapter extends ArrayAdapter<String> {
     private static class CategoryViewHolder{
         TextView textViewVH;
         ImageView imageViewVH;
+        Bitmap image;
     }
 
     @Override
@@ -53,7 +54,12 @@ public class HomePageListAdapter extends ArrayAdapter<String> {
 
             String imgUrl = BASE_URL + "/static/img/" + categoryNames.get(position).toLowerCase() +".png";
 
-            new DownloadImageAsyncTask(categoryViewHolder.imageViewVH).execute(imgUrl);
+            new DownloadImageAsyncTask(categoryViewHolder.imageViewVH, new DownloadImageAsyncTask.ImageDownloadCallback() {
+                @Override
+                public void downloaded(Bitmap img) {
+                    categoryViewHolder.image = img;
+                }
+            }).execute(imgUrl);
 
 
             convertView.setTag(categoryViewHolder);
@@ -62,7 +68,7 @@ public class HomePageListAdapter extends ArrayAdapter<String> {
         }
 
         categoryViewHolder.textViewVH.setText(categoryNames.get(position));
-        //categoryViewHolder.imageViewVH.setImageBitmap(categoryImages.get(position));
+        categoryViewHolder.imageViewVH.setImageBitmap(categoryViewHolder.image);
         return convertView;
     }
 }

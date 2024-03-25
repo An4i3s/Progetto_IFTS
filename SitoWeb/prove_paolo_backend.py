@@ -1,5 +1,27 @@
 
 
+# @@@@@PROVE VARIE PER RICERCA AVANZATA
+# api / RICERCA PER PORTATA E DIFFICOLTA     // questa versione è meglio perchè viene indicizzata dai motori di ricerca//
+# http://192.168.0.110:8000/api/ricerca/primo/2
+@appWebApi.route("/api/ricerca/<portata>/<difficolta>")
+def getRecipesfromPortataAndDifficolta(portata, difficolta):
+    query = "select * from piatti WHERE portata = %s AND difficolta = %s"
+    cursor.execute(query, (portata, difficolta))
+    result = cursor.fetchall()
+    return json.dumps(result)
+
+
+# @@@@@PROVE VARIE PER RICERCA AVANZATA
+# api / RICERCA PER PORTATA E DIFFICOLTA VERSIONE 2   // questa versione è migliore nel caso di tanti parametri
+# http://192.168.1.94:8000/api/ricerca/?portata=primo&difficolta=2
+@appWebApi.route("/api/ricerca/")
+def _getRecipesfromPortataAndDifficolta():
+    portata = request.args.get('portata')
+    difficolta = request.args.get('difficolta')
+    query = "select * from piatti WHERE portata = %s AND difficolta = %s"
+    cursor.execute(query, (portata, difficolta))
+    result = cursor.fetchall()
+    return json.dumps(result)
 
 
 

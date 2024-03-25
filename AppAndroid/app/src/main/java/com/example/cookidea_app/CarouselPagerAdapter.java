@@ -43,7 +43,7 @@ public class CarouselPagerAdapter extends PagerAdapter {
 
         int realPosition = position % imagesURLs.size();
         ImageView imageView = (ImageView) itemView.findViewById(R.id.carouselImageView);
-        new DownloadImageAsyncTask(imageView).execute(imagesURLs.get(realPosition));
+        new DownloadImageAsyncTask(imageView, null).execute(imagesURLs.get(realPosition));
 
 
         container.addView(itemView);
