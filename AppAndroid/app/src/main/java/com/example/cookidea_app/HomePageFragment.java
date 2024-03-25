@@ -62,7 +62,7 @@ public class HomePageFragment extends Fragment {
 
         ListView listView = rootView.findViewById(R.id.categoryListHomeFragment);
 
-        if(listPortate == null && listPortateImages == null){
+        if(listPortate == null || listPortateImages == null){
             Call<List<String>> callListPortate = apiService.getPortate();
             callListPortate.enqueue(new Callback<List<String>>() {
                 @Override
