@@ -43,6 +43,7 @@ public class HomePageFragment extends Fragment {
     ListView listView;
     List<String> listPortate = new ArrayList<>();
     List<Bitmap> listPortateImages = new ArrayList<>();
+    HomePageListAdapter homePageListAdapter;
 
     public HomePageFragment(){
 
@@ -52,11 +53,11 @@ public class HomePageFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         ctx = context;
-
-        downloadBackEndInfo();
+        if(homePageListAdapter.categoryNames != null && homePageListAdapter.categoryNames.isEmpty())
+            downloadBackEndInfo();
     }
 
-    HomePageListAdapter homePageListAdapter;
+
 
     @Nullable
     @Override
@@ -93,6 +94,7 @@ public class HomePageFragment extends Fragment {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                 listPortate = response.body();
+
                 homePageListAdapter.categoryNames.addAll(listPortate);
 
                 homePageListAdapter.notifyDataSetChanged();
