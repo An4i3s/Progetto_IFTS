@@ -3,7 +3,7 @@ package com.example.cookidea_app;
 import java.util.HashMap;
 
 public class Recipe {
-    private  int recipeId;
+    private final int recipeId;
     private final String img_name;
     private final String name;
     private final String method;
@@ -13,7 +13,8 @@ public class Recipe {
     private final String serving;
     private final HashMap<String, Integer> ingredients;
 
-    public Recipe(String img_name, String name, String method, int time, int difficulty, String provenance, String serving, HashMap<String, Integer> ingredients) {
+    public Recipe(int recipeId, String img_name, String name, String method, int time, int difficulty, String provenance, String serving, HashMap<String, Integer> ingredients) {
+        this.recipeId = recipeId;
         this.img_name = img_name;
         this.name = name;
         this.method = method;
@@ -24,6 +25,9 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
+    public int getRecipeId(){
+        return recipeId;
+    }
     public String getImg_name() {
         return img_name;
     }
