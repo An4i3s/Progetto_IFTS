@@ -40,8 +40,10 @@ public class HomePageFragment extends Fragment {
     Context ctx = null;
     CarouselPagerAdapter carouselPagerAdapter;
     ViewPager carouselViewPager;
-    List<String> listPortate;
-    List<Bitmap> listPortateImages;
+    ListView listView;
+    List<String> listPortate = new ArrayList<>();
+    List<String> listPortateImagesName = new ArrayList<>();
+    List<Bitmap> listPortateImages = new ArrayList<>();
 
     public HomePageFragment(){
 
@@ -51,6 +53,8 @@ public class HomePageFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         ctx = context;
+
+        downloadBackEndInfo();
     }
 
     HomePageListAdapter homePageListAdapter;
@@ -60,43 +64,9 @@ public class HomePageFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home_page, container, false);
 
-        ListView listView = rootView.findViewById(R.id.categoryListHomeFragment);
-
-        if(listPortate == null || listPortateImages == null){
-            Call<List<String>> callListPortate = apiService.getPortate();
-            callListPortate.enqueue(new Callback<List<String>>() {
-                @Override
-                public void onResponse(Call<List<String>> call, Response<List<String>> response) {
-                    listPortate = response.body();
-
-                    listPortateImages = new ArrayList<>();
-
-                    for(int i = 0; i<listPortate.size(); i++){
-                        String imgUrl = BASE_URL + "/static/img/" + listPortate.get(i).toLowerCase() +".png";
-                        try {
-                            listPortateImages.add(new DownloadImageAsyncTask().execute(imgUrl).get());
-                        } catch (ExecutionException e) {
-                            throw new RuntimeException(e);
-                        } catch (InterruptedException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-
-                    homePageListAdapter = new HomePageListAdapter(ctx, listPortate, listPortateImages);
-                    listView.setAdapter(homePageListAdapter);
-                    homePageListAdapter.notifyDataSetChanged();
-
-                }
-
-                @Override
-                public void onFailure(Call<List<String>> call, Throwable t) {
-                    Log.e("MainActivity", t.getMessage());
-                }
-            });
-        }else{
-            homePageListAdapter = new HomePageListAdapter(ctx, listPortate, listPortateImages);
-            listView.setAdapter(homePageListAdapter);
-        }
+        listView = rootView.findViewById(R.id.categoryListHomeFragment);
+        homePageListAdapter = new HomePageListAdapter(ctx, listPortate, listPortateImages);
+        listView.setAdapter(homePageListAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
@@ -113,11 +83,31 @@ public class HomePageFragment extends Fragment {
         carouselPagerAdapter = new CarouselPagerAdapter(rootView.getContext(), imageURLs);
         carouselViewPager = rootView.findViewById(R.id.carouselViewPagerHomeFragment);
         carouselViewPager.setAdapter(carouselPagerAdapter);
-
-
+        
         return rootView;
     }
 
+
+    void downloadBackEndInfo() {
+        Call<List<String>> callListPortate = apiService.getPortate();
+        callListPortate.enqueue(new Callback<List<String>>() {
+            @Override
+            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+                listPortate = response.body();
+                homePageListAdapter.categoryNames.addAll(listPortate);
+
+                homePageListAdapter.notifyDataSetChanged();
+                listView.invalidate();
+
+            }
+
+            @Override
+            public void onFailure(Call<List<String>> call, Throwable t) {
+                Log.e("MainActivity", t.getMessage());
+            }
+        });
+
+    }
 
 }
 

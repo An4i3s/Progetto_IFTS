@@ -10,8 +10,9 @@ import java.io.InputStream;
 
 public class DownloadImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
 
-    public DownloadImageAsyncTask() {
-
+    ImageView imgView = null;
+    public DownloadImageAsyncTask(ImageView imgView) {
+        this.imgView = imgView;
     }
 
     protected Bitmap doInBackground(String... urls) {
@@ -28,5 +29,6 @@ public class DownloadImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
     }
 
     protected void onPostExecute(Bitmap result) {
+        imgView.setImageBitmap(result);
     }
 }

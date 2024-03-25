@@ -23,7 +23,7 @@ import java.util.concurrent.ExecutionException;
 public class HomePageListAdapter extends ArrayAdapter<String> {
 
     Context context;
-    private List<String> categoryNames;
+    List<String> categoryNames;
     private List<Bitmap> categoryImages;
 
 
@@ -42,9 +42,6 @@ public class HomePageListAdapter extends ArrayAdapter<String> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         CategoryViewHolder categoryViewHolder;
-        final View result;
-
-
 
         if (convertView == null) {
 
@@ -54,6 +51,9 @@ public class HomePageListAdapter extends ArrayAdapter<String> {
             categoryViewHolder.textViewVH = (TextView) convertView.findViewById(R.id.categoryName);
             categoryViewHolder.imageViewVH = (ImageView) convertView.findViewById(R.id.categoryImage);
 
+            String imgUrl = BASE_URL + "/static/img/" + categoryNames.get(position).toLowerCase() +".png";
+
+            new DownloadImageAsyncTask(categoryViewHolder.imageViewVH).execute(imgUrl);
 
 
             convertView.setTag(categoryViewHolder);
@@ -62,7 +62,7 @@ public class HomePageListAdapter extends ArrayAdapter<String> {
         }
 
         categoryViewHolder.textViewVH.setText(categoryNames.get(position));
-        categoryViewHolder.imageViewVH.setImageBitmap(categoryImages.get(position));
+        //categoryViewHolder.imageViewVH.setImageBitmap(categoryImages.get(position));
         return convertView;
     }
 }
