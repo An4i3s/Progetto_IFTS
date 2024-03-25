@@ -3,9 +3,15 @@
     <style name="Base.Theme.CookIdea" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorButtonNormal">@color/yellow</item>
+
     </style>
 
-    <style name="Theme.CookIdea" parent="Base.Theme.CookIdea" />
+    <style name="Theme.CookIdea" parent="Base.Theme.CookIdea">
+        <item name="colorPrimary">@color/bluScuro</item>
+        <item name="colorButtonNormal">@color/yellow</item>
+    </style>
+
 
 
 </resources>

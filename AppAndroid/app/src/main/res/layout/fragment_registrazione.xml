@@ -97,7 +97,10 @@
             android:layout_height="40dp"
             android:layout_marginHorizontal="@dimen/margin"
             android:layout_span="2"
-            android:text="Registrati" />
+            android:text="Registrati"
+            android:fontFamily="@font/days_one"
+            android:backgroundTint="@color/yellow"
+            />
 
     </LinearLayout>
 </ScrollView>
