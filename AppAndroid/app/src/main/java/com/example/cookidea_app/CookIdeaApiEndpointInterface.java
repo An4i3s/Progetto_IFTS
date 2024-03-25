@@ -13,4 +13,7 @@ import retrofit2.http.Query;
 public interface CookIdeaApiEndpointInterface {
     @GET("/api/portate")
     Call<List<String>> getPortate();
+
+    @GET("/api/ricercaPerNome/{nome}")
+    Call<List<Recipe>> getRecipeByName(@Path("nome") String nome);
 }

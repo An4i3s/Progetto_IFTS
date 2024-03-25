@@ -2,7 +2,7 @@ package com.example.cookidea_app;
 
 
 import static com.example.cookidea_app.MainActivity.BASE_URL;
-import static com.example.cookidea_app.MainActivity.retrofit;
+import static com.example.cookidea_app.MainActivity.apiService;
 
 import android.content.Context;
 import android.content.Intent;
@@ -59,8 +59,6 @@ public class HomePageFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home_page, container, false);
-
-        CookIdeaApiEndpointInterface apiService = retrofit.create(CookIdeaApiEndpointInterface.class);
 
         ListView listView = rootView.findViewById(R.id.categoryListHomeFragment);
 

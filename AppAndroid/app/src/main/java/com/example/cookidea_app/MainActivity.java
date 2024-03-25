@@ -68,6 +68,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
+    public static final CookIdeaApiEndpointInterface apiService = retrofit.create(CookIdeaApiEndpointInterface.class);
+
+
     Button registraBtn;
 
 
