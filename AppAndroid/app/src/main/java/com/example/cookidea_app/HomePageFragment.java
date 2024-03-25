@@ -42,7 +42,6 @@ public class HomePageFragment extends Fragment {
     ViewPager carouselViewPager;
     ListView listView;
     List<String> listPortate = new ArrayList<>();
-    List<String> listPortateImagesName = new ArrayList<>();
     List<Bitmap> listPortateImages = new ArrayList<>();
 
     public HomePageFragment(){
@@ -94,7 +93,6 @@ public class HomePageFragment extends Fragment {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                 listPortate = response.body();
-                homePageListAdapter.categoryNames = new ArrayList<>();
                 homePageListAdapter.categoryNames.addAll(listPortate);
 
                 homePageListAdapter.notifyDataSetChanged();
