@@ -62,7 +62,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     ActionBarDrawerToggle actionBarDrawerToggle;
     List<String> listPortate;
 
-    public static final String BASE_URL = "http://192.168.1.141:8000";
+    public static final String BASE_URL = "http://192.168.0.105:8000";
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -138,7 +138,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (id == R.id.loginPage)
             fragment = new LoginFragment();
         //if(id==R.id.) AggiungereFragment x Profilo
-        //questo metodo controlla solo la bottom navigation bar, i fragment per il profilo richiedono un metodo a parte
 
         getSupportFragmentManager()
                 .beginTransaction()

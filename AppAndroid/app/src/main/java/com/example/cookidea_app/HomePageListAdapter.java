@@ -16,20 +16,21 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 public class HomePageListAdapter extends ArrayAdapter<String> {
 
     Context context;
-    private List<String> categoryName;
+    private List<String> categoryNames;
     private List<Bitmap> categoryImages;
 
 
     public HomePageListAdapter(Context context, List<String> categoryName, List<Bitmap> categoryImages) {
         super(context, R.layout.home_page_cateogry_list_layout, categoryName);
         this.context = context;
-        this.categoryName = categoryName;
+        this.categoryNames = categoryName;
         this.categoryImages = categoryImages;
     }
 
@@ -53,28 +54,39 @@ public class HomePageListAdapter extends ArrayAdapter<String> {
             categoryViewHolder.textViewVH = (TextView) convertView.findViewById(R.id.categoryName);
             categoryViewHolder.imageViewVH = (ImageView) convertView.findViewById(R.id.categoryImage);
 
-            result=convertView;
+
 
             convertView.setTag(categoryViewHolder);
         } else {
             categoryViewHolder = (CategoryViewHolder) convertView.getTag();
-            result=convertView;
         }
 
-        categoryViewHolder.textViewVH.setText(categoryName.get(position));
-        String imgUrl = BASE_URL + "/static/img/" + categoryName.get(position).toLowerCase() +".png";
+        categoryViewHolder.textViewVH.setText(categoryNames.get(position));
+        /*String imgUrl = BASE_URL + "/static/img/" + categoryNames.get(position).toLowerCase() +".png";
 
-        try {
-            categoryViewHolder.imageViewVH.setImageBitmap(new DownloadImageAsyncTask().execute(imgUrl).get());
-        } catch (ExecutionException e) {
-            throw new RuntimeException(e);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-
-        //categoryViewHolder.imageViewVH.setImageBitmap(categoryImages.get(position));
+        categoryImages = new ArrayList<>();
 
 
-        return result;
+        if(categoryImages.size() < categoryNames.size()){
+            try {
+                Bitmap bitmapImg = new DownloadImageAsyncTask().execute(imgUrl).get();
+                categoryViewHolder.imageViewVH.setImageBitmap(bitmapImg);
+                categoryImages.add(bitmapImg);
+            } catch (ExecutionException e) {
+                throw new RuntimeException(e);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+        } else {*/
+            categoryViewHolder.imageViewVH.setImageBitmap(categoryImages.get(position));
+       // }
+
+
+
+
+
+
+        return convertView;
     }
 }

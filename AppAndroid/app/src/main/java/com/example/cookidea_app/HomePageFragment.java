@@ -1,6 +1,7 @@
 package com.example.cookidea_app;
 
 
+import static com.example.cookidea_app.MainActivity.BASE_URL;
 import static com.example.cookidea_app.MainActivity.retrofit;
 
 import android.content.Context;
@@ -27,6 +28,7 @@ import android.widget.Toast;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -67,6 +69,20 @@ public class HomePageFragment extends Fragment {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                 listPortate = response.body();
+
+                listPortateImages = new ArrayList<>();
+
+                for(int i = 0; i<listPortate.size(); i++){
+                    String imgUrl = BASE_URL + "/static/img/" + listPortate.get(i).toLowerCase() +".png";
+                    try {
+                        listPortateImages.add(new DownloadImageAsyncTask().execute(imgUrl).get());
+                    } catch (ExecutionException e) {
+                        throw new RuntimeException(e);
+                    } catch (InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
                 homePageListAdapter = new HomePageListAdapter(ctx, listPortate, listPortateImages);
                 listView.setAdapter(homePageListAdapter);
                 homePageListAdapter.notifyDataSetChanged();
