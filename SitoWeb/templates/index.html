@@ -1,105 +1,116 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CookIdea</title>
-    <link rel="stylesheet" href="..\static\css\homestyle.css">
-
-
+    <!-- Non toccare, 2 link CSS carosello -->
+    <link rel="stylesheet" href="../static/css/slide.css" media="screen">
+    <link rel="stylesheet" href="../static/css/flickity.css" media="screen">
+    <!-- Non toccare, 2 link CSS per Login e Navbar -->
+    <link rel="stylesheet" href="../static/css/homestyle.css" media="screen">
 </head>
 <body>
-    <nav class="navigation">
-      <img src="..\static\img\1.png" alt="logo cook Idea" height="100px" width="100px">
-      <input type="text" id="searchBar" placeholder="CERCA...">
-      <a href="#">Home</a>
-      <button class="btnLogin-popup">Login</button>
-    </nav>
-
+    <!-- Inizio Nav / Login -->
+    <header>
+      <nav class="navigation">
+        <img src="../static/img/cookidea.png" alt="logo cook Idea" height="100px" width="100px">
+        <input class="cerca" type="text" id="searchBar" placeholder="CERCA...">
+        <a href="#">Home</a>
+        <button class="btnLogin-popup">Login</button>
+      </nav>
+    </header>
+    <!-- Inizio Flickity -->
+    <div class="carousel"data-flickity='{ "freeScroll": true }'>
+    <div class="carousel-cell"></div>
+    <div class="carousel-cell"></div>
+    <div class="carousel-cell"></div>
+    <div class="carousel-cell"></div>
+    <div class="carousel-cell"></div>
+    </div>
+    <!-- Inizio Schede -->
     <div id="container">
 
-    <div class="wrapper">
-      <span class="icon-close">
-          <ion-icon name="close"></ion-icon>
-      </span>
-      <div class="form-box login">
-          <h2>Login</h2>
-          <form action="#">
-              <div class="input-box">
-                  <span class="icon">
-                      <ion-icon name="mail"></ion-icon>
-                  </span>
-                  <input type="email" required>
-                  <label>Indirizzo email</label> 
-              </div>
-              <div class="input-box">
-                  <span class="icon">
-                      <ion-icon name="lock-closed"></ion-icon>
-                  </span>
-                  <input type="password" required>
-                  <label>Password</label> 
-              </div>
-              <div class="remember-forgot">
-                  <label><input type="checkbox"> Ricordami</label>
-                  <a href="#">Password dimenticata?</a>
-              </div>
-              <button type="submit" class="btn">Accedi</button>
-              <div class="login-register">
-                  <p>Non hai ancora un account?<a href="#" class="register-link"> Registrati</a></p>
-              </div>
-          </form>
-      </div>
-      <div class="form-box register">
-          <h2>Crea account</h2>
-          <form action="#">
-              <div class="input-box">
-                  <span class="icon">
-                      <ion-icon name="person"></ion-icon>
-                  </span>
-                  <input type="text" required>
-                  <label>Username</label>
-              </div>
-              <div class="input-box">
-                  <span class="icon">
-                      <ion-icon name="mail"></ion-icon>
-                  </span>
-                  <input type="email" required>
-                  <label>Indirizzo email</label>
-              </div>
-              <div class="input-box">
-                  <span class="icon">
-                      <ion-icon name="lock-closed"></ion-icon>
-                  </span>
-                  <input type="password" required>
-                  <label>Password</label> 
-              </div>
-              <div class="remember-forgot">
-                  <label><input type="checkbox"> Accetto termini e condizioni</label>
-              </div>
-              <button type="submit" class="btn">Registrati</button>
-              <div class="login-register">
-                  <p>Hai già un account?<a href="#" class="login-link"> Accedi</a></p>
-              </div>
-          </form>
-      </div>
-    </div class="wrapper">
-
-      <div id="antipasti" class="box"><a href="pagina_antipasti.html"></a></div>
-      <div id="primi" class="box"><a href="pagina_primi.html"></a>primi</div>
-      <div id="secondi" class="box"><a href="pagina_secondi.html"></a>secondi</div>
-      <div id="dessert" class="box"><a href="pagina_dessert.html"></a>dessert</div>
-
-
-      <footer>footer</footer>
-
-  </div>
-  
-      
-  
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="..\static\js\login.js"></script>
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <div class="wrapper">
+            <span class="icon-close">
+                <ion-icon name="close"></ion-icon>
+            </span>
+            <div class="form-box login">
+                <h2>Login</h2>
+                <form action="#">
+                    <div class="input-box">
+                        <span class="icon">
+                            <ion-icon name="mail"></ion-icon>
+                        </span>
+                        <input type="email" required>
+                        <label>Indirizzo email</label> 
+                    </div>
+                    <div class="input-box">
+                        <span class="icon">
+                            <ion-icon name="lock-closed"></ion-icon>
+                        </span>
+                        <input type="password" required>
+                        <label>Password</label> 
+                    </div>
+                    <div class="remember-forgot">
+                        <label><input type="checkbox"> Ricordami</label>
+                        <a href="#">Password dimenticata?</a>
+                    </div>
+                    <button type="submit" class="btn">Accedi</button>
+                    <div class="login-register">
+                        <p>Non hai ancora un account?<a href="#" class="register-link"> Registrati</a></p>
+                    </div>
+                </form>
+            </div>
+            <div class="form-box register">
+                <h2>Crea account</h2>
+                <form action="#">
+                    <div class="input-box">
+                        <span class="icon">
+                            <ion-icon name="person"></ion-icon>
+                        </span>
+                        <input type="text" required>
+                        <label>Username</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon">
+                            <ion-icon name="mail"></ion-icon>
+                        </span>
+                        <input type="email" required>
+                        <label>Indirizzo email</label>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon">
+                            <ion-icon name="lock-closed"></ion-icon>
+                        </span>
+                        <input type="password" required>
+                        <label>Password</label> 
+                    </div>
+                    <div class="remember-forgot">
+                        <label><input type="checkbox"> Accetto termini e condizioni</label>
+                    </div>
+                    <button type="submit" class="btn">Registrati</button>
+                    <div class="login-register">
+                        <p>Hai già un account?<a href="#" class="login-link"> Accedi</a></p>
+                    </div>
+                </form>
+            </div>
+          </div>
+ 
+ 
+        <div id="antipasti" class="box"><a href="pagina_antipasti.html"></a></div>
+        <div id="primi" class="box"><a href="pagina_primi.html"></a>primi</div>
+        <div id="secondi" class="box"><a href="pagina_secondi.html"></a>secondi</div>
+        <div id="dessert" class="box"><a href="pagina_dessert.html"></a>dessert</div>
+        <footer>footer</footer>
+ 
+    </div>
+    <!-- Non toccare Script carosello -->
+    <script src="../static/js/flickity.pkgd.js"></script>
+    <!-- Non toccare Script login e icons -->
+    <script src="../static/js/login.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>  
 </body>
 </html>

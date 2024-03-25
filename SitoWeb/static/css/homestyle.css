@@ -1,7 +1,9 @@
 * {
   margin:0;
   padding:0;
+  font-family: 'Poppins', sans-serif;
 }
+
 body{
   background-image: url('../img/background_blur.jpg');
   min-height: 100vh;
@@ -63,6 +65,7 @@ nav{
   margin-left: 10px;
   margin-right: 10px;
 }
+
 .navigation a::after{
   content: '';
   position: absolute;
@@ -76,13 +79,15 @@ nav{
   transform: scaleX(0);
   transition: transform .5s;
 }
+
 .navigation a:hover::after{
   transform-origin: left;
   transform: scaleX(1);
 }
+
 .navigation .btnLogin-popup{
-  width: 100px;
-  height: 30px;
+  width: 130px;
+  height: 50px;
   background: transparent;
   border: 2px solid;
   outline: none;
@@ -93,57 +98,69 @@ nav{
   font-weight: 500;
   margin-top: auto;
   margin-bottom: auto;
+  margin-left: 40px;
   transition: .5s;
 }
+
 .navigation .btnLogin-popup:hover{
   background: #fff;
   color: #162938;
 }
 
 .wrapper{
-  position: relative;
-  width: 400px;
+  position: fixed;
+  width: 100%;
+  max-width: 400px;
   height: 440px;
   background: transparent;
   border: 2px solid rgba(255, 255, 255, .5);
   border-radius: 20px;
   backdrop-filter: blur(20px);
   box-shadow: 0 0 30px rgba(0, 0, 0, .5);
-  display: grid;
-  grid-area: 3/5/5/5;
+  display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   transform: scale(0);
   transition:transform .5s ease, height .2s ease;
+  z-index: 2; /* Non cambiare, server per avere la scheda di Login sopra a tutto quando usata*/
+  top: 15%;
+  margin-left: 40%;
 }
+
 .wrapper.active-popup{
   transform: scale(1);
 }
 .wrapper.active{
   height: 520px;
-
 }
-.wrapper .form-box{
-  width: 380px;
 
+.wrapper .form-box{
+  width: 80%;
+  padding: 40px;
 }
 .wrapper .form-box.login{
   transition: transform .18s ease;
   transform:  translateX(0);
 }
+
 .wrapper.active .form-box.login{
   transition: none;
   transform: translateX(-400px);
 }
+
 .wrapper .form-box.register{
+  width: 80%;
   position: absolute;
+  transition: none;
   transform: translateX(400px);
 }
+
 .wrapper.active .form-box.register{
   transition: transform .18s ease;
-  transform:  translateX(10px);
+  transform:  translateX(0px);
 }
+
 .wrapper .icon-close{
   position: absolute;
   top:  0;
@@ -160,11 +177,13 @@ nav{
   cursor: pointer;
   z-index: 1;
 }
+
 .form-box h2{
   font-size: 2em;
   color: #fff;
   text-align: center;
 }
+
 .input-box{
   position: relative;
   width: 100%;
@@ -172,10 +191,11 @@ nav{
   border-bottom:  2px solid #fff;
   margin: 30px 0;
 }
+
 .input-box label{
   position: absolute;
-  top: 40%;
-  left: 0px;
+  top: 50%;
+  left: 5px;
   transform: translateY(-50%);
   font-size: 1em;
   color: #fff;
@@ -183,10 +203,12 @@ nav{
   pointer-events: none;
   transition: 0s;
 }
+
 .input-box input:focus~label,
 .input-box input:valid~label{
-  top: -10px;
+  top: -5px;
 }
+
 .input-box input{
   width: 100%;
   height: 100%;
@@ -196,14 +218,15 @@ nav{
   font-size: 1em;
   font-weight: 600;
 }
+
 .input-box .icon{
   position: absolute;
   right: 8px;
-  top: -12px;
   font-size: 1.2em;
   color: #fff; 
-  line-height: 80px;
+  line-height: 57px;
 }
+
 .remember-forgot{
   font-size: .9em;
   color: #fff;
@@ -212,22 +235,24 @@ nav{
   display: flex;
   justify-content: space-between;
 }
+
 .remember-forgot label input{
   accent-color: #fff;
   margin-right: 3px;
 }
+
 .remember-forgot a{
   color: #fff;
   text-decoration: none;
 }
+
 .remember-forgot a:hover{
   text-decoration: underline;
 }
+
 .btn{
   width: 100%;
   height: 45px;
-  width: 200px;
-  margin-left: 25%;
   background: #162938;
   border: none;
   border-radius: 6px;
@@ -236,6 +261,7 @@ nav{
   color: #fff;
   font-weight: 500;
 }
+
 .login-register{
   font-size: .9em;
   color: #fff;
@@ -243,11 +269,13 @@ nav{
   font-weight: 500;
   margin: 25px 0 10px;
 }
+
 .login-register p a{
   color: #fff;
   text-decoration: none;
   font-weight: 600;
 }
+
 .login-register p a:hover{
   text-decoration: underline;
 }
@@ -260,9 +288,10 @@ nav{
   height: 100%;
   display: grid;
   grid-column: auto;
-  grid-area: 8/3/12/8;
+  grid-area: 2/3/6/8;
   border-radius: 10px;
 }
+
 .antipasti-image {
   width: 100%; /* Imposta la larghezza al 100% dell'elemento padre */
   height: 200px; /* Imposta l'altezza in base all'aspetto originale dell'immagine */
@@ -284,7 +313,7 @@ nav{
   width: 100%;
   height: 100%;
   display: grid;
-  grid-area: 12/3/16/8;
+  grid-area: 6/3/10/8;
   border-radius: 10px;
 }
 #primi:active{
@@ -296,6 +325,7 @@ nav{
   transform: scale(1.1);
   transition: transform 0.3s ease;
 }
+
 #secondi{
   background-image: url('/static/img/category_secondi.png');
   background-repeat: no-repeat;
@@ -303,7 +333,7 @@ nav{
   width: 100%;
   height: 100%;
   display: grid;
-  grid-area: 16/3/20/8;
+  grid-area: 10/3/14/8;
   border-radius: 10px;
 }
 #secondi:active{
@@ -315,6 +345,7 @@ nav{
   transform: scale(1.1);
   transition: transform 0.3s ease;
 }
+
 #dessert{
   background-image: url('/static/img/category_dessert.png');
   background-repeat: no-repeat;
@@ -322,7 +353,7 @@ nav{
   width: 100%;
   height: 100%;
   display: grid;
-  grid-area: 20/3/24/8;
+  grid-area: 14/3/18/8;
   border-radius: 10px;
 }
 #dessert:active{
@@ -336,6 +367,6 @@ nav{
 }
 
 footer{
-  grid-area: 24/1/26/10;
+  grid-area: 18/1/20/10;
   background-color: rgb(128,128,128,0.95);
 }
