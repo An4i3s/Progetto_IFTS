@@ -23,13 +23,13 @@ import java.util.List;
 public class SearchPageListAdapter extends ArrayAdapter<Recipe> {
 
     Context ctx;
-    public List<Recipe> recipes;
+    //public List<Recipe> recipes;
 
 
     public SearchPageListAdapter(@NonNull Context context, @NonNull List<Recipe> recipes) {
         super(context, R.layout.search_page_recipe_list, recipes);
         this.ctx = context;
-        this.recipes = recipes;
+        //this.recipes = recipes;
     }
 
     private static class ResultsViewHolder{
@@ -56,7 +56,7 @@ public class SearchPageListAdapter extends ArrayAdapter<Recipe> {
             resultsViewHolder.difficultyRecipeVH = (TextView) convertView.findViewById(R.id.difficultyRecipeSearchedTextView);
             resultsViewHolder.servingRecipeVH = (TextView) convertView.findViewById(R.id.servingRecipeSearchedTextView);
 
-            String imgUrl = BASE_URL + "/static/img/" + recipes.get(position).getImg_name().toLowerCase();
+            String imgUrl = BASE_URL + "/static/img/" + getItem(position).getImg_name().toLowerCase();
 
             new DownloadImageAsyncTask(resultsViewHolder.imgRecipeVh, new DownloadImageAsyncTask.ImageDownloadCallback() {
                 @Override
@@ -71,12 +71,12 @@ public class SearchPageListAdapter extends ArrayAdapter<Recipe> {
         }
         //TODO controllare perchè entra più volte nell'adapter
         resultsViewHolder.imgRecipeVh.setImageBitmap(resultsViewHolder.recipeImage);
-        resultsViewHolder.nameRecipeVH.setText(recipes.get(position).getName());
-        String time = " " + recipes.get(position).getTime() + "min";
+        resultsViewHolder.nameRecipeVH.setText(getItem(position).getName());
+        String time = " " + getItem(position).getTime() + "min";
         resultsViewHolder.timeRecipeVH.setText(time);
-        String difficulty = " " + recipes.get(position).getDifficulty();
+        String difficulty = " " + getItem(position).getDifficulty();
         resultsViewHolder.difficultyRecipeVH.setText(difficulty);
-        String serving = " " + recipes.get(position).getServing();
+        String serving = " " + getItem(position).getServing();
         resultsViewHolder.servingRecipeVH.setText(serving);
 
         return convertView;

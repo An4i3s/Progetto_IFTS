@@ -19,14 +19,14 @@ import java.util.List;
 public class HomePageListAdapter extends ArrayAdapter<String> {
 
     Context context;
-    public List<String> categoryNames;
+    //public List<String> categoryNames;
     private List<Bitmap> categoryImages;
 
 
     public HomePageListAdapter(Context context, List<String> categoryName, List<Bitmap> categoryImages) {
         super(context, R.layout.home_page_cateogry_list_layout, categoryName);
         this.context = context;
-        this.categoryNames = categoryName;
+        //this.categoryNames = categoryName;
         this.categoryImages = categoryImages;
     }
 
@@ -48,7 +48,7 @@ public class HomePageListAdapter extends ArrayAdapter<String> {
             categoryViewHolder.textViewVH = (TextView) convertView.findViewById(R.id.categoryName);
             categoryViewHolder.imageViewVH = (ImageView) convertView.findViewById(R.id.categoryImage);
 
-            String imgUrl = BASE_URL + "/static/img/" + categoryNames.get(position).toLowerCase() +".jpg";
+            String imgUrl = BASE_URL + "/static/img/" + getItem(position).toLowerCase() +".jpg";
 
             new DownloadImageAsyncTask(categoryViewHolder.imageViewVH, new DownloadImageAsyncTask.ImageDownloadCallback() {
                 @Override
@@ -63,7 +63,7 @@ public class HomePageListAdapter extends ArrayAdapter<String> {
             categoryViewHolder = (CategoryViewHolder) convertView.getTag();
         }
 
-        categoryViewHolder.textViewVH.setText(categoryNames.get(position));
+        categoryViewHolder.textViewVH.setText(getItem(position));
         categoryViewHolder.imageViewVH.setImageBitmap(categoryViewHolder.image);
         return convertView;
     }

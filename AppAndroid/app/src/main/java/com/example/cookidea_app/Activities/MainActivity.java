@@ -57,9 +57,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     List<String> listPortate;
     TextView etaTv;
     DatePickerDialogFragment datePicker;
+    String search = "";
 
 
-    public static final String BASE_URL = "http://192.168.52.85:8000";
+    public static final String BASE_URL = "http://192.168.1.141:8000";
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -114,32 +115,27 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     }
 
-
-
-
-   @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-
-       return true;
+    public void changeTabById(int res, String search) { //1
+        this.search = search;
+        bottomNavigationView.setSelectedItemId(res);
     }
 
-
-
-
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+    public void changeFrameByNavigationTab(int id_tab) { //3
         Fragment fragment = null;
-        int id = menuItem.getItemId();
 
-        if (id == R.id.homePage)
+        if (id_tab == R.id.homePage)
             fragment = homeFragment;
-        if (id == R.id.searchPage)
+        if (id_tab == R.id.searchPage) {
+            Bundle b = new Bundle();
+            b.putString("filterByCategory", search);
             fragment = searchFragment;
-        if (id == R.id.shoppingListPage)
+            fragment.setArguments(b);
+        }
+        if (id_tab == R.id.shoppingListPage)
             fragment = listaSpesaFragment;
-        if (id == R.id.menuPage)
+        if (id_tab == R.id.menuPage)
             fragment = menuFragment;
-        if (id == R.id.loginPage)
+        if (id_tab == R.id.loginPage)
             fragment = new LoginFragment();
         //if(id==R.id.) AggiungereFragment x Profilo
 
@@ -148,8 +144,25 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 .replace(R.id.mainContent, fragment)
                 .commit();
 
-       DrawerLayout drawer = findViewById(R.id.drawerLayout);
-       drawer.closeDrawer(GravityCompat.END);
+
+    }
+
+
+   @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        return true;
+    }
+
+
+
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) { //2
+        int id = menuItem.getItemId();
+        changeFrameByNavigationTab(id);
+
+        DrawerLayout drawer = findViewById(R.id.drawerLayout);
+        drawer.closeDrawer(GravityCompat.END);
         return true;
     }
 

@@ -34,10 +34,14 @@ import retrofit2.Response;
 public class SearchPageFragment extends Fragment {
 
     Context ctx = null;
-    String searched = "";
     List<Recipe> results = new ArrayList<>();
+
+    static EditText searchEditText;
     ListView resultListView;
     SearchPageListAdapter searchPageListAdapter;
+    Button searchButton;
+    View rootView = null;
+
 
     public SearchPageFragment(){
 
@@ -52,43 +56,33 @@ public class SearchPageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_search_page, container, false);
-        EditText editText = rootView.findViewById(R.id.searchEditText);
-        Button searchButton = rootView.findViewById(R.id.startSearchButton);
+        results = new ArrayList<>();
+
+        rootView = inflater.inflate(R.layout.fragment_search_page, container, false);
+        searchEditText = rootView.findViewById(R.id.searchEditText);
+        searchButton = rootView.findViewById(R.id.startSearchButton);
         resultListView = rootView.findViewById(R.id.serachResultListView);
         searchPageListAdapter = new SearchPageListAdapter(ctx, results);
         resultListView.setAdapter(searchPageListAdapter);
 
+
         //aggiungere on click listener alla lista e capire come passare i dati all'altro fragment
-        editText.setOnClickListener(new View.OnClickListener() {
+        searchEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                editText.setText("");
+                searchEditText.setText("");
             }
         });
-        editText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            }
 
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                searched = s.toString();
-            }
-        });
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!searched.isEmpty()) {
-                    searchPageListAdapter.recipes.clear();
-                    downloadBackEndInfo(searched);
+                String searchEditTextStr = searchEditText.getText().toString();
+                if(!searchEditTextStr.isEmpty()) {
+                    searchPageListAdapter.clear();
+                    downloadBackEndInfo(searchEditText.getText().toString(), 0);
                 }
             }
         });
@@ -97,21 +91,43 @@ public class SearchPageFragment extends Fragment {
 
     }
 
-    private void downloadBackEndInfo(String searched){
-        Call<List<Recipe>> listCall = apiService.getRecipeByName(searched);
+    @Override
+    public void onResume() {
+        super.onResume();
+        Bundle b = getArguments();
+        String category = "";
+
+        if(b.get("filterByCategory") != "") {
+            category = b.getString("filterByCategory");
+            downloadBackEndInfo(category, 1);
+        }
+    }
+
+    private void downloadBackEndInfo(String filter, int function){
+        Call<List<Recipe>> listCall = null;
+        switch (function){
+            case 0:
+                listCall = apiService.getRecipeByName(filter);
+                break;
+            case 1:
+                searchEditText.setText("");
+                listCall = apiService.getRecipeByServing(filter);
+                break;
+        }
         listCall.enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                 results = response.body();
-                searchPageListAdapter.recipes.addAll(results);
-                searchPageListAdapter.notifyDataSetChanged();
-                resultListView.invalidate();
+                if(results != null) {
+                    searchPageListAdapter.addAll(results);
+                    searchPageListAdapter.notifyDataSetChanged();
+                    resultListView.invalidate();
+                }
 
             }
-
             @Override
             public void onFailure(Call<List<Recipe>> call, Throwable t) {
-                Log.i("SearchPageFragment", t.getMessage());
+                Log.i("RicercaRicettaUtente", t.getMessage());
             }
         });
     }

@@ -20,6 +20,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.cookidea_app.Activities.MainActivity;
 import com.example.cookidea_app.Adapters.CarouselPagerAdapter;
 import com.example.cookidea_app.Adapters.HomePageListAdapter;
 import com.example.cookidea_app.R;
@@ -69,7 +70,8 @@ public class HomePageFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Toast.makeText(ctx, homePageListAdapter.getItem(position), Toast.LENGTH_LONG).show();
-
+                String prova = homePageListAdapter.getItem(position);
+                ((MainActivity)ctx).changeTabById(R.id.searchPage, homePageListAdapter.getItem(position));
             }
         });
 
@@ -91,12 +93,13 @@ public class HomePageFragment extends Fragment {
             @Override
             public void onResponse(Call<List<String>> call, Response<List<String>> response) {
                 listPortate = response.body();
+                if(listPortate != null) {
+                    homePageListAdapter.clear();
+                    homePageListAdapter.addAll(listPortate);
 
-                homePageListAdapter.categoryNames.addAll(listPortate);
-
-                homePageListAdapter.notifyDataSetChanged();
-                listView.invalidate();
-
+                    homePageListAdapter.notifyDataSetChanged();
+                    listView.invalidate();
+                }
             }
 
             @Override
