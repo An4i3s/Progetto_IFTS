@@ -55,17 +55,19 @@ def login():
 
 
 # api / RICERCA PER NOME PIATTO  (anche solo una parte del nome)
-# restituisce un record di entità piatto (id, nome_piatto, difficoltà, tempo, provenienza, portata, procedimento, image_name)
+# restituisce un record di entità piatto (id, nome_piatto, difficoltà, tempo, provenienza, portata, image_name)
 # filtrato per nome_piatto
 # http://192.168.0.110:8000/api/ricercaPerNome/funghi
 @appWebApi.route("/api/ricercaPerNome/<nome>")
 def getRecipesfromName(nome):
 
-    query = "select * from piatti WHERE nome_piatto LIKE %s"
+    query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE nome_piatto LIKE %s"
     result = db.fetchAll(query, ('%' + nome+ '%',))
 
-   
     return json.dumps(result, default=vars)
+
+
+
 
 
 # api / ELENCO PORTATE
