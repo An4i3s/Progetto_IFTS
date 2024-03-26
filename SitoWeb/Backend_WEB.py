@@ -32,10 +32,10 @@ def webGetAllRecipes():
 
 # WEB / RICERCA PER NOME PIATTO  (anche solo una parte del nome)
 # http://192.168.0.110:8000/ricercaPerNome/Funghi
-@appWebApi.route("/ricercaPerNome/<nome>")
+@appWebApi.route("/web/ricercaPerNome/<nome>")
 def webGetRecipesfromName(nome):
 
-    query = "select * from piatti WHERE nome_piatto LIKE %s"
+    query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE nome_piatto LIKE %s"
     result = db.fetchAll(query,('%' + nome+ '%',) )
 
     return render_template("piatti_esempio.html", piatti = result)
@@ -60,7 +60,7 @@ def webGetRecipesfromName(nome):
 def webGetRicettaCompletaFromId():
     idPiatto = request.args.get("id_piatto")
 
-    query = """SELECT p.id, p.difficolta, p.tempo, p.nome_piatto, p.provenienza, p.procedimento, p.image_name
+    query = """SELECT p.id, p.difficolta, p.tempo, p.nome_piatto, p.portata, p.provenienza, p.procedimento, p.image_name
                FROM piatti p WHERE p.id = %s"""
     
     result = db.fetchOne(query, (idPiatto,))

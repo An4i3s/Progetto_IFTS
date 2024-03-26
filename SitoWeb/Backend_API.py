@@ -50,6 +50,21 @@ def login():
     else:
         return json.dumps({"success": True, "user": user}), 200
     
+@appWebApi.route("/api/login2", methods=["POST"])
+def login2():
+    data = request.get_json()
+    username = data["username"]
+    password = data["password"]
+    query = "select * from utenti where username = %s and password = %s"
+    user = db.fetchOne(query, (username, password))
+    
+    if user is None:
+        return json.dumps({"success": False}), 401
+    else:
+        return json.dumps({"success": True}), 200
+    
+    
+    
 
 
 
@@ -103,7 +118,7 @@ def getPiattiImmagini():
 def getRicettaCompletaFromId():
     idPiatto = request.args.get("id_piatto")
 
-    query = """SELECT p.id, p.difficolta, p.tempo, p.nome_piatto, p.provenienza, p.procedimento, p.image_name
+    query = """SELECT p.id, p.difficolta, p.tempo, p.nome_piatto, p.portata, p.provenienza, p.procedimento, p.image_name
                FROM piatti p WHERE p.id = %s"""
     
     result = db.fetchOne(query, (idPiatto))
