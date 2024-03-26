@@ -43,7 +43,7 @@ def webGetRecipesfromName(nome):
 # WEB / RICERCA PER PORTATA
 # http://192.168.0.110:8000/ricercaPerNome/Funghi
 @appWebApi.route("/web/ricercaPerPortata/<portata>")
-def webGetRecipesfromName(portata):
+def webGetRecipesfromPortata(portata):
 
     query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE portata = %s"
     result = db.fetchAll(query,(portata,) )
