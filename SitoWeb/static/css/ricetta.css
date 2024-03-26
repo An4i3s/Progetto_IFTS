@@ -91,7 +91,7 @@ nav{
   grid-auto-rows: auto auto;
   gap: 1rem;
   margin-left: 44%; /* Aggiunto per spostare il container verso destra */
-  margin-right: 10%; /* Aggiunto per fornire uno spazio a destra */
+  margin-right: 15%; /* Aggiunto per fornire uno spazio a destra */
 }
 
 #searchBar{
@@ -356,3 +356,4 @@ nav{
   font-size: 16px;
   margin: 0;
 }
+
