@@ -2,26 +2,18 @@ from flask import Flask, jsonify, request, json
 import pymysql
 import random
 from models import *
+from Database import *
 
 
 appWebApi = Flask(__name__)
 
 
+db = None
+
 
 @appWebApi.route("/main")
 def principale():
     return "ok funziona "
-
-config = {
-    'host': 'bvl9qu0y8urzicrcjonj-mysql.services.clever-cloud.com',
-    'user': 'udihp2ytyzgp09os',
-    'password': 'Vy2duKaXFXncXE5gSwEh',
-    'database': 'bvl9qu0y8urzicrcjonj' #COOKIDEA
-}
-
-# Connessione al database
-db = pymysql.connect(**config)
-cursor = db.cursor(pymysql.cursors.DictCursor)
 
 
 # api   (TUTTI I PIATTI)
@@ -30,8 +22,7 @@ cursor = db.cursor(pymysql.cursors.DictCursor)
 @appWebApi.route("/api/piatti")
 def getAllRecipes():
     query = "select * from piatti"
-    cursor.execute(query)
-    result = cursor.fetchall()
+    result = db.fetchAll(query)
     return json.dumps(result)
 
 # api (TUTTI GLI UTENTI)
@@ -40,8 +31,7 @@ def getAllRecipes():
 @appWebApi.route("/api/utenti")
 def getAllUsers():
     query = "select * from utenti"
-    cursor.execute(query)
-    result = cursor.fetchall()
+    result = db.fetchAll(query)
     return json.dumps(result)
 
 # api LOGIN
@@ -53,8 +43,8 @@ def login():
     username = data["username"]
     password = data["password"]
     query = "select * from utenti where username = %s and password = %s"
-    cursor.execute(query, (username, password))
-    user = cursor.fetchone()
+    user = db.fetchOne(query, (username, password))
+    
     if user is None:
         return json.dumps({"success": False, "message": "Utente non trovato"}), 401
     else:
@@ -72,8 +62,8 @@ def login():
 def getRecipesfromName(nome):
 
     query = "select * from piatti WHERE nome_piatto LIKE %s"
-    cursor.execute(query, ('%' + nome+ '%',))
-    result = cursor.fetchall()
+    result = db.fetchAll(query, ('%' + nome+ '%',))
+
    
     return json.dumps(result, default=vars)
 
@@ -84,8 +74,7 @@ def getRecipesfromName(nome):
 @appWebApi.route("/api/portate")
 def getPortate():
     query = "SELECT DISTINCT piatti.portata FROM piatti"
-    cursor.execute(query)
-    result = cursor.fetchall()
+    result = db.fetchAll(query)
     nomi_portate = []
     for record in result:
         nomi_portate.append(record["portata"])
@@ -100,8 +89,7 @@ def getPiattiImmagini():
     piattiDaRestituire = 5
     query = """SELECT id, nome_piatto, image_name
                FROM piatti ORDER BY RAND() LIMIT %s"""
-    cursor.execute(query, (piattiDaRestituire))
-    result = cursor.fetchall()
+    result = db.fetchAll(query, (piattiDaRestituire))
     return jsonify(result)
 
 
@@ -116,17 +104,15 @@ def getRicettaCompletaFromId():
     query = """SELECT p.id, p.difficolta, p.tempo, p.nome_piatto, p.provenienza, p.procedimento, p.image_name
                FROM piatti p WHERE p.id = %s"""
     
-    cursor.execute(query, (idPiatto,))
-    result = cursor.fetchone()
-
+    result = db.fetchOne(query, (idPiatto))
+    
     piatto = Piatto(**result)
 
     query = """SELECT i.nome_ingrediente, r.quantita_ingrediente
                FROM piatti p JOIN ricettario r ON p.id = r.id_piatto
                JOIN ingredienti i ON r.id_ingrediente = i.id WHERE p.id = %s;""" 
     
-    cursor.execute(query, (idPiatto,))
-    result = cursor.fetchall()
+    result = db.fetchAll(query, (idPiatto))
     
     
     for row in result:
@@ -142,7 +128,11 @@ def getRicettaCompletaFromId():
 
 
 if __name__ == "__main__":
-    appWebApi.run(host='0.0.0.0', port=8000, debug=True)
+    try:
+        db = Database()
+        appWebApi.run(host='0.0.0.0', port=8000, debug=True)
+    except KeyboardInterrupt:
+        db.close()
 
 
 

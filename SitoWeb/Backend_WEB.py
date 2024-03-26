@@ -1,29 +1,16 @@
 from flask import Flask, request, render_template, json
 import pymysql
 from models import *
+from Database import *
 
 
 appWebApi = Flask(__name__)
 
 
 
-@appWebApi.route("/main")
-def principale():
-    return "ok funziona"
-
-config = {
-    'host': 'bvl9qu0y8urzicrcjonj-mysql.services.clever-cloud.com',
-    'user': 'udihp2ytyzgp09os',
-    'password': 'Vy2duKaXFXncXE5gSwEh',
-    'database': 'bvl9qu0y8urzicrcjonj' #COOKIDEA #
-}
-
-# Connessione al database
-db = pymysql.connect(**config)
-cursor = db.cursor(pymysql.cursors.DictCursor)
+db = None
 
 
-# ENDPOINT WEB
 
 @appWebApi.route("/")
 def homepage():
@@ -37,8 +24,7 @@ def homepage():
 def webGetAllRecipes():
 
     query = "select * from piatti"
-    cursor.execute(query)
-    result = cursor.fetchall()
+    result = db.fetchAll(query)
 
     return render_template("piatti_esempio.html", piatti = result)
 
@@ -50,10 +36,22 @@ def webGetAllRecipes():
 def webGetRecipesfromName(nome):
 
     query = "select * from piatti WHERE nome_piatto LIKE %s"
-    cursor.execute(query, ('%' + nome+ '%',))
-    result = cursor.fetchall()
+    result = db.fetchAll(query,('%' + nome+ '%',) )
 
     return render_template("piatti_esempio.html", piatti = result)
+
+
+# # web / 5 piatti random
+# # restituisce 5 piatti (id, nome_piatto, image_name) a random dal database
+# # http://192.168.0.110:8000/web/randomPiattoIdNomeImg
+# @appWebApi.route("/web/randomPiattoIdNomeImg")
+# def webGetPiattiImmagini():
+#     piattiDaRestituire = 5
+#     query = """SELECT id, nome_piatto, image_name
+#                FROM piatti ORDER BY RAND() LIMIT %s"""
+#     cursor.execute(query, (piattiDaRestituire))
+#     result = cursor.fetchall()
+#     return jsonify(result)
 
 
 
@@ -65,8 +63,7 @@ def webGetRicettaCompletaFromId():
     query = """SELECT p.id, p.difficolta, p.tempo, p.nome_piatto, p.provenienza, p.procedimento, p.image_name
                FROM piatti p WHERE p.id = %s"""
     
-    cursor.execute(query, (idPiatto,))
-    result = cursor.fetchone()
+    result = db.fetchOne(query, (idPiatto,))
 
     piatto = Piatto(**result)
 
@@ -74,9 +71,8 @@ def webGetRicettaCompletaFromId():
                FROM piatti p JOIN ricettario r ON p.id = r.id_piatto
                JOIN ingredienti i ON r.id_ingrediente = i.id WHERE p.id = %s;""" 
     
-    cursor.execute(query, (idPiatto,))
-    result = cursor.fetchall()
-    
+    result = db.fetchAll(query, (idPiatto,))
+   
     
     for row in result:
         ricettario = Ricettario(**row)
@@ -91,8 +87,13 @@ def webGetRicettaCompletaFromId():
 
 
 
+
 if __name__ == "__main__":
-    appWebApi.run(host='0.0.0.0', port=8000, debug=True)
+    try:
+        db = Database()
+        appWebApi.run(host='0.0.0.0', port=8000, debug=True)
+    except KeyboardInterrupt:
+        db.close()
 
 
 
