@@ -16,7 +16,7 @@
 <body>
 
 <nav class="navigation">
-    <img src="\static\img\1.png" alt="logo cook Idea" height="100px" width="100px">
+    <img src="..\static\img\1.png" alt="logo cook Idea" height="100px" width="100px">
     <input type="text" id="searchBar" placeholder="CERCA...">
     <a href="#">Home</a>
     <button class="btnLogin-popup">Login</button>
@@ -92,6 +92,21 @@
 <div class="recipe">
     <h1 class="recipe_name">{{piatto.nome_piatto}}</h1>
     <img src="\static\img\{{piatto.image_name}}" alt="Ricetta" class="recipe_image">
+    <div class="recipe_details_box">
+        <div class="recipe_details">
+            <div class="recipe_detail">
+                <h3>Tempo di preparazione</h3>
+                <p>{{piatto.tempo}}</p>
+            </div>
+            <div class="recipe_detail">
+                <h3>Difficoltà</h3>
+                <p>{{piatto.difficolta}}</p>
+            </div>
+            <div class="recipe_detail">
+                <h3>Portata</h3>
+                <p>{{piatto.portata}}</p>
+            </div>
+        </div>
     <div class="recipe_section">
         <h2 class="recipe_title">Ingredienti</h2>
         <div class="recipe_ingredienti">

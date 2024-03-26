@@ -1,19 +1,39 @@
-body{
-    font-family: Arial, Helvetica, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-image: url('../img/background_blur.jpg');
-    min-height: 100vh;
-    background-size: cover;
-    background-position: center;  
-    background-size: cover; /* Per adattare l'immagine alla dimensione dell'intera finestra del browser */
-    background-repeat: no-repeat; 
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-image: url('../img/background_blur.jpg');
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;  
+  background-repeat: no-repeat; 
+  display: flex;
+  flex-direction: column; /* Aggiunto */
+  align-items:center ; /* Aggiunto */
 }
+
+/* Contenitore per la navbar */
+.navbar-container {
+  overflow: hidden;
+  background-color: rgb(128,128,128,0.95);
+  width: 100%; /* Aggiunto */
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* Contenitore per il contenuto principale */
+.content-wrapper {
+  width: 100%;
+  max-width: 800px;
+  padding: 20px;
+}
+
+
 
 .container {
     max-width: 800px;
     margin: 0 auto;
-    padding: 20px;
+  
 
 }
 
@@ -25,6 +45,7 @@ body{
     max-width: 100%;
     display: block;
     margin-bottom: 20px;
+    align-items: center;
 }
 
 .recipe_section{
@@ -61,14 +82,16 @@ nav{
   margin-bottom: auto;
 }
 
-#container{
-    display: grid;
-    position: relative;
-    grid-template-areas: "navbar" "login";
-    grid-template-rows: auto;
-    grid-template-columns: auto;
-    grid-auto-rows: auto auto;
-    gap: 1rem; 
+#container {
+  display: grid;
+  position: relative;
+  grid-template-areas: "navbar" "login";
+  grid-template-rows: auto;
+  grid-template-columns: auto;
+  grid-auto-rows: auto auto;
+  gap: 1rem;
+  margin-left: 44%; /* Aggiunto per spostare il container verso destra */
+  margin-right: 10%; /* Aggiunto per fornire uno spazio a destra */
 }
 
 #searchBar{
@@ -300,8 +323,36 @@ nav{
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 1.0);
 }
 
-footer{
-  grid-area: 18/1/20/10;
-  background-color: rgb(128,128,128,0.5);
+.recipe_details_box {
+  background-color: rgba(0, 0, 0, 0.5); /* Colore di sfondo trasparente opacizzato */
+  padding: 20px;
+  border-radius: 8px;
+  margin-top: 20px;
+}
 
-  }
+.recipe_details,
+.recipe_section {
+  margin-bottom: 20px;
+  flex-basis: calc(100% - 40px);
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+}
+
+.recipe_detail {
+  
+  padding: 10px;
+  
+  text-align: center;
+}
+
+.recipe_detail h3 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.recipe_detail p {
+  font-size: 16px;
+  margin: 0;
+}
