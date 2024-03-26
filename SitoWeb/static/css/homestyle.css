@@ -290,6 +290,11 @@ nav{
   grid-column: auto;
   grid-area: 2/3/6/8;
   border-radius: 10px;
+  font-family: "Passion One", sans-serif;
+  color: #ececec;
+  font-size: 150px;
+  font-weight: 400
+  
 }
 
 .antipasti-image {
