@@ -40,6 +40,16 @@ def webGetRecipesfromName(nome):
 
     return render_template("piatti_esempio.html", piatti = result)
 
+# WEB / RICERCA PER PORTATA
+# http://192.168.0.110:8000/ricercaPerNome/Funghi
+@appWebApi.route("/web/ricercaPerPortata/<portata>")
+def webGetRecipesfromName(portata):
+
+    query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE portata = %s"
+    result = db.fetchAll(query,(portata,) )
+
+    return render_template("piatti_esempio.html", piatti = result)
+
 
 # # web / 5 piatti random
 # # restituisce 5 piatti (id, nome_piatto, image_name) a random dal database

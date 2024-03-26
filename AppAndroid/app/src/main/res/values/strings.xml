@@ -10,5 +10,8 @@
     <string name="spesa">Spesa</string>
     <string name="ricerca">Ricerca</string>
     <string name="registrati">Registrati</string>
+    <string name="tempo">Tempo: </string>
+    <string name="difficolt">Difficoltà: </string>
+    <string name="portata">Portata: </string>
 
 </resources>

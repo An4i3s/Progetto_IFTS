@@ -82,7 +82,17 @@ def getRecipesfromName(nome):
     return json.dumps(result, default=vars)
 
 
+# api / RICERCA PER NOME PORTATA 
+# restituisce un record di entità piatto (id, nome_piatto, difficoltà, tempo, provenienza, portata, image_name)
+# filtrato per portata
+# http://192.168.0.110:8000/api/ricercaPerPortata/primo
+@appWebApi.route("/api/ricercaPerPortata/<portata>")
+def getRecipesfromPortata(portata):
 
+    query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE portata = %s"
+    result = db.fetchAll(query, (portata,))
+
+    return json.dumps(result, default=vars)
 
 
 # api / ELENCO PORTATE

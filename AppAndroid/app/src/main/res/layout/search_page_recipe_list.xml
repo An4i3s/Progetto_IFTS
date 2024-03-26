@@ -23,22 +23,49 @@
             android:textSize="20sp"
             android:textStyle="bold" />
         <TextView
+            android:id="@+id/timeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nameRecipeSearchedTextView"
+            android:textSize="20sp"
+            android:text="@string/tempo"
+            android:textStyle="bold"/>
+        <TextView
             android:id="@+id/timeRecipeSearchedTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/nameRecipeSearchedTextView"
-            android:textSize="20sp" />
+            android:layout_toEndOf="@id/timeTextView"
+            android:textSize="20sp"/>
+        <TextView
+            android:id="@+id/difficultyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/timeRecipeSearchedTextView"
+            android:textSize="20sp"
+            android:text="@string/difficolt"
+            android:textStyle="bold"/>
         <TextView
             android:id="@+id/difficultyRecipeSearchedTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/timeRecipeSearchedTextView"
+            android:layout_toEndOf="@+id/difficultyTextView"
             android:textSize="20sp" />
+        <TextView
+            android:id="@+id/servingTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/difficultyRecipeSearchedTextView"
+            android:textSize="20sp"
+            android:text="@string/portata"
+            android:textStyle="bold"/>
         <TextView
             android:id="@+id/servingRecipeSearchedTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/difficultyRecipeSearchedTextView"
-            android:textSize="20sp" />
+            android:layout_toEndOf="@+id/servingTextView"
+            android:textSize="20sp"/>
     </RelativeLayout>
 </RelativeLayout>

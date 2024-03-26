@@ -93,6 +93,8 @@ public class SearchPageFragment extends Fragment {
             }
         });
         return rootView;
+
+
     }
 
     private void downloadBackEndInfo(String searched){

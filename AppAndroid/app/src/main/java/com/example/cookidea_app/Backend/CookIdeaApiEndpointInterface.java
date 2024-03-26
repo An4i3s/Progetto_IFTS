@@ -14,4 +14,7 @@ public interface CookIdeaApiEndpointInterface {
 
     @GET("/api/ricercaPerNome/{nome}")
     Call<List<Recipe>> getRecipeByName(@Path("nome") String nome);
+
+    @GET("/api/ricercaPerPortata/{portata}")
+    Call<List<Recipe>> getRecipeByServing(@Path("portata") String portata);
 }

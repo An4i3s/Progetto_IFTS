@@ -69,12 +69,15 @@ public class SearchPageListAdapter extends ArrayAdapter<Recipe> {
         }else{
             resultsViewHolder = (SearchPageListAdapter.ResultsViewHolder) convertView.getTag();
         }
-
+        //TODO controllare perchè entra più volte nell'adapter
         resultsViewHolder.imgRecipeVh.setImageBitmap(resultsViewHolder.recipeImage);
         resultsViewHolder.nameRecipeVH.setText(recipes.get(position).getName());
-        resultsViewHolder.timeRecipeVH.setText(recipes.get(position).getTime());
-        resultsViewHolder.difficultyRecipeVH.setText(recipes.get(position).getDifficulty());
-        resultsViewHolder.servingRecipeVH.setText(recipes.get(position).getServing());
+        String time = " " + recipes.get(position).getTime() + "min";
+        resultsViewHolder.timeRecipeVH.setText(time);
+        String difficulty = " " + recipes.get(position).getDifficulty();
+        resultsViewHolder.difficultyRecipeVH.setText(difficulty);
+        String serving = " " + recipes.get(position).getServing();
+        resultsViewHolder.servingRecipeVH.setText(serving);
 
         return convertView;
     }
