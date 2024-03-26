@@ -1,5 +1,7 @@
 package com.example.cookidea_app.ModelClasses;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class User {

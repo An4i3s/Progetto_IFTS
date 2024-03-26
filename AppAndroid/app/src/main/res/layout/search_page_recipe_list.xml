@@ -7,7 +7,7 @@
         android:id="@+id/imageRecipeSearchedImageView"
         android:layout_width="140dp"
         android:layout_height="140dp"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
         android:padding="10dp" />
     <RelativeLayout
         android:layout_width="wrap_content"

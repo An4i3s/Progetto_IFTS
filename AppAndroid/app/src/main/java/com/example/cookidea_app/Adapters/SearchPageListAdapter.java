@@ -23,7 +23,7 @@ import java.util.List;
 public class SearchPageListAdapter extends ArrayAdapter<Recipe> {
 
     Context ctx;
-    List<Recipe> recipes;
+    public List<Recipe> recipes;
 
 
     public SearchPageListAdapter(@NonNull Context context, @NonNull List<Recipe> recipes) {
@@ -56,7 +56,7 @@ public class SearchPageListAdapter extends ArrayAdapter<Recipe> {
             resultsViewHolder.difficultyRecipeVH = (TextView) convertView.findViewById(R.id.difficultyRecipeSearchedTextView);
             resultsViewHolder.servingRecipeVH = (TextView) convertView.findViewById(R.id.servingRecipeSearchedTextView);
 
-            String imgUrl = BASE_URL + "/static/recipes/" + recipes.get(position).getImg_name().toLowerCase() + ".jpg";
+            String imgUrl = BASE_URL + "/static/img/" + recipes.get(position).getImg_name().toLowerCase();
 
             new DownloadImageAsyncTask(resultsViewHolder.imgRecipeVh, new DownloadImageAsyncTask.ImageDownloadCallback() {
                 @Override
@@ -75,7 +75,7 @@ public class SearchPageListAdapter extends ArrayAdapter<Recipe> {
         resultsViewHolder.timeRecipeVH.setText(recipes.get(position).getTime());
         resultsViewHolder.difficultyRecipeVH.setText(recipes.get(position).getDifficulty());
         resultsViewHolder.servingRecipeVH.setText(recipes.get(position).getServing());
-        
+
         return convertView;
     }
 }

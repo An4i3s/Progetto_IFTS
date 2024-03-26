@@ -50,7 +50,6 @@ public class HomePageFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         ctx = context;
-
     }
 
 
@@ -86,7 +85,7 @@ public class HomePageFragment extends Fragment {
     }
 
 
-    void downloadBackEndInfo() {
+    private void downloadBackEndInfo() {
         Call<List<String>> callListPortate = apiService.getPortate();
         callListPortate.enqueue(new Callback<List<String>>() {
             @Override
