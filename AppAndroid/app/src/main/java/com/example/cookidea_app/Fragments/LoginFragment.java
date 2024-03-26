@@ -35,10 +35,7 @@ public class LoginFragment extends Fragment {
    Retrofit retrofit = new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
 
-    // TODO: 26/03/2024 Creare Endpoint Login Utente:
-    //  -> istanza di Retrofit (con (GsonConverterFactory.create(gson))
-    //  -> richiamare anche BASE URL?
-    //  ->
+
     public LoginFragment(){
 
     }
@@ -59,7 +56,6 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 CookIdeaApiEndpointInterface apiInterface = retrofit.create(CookIdeaApiEndpointInterface.class);
-                //Call<User> call = apiInterface.login(username.getText().toString(), password.getText().toString());
                 LoginRequest loginRequest = new LoginRequest();
                 loginRequest.setUsername(username.getText().toString());
                 Log.i("userLogin",username.getText().toString());
@@ -73,6 +69,10 @@ public class LoginFragment extends Fragment {
                     public void onResponse(Call<User> call, Response<User> response) {
 
                         if (response.isSuccessful()){
+                            // TODO: 26/03/2024 Gestire Login se utente trovato
+                            //  -> rimanda a MainActivity
+                            //  -> rende visibili nuovi campi nella NavBar (PROFILO, 3 FRAGMNET RICETTE E LOGOUT) sulla base di un valore booleano
+                            //
                             Toast.makeText(getContext(), "Utente Trovato", Toast.LENGTH_LONG).show();
                             User user = response.body();
                         }else {
