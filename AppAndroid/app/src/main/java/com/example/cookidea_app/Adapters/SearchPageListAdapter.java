@@ -29,7 +29,6 @@ public class SearchPageListAdapter extends ArrayAdapter<Recipe> {
     public SearchPageListAdapter(@NonNull Context context, @NonNull List<Recipe> recipes) {
         super(context, R.layout.search_page_recipe_list, recipes);
         this.ctx = context;
-        //this.recipes = recipes;
     }
 
     private static class ResultsViewHolder{
@@ -56,7 +55,7 @@ public class SearchPageListAdapter extends ArrayAdapter<Recipe> {
             resultsViewHolder.difficultyRecipeVH = (TextView) convertView.findViewById(R.id.difficultyRecipeSearchedTextView);
             resultsViewHolder.servingRecipeVH = (TextView) convertView.findViewById(R.id.servingRecipeSearchedTextView);
 
-            String imgUrl = BASE_URL + "/static/img/" + getItem(position).getImg_name().toLowerCase();
+            String imgUrl = BASE_URL + "/static/recipes/" + getItem(position).getImg_name().toLowerCase();
 
             new DownloadImageAsyncTask(resultsViewHolder.imgRecipeVh, new DownloadImageAsyncTask.ImageDownloadCallback() {
                 @Override

@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.cookidea_app.Activities.MainActivity;
 import com.example.cookidea_app.Adapters.CarouselPagerAdapter;
 import com.example.cookidea_app.Adapters.HomePageListAdapter;
+import com.example.cookidea_app.ModelClasses.Recipe;
 import com.example.cookidea_app.R;
 
 import java.util.ArrayList;
@@ -41,6 +42,8 @@ public class HomePageFragment extends Fragment {
     ListView listView;
     List<String> listPortate = new ArrayList<>();
     List<Bitmap> listPortateImages = new ArrayList<>();
+    List<Recipe> carouselResult = new ArrayList<>();
+
     HomePageListAdapter homePageListAdapter;
 
     public HomePageFragment(){
@@ -63,7 +66,6 @@ public class HomePageFragment extends Fragment {
         homePageListAdapter = new HomePageListAdapter(ctx, listPortate, listPortateImages);
         listView.setAdapter(homePageListAdapter);
 
-        //if(homePageListAdapter!=null && homePageListAdapter.categoryNames.isEmpty())
         downloadBackEndInfo();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -75,13 +77,30 @@ public class HomePageFragment extends Fragment {
             }
         });
 
-        List<String> imageURLs = new ArrayList<>();
-        imageURLs.add("https://upload.wikimedia.org/wikipedia/commons/thumb/a/a3/Eq_it-na_pizza-margherita_sep2005_sml.jpg/640px-Eq_it-na_pizza-margherita_sep2005_sml.jpg");
-        imageURLs.add("https://www.biochetasi.it/wp-content/uploads/2019/09/I-bambini-e-il-cibo-spazzatura.-Meglio-non-esagerare-1-biochetasi-1000x600.jpg");
-        imageURLs.add("https://inglesedinamico.net/wp-content/uploads/2021/01/cibo-in-inglese-fb.jpg");
-        carouselPagerAdapter = new CarouselPagerAdapter(rootView.getContext(), imageURLs);
+        carouselPagerAdapter = new CarouselPagerAdapter(rootView.getContext(), carouselResult);
         carouselViewPager = rootView.findViewById(R.id.carouselViewPagerHomeFragment);
         carouselViewPager.setAdapter(carouselPagerAdapter);
+
+        //TODO fixare carosello (riga 92 NullPointerException)
+        /*Call<List<Recipe>> carouselCall = apiService.getRandomRecipe();
+        carouselCall.enqueue(new Callback<List<Recipe>>() {
+            @Override
+            public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
+                carouselResult = response.body();
+
+                carouselPagerAdapter.carouselRecipes.clear();
+                carouselPagerAdapter.carouselRecipes.addAll(carouselResult);
+
+                carouselPagerAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Recipe>> call, Throwable t) {
+                Log.i("carouselDownload", t.getMessage());
+            }
+        });*/
+
         
         return rootView;
     }

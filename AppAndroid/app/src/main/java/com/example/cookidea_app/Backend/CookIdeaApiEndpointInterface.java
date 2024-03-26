@@ -19,6 +19,9 @@ public interface CookIdeaApiEndpointInterface {
     @GET("/api/portate")
     Call<List<String>> getPortate();
 
+    @GET("/api/randomPiattoIdNomeImg")
+    Call<List<Recipe>> getRandomRecipe();
+
     @GET("/api/ricercaPerNome/{nome}")
     Call<List<Recipe>> getRecipeByName(@Path("nome") String nome);
 

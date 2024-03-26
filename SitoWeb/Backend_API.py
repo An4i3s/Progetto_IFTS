@@ -76,7 +76,7 @@ def login2():
 @appWebApi.route("/api/ricercaPerNome/<nome>")
 def getRecipesfromName(nome):
 
-    query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE nome_piatto LIKE %s"
+    query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE nome_piatto LIKE '%s'"
     result = db.fetchAll(query, ('%' + nome+ '%',))
 
     return json.dumps(result, default=vars)
@@ -89,7 +89,7 @@ def getRecipesfromName(nome):
 @appWebApi.route("/api/ricercaPerPortata/<portata>")
 def getRecipesfromPortata(portata):
 
-    query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE portata = %s"
+    query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE portata = '%s'"
     result = db.fetchAll(query, (portata,))
 
     return json.dumps(result, default=vars)
@@ -98,6 +98,7 @@ def getRecipesfromPortata(portata):
 # api / ELENCO PORTATE
 # restituisce un array di portate prese dalla tabella piatti (piatti.portate), senza duplicati
 # http://192.168.0.110:8000/api/portate
+'''
 @appWebApi.route("/api/portate")
 def getPortate():
     query = "SELECT DISTINCT piatti.portata FROM piatti"
@@ -106,8 +107,21 @@ def getPortate():
     for record in result:
         nomi_portate.append(record["portata"])
     return jsonify(nomi_portate)
+'''
 
-
+@appWebApi.route("/api/portate")
+def getPortate():
+    query = "SELECT DISTINCT piatti.portata FROM piatti"
+    try:
+        result = db.fetchAll(query)
+        if result is None:
+            return jsonify([])
+        
+        nomi_portate = [record["portata"] for record in result]
+        return jsonify(nomi_portate) 
+    except Exception as e:
+        return jsonify({"error": str(e)})
+    
 # api / 5 piatti random
 # restituisce 5 piatti (id, nome_piatto, image_name) a random dal database
 # http://192.168.0.110:8000/api/randomPiattoIdNomeImg
@@ -116,8 +130,10 @@ def getPiattiImmagini():
     piattiDaRestituire = 5
     query = """SELECT id, nome_piatto, image_name
                FROM piatti ORDER BY RAND() LIMIT %s"""
-    result = db.fetchAll(query, (piattiDaRestituire))
+    result = db.fetchAll(query, (piattiDaRestituire,))
     return jsonify(result)
+
+
 
 
 
