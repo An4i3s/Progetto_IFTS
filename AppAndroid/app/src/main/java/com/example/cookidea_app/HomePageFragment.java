@@ -53,10 +53,8 @@ public class HomePageFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         ctx = context;
-        if(homePageListAdapter.categoryNames != null && homePageListAdapter.categoryNames.isEmpty())
-            downloadBackEndInfo();
-    }
 
+    }
 
 
     @Nullable
@@ -67,6 +65,9 @@ public class HomePageFragment extends Fragment {
         listView = rootView.findViewById(R.id.categoryListHomeFragment);
         homePageListAdapter = new HomePageListAdapter(ctx, listPortate, listPortateImages);
         listView.setAdapter(homePageListAdapter);
+
+        //if(homePageListAdapter!=null && homePageListAdapter.categoryNames.isEmpty())
+        downloadBackEndInfo();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override

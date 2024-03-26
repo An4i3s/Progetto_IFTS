@@ -29,15 +29,9 @@ public class LoginFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_login, container, false);
 
         Button button = rootView.findViewById(R.id.signupButton);
-//        btn = getActivity().findViewById(R.id.signupButton);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Activity parentActivity = getActivity();
-                //ERRORE:
-                // java.lang.NullPointerException: Attempt to invoke virtual method
-                // 'void android.widget.Button.setOnClickListener(android.view.View$OnClickListener)'
-                // on a null object reference
                 MainActivity activity = (MainActivity) getActivity();
                 assert activity != null;
                 activity.apriRegistrazione();

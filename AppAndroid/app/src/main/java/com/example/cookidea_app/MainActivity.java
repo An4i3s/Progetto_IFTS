@@ -1,6 +1,7 @@
 package com.example.cookidea_app;
 
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.View;
 import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
@@ -33,6 +35,8 @@ import androidx.fragment.app.FragmentManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.DateFormat;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,7 +47,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener   {
     /*fare activity di login
     implementare splashpage
     collegare gli endpoint
@@ -61,6 +65,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     List<String> listPortate;
+    TextView etaTv;
+    DatePicker datePicker;
+
 
     public static final String BASE_URL = "http://192.168.0.105:8000";
     public static final Retrofit retrofit = new Retrofit.Builder()
@@ -109,11 +116,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         NavigationView navigationView = findViewById(R.id.navView);
         navigationView.setNavigationItemSelectedListener(this);
 
-
+        etaTv = findViewById(R.id.tvEta);
+        datePicker = new DatePicker();
+        datePicker.onCreateDialog(savedInstanceState);
 
 
 
     }
+
+
 
 
    @Override
@@ -156,9 +167,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public void apriRegistrazione(){
 
         Fragment fragment = new RegistrazioneFragment();
-        //? replace con loginPage o mai content
         getSupportFragmentManager().beginTransaction().replace(R.id.mainContent, fragment).commit();
-       // DrawerLayout drawer = findViewById(R.id.drawerLayout);
-        //drawer.closeDrawer(GravityCompat.END);
+
     }
+
+    @Override
+    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
+       // RegistrazioneFragment registrazioneFragment = new RegistrazioneFragment();
+       // registrazioneFragment.onDateSet(view, year, month, dayOfMonth);
+    }
+
+
 }

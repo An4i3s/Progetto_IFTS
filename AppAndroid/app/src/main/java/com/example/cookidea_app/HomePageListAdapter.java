@@ -52,7 +52,7 @@ public class HomePageListAdapter extends ArrayAdapter<String> {
             categoryViewHolder.textViewVH = (TextView) convertView.findViewById(R.id.categoryName);
             categoryViewHolder.imageViewVH = (ImageView) convertView.findViewById(R.id.categoryImage);
 
-            String imgUrl = BASE_URL + "/static/img/" + categoryNames.get(position).toLowerCase() +".png";
+            String imgUrl = BASE_URL + "/static/img/" + categoryNames.get(position).toLowerCase() +".jpg";
 
             new DownloadImageAsyncTask(categoryViewHolder.imageViewVH, new DownloadImageAsyncTask.ImageDownloadCallback() {
                 @Override
