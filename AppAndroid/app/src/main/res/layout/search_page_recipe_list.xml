@@ -5,8 +5,8 @@
 
     <ImageView
         android:id="@+id/imageRecipeSearchImageView"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:scaleType="fitCenter"/>
     <TextView
         android:id="@+id/nameRecipeSearchTextView"
@@ -15,22 +15,40 @@
         android:layout_toEndOf="@+id/imageRecipeSearchImageView"
         android:paddingStart="15dp"
         android:paddingEnd="15dp"
-        android:text="pasta alla carbonara"
         android:textSize="20sp"/>
     <TextView
         android:id="@+id/timeRecipeSearchTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/imageRecipeSearchImageView"
+        android:layout_below="@+id/nameRecipeSearchTextView"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textSize="20sp" />
     <TextView
         android:id="@+id/difficultyRecipeSearchTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/imageRecipeSearchImageView"
+        android:layout_below="@+id/timeRecipeSearchTextView"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp" />
     <TextView
         android:id="@+id/provenanceRecipeSearchTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/imageRecipeSearchImageView"
+        android:layout_below="@+id/difficultyRecipeSearchTextView"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textSize="20sp" />
     <TextView
         android:id="@+id/servingRecipeSearchTextView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/imageRecipeSearchImageView"
+        android:layout_below="@+id/provenanceRecipeSearchTextView"
+        android:paddingStart="15dp"
+        android:paddingEnd="15dp"
+        android:textSize="20sp" />
 </RelativeLayout>

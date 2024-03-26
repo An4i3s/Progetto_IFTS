@@ -69,7 +69,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     DatePicker datePicker;
 
 
-    public static final String BASE_URL = "http://192.168.0.105:8000";
+    public static final String BASE_URL = "http://192.168.0.102:8000";
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
