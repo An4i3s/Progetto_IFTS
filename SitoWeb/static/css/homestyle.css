@@ -274,6 +274,7 @@ nav{
   color: #fff;
   text-decoration: none;
   font-weight: 600;
+  
 }
 
 .login-register p a:hover{
@@ -292,9 +293,10 @@ nav{
   border-radius: 10px;
   font-family: "Passion One", sans-serif;
   color: #ececec;
-  font-size: 150px;
-  font-weight: 400
-  
+  font-size: 130px;
+  font-weight: 400;
+  text-align: center;
+  text-shadow:10px 10px 10px rgba(0, 0, 0, 1);
 }
 
 .antipasti-image {
@@ -320,6 +322,12 @@ nav{
   display: grid;
   grid-area: 6/3/10/8;
   border-radius: 10px;
+  font-family: "Passion One", sans-serif;
+  color: #ececec;
+  font-size: 130px;
+  font-weight: 400;
+  text-align: center;
+  text-shadow:10px 10px 10px rgba(0, 0, 0, 1);
 }
 #primi:active{
   opacity: 0.8s;
@@ -341,6 +349,12 @@ nav{
   grid-area: 10/3/14/8;
   border-radius: 10px;
   background-position: center;
+  font-family: "Passion One", sans-serif;
+  color: #ececec;
+  font-size: 130px;
+  font-weight: 400;
+  text-align: center;
+  text-shadow:10px 10px 10px rgba(0, 0, 0, 1);
 }
 #secondi:active{
   opacity: 0.8s;
@@ -362,6 +376,12 @@ nav{
   grid-area: 14/3/18/8;
   border-radius: 10px;
   background-position: center;
+  font-family: "Passion One", sans-serif;
+  color: #ececec;
+  font-size: 130px;
+  font-weight: 400;
+  text-align: center;
+  text-shadow:10px 10px 10px rgba(0, 0, 0, 1);
  
 }
 #dessert:active{
@@ -376,5 +396,5 @@ nav{
 
 footer{
   grid-area: 18/1/20/10;
-  background-color: rgb(128,128,128,0.95);
+  background-color: rgb(128,128,128,0.5);
 }
