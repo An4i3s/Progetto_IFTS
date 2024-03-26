@@ -9,21 +9,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 
 import com.example.cookidea_app.R;
 
 import java.text.DateFormat;
+
 import java.util.Calendar;
 
-public class RegistrazioneFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
+public class RegistrazioneFragment extends Fragment {
 
     Button dateBtn;
     TextView etaTv;
+
+    String dataNascita;
 
     public RegistrazioneFragment(){
 
@@ -41,17 +48,23 @@ public class RegistrazioneFragment extends Fragment implements DatePickerDialog.
             public void onClick(View v) {
 
                 Activity activity = getActivity();
-                DatePickerDialogFragment fragment = new DatePickerDialogFragment();
+               DatePickerDialog fragment = new DatePickerDialog(rootView.getContext());
                 if (activity!=null && isAdded()){
-                   /* getActivity().getSupportFragmentManager()
-                            .beginTransaction()
-                            .replace(R.id.loginPage, fragment)
-                            .commit();
-
-                    */
-                    fragment.show(getActivity().getSupportFragmentManager(), "Date Pick");
-
-
+                    fragment.show();
+                    fragment.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            Calendar mCalendar = Calendar.getInstance();
+                            mCalendar.set(Calendar.YEAR, year);
+                            mCalendar.set(Calendar.MONTH, month);
+                            mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                            String selectedDate = DateFormat.getDateInstance(DateFormat.SHORT).format(mCalendar.getTime());
+                           
+                            dataNascita = selectedDate;
+                            etaTv.setText(dataNascita);
+                            Toast.makeText(view.getContext(),dataNascita, Toast.LENGTH_LONG).show();
+                        }
+                    });
                 }
 
             }
@@ -60,32 +73,4 @@ public class RegistrazioneFragment extends Fragment implements DatePickerDialog.
         return  rootView;
     }
 
-    @Override
-    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
-        // TODO: 25/03/2024 Provato con LocalDate ma non funziona a sotto livello 26 (min app è 24)
-       // LocalDate localDate = new LocalDate(year,month,dayOfMonth);
-        Calendar mCalendar = Calendar.getInstance();
-        mCalendar.set(Calendar.YEAR, year);
-        mCalendar.set(Calendar.MONTH, month);
-        mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-        String selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
-        etaTv.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-             etaTv.setText(selectedDate);
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                etaTv.setText(selectedDate);
-
-            }
-        });
-    }
 }
