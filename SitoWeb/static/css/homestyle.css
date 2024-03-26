@@ -281,7 +281,7 @@ nav{
 }
 
 #antipasti{
-  background-image: url('/static/img/category_antipasti.png');
+  background-image: url("../img/category_antipasti.png");
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
@@ -307,7 +307,7 @@ nav{
 }
 
 #primi{
-  background-image: url('/static/img/category_primi.png');
+  background-image: url('../img/category_primi.png');
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
@@ -327,7 +327,7 @@ nav{
 }
 
 #secondi{
-  background-image: url('/static/img/category_secondi.png');
+  background-image: url('../img/category_secondi.png');
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
@@ -335,6 +335,7 @@ nav{
   display: grid;
   grid-area: 10/3/14/8;
   border-radius: 10px;
+  background-position: center;
 }
 #secondi:active{
   opacity: 0.8s;
@@ -347,7 +348,7 @@ nav{
 }
 
 #dessert{
-  background-image: url('/static/img/category_dessert.png');
+  background-image: url('../img/category_dessert.png');
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;
@@ -355,6 +356,8 @@ nav{
   display: grid;
   grid-area: 14/3/18/8;
   border-radius: 10px;
+  background-position: center;
+ 
 }
 #dessert:active{
   opacity: 0.8s;
