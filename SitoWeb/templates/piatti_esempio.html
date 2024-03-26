@@ -12,6 +12,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Passion+One&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alatsi&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -110,9 +114,9 @@
     <div class="recipe_section">
         <h2 class="recipe_title">Ingredienti</h2>
         <div class="recipe_ingredienti">
-            <ul>
+            <ul class="list_ingredienti">
                 {% for ingrediente in piatto.ricettario %}
-                <li>{{ingrediente.nome_ingrediente}} :   {{ingrediente["quantita_ingrediente"]}}</li>
+                <li class="list_ingredienti">{{ingrediente.nome_ingrediente}} :   {{ingrediente["quantita_ingrediente"]}}</li>
             {% endfor %}   
                 
                 
