@@ -57,7 +57,7 @@
             android:id="@+id/tvEta"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:text="Ciao!"
+            android:text=""
             />
 
         <!--EditText

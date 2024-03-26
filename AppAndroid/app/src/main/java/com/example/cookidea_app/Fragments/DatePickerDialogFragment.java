@@ -5,15 +5,26 @@ import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
+<<<<<<< Updated upstream:AppAndroid/app/src/main/java/com/example/cookidea_app/Fragments/DatePickerDialogFragment.java
+=======
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+>>>>>>> Stashed changes:AppAndroid/app/src/main/java/com/example/cookidea_app/DatePicker.java
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
+import java.text.DateFormat;
 import java.util.Calendar;
 
+<<<<<<< Updated upstream:AppAndroid/app/src/main/java/com/example/cookidea_app/Fragments/DatePickerDialogFragment.java
 public class DatePickerDialogFragment extends DialogFragment {
+=======
+public class DatePicker extends DialogFragment  {
+>>>>>>> Stashed changes:AppAndroid/app/src/main/java/com/example/cookidea_app/DatePicker.java
 
     public DatePickerDialogFragment() {
     }
@@ -40,6 +51,7 @@ public class DatePickerDialogFragment extends DialogFragment {
         }
         return null;
     }
+
 
 
 }
