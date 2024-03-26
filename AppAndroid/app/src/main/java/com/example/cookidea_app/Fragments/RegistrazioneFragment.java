@@ -1,9 +1,7 @@
 package com.example.cookidea_app.Fragments;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,12 +22,7 @@ import androidx.fragment.app.FragmentActivity;
 import com.example.cookidea_app.R;
 
 import java.text.DateFormat;
-<<<<<<< Updated upstream:AppAndroid/app/src/main/java/com/example/cookidea_app/Fragments/RegistrazioneFragment.java
-=======
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
->>>>>>> Stashed changes:AppAndroid/app/src/main/java/com/example/cookidea_app/RegistrazioneFragment.java
+
 import java.util.Calendar;
 
 public class RegistrazioneFragment extends Fragment {
@@ -55,11 +48,7 @@ public class RegistrazioneFragment extends Fragment {
             public void onClick(View v) {
 
                 Activity activity = getActivity();
-<<<<<<< Updated upstream:AppAndroid/app/src/main/java/com/example/cookidea_app/Fragments/RegistrazioneFragment.java
-                DatePickerDialogFragment fragment = new DatePickerDialogFragment();
-=======
-                DatePickerDialog fragment = new DatePickerDialog(rootView.getContext());
->>>>>>> Stashed changes:AppAndroid/app/src/main/java/com/example/cookidea_app/RegistrazioneFragment.java
+               DatePickerDialog fragment = new DatePickerDialog(rootView.getContext());
                 if (activity!=null && isAdded()){
                     fragment.show();
                     fragment.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
@@ -69,9 +58,7 @@ public class RegistrazioneFragment extends Fragment {
                             mCalendar.set(Calendar.YEAR, year);
                             mCalendar.set(Calendar.MONTH, month);
                             mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                            //  String selectedDate = DateFormat.getDateInstance(DateFormat.FULL).format(mCalendar.getTime());
-                            @SuppressLint("SimpleDateFormat") SimpleDateFormat formatDate = new SimpleDateFormat("dd-MM-yyyy");
-                           String selectedDate = DateFormat.getDateInstance(DateFormat.SHORT).format(mCalendar.getTime());
+                            String selectedDate = DateFormat.getDateInstance(DateFormat.SHORT).format(mCalendar.getTime());
                            
                             dataNascita = selectedDate;
                             etaTv.setText(dataNascita);
