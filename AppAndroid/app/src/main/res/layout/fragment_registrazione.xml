@@ -45,30 +45,45 @@
             android:hint="Inserisci cognome"
 
             />
-        <Button
-            android:id="@+id/btnEta"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_marginHorizontal="@dimen/margin"
-            android:text="Data di Nascita"
-            android:fontFamily="@font/days_one"
-            />
-        <TextView
-            android:id="@+id/tvEta"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text=""
-            />
 
-        <!--EditText
-            android:id="@+id/ageEditText"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
 
-            android:layout_marginHorizontal="@dimen/margin"
-            android:hint="Inserisci l'eta"
+            >
 
-            /-->
+            <TextView
+                android:id="@+id/tvEtaHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="@dimen/margin"
+                android:text="Data di Nascita:"
+                android:fontFamily="@font/days_one"
+
+                />
+            <TextView
+                android:id="@+id/tvEta"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:text=""
+                android:fontFamily="@font/days_one"
+                android:layout_toEndOf="@id/tvEtaHeader"
+                />
+            <Button
+                android:id="@+id/btnEta"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="@dimen/margin"
+                android:layout_marginBottom="10dp"
+                android:text="Seleziona data"
+                android:fontFamily="@font/days_one"
+                android:layout_below="@id/tvEtaHeader"
+                />
+
+        </RelativeLayout>
+
+
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
