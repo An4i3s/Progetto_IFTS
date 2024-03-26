@@ -5,16 +5,18 @@ class Piatto:
     difficolta = None
     tempo = None
     nome_piatto = None
+    portata = None
     provenienza = None
     procedimento = None
     image_url = None
     ricettario = []
     
-    def __init__(self, id, difficolta, tempo, nome_piatto, provenienza, procedimento, image_name):
+    def __init__(self, id, difficolta, tempo, nome_piatto, portata, provenienza, procedimento, image_name):
         self.id = id
         self.difficolta = difficolta
         self.tempo = tempo
         self.nome_piatto = nome_piatto
+        self.portata = portata
         self.provenienza = provenienza
         self.procedimento = procedimento
         self.image_name = image_name

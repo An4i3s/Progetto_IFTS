@@ -60,7 +60,7 @@ def webGetRecipesfromName(nome):
 def webGetRicettaCompletaFromId():
     idPiatto = request.args.get("id_piatto")
 
-    query = """SELECT p.id, p.difficolta, p.tempo, p.nome_piatto, p.provenienza, p.procedimento, p.image_name
+    query = """SELECT p.id, p.difficolta, p.tempo, p.nome_piatto, p.portata, p.provenienza, p.procedimento, p.image_name
                FROM piatti p WHERE p.id = %s"""
     
     result = db.fetchOne(query, (idPiatto,))
