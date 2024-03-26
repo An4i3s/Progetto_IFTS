@@ -1,4 +1,4 @@
-package com.example.cookidea_app;
+package com.example.cookidea_app.Fragments;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
@@ -15,10 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.cookidea_app.R;
+
 import java.text.DateFormat;
-import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.Date;
 
 public class RegistrazioneFragment extends Fragment implements DatePickerDialog.OnDateSetListener {
 
@@ -41,7 +41,7 @@ public class RegistrazioneFragment extends Fragment implements DatePickerDialog.
             public void onClick(View v) {
 
                 Activity activity = getActivity();
-                DatePicker fragment = new DatePicker();
+                DatePickerDialogFragment fragment = new DatePickerDialogFragment();
                 if (activity!=null && isAdded()){
                    /* getActivity().getSupportFragmentManager()
                             .beginTransaction()

@@ -1,20 +1,18 @@
-package com.example.cookidea_app;
+package com.example.cookidea_app.Adapters;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
-import java.util.ArrayList;
+import com.example.cookidea_app.Backend.DownloadImageAsyncTask;
+import com.example.cookidea_app.R;
+
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class CarouselPagerAdapter extends PagerAdapter {
     private List<String> imagesURLs;

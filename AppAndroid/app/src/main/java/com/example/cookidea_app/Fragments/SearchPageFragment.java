@@ -1,6 +1,6 @@
-package com.example.cookidea_app;
+package com.example.cookidea_app.Fragments;
 
-import static com.example.cookidea_app.MainActivity.apiService;
+import static com.example.cookidea_app.Activities.MainActivity.apiService;
 
 import android.os.Bundle;
 
@@ -16,6 +16,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import com.example.cookidea_app.R;
+import com.example.cookidea_app.ModelClasses.Recipe;
 
 import java.util.List;
 

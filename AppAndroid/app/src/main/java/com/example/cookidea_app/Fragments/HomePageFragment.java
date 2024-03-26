@@ -1,14 +1,10 @@
-package com.example.cookidea_app;
+package com.example.cookidea_app.Fragments;
 
 
-import static com.example.cookidea_app.MainActivity.BASE_URL;
-import static com.example.cookidea_app.MainActivity.apiService;
+import static com.example.cookidea_app.Activities.MainActivity.apiService;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,14 +17,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.io.InputStream;
+import com.example.cookidea_app.Adapters.CarouselPagerAdapter;
+import com.example.cookidea_app.Adapters.HomePageListAdapter;
+import com.example.cookidea_app.R;
+
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import retrofit2.Call;
 import retrofit2.Callback;

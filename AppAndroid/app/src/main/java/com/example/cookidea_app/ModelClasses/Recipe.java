@@ -1,4 +1,4 @@
-package com.example.cookidea_app;
+package com.example.cookidea_app.ModelClasses;
 
 import java.util.HashMap;
 

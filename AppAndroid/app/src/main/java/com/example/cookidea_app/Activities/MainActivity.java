@@ -1,48 +1,38 @@
-package com.example.cookidea_app;
+package com.example.cookidea_app.Activities;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ActionMenuView;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.ToggleButton;
 
-import androidx.appcompat.view.menu.ActionMenuItemView;
 import androidx.appcompat.widget.Toolbar;
 
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NavigationRes;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
+import com.example.cookidea_app.Backend.CookIdeaApiEndpointInterface;
+import com.example.cookidea_app.Fragments.DatePickerDialogFragment;
+import com.example.cookidea_app.Fragments.HomePageFragment;
+import com.example.cookidea_app.Fragments.ListaSpesaFragmentPage;
+import com.example.cookidea_app.Fragments.LoginFragment;
+import com.example.cookidea_app.Fragments.MenuPageFragment;
+import com.example.cookidea_app.R;
+import com.example.cookidea_app.Fragments.RegistrazioneFragment;
+import com.example.cookidea_app.Fragments.SearchPageFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
-import java.text.DateFormat;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -66,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     ActionBarDrawerToggle actionBarDrawerToggle;
     List<String> listPortate;
     TextView etaTv;
-    DatePicker datePicker;
+    DatePickerDialogFragment datePicker;
 
 
     public static final String BASE_URL = "http://192.168.0.102:8000";
@@ -117,7 +107,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         navigationView.setNavigationItemSelectedListener(this);
 
         etaTv = findViewById(R.id.tvEta);
-        datePicker = new DatePicker();
+        datePicker = new DatePickerDialogFragment();
         datePicker.onCreateDialog(savedInstanceState);
 
 

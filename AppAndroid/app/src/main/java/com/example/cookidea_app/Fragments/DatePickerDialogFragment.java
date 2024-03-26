@@ -1,12 +1,10 @@
-package com.example.cookidea_app;
+package com.example.cookidea_app.Fragments;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,11 +12,10 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
 
 import java.util.Calendar;
-import java.util.Objects;
 
-public class DatePicker extends DialogFragment {
+public class DatePickerDialogFragment extends DialogFragment {
 
-    public DatePicker() {
+    public DatePickerDialogFragment() {
     }
 
     @Override

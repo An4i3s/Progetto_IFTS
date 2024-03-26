@@ -1,4 +1,4 @@
-package com.example.cookidea_app;
+package com.example.cookidea_app.Backend;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;

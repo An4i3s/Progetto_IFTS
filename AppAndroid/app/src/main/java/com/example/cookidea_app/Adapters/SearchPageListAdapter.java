@@ -1,9 +1,12 @@
-package com.example.cookidea_app;
+package com.example.cookidea_app.Adapters;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
 
 import androidx.annotation.NonNull;
+
+import com.example.cookidea_app.ModelClasses.Recipe;
+import com.example.cookidea_app.R;
 
 import java.util.List;
 

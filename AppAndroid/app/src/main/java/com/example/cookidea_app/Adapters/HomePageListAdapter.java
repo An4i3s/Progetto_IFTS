@@ -1,6 +1,6 @@
-package com.example.cookidea_app;
+package com.example.cookidea_app.Adapters;
 
-import static com.example.cookidea_app.MainActivity.BASE_URL;
+import static com.example.cookidea_app.Activities.MainActivity.BASE_URL;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -8,22 +8,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.recyclerview.widget.RecyclerView;
+import com.example.cookidea_app.Backend.DownloadImageAsyncTask;
+import com.example.cookidea_app.R;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 public class HomePageListAdapter extends ArrayAdapter<String> {
 
     Context context;
-    List<String> categoryNames;
+    public List<String> categoryNames;
     private List<Bitmap> categoryImages;
 
 
