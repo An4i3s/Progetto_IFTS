@@ -7,11 +7,12 @@ import com.google.gson.annotations.SerializedName;
 public class Serving {
     @SerializedName("portata")
     String serving;
+    @SerializedName("urlportata")
     String imgUrl;
 
     public Serving(String serving) {
         this.serving = serving;
-        this.imgUrl = BASE_URL + "/static/recipes" + serving + ".jpg";
+        this.imgUrl = BASE_URL + "/static/img" + serving + ".jpg";
     }
 
     public String getServing() {

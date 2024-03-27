@@ -41,7 +41,7 @@ public class HomePageFragment extends Fragment {
     CarouselPagerAdapter carouselPagerAdapter;
     ViewPager carouselViewPager;
     ListView listView;
-    List<Serving> listPortate = new ArrayList<>();
+    List<Serving> listServing = new ArrayList<>();
     List<Recipe> carouselResult = new ArrayList<>();
 
     HomePageListAdapter homePageListAdapter;
@@ -63,7 +63,7 @@ public class HomePageFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home_page, container, false);
 
         listView = rootView.findViewById(R.id.categoryListHomeFragment);
-        homePageListAdapter = new HomePageListAdapter(ctx, listPortate);
+        homePageListAdapter = new HomePageListAdapter(ctx, listServing);
         listView.setAdapter(homePageListAdapter);
 
         downloadBackEndInfo();
@@ -107,13 +107,15 @@ public class HomePageFragment extends Fragment {
 
     private void downloadBackEndInfo() {
         Call<List<Serving>> callListPortate = apiService.getPortate();
+        Log.i("onResponseQuasi", "arriva");
         callListPortate.enqueue(new Callback<List<Serving>>() {
             @Override
             public void onResponse(Call<List<Serving>> call, Response<List<Serving>> response) {
-                listPortate = response.body();
-                if(listPortate != null) {
+                Log.i("onResponse", "funziona");
+                listServing = response.body();
+                if(listServing != null) {
                     homePageListAdapter.clear();
-                    homePageListAdapter.addAll(listPortate);
+                    homePageListAdapter.addAll(listServing);
 
                     homePageListAdapter.notifyDataSetChanged();
                     listView.invalidate();

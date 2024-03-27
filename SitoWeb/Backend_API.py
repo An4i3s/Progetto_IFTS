@@ -115,19 +115,26 @@ def getPortate():
 def getPortate():
     query = "SELECT DISTINCT piatti.portata FROM piatti"
     try:
-        result = db.fetchAll(query)
+        queryResult = db.fetchAll(query)
 
-        if result is None:
+        if queryResult is None:
             return jsonify([])
             
-        #nomi_portate = [record["portata"] for record in result]
-        return jsonify(result) 
+        
+        resultWithUrl = []
+        for record in queryResult:
+            portata = record["portata"]
+            url_portata = f"/static/img/{portata.lower()}.jpg"
+            resultWithUrl.append({"portata": portata, "urlportata": url_portata})  
+                
+        return jsonify(resultWithUrl) 
     except Exception as e:
         return jsonify({"error": str(e)})
     
 # api / 5 piatti random
 # restituisce 5 piatti (id, nome_piatto, image_name) a random dal database
 # http://192.168.0.110:8000/api/randomPiattoIdNomeImg
+'''
 @appWebApi.route("/api/randomPiattoIdNomeImg")
 def getPiattiImmagini():
     piattiDaRestituire = 5
@@ -135,6 +142,30 @@ def getPiattiImmagini():
                FROM piatti ORDER BY RAND() LIMIT %s"""
     result = db.fetchAll(query, (piattiDaRestituire,))
     return jsonify(result)
+'''
+
+@appWebApi.route("/api/randomPiattoIdNomeImg")
+def getPiattiImmagini():
+    try:
+        piattiDaRestituire = 5
+        query = """SELECT id, nome_piatto, image_name
+                   FROM piatti ORDER BY RAND() LIMIT %s"""
+        queryResult = db.fetchAll(query, (piattiDaRestituire,))
+        
+        ricetteCasuali = []
+        for record in queryResult:
+            id = record["id"]
+            nome = record["nome_piatto"]
+            imgName = record["image_name"]
+            url_portata = f"/static/img/{imgName.lower()}"
+            ricetteCasuali.append({"id": id, "nome_piatto": nome,"urlportata": url_portata}) 
+        
+        return jsonify(ricetteCasuali)
+
+    except Exception as e:
+        print("An error occurred:", str(e))
+        return jsonify({'error': 'Errore'}), 500
+
 
 
 

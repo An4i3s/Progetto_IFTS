@@ -43,11 +43,12 @@ CREATE TABLE `utenti` (
   `nome` varchar(45) NOT NULL,
   `cognome` varchar(45) NOT NULL,
   `data_nascita` date NOT NULL,
-  `email` varchar(45) NOT NULL,
-  `username` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL ,
+  `username` varchar(45) NOT NULL ,
   `password` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `username_UNIQUE` (`username`)
+  UNIQUE KEY `username_UNIQUE` (`username`),
+  UNIQUE KEY `email_UNIQUE` (`email`)
 );
 
 CREATE TABLE `tipo_pasto` (
