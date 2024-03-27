@@ -66,7 +66,7 @@ public class HomePageFragment extends Fragment {
         homePageListAdapter = new HomePageListAdapter(ctx, listServing);
         listView.setAdapter(homePageListAdapter);
 
-        downloadBackEndInfo();
+        downloadRandomRecipes();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
@@ -80,32 +80,38 @@ public class HomePageFragment extends Fragment {
         carouselViewPager = rootView.findViewById(R.id.carouselViewPagerHomeFragment);
         carouselViewPager.setAdapter(carouselPagerAdapter);
 
+
+
+        return rootView;
+    }
+
+
+    private void downloadRandomRecipes() {
         //TODO fixare carosello (riga 92 NullPointerException)
-        /*Call<List<Recipe>> carouselCall = apiService.getRandomRecipe();
+        Call<List<Recipe>> carouselCall = apiService.getRandomRecipe();
         carouselCall.enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                 carouselResult = response.body();
+                if (!carouselResult.isEmpty()) {
+                    carouselPagerAdapter.carouselRecipes.clear();
+                    Log.i("carosello", carouselResult.get(0).getRecipeId());
+                    carouselPagerAdapter.carouselRecipes.addAll(carouselResult);
 
-                carouselPagerAdapter.carouselRecipes.clear();
-                carouselPagerAdapter.carouselRecipes.addAll(carouselResult);
-
-                carouselPagerAdapter.notifyDataSetChanged();
-
+                    carouselPagerAdapter.notifyDataSetChanged();
+                }
+                downloadService();
             }
 
             @Override
             public void onFailure(Call<List<Recipe>> call, Throwable t) {
                 Log.i("carouselDownload", t.getMessage());
             }
-        });*/
+        });
 
-        
-        return rootView;
     }
 
-
-    private void downloadBackEndInfo() {
+    private void downloadService() {
         Call<List<Serving>> callListPortate = apiService.getPortate();
         Log.i("onResponseQuasi", "arriva");
         callListPortate.enqueue(new Callback<List<Serving>>() {

@@ -15,6 +15,7 @@ import com.example.cookidea_app.Backend.DownloadImageAsyncTask;
 import com.example.cookidea_app.ModelClasses.Recipe;
 import com.example.cookidea_app.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CarouselPagerAdapter extends PagerAdapter {
@@ -44,10 +45,9 @@ public class CarouselPagerAdapter extends PagerAdapter {
         if(!carouselRecipes.isEmpty()) {
             int realPosition = position % carouselRecipes.size();
             ImageView imageView = (ImageView) itemView.findViewById(R.id.carouselImageView);
-            String imgUrl = BASE_URL + "/static/recipes" + carouselRecipes.get(realPosition);
-            new DownloadImageAsyncTask(imageView, null).execute(imgUrl);
+            String[] imgUrl = {BASE_URL + carouselRecipes.get(realPosition).getImg_name()};
+            new DownloadImageAsyncTask(imageView, null).execute(imgUrl[0]);
         }
-
         container.addView(itemView);
 
         return itemView;
@@ -58,5 +58,7 @@ public class CarouselPagerAdapter extends PagerAdapter {
         container.removeView((LinearLayout) object);
     }
 
+    public void downloadCarouselImages(){
 
+    }
 }
