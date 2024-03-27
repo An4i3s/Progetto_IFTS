@@ -37,15 +37,15 @@ body {
 
 }
 
-.recipe {
-    margin-bottom: 30 px;
-}
 
 .recipe img{
-    max-width: 100%;
+    max-width: 250%;
     display: block;
     margin-bottom: 20px;
     align-items: center;
+    border-radius: 8px;
+    box-shadow:4px 4px 4px rgba(0, 0, 0, 0.5);
+    max-height: 29%;
 }
 
 .recipe_section{
@@ -336,20 +336,26 @@ nav{
 }
 
 .recipe_name {
-    font-family: "Passion One", sans-serif;
-    font-weight: 400;
-    font-size: 70px;
-    font-style: normal;
-    color: #ececec;
-     margin-left: 10px;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 1.0);
+  font-family: "Passion One", sans-serif;
+  font-weight: 400;
+  font-size: 70px;
+  font-style: normal;
+  color: #ececec;
+  margin-left: 10px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 1.0);
+  margin-bottom: 20px; /* Aggiunto margine inferiore */
 }
+
+
 
 .recipe_details_box {
   background-color: rgba(0, 0, 0, 0.5); /* Colore di sfondo trasparente opacizzato */
   padding: 20px;
   border-radius: 8px;
   margin-top: 20px;
+  width: 280%;
+  max-width: 2500px;
+
 }
 
 .recipe_details,
@@ -385,5 +391,15 @@ nav{
   margin: 0;
   color: #ececec;
   text-shadow:5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.recipe {
+  display: flex; /* Utilizziamo flexbox per organizzare gli elementi */
+  flex-direction: column; /* Organizziamo gli elementi in colonna */
+  align-items: center; /* Centriamo gli elementi orizzontalmente */
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
