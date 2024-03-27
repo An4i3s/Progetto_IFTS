@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,10 +26,10 @@ import com.example.cookidea_app.Fragments.ListaSpesaFragmentPage;
 import com.example.cookidea_app.Fragments.LoginFragment;
 import com.example.cookidea_app.Fragments.MenuPageFragment;
 import com.example.cookidea_app.Fragments.ProfiloFragment;
+import com.example.cookidea_app.Fragments.RicettePreferiteFragment;
 import com.example.cookidea_app.R;
 import com.example.cookidea_app.Fragments.RegistrazioneFragment;
 import com.example.cookidea_app.Fragments.SearchPageFragment;
-import com.example.cookidea_app.SessionManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -59,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     MenuPageFragment menuFragment = new MenuPageFragment();
     LoginFragment loginFragment = new LoginFragment();
     ProfiloFragment profiloFragment = new ProfiloFragment();
+    RicettePreferiteFragment ricettePreferFrag = new RicettePreferiteFragment();
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     List<String> listPortate;
@@ -151,7 +151,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             fragment = loginFragment;
         if (id_tab == R.id.userProfilePage)
             fragment = profiloFragment;
-        //if(id==R.id.) AggiungereFragment x Profilo
+        if (id_tab == R.id.ricettePrefe)
+            fragment = ricettePreferFrag;
+        if(id_tab == R.id.logout){
+            SharedPrefManager.setLoggedIn(this, false);
+            updateNavigationDrawer();
+            fragment = homeFragment;
+        }
 
         getSupportFragmentManager()
                 .beginTransaction()
