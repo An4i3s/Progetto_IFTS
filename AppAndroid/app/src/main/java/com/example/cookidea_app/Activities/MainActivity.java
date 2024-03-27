@@ -7,7 +7,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,7 +30,6 @@ import com.example.cookidea_app.Fragments.RicettePreferiteFragment;
 import com.example.cookidea_app.R;
 import com.example.cookidea_app.Fragments.RegistrazioneFragment;
 import com.example.cookidea_app.Fragments.SearchPageFragment;
-import com.example.cookidea_app.SessionManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -155,7 +153,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             fragment = profiloFragment;
         if (id_tab == R.id.ricettePrefe)
             fragment = ricettePreferFrag;
-        
+        if(id_tab == R.id.logout){
+            SharedPrefManager.setLoggedIn(this, false);
+            updateNavigationDrawer();
+            fragment = homeFragment;
+        }
 
         getSupportFragmentManager()
                 .beginTransaction()
