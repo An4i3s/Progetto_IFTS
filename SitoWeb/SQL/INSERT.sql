@@ -145,7 +145,7 @@ UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'ossobuco.jpg' WHERE (`id` = '3');
 UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'caciopepe.jpg' WHERE (`id` = '4');
 UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'pizza.jpg' WHERE (`id` = '5');
 UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'pestogenovese.jpg' WHERE (`id` = '6');
-UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'risottomilanese..jpg' WHERE (`id` = '7');
+UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'risottomilanese.jpg' WHERE (`id` = '7');
 UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'parmigianamelanzane.jpg' WHERE (`id` = '8');
 UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'spaghettivongole.jpg' WHERE (`id` = '9');
 UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'tiramisu.jpg' WHERE (`id` = '10');
