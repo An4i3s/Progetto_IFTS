@@ -26,6 +26,7 @@ import com.example.cookidea_app.Fragments.HomePageFragment;
 import com.example.cookidea_app.Fragments.ListaSpesaFragmentPage;
 import com.example.cookidea_app.Fragments.LoginFragment;
 import com.example.cookidea_app.Fragments.MenuPageFragment;
+import com.example.cookidea_app.Fragments.ProfiloFragment;
 import com.example.cookidea_app.R;
 import com.example.cookidea_app.Fragments.RegistrazioneFragment;
 import com.example.cookidea_app.Fragments.SearchPageFragment;
@@ -56,6 +57,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     SearchPageFragment searchFragment = new SearchPageFragment();
     ListaSpesaFragmentPage listaSpesaFragment = new ListaSpesaFragmentPage();
     MenuPageFragment menuFragment = new MenuPageFragment();
+    LoginFragment loginFragment = new LoginFragment();
+    ProfiloFragment profiloFragment = new ProfiloFragment();
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     List<String> listPortate;
@@ -77,7 +80,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     public static final CookIdeaApiEndpointInterface apiService = retrofit.create(CookIdeaApiEndpointInterface.class);
 
 
-    Button registraBtn;
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -146,7 +148,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         if (id_tab == R.id.menuPage)
             fragment = menuFragment;
         if (id_tab == R.id.loginPage)
-            fragment = new LoginFragment();
+            fragment = loginFragment;
+        if (id_tab == R.id.userProfilePage)
+            fragment = profiloFragment;
         //if(id==R.id.) AggiungereFragment x Profilo
 
         getSupportFragmentManager()
