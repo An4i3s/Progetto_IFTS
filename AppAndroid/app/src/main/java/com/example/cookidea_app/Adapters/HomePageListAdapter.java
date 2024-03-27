@@ -1,5 +1,6 @@
 package com.example.cookidea_app.Adapters;
 
+
 import static com.example.cookidea_app.Activities.MainActivity.BASE_URL;
 
 import android.content.Context;
@@ -49,14 +50,13 @@ public class HomePageListAdapter extends ArrayAdapter<Serving> {
             categoryViewHolder.textViewVH = (TextView) convertView.findViewById(R.id.categoryName);
             categoryViewHolder.imageViewVH = (ImageView) convertView.findViewById(R.id.categoryImage);
 
-            //String imgUrl = BASE_URL + "/static/img/" + getItem(position).toLowerCase() +".jpg";
-
+            String imgUrl = BASE_URL + getItem(position).getImgUrl();
             new DownloadImageAsyncTask(categoryViewHolder.imageViewVH, new DownloadImageAsyncTask.ImageDownloadCallback() {
                 @Override
                 public void downloaded(Bitmap img) {
                     categoryViewHolder.image = img;
                 }
-            }).execute(getItem(position).getImgUrl());
+            }).execute(imgUrl);
 
 
             convertView.setTag(categoryViewHolder);

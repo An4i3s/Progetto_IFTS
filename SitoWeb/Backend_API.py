@@ -115,13 +115,19 @@ def getPortate():
 def getPortate():
     query = "SELECT DISTINCT piatti.portata FROM piatti"
     try:
-        result = db.fetchAll(query)
+        queryResult = db.fetchAll(query)
 
-        if result is None:
+        if queryResult is None:
             return jsonify([])
             
-        #nomi_portate = [record["portata"] for record in result]
-        return jsonify(result) 
+        
+        resultWithUrl = []
+        for record in queryResult:
+            portata = record["portata"]
+            url_portata = f"/static/img/{portata.lower()}.jpg"
+            resultWithUrl.append({"portata": portata, "urlportata": url_portata})  
+                
+        return jsonify(resultWithUrl) 
     except Exception as e:
         return jsonify({"error": str(e)})
     
