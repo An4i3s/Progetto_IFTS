@@ -7,10 +7,6 @@
             android:icon="@drawable/user_icon"
             android:visible="true"
             />
-        <item
-            android:id="@+id/userProfilePage"
-            android:title="Profilo"
-            android:icon="@drawable/user_icon"
-            android:visible="true"/>
+
     </group>
 </menu>

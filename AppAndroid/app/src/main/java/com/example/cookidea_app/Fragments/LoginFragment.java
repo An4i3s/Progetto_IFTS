@@ -1,5 +1,6 @@
 package com.example.cookidea_app.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.cookidea_app.Activities.MainActivity;
+import com.example.cookidea_app.Activities.SharedPrefManager;
 import com.example.cookidea_app.Backend.CookIdeaApiEndpointInterface;
 import com.example.cookidea_app.Backend.LoginRequest;
 import com.example.cookidea_app.ModelClasses.User;
@@ -58,9 +60,7 @@ public class LoginFragment extends Fragment {
                 CookIdeaApiEndpointInterface apiInterface = retrofit.create(CookIdeaApiEndpointInterface.class);
                 LoginRequest loginRequest = new LoginRequest();
                 loginRequest.setUsername(username.getText().toString());
-                Log.i("userLogin",username.getText().toString());
                 loginRequest.setPassword(password.getText().toString());
-                Log.i("userLogin",password.getText().toString());
                 Call<User> call = apiInterface.login(loginRequest);
 
 
@@ -68,13 +68,12 @@ public class LoginFragment extends Fragment {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
 
+                        //if StatusCode = 200
                         if (response.isSuccessful()){
-                            // TODO: 26/03/2024 Gestire Login se utente trovato
-                            //  -> rimanda a MainActivity
-                            //  -> rende visibili nuovi campi nella NavBar (PROFILO, 3 FRAGMNET RICETTE E LOGOUT) sulla base di un valore booleano
-                            //
                             Toast.makeText(getContext(), "Utente Trovato", Toast.LENGTH_LONG).show();
+                            // TODO: 27/03/2024 Creare classe Wrapper
                             User user = response.body();
+                            onLoginSuccess();
                         }else {
                             Toast.makeText(getContext(), "Utente non Trovato", Toast.LENGTH_LONG).show();
 
@@ -101,6 +100,7 @@ public class LoginFragment extends Fragment {
             public void onClick(View v) {
                 MainActivity activity = (MainActivity) getActivity();
                 assert activity != null;
+
                 activity.apriRegistrazione();
 
             }
@@ -111,5 +111,11 @@ public class LoginFragment extends Fragment {
     }
 
 
+    public void onLoginSuccess(){
+        SharedPrefManager.setLoggedIn(getContext(),true);
+        MainActivity activity = (MainActivity) getActivity();
+        assert activity != null;
+        activity.changeFrameByNavigationTab(R.id.homePage);
+    }
 
 }

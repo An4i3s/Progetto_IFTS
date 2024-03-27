@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+ <group android:checkableBehavior="single">
+     <item
+         android:id="@+id/userProfilePage"
+         android:icon="@drawable/settings_24"
+         android:title="Profilo"
+         android:visible="true" />
+     <item
+         android:id="@+id/ricettePrefe"
+         android:icon="@drawable/heart_24"
+         android:title="Ricette Preferite"
+         android:visible="true" />
+     <item
+         android:id="@+id/logout"
+         android:icon="@drawable/signout"
+         android:title="Logout"
+         android:visible="true" />
+ </group>
+</menu>

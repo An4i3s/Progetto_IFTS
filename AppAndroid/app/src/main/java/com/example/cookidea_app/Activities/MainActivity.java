@@ -2,6 +2,8 @@ package com.example.cookidea_app.Activities;
 
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -27,6 +29,7 @@ import com.example.cookidea_app.Fragments.MenuPageFragment;
 import com.example.cookidea_app.R;
 import com.example.cookidea_app.Fragments.RegistrazioneFragment;
 import com.example.cookidea_app.Fragments.SearchPageFragment;
+import com.example.cookidea_app.SessionManager;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 
@@ -48,6 +51,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     collegre pagina profile utente con dati presi da db
     per il momento niente SQLite*/
     BottomNavigationView bottomNavigationView;
+    NavigationView navigationView;
     HomePageFragment homeFragment = new HomePageFragment();
     SearchPageFragment searchFragment = new SearchPageFragment();
     ListaSpesaFragmentPage listaSpesaFragment = new ListaSpesaFragmentPage();
@@ -58,9 +62,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     TextView etaTv;
     DatePickerDialogFragment datePicker;
     String search = "";
+    SharedPreferences sharedPreferences;
 
 
-    public static final String BASE_URL = "http://192.168.0.113:8000";
+
+
+    public static final String BASE_URL = "http://192.168.59.85:8000";
+
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
@@ -79,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
 
 
+
         bottomNavigationView = findViewById((R.id.bottomNavBar));
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.homePage);
@@ -86,7 +95,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("");
-
 
 
 
@@ -104,13 +112,15 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         actionBarDrawerToggle.syncState();
         actionBarDrawerToggle.setDrawerIndicatorEnabled(false);
 
-        NavigationView navigationView = findViewById(R.id.navView);
+        navigationView = findViewById(R.id.navView);
         navigationView.setNavigationItemSelectedListener(this);
 
         etaTv = findViewById(R.id.tvEta);
         datePicker = new DatePickerDialogFragment();
         datePicker.onCreateDialog(savedInstanceState);
 
+        sharedPreferences = getSharedPreferences(SharedPrefManager.PREF_NAME, Context.MODE_PRIVATE);
+        updateNavigationDrawer();
 
 
     }
@@ -174,10 +184,23 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     }
 
+
     @Override
     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
        // RegistrazioneFragment registrazioneFragment = new RegistrazioneFragment();
        // registrazioneFragment.onDateSet(view, year, month, dayOfMonth);
+    }
+
+    public void updateNavigationDrawer(){
+        boolean isLoggedIn = SharedPrefManager.isLoggedIn(this);
+        if (isLoggedIn){
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.drawer_nav_menu_login);
+        }else {
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.drawer_nav_menu);
+        }
+;
     }
 
 
