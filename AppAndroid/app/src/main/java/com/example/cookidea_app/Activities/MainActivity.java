@@ -27,6 +27,7 @@ import com.example.cookidea_app.Fragments.ListaSpesaFragmentPage;
 import com.example.cookidea_app.Fragments.LoginFragment;
 import com.example.cookidea_app.Fragments.MenuPageFragment;
 import com.example.cookidea_app.Fragments.ProfiloFragment;
+import com.example.cookidea_app.Fragments.RicettePreferiteFragment;
 import com.example.cookidea_app.R;
 import com.example.cookidea_app.Fragments.RegistrazioneFragment;
 import com.example.cookidea_app.Fragments.SearchPageFragment;
@@ -59,6 +60,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     MenuPageFragment menuFragment = new MenuPageFragment();
     LoginFragment loginFragment = new LoginFragment();
     ProfiloFragment profiloFragment = new ProfiloFragment();
+    RicettePreferiteFragment ricettePreferFrag = new RicettePreferiteFragment();
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     List<String> listPortate;
@@ -151,7 +153,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             fragment = loginFragment;
         if (id_tab == R.id.userProfilePage)
             fragment = profiloFragment;
-        //if(id==R.id.) AggiungereFragment x Profilo
+        if (id_tab == R.id.ricettePrefe)
+            fragment = ricettePreferFrag;
+        
 
         getSupportFragmentManager()
                 .beginTransaction()
