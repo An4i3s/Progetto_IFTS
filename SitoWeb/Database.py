@@ -3,6 +3,7 @@ from DB_PERSONAL import *
 
 
 
+
 class Database:
     def __init__(self, host = DB_HOST, user = DB_USER, password = DB_PASSWORD, database= DB_NAME):
         self.connection = pymysql.connect(

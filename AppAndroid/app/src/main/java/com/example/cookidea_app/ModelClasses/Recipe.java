@@ -11,6 +11,7 @@ public class Recipe {
     private final String img_name;
     @SerializedName("nome_piatto")
     private final String name;
+    @SerializedName("procedimento")
     private final String method;
     @SerializedName("tempo")
     private final int time;
@@ -34,8 +35,8 @@ public class Recipe {
         this.ingredients = ingredients;
     }
 
-    public int getRecipeId(){
-        return recipeId;
+    public String getRecipeId(){
+        return String.valueOf(recipeId);
     }
     public String getImg_name() {
         return img_name;
