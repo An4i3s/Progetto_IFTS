@@ -3,6 +3,7 @@ import pymysql
 import random
 from models import *
 from Database import *
+import time
 
 
 appWebApi = Flask(__name__)
@@ -116,7 +117,7 @@ def getPortate():
     query = "SELECT DISTINCT piatti.portata FROM piatti"
     try:
         queryResult = db.fetchAll(query)
-
+        print(queryResult)
         if queryResult is None:
             return jsonify([])
             
@@ -148,19 +149,30 @@ def getPiattiImmagini():
 def getPiattiImmagini():
     try:
         piattiDaRestituire = 5
-        query = """SELECT id, nome_piatto, image_name
-                   FROM piatti ORDER BY RAND() LIMIT %s"""
-        queryResult = db.fetchAll(query, (piattiDaRestituire,))
-        
+        query = f"""SELECT id, nome_piatto, image_name FROM piatti ORDER BY RAND() LIMIT {piattiDaRestituire}"""
+
+        print(query)
+        timeIniz = time.time()
+        queryResult = db.fetchAll(query)
+        timeFin = time.time()
+
+
+        print(queryResult)
         ricetteCasuali = []
+
+        if queryResult is None:
+            return jsonify([])
+
+
         for record in queryResult:
             id = record["id"]
             nome = record["nome_piatto"]
             imgName = record["image_name"]
-            url_portata = f"/static/img/{imgName.lower()}"
-            ricetteCasuali.append({"id": id, "nome_piatto": nome,"urlportata": url_portata}) 
-        
+            url_portata = f"/static/recipes/{imgName.lower()}"
+            ricetteCasuali.append({"id": id, "nome_piatto": nome,"image_name": url_portata}) 
         return jsonify(ricetteCasuali)
+        
+        
 
     except Exception as e:
         print("An error occurred:", str(e))
