@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         datePicker.onCreateDialog(savedInstanceState);
 
         sharedPreferences = getSharedPreferences(SharedPrefManager.PREF_NAME, Context.MODE_PRIVATE);
-        updateNavigationDrawer();
+      //  updateNavigationDrawer();
 
 
     }

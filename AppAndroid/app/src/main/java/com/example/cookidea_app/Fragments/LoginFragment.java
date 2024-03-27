@@ -115,6 +115,7 @@ public class LoginFragment extends Fragment {
         SharedPrefManager.setLoggedIn(getContext(),true);
         MainActivity activity = (MainActivity) getActivity();
         assert activity != null;
+        activity.updateNavigationDrawer();
         activity.changeFrameByNavigationTab(R.id.homePage);
     }
 
