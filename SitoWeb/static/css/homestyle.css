@@ -36,6 +36,7 @@ nav{
     grid-template-columns: auto;
     grid-auto-rows: 40px;
     gap: 1rem; 
+   
 }
 
 #searchBar{
@@ -317,7 +318,7 @@ nav{
 
 
  .box {
-  width: 100%;
+  width: 50%;
   height: 50%; /* Imposta l'altezza in base al contenuto */
   display: flex;
   flex-direction: column;
@@ -329,14 +330,15 @@ nav{
   background-repeat: no-repeat;
   font-family: "Passion One", sans-serif;
   color: #ececec;
-  font-size: 18px; /* Imposta una dimensione del carattere più ragionevole */
+  font-size: 80px; /* Imposta una dimensione del carattere più ragionevole */
   font-weight: 400;
   text-align: center;
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Riduci l'ombra del testo */
-  padding: 20px; /* Aggiungi spazio intorno al contenuto */
-  margin: 10px; /* Aggiungi margine esterno */
+  padding: 15px; /* Aggiungi spazio intorno al contenuto */
+  margin: 15px auto; /* Aggiungi margine esterno */
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Aggiungi un'ombra sottile */
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Aggiungi una transizione */
+  flex-grow: 0; /* Imposta il valore di flessibilità */
 }
 
 .box:hover {
