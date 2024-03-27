@@ -76,8 +76,10 @@ def login2():
 @appWebApi.route("/api/ricercaPerNome/<nome>")
 def getRecipesfromName(nome):
 
-    query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE nome_piatto LIKE '%s'"
+    query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE nome_piatto LIKE %s"
     result = db.fetchAll(query, ('%' + nome+ '%',))
+
+    print(result)
 
     return json.dumps(result, default=vars)
 
@@ -89,7 +91,7 @@ def getRecipesfromName(nome):
 @appWebApi.route("/api/ricercaPerPortata/<portata>")
 def getRecipesfromPortata(portata):
 
-    query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE portata = '%s'"
+    query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE portata = %s"
     result = db.fetchAll(query, (portata,))
 
     return json.dumps(result, default=vars)
@@ -114,11 +116,12 @@ def getPortate():
     query = "SELECT DISTINCT piatti.portata FROM piatti"
     try:
         result = db.fetchAll(query)
+
         if result is None:
             return jsonify([])
-        
-        nomi_portate = [record["portata"] for record in result]
-        return jsonify(nomi_portate) 
+            
+        #nomi_portate = [record["portata"] for record in result]
+        return jsonify(result) 
     except Exception as e:
         return jsonify({"error": str(e)})
     

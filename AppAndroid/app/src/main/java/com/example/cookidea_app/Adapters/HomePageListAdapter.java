@@ -12,22 +12,23 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.cookidea_app.Backend.DownloadImageAsyncTask;
+import com.example.cookidea_app.ModelClasses.Recipe;
+import com.example.cookidea_app.ModelClasses.Serving;
 import com.example.cookidea_app.R;
 
 import java.util.List;
 
-public class HomePageListAdapter extends ArrayAdapter<String> {
+public class HomePageListAdapter extends ArrayAdapter<Serving> {
 
     Context context;
     //public List<String> categoryNames;
     private List<Bitmap> categoryImages;
 
 
-    public HomePageListAdapter(Context context, List<String> categoryName, List<Bitmap> categoryImages) {
-        super(context, R.layout.home_page_cateogry_list_layout, categoryName);
+    public HomePageListAdapter(Context context, List<Serving> categoryName) {
+        super(context, R.layout.home_page_cateogry_list_layout);
         this.context = context;
         //this.categoryNames = categoryName;
-        this.categoryImages = categoryImages;
     }
 
     private static class CategoryViewHolder{
@@ -48,14 +49,14 @@ public class HomePageListAdapter extends ArrayAdapter<String> {
             categoryViewHolder.textViewVH = (TextView) convertView.findViewById(R.id.categoryName);
             categoryViewHolder.imageViewVH = (ImageView) convertView.findViewById(R.id.categoryImage);
 
-            String imgUrl = BASE_URL + "/static/img/" + getItem(position).toLowerCase() +".jpg";
+            //String imgUrl = BASE_URL + "/static/img/" + getItem(position).toLowerCase() +".jpg";
 
             new DownloadImageAsyncTask(categoryViewHolder.imageViewVH, new DownloadImageAsyncTask.ImageDownloadCallback() {
                 @Override
                 public void downloaded(Bitmap img) {
                     categoryViewHolder.image = img;
                 }
-            }).execute(imgUrl);
+            }).execute(getItem(position).getImgUrl());
 
 
             convertView.setTag(categoryViewHolder);
@@ -63,7 +64,7 @@ public class HomePageListAdapter extends ArrayAdapter<String> {
             categoryViewHolder = (CategoryViewHolder) convertView.getTag();
         }
 
-        categoryViewHolder.textViewVH.setText(getItem(position));
+        categoryViewHolder.textViewVH.setText(getItem(position).getServing());
         categoryViewHolder.imageViewVH.setImageBitmap(categoryViewHolder.image);
         return convertView;
     }

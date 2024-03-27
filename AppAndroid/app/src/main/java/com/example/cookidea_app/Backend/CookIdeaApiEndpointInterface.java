@@ -3,6 +3,7 @@ package com.example.cookidea_app.Backend;
 import android.icu.text.UnicodeSet;
 
 import com.example.cookidea_app.ModelClasses.Recipe;
+import com.example.cookidea_app.ModelClasses.Serving;
 import com.example.cookidea_app.ModelClasses.User;
 
 import java.util.List;
@@ -17,7 +18,7 @@ import retrofit2.http.Query;
 
 public interface CookIdeaApiEndpointInterface {
     @GET("/api/portate")
-    Call<List<String>> getPortate();
+    Call<List<Serving>> getPortate();
 
     @GET("/api/randomPiattoIdNomeImg")
     Call<List<Recipe>> getRandomRecipe();

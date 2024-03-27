@@ -24,6 +24,7 @@ import com.example.cookidea_app.Activities.MainActivity;
 import com.example.cookidea_app.Adapters.CarouselPagerAdapter;
 import com.example.cookidea_app.Adapters.HomePageListAdapter;
 import com.example.cookidea_app.ModelClasses.Recipe;
+import com.example.cookidea_app.ModelClasses.Serving;
 import com.example.cookidea_app.R;
 
 import java.util.ArrayList;
@@ -40,8 +41,7 @@ public class HomePageFragment extends Fragment {
     CarouselPagerAdapter carouselPagerAdapter;
     ViewPager carouselViewPager;
     ListView listView;
-    List<String> listPortate = new ArrayList<>();
-    List<Bitmap> listPortateImages = new ArrayList<>();
+    List<Serving> listPortate = new ArrayList<>();
     List<Recipe> carouselResult = new ArrayList<>();
 
     HomePageListAdapter homePageListAdapter;
@@ -63,7 +63,7 @@ public class HomePageFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_home_page, container, false);
 
         listView = rootView.findViewById(R.id.categoryListHomeFragment);
-        homePageListAdapter = new HomePageListAdapter(ctx, listPortate, listPortateImages);
+        homePageListAdapter = new HomePageListAdapter(ctx, listPortate);
         listView.setAdapter(homePageListAdapter);
 
         downloadBackEndInfo();
@@ -71,9 +71,8 @@ public class HomePageFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(ctx, homePageListAdapter.getItem(position), Toast.LENGTH_LONG).show();
-                String prova = homePageListAdapter.getItem(position);
-                ((MainActivity)ctx).changeTabById(R.id.searchPage, homePageListAdapter.getItem(position));
+                Toast.makeText(ctx, homePageListAdapter.getItem(position).getServing(), Toast.LENGTH_LONG).show();
+                ((MainActivity)ctx).changeTabById(R.id.searchPage, homePageListAdapter.getItem(position).getServing());
             }
         });
 
@@ -107,10 +106,10 @@ public class HomePageFragment extends Fragment {
 
 
     private void downloadBackEndInfo() {
-        Call<List<String>> callListPortate = apiService.getPortate();
-        callListPortate.enqueue(new Callback<List<String>>() {
+        Call<List<Serving>> callListPortate = apiService.getPortate();
+        callListPortate.enqueue(new Callback<List<Serving>>() {
             @Override
-            public void onResponse(Call<List<String>> call, Response<List<String>> response) {
+            public void onResponse(Call<List<Serving>> call, Response<List<Serving>> response) {
                 listPortate = response.body();
                 if(listPortate != null) {
                     homePageListAdapter.clear();
@@ -122,10 +121,12 @@ public class HomePageFragment extends Fragment {
             }
 
             @Override
-            public void onFailure(Call<List<String>> call, Throwable t) {
+            public void onFailure(Call<List<Serving>> call, Throwable t) {
                 Log.e("MainActivity", t.getMessage());
             }
         });
+
+
 
     }
 
