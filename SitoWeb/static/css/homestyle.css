@@ -31,7 +31,6 @@ nav{
 }
 
 #container{
-    display: grid;
     position: relative;
     grid-template-rows: auto;
     grid-template-columns: auto;
@@ -317,33 +316,40 @@ nav{
  }
 
 
-.box{
-  background-repeat: no-repeat;
-  background-size: cover;
+ .box {
   width: 100%;
-  height: 100%;
-  display: grid;
+  height: 50%; /* Imposta l'altezza in base al contenuto */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra i contenuti verticalmente */
+  justify-content: center; /* Centra i contenuti orizzontalmente */
   border-radius: 10px;
   background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   font-family: "Passion One", sans-serif;
   color: #ececec;
-  font-size: 130px;
+  font-size: 18px; /* Imposta una dimensione del carattere più ragionevole */
   font-weight: 400;
   text-align: center;
-  text-shadow:10px 10px 10px rgba(0, 0, 0, 1);
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5); /* Riduci l'ombra del testo */
+  padding: 20px; /* Aggiungi spazio intorno al contenuto */
+  margin: 10px; /* Aggiungi margine esterno */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Aggiungi un'ombra sottile */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Aggiungi una transizione */
 }
+
+.box:hover {
+  transform: scale(1.05); /* Effetto di ingrandimento al passaggio del mouse */
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Effetto di ombreggiatura leggermente più marcato */
+}
+
 
 .box:active{
   opacity: 0.8s;
 }
 
-.box:hover{
 
-  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
-  opacity: 0.8s;
-  transform: scale(1.1);
-  transition: transform 0.3s ease;
-}
 footer{
   grid-area: 18/1/20/10;
   background-color: rgb(128,128,128,0.5);

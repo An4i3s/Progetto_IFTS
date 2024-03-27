@@ -1,3 +1,10 @@
+class Portata:
+    nome = None
+    image_url = None
+
+    def __init__(self, nome, image_url):
+        self.nome = nome
+        self.image_url = image_url
 
 
 class Piatto:

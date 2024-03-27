@@ -14,7 +14,17 @@ db = None
 
 @appWebApi.route("/")
 def homepage():
-    return render_template("index.html")
+    
+    query = "SELECT DISTINCT piatti.portata FROM piatti"
+    result = db.fetchAll(query)
+    listaPortate = []
+    for record in result:
+        nomePortata = record["portata"]
+        image_url = f"/static/img/{nomePortata.lower()}.jpg"
+        portata = Portata(nomePortata, image_url)
+        listaPortate.append(portata)
+    return render_template("index.html", listaPortate=listaPortate)
+
 
 
 
@@ -49,6 +59,20 @@ def webGetRecipesfromPortata(portata):
     result = db.fetchAll(query,(portata,) )
 
     return render_template("piatti_esempio.html", piatti = result)
+
+
+    
+'''    
+@appWebApi.route("/api/portate")
+def getPortate():
+    query = "SELECT DISTINCT piatti.portata FROM piatti"
+    result = db.fetchAll(query)
+    nomi_portate = []
+    for record in result:
+        nomi_portate.append(record["portata"])
+    return jsonify(nomi_portate)
+'''
+    
 
 
 # # web / 5 piatti random
