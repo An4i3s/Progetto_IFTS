@@ -139,16 +139,19 @@ INSERT INTO `utenti` VALUES (1,'Mario','Rossi','1990-05-15','mario.rossi@example
 INSERT INTO `tipo_pasto` VALUES (1,'Primo'),(2,'Secondo'),(3,'Contorno'),(4,'Dolce');
 
 
-UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_name` = 'Pizza.jpg' WHERE (`id` = '10');
-UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_name` = 'pasta_e_lenticchie (1).jpg' WHERE (`id` = '8');
-UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_name` = 'pasta_e_lenticchie (1).jpg' WHERE (`id` = '9');
-UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_name` = 'Pizza.jpg' WHERE (`id` = '6');
-UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_name` = 'Pizza.jpg' WHERE (`id` = '1');
-UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_name` = 'Pizza.jpg' WHERE (`id` = '2');
-UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_name` = 'Pizza.jpg' WHERE (`id` = '3');
-UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_name` = 'Pizza.jpg' WHERE (`id` = '4');
-UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_name` = 'Pizza.jpg' WHERE (`id` = '5');
-UPDATE `bvl9qu0y8urzicrcjonj`.`piatti` SET `image_name` = 'Pizza.jpg' WHERE (`id` = '7');
+UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'carbonara.jpg' WHERE (`id` = '1');
+UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'risottofunghi.jpg' WHERE (`id` = '2');
+UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'ossobuco.jpg' WHERE (`id` = '3');
+UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'caciopepe.jpg' WHERE (`id` = '4');
+UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'pizza.jpg' WHERE (`id` = '5');
+UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'pestogenovese.jpg' WHERE (`id` = '6');
+UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'risottomilanese..jpg' WHERE (`id` = '7');
+UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'parmigianamelanzane.jpg' WHERE (`id` = '8');
+UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'spaghettivongole.jpg' WHERE (`id` = '9');
+UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'tiramisu.jpg' WHERE (`id` = '10');
+
+
+
 
  --
-
+select * from piatti;
