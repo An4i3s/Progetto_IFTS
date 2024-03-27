@@ -3,6 +3,7 @@ package com.example.cookidea_app.Adapters;
 import static com.example.cookidea_app.Activities.MainActivity.BASE_URL;
 
 import android.content.Context;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.example.cookidea_app.Backend.DownloadImageAsyncTask;
 import com.example.cookidea_app.ModelClasses.Recipe;
@@ -17,11 +19,15 @@ import com.example.cookidea_app.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class CarouselPagerAdapter extends PagerAdapter {
     public List<Recipe> carouselRecipes;
     private Context context;
     private LayoutInflater layoutInflater;
+
+    private static int COUNTER = 0;
 
     public CarouselPagerAdapter(Context context, List<Recipe> carouselRecipes){
         this.context = context;
@@ -31,8 +37,11 @@ public class CarouselPagerAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return Integer.MAX_VALUE;
+        return carouselRecipes.size();
     }
+    /*public int getCount() {
+        return Integer.MAX_VALUE;
+    }*/
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
@@ -42,14 +51,13 @@ public class CarouselPagerAdapter extends PagerAdapter {
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View itemView = layoutInflater.inflate(R.layout.home_page_carousel_layout, container, false);
-        if(!carouselRecipes.isEmpty()) {
+        if(carouselRecipes != null) {
             int realPosition = position % carouselRecipes.size();
             ImageView imageView = (ImageView) itemView.findViewById(R.id.carouselImageView);
-            String[] imgUrl = {BASE_URL + carouselRecipes.get(realPosition).getImg_name()};
-            new DownloadImageAsyncTask(imageView, null).execute(imgUrl[0]);
+            String imageUrl = BASE_URL + carouselRecipes.get(realPosition).getImg_name();
+            new DownloadImageAsyncTask(imageView, null).execute(imageUrl);
         }
         container.addView(itemView);
-
         return itemView;
     }
 
@@ -58,7 +66,30 @@ public class CarouselPagerAdapter extends PagerAdapter {
         container.removeView((LinearLayout) object);
     }
 
-    public void downloadCarouselImages(){
-
+    public void setCarouselRecipes(List<Recipe> carouselRecipes){
+        this.carouselRecipes.clear();
+        this.carouselRecipes = carouselRecipes;
     }
+
+    public void startAutoScroll(final ViewPager viewPager, int delay) {
+        final Handler handler = new Handler();
+        final Runnable update = new Runnable() {
+            public void run() {
+                int currentItem = 0;
+                if (!carouselRecipes.isEmpty())
+                    currentItem = COUNTER % carouselRecipes.size();//viewPager.getCurrentItem();
+                viewPager.setCurrentItem(currentItem, true);
+                COUNTER++;
+            }
+        };
+
+        Timer swipeTimer = new Timer();
+        swipeTimer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                handler.post(update);
+            }
+        }, delay, delay);
+    }
+
 }

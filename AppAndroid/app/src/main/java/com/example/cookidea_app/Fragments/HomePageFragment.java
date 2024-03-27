@@ -66,6 +66,10 @@ public class HomePageFragment extends Fragment {
         homePageListAdapter = new HomePageListAdapter(ctx, listServing);
         listView.setAdapter(homePageListAdapter);
 
+        carouselPagerAdapter = new CarouselPagerAdapter(rootView.getContext(), carouselResult);
+        carouselViewPager = rootView.findViewById(R.id.carouselViewPagerHomeFragment);
+        carouselViewPager.setAdapter(carouselPagerAdapter);
+        carouselPagerAdapter.startAutoScroll(carouselViewPager, 3000);
         downloadRandomRecipes();
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
@@ -76,10 +80,6 @@ public class HomePageFragment extends Fragment {
             }
         });
 
-        carouselPagerAdapter = new CarouselPagerAdapter(rootView.getContext(), carouselResult);
-        carouselViewPager = rootView.findViewById(R.id.carouselViewPagerHomeFragment);
-        carouselViewPager.setAdapter(carouselPagerAdapter);
-
 
 
         return rootView;
@@ -87,18 +87,16 @@ public class HomePageFragment extends Fragment {
 
 
     private void downloadRandomRecipes() {
-        //TODO fixare carosello (riga 92 NullPointerException)
         Call<List<Recipe>> carouselCall = apiService.getRandomRecipe();
         carouselCall.enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
                 carouselResult = response.body();
-                if (!carouselResult.isEmpty()) {
-                    carouselPagerAdapter.carouselRecipes.clear();
-                    Log.i("carosello", carouselResult.get(0).getRecipeId());
-                    carouselPagerAdapter.carouselRecipes.addAll(carouselResult);
 
+                if (carouselResult != null && carouselPagerAdapter.carouselRecipes != null) {
+                    carouselPagerAdapter.setCarouselRecipes(carouselResult);
                     carouselPagerAdapter.notifyDataSetChanged();
+                    carouselViewPager.invalidate();
                 }
                 downloadService();
             }
@@ -113,11 +111,9 @@ public class HomePageFragment extends Fragment {
 
     private void downloadService() {
         Call<List<Serving>> callListPortate = apiService.getPortate();
-        Log.i("onResponseQuasi", "arriva");
         callListPortate.enqueue(new Callback<List<Serving>>() {
             @Override
             public void onResponse(Call<List<Serving>> call, Response<List<Serving>> response) {
-                Log.i("onResponse", "funziona");
                 listServing = response.body();
                 if(listServing != null) {
                     homePageListAdapter.clear();
