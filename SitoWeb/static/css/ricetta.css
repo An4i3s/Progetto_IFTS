@@ -7,16 +7,13 @@ body {
   background-size: cover;
   background-position: center;  
   background-repeat: no-repeat; 
-  display: flex;
   flex-direction: column; /* Aggiunto */
   align-items:center ; /* Aggiunto */
 }
 
-/* Contenitore per la navbar */
-.navbar-container {
+nav{
   overflow: hidden;
   background-color: rgb(128,128,128,0.95);
-  width: 100%; /* Aggiunto */
   display: flex;
   justify-content: space-evenly;
 }
@@ -102,34 +99,33 @@ nav{
 .nav img{
   margin-top: auto;
   margin-bottom: auto;
+  filter: blur(5px);
 }
 
-#container {
+#container{
   display: grid;
   position: relative;
-  grid-template-areas: "navbar" "login";
   grid-template-rows: auto;
-  grid-template-columns: auto;
-  grid-auto-rows: auto auto;
-  gap: 1rem;
-  margin-left: 44%; /* Aggiunto per spostare il container verso destra */
-  margin-right: 15%; /* Aggiunto per fornire uno spazio a destra */
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  grid-auto-rows: 40px;
+  gap: 1rem; 
 }
 
 #searchBar{
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 10px;
-    margin-right: 10px;
-    width: auto;
-    height: 30px;
-    background-color: #ffffff;
-    font-size: 17px;
-    justify-content: center;
-    border: none;
-    text-align: center;
-    float: right;
-    border-radius: 6rem;
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+  width: auto;
+  height: 30px;
+  background-color: #ffffff;
+  font-size: 17px;
+  justify-content: center;
+  border: none;
+  text-align: center;
+  float: right;
+  border-radius: 6rem;
 }
 
 .navigation a{
@@ -143,6 +139,7 @@ nav{
   margin-left: 10px;
   margin-right: 10px;
 }
+
 .navigation a::after{
   content: '';
   position: absolute;
@@ -156,13 +153,15 @@ nav{
   transform: scaleX(0);
   transition: transform .5s;
 }
+
 .navigation a:hover::after{
   transform-origin: left;
   transform: scaleX(1);
 }
+
 .navigation .btnLogin-popup{
-  width: 100px;
-  height: 30px;
+  width: 130px;
+  height: 50px;
   background: transparent;
   border: 2px solid;
   outline: none;
@@ -173,60 +172,68 @@ nav{
   font-weight: 500;
   margin-top: auto;
   margin-bottom: auto;
+  margin-left: 40px;
   transition: .5s;
 }
+
 .navigation .btnLogin-popup:hover{
   background: #fff;
   color: #162938;
 }
 
-.wrapper {
-    position: relative;
-  width: 400px;
+.wrapper{
+  width: 100%;
+  max-width: 400px;
   height: 440px;
   background: transparent;
   border: 2px solid rgba(255, 255, 255, .5);
   border-radius: 20px;
   backdrop-filter: blur(20px);
   box-shadow: 0 0 30px rgba(0, 0, 0, .5);
-  display: grid;
-  grid-area: 3/5/5/5;
+  display: flex;
   justify-content: center;
   align-items: center;
   overflow: hidden;
   transform: scale(0);
   transition:transform .5s ease, height .2s ease;
+  z-index: 2; /* Non cambiare, server per avere la scheda di Login sopra a tutto quando usata*/
+  margin-top: 10%;
+  grid-area: 1/4/2/9;
 }
 
-.wrapper.active-popup {
-    transform: translate(-100%, -100%) scale(1);
+.wrapper.active-popup{
+  transform: scale(1);
 }
-
-.wrapper.active {
-    height: 520px;
+.wrapper.active{
+  height: 520px;
 }
-
 
 .wrapper .form-box{
-  width: 380px;
-
+  width: 80%;
+  padding: 40px;
 }
 .wrapper .form-box.login{
   transition: transform .18s ease;
   transform:  translateX(0);
 }
+
 .wrapper.active .form-box.login{
   transition: none;
   transform: translateX(-400px);
 }
+
 .wrapper .form-box.register{
+  width: 80%;
   position: absolute;
+  transition: none;
   transform: translateX(400px);
 }
+
 .wrapper.active .form-box.register{
   transition: transform .18s ease;
-  transform:  translateX(10px);
+  transform:  translateX(0px);
 }
+
 .wrapper .icon-close{
   position: absolute;
   top:  0;
@@ -243,11 +250,13 @@ nav{
   cursor: pointer;
   z-index: 1;
 }
+
 .form-box h2{
   font-size: 2em;
   color: #fff;
   text-align: center;
 }
+
 .input-box{
   position: relative;
   width: 100%;
@@ -255,10 +264,11 @@ nav{
   border-bottom:  2px solid #fff;
   margin: 30px 0;
 }
+
 .input-box label{
   position: absolute;
-  top: 40%;
-  left: 0px;
+  top: 50%;
+  left: 5px;
   transform: translateY(-50%);
   font-size: 1em;
   color: #fff;
@@ -266,10 +276,12 @@ nav{
   pointer-events: none;
   transition: 0s;
 }
+
 .input-box input:focus~label,
 .input-box input:valid~label{
-  top: -10px;
+  top: -5px;
 }
+
 .input-box input{
   width: 100%;
   height: 100%;
@@ -279,14 +291,15 @@ nav{
   font-size: 1em;
   font-weight: 600;
 }
+
 .input-box .icon{
   position: absolute;
   right: 8px;
-  top: -12px;
   font-size: 1.2em;
   color: #fff; 
-  line-height: 80px;
+  line-height: 57px;
 }
+
 .remember-forgot{
   font-size: .9em;
   color: #fff;
@@ -295,22 +308,24 @@ nav{
   display: flex;
   justify-content: space-between;
 }
+
 .remember-forgot label input{
   accent-color: #fff;
   margin-right: 3px;
 }
+
 .remember-forgot a{
   color: #fff;
   text-decoration: none;
 }
+
 .remember-forgot a:hover{
   text-decoration: underline;
 }
+
 .btn{
   width: 100%;
   height: 45px;
-  width: 200px;
-  margin-left: 25%;
   background: #162938;
   border: none;
   border-radius: 6px;
@@ -319,6 +334,7 @@ nav{
   color: #fff;
   font-weight: 500;
 }
+
 .login-register{
   font-size: .9em;
   color: #fff;
@@ -326,14 +342,72 @@ nav{
   font-weight: 500;
   margin: 25px 0 10px;
 }
+
 .login-register p a{
   color: #fff;
   text-decoration: none;
   font-weight: 600;
+  
 }
+
 .login-register p a:hover{
   text-decoration: underline;
 }
+
+.recipe {
+  grid-area: 1/3/4/9;
+}
+
+.recipe img{
+  max-width: 80%;
+  display: block;
+  margin-bottom: 20px;
+  align-items: center;
+  position: center;
+  border-radius: 8px;
+  margin: auto;
+  box-shadow:4px 4px 4px rgba(0, 0, 0, .5);
+}
+
+.recipe_section{
+  background-color: transparent ;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.recipe_title{
+  font-family: "Passion One", sans-serif;
+  font-weight: 400;
+  color: #ececec;
+  font-size: 38px;
+  margin-bottom: 10px;
+  text-shadow:5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.recipe_ingredienti, .recipe_preparazione{
+  margin-bottom: 20px;
+  color: #ececec;
+   
+}
+
+.list_ingredienti{
+  font-family:"Alatsi", sans-serif;
+  font-weight:400;
+  font-size: 20px;
+  font-style: normal;
+  text-shadow:2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+
+.list_preparazione{
+  font-family:"Alatsi", sans-serif;
+  font-weight:400;
+  font-size: 28px;
+  font-style: normal;
+  text-shadow:2px 2px 2px rgba(0, 0, 0, 0.5);
+
+}
+
 
 .recipe_name {
     font-family: "Passion One", sans-serif;
@@ -345,11 +419,16 @@ nav{
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 1.0);
 }
 
+
+
 .recipe_details_box {
   background-color: rgba(0, 0, 0, 0.5); /* Colore di sfondo trasparente opacizzato */
   padding: 20px;
   border-radius: 8px;
   margin-top: 20px;
+  width: 280%;
+  max-width: 2500px;
+
 }
 
 .recipe_details,
@@ -365,7 +444,6 @@ nav{
 .recipe_detail {
   
   padding: 10px;
- 
   text-align: center;
 }
 
@@ -385,5 +463,15 @@ nav{
   margin: 0;
   color: #ececec;
   text-shadow:5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.recipe {
+  display: flex; /* Utilizziamo flexbox per organizzare gli elementi */
+  flex-direction: column; /* Organizziamo gli elementi in colonna */
+  align-items: center; /* Centriamo gli elementi orizzontalmente */
+  margin-bottom: 30px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 

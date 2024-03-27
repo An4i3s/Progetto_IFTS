@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CookIdea</title>
-    <link rel="stylesheet" href="..\static\css\homestyle.css">
     <link rel="stylesheet" href="..\static\css\ricetta.css">
-    <link rel="stylesheet" href="\static\css\homestyle.css">
     <link rel="stylesheet" href="\static\css\ricetta.css">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -20,14 +18,15 @@
 <body>
 
 <nav class="navigation">
-    <img src="..\static\img\1.png" alt="logo cook Idea" height="100px" width="100px">
+    <img src="\static\img\1.png" alt="logo cook Idea" height="100px" width="100px">
     <input type="text" id="searchBar" placeholder="CERCA...">
     <a href="#">Home</a>
     <button class="btnLogin-popup">Login</button>
 </nav>
+
 <div id="container">
 
-<div class="wrapper">
+    <div class="wrapper">
     <span class="icon-close">
         <ion-icon name="close"></ion-icon>
     </span>
@@ -91,55 +90,59 @@
             </div>
         </form>
     </div>
-</div>
+    </div>
 
+<<<<<<< HEAD
+    <div class="recipe">
+        <h1 class="recipe_name">{{piatto.nome_piatto}}</h1>
+        <img src="\static\recipes\{{piatto.image_name}}" alt="Ricetta" class="recipe_image">
+        <div class="recipe_details_box">
+            <div class="recipe_details">
+                <div class="recipe_detail">
+                    <h3>Tempo di preparazione</h3>
+                    <p>{{piatto.tempo}}</p>
+                </div>
+                <div class="recipe_detail">
+                    <h3>Difficoltà</h3>
+                    <p>{{piatto.difficolta}}</p>
+                </div>
+                <div class="recipe_detail">
+                    <h3>Portata</h3>
+                    <p>{{piatto.portata}}</p>
+                </div>
+=======
 <div class="recipe">
     <h1 class="recipe_name">{{piatto.nome_piatto}}</h1>
-    <img src="\static\img\{{piatto.image_name}}" alt="Ricetta" class="recipe_image">
+    <img src="\static\recipes\{{piatto.image_name}}" alt="Ricetta" class="recipe_image">
     <div class="recipe_details_box">
         <div class="recipe_details">
             <div class="recipe_detail">
                 <h3>Tempo di preparazione</h3>
                 <p>{{piatto.tempo}}</p>
+>>>>>>> 5a85a9e75b78b519f7b40c7cb712bc004ba3ca6c
             </div>
-            <div class="recipe_detail">
-                <h3>Difficoltà</h3>
-                <p>{{piatto.difficolta}}</p>
+            <div class="recipe_section">
+                <h2 class="recipe_title">Ingredienti</h2>
+                <div class="recipe_ingredienti">
+                    <ul class="list_ingredienti">
+                        {% for ingrediente in piatto.ricettario %}
+                        <li class="list_ingredienti">{{ingrediente.nome_ingrediente}} :   {{ingrediente["quantita_ingrediente"]}}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
             </div>
-            <div class="recipe_detail">
-                <h3>Portata</h3>
-                <p>{{piatto.portata}}</p>
+            <div class="recipe_section">
+                <h2 class="recipe_title">Procedimento</h2>
+                <div class="recipe_preparazione">
+                    <h2 class="list_preparazione">{{piatto.procedimento}}</h2>
+                </div>
             </div>
-        </div>
-    <div class="recipe_section">
-        <h2 class="recipe_title">Ingredienti</h2>
-        <div class="recipe_ingredienti">
-            <ul class="list_ingredienti">
-                {% for ingrediente in piatto.ricettario %}
-                <li class="list_ingredienti">{{ingrediente.nome_ingrediente}} :   {{ingrediente["quantita_ingrediente"]}}</li>
-            {% endfor %}   
-                
-                
-            </ul>
         </div>
     </div>
-    <div class="recipe_section">
-        <h2 class="recipe_title">Procedimento</h2>
-        <div class="recipe_preparazione">
-            <h2 class="list_preparazione">{{piatto.procedimento}}</h2>
-        </div>
-    </div>
-</div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="..\static\js\login.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 
-         
-</div>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="..\static\js\login.js"></script>
-  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-
-
-
-</body>
+    </body>
 </html>
