@@ -312,6 +312,7 @@ nav{
 
 #dessert{
   background-image: url('../img/category_dessert.png');
+  
  grid-area: 14/3/18/8;
 
  }

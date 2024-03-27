@@ -12,19 +12,18 @@
   width: 100%;
   height: 350px;
   margin-right: 10px;
-  background: #8C8;
   border-radius: 20px;
   counter-increment: gallery-cell;
 }
 /* cell number */
-.carousel-cell:before {
+/* .carousel-cell:before {
   display: block;
   text-align: center;
   content: counter(gallery-cell);
   line-height: 300px;
   font-size: 80px;
   color: white;
-}
+} */
 @media screen and ( min-width: 768px ) {
   /* half-width cells for larger devices */
   .carousel-cell { width: 50%; }
