@@ -397,5 +397,5 @@ nav{
 footer{
   grid-area: 18/1/20/10;
   background-color: rgb(128,128,128,0.5);
- height: -50%;
+  height: -50%;
 }
