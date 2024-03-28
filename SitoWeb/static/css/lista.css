@@ -1,0 +1,66 @@
+* {
+    margin:0;
+    padding:0;
+    font-family: 'Poppins', sans-serif;
+  }
+  
+  body{
+    background-image: url('../img/background_blur.jpg');
+    min-height: 100vh;
+    background-position: center;  
+    background-size: cover; /* Per adattare l'immagine alla dimensione dell'intera finestra del browser */
+    background-repeat: no-repeat; /* Per evitare la ripetizione dell'immagine */
+  }
+  
+#container{
+    margin-bottom: 100px;
+
+} 
+
+.schede-container {
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Centra verticalmente */
+    height: 100vh; /* Altezza pari all'altezza della finestra del browser */
+}
+
+/* Stili per il contenitore delle schede */
+.schede {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 800px;
+    width: 100%;
+    margin-top: 15px;
+}
+
+/* Stili per i container delle schede */
+.schede .schede-box {
+    width: calc(50% - 20px); /* Larghezza del 50% del contenitore, meno il margine */
+    height: 200px; /* Altezza fissa */
+    margin: 10px;
+    border-radius: 10px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    font-family: "Passion One", sans-serif;
+    color: #ececec;
+    font-size: 24px;
+    font-weight: 400;
+    text-align: center;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    background-color: #ececec;
+}
+
+/* Effetto hover */
+.schede .schede-box:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+}
+
+/* Effetto click */
+.schede .schede-box:active {
+    opacity: 0.8;
+}
