@@ -11,7 +11,7 @@ appWebApi = Flask(__name__)
 db = None
 
 
-
+# web w1 - homepage - 
 @appWebApi.route("/")
 def homepage():
     
@@ -33,7 +33,7 @@ def homepage():
         immagine = record["image_name"]
         listaImmagini.append(immagine)
 
-    return render_template("index.html", listaPortate=listaPortate, listaImmagini=listaImmagini)
+    return render_template("index.html", listaPortate=listaPortate, listaImmagini=listaImmagini, id= idutente)
 
 
 

@@ -6,6 +6,25 @@ class Portata:
         self.nome = nome
         self.image_url = image_url
 
+class User:
+    id = None
+    name = None
+    surname = None
+    birthdate = None
+    email = None
+    username = None
+    password = None
+
+    def __init__(self, name, surname, birthdate, email, username, password):
+        self.id = None
+        self.name = name
+        self.surname = surname
+        self.birthdate = birthdate
+        self.email = email
+        self.username = username
+        self.password = password
+
+
 
 class Piatto:
     id = None

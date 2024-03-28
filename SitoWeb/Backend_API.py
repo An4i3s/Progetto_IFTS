@@ -17,7 +17,7 @@ def principale():
     return "ok funziona "
 
 
-# api   (TUTTI I PIATTI)
+# api a1   (TUTTI I PIATTI)
 # restituisce tutti i record di entità piatto (id, nome_piatto, difficoltà, tempo, provenienza, portata, procedimento, image_name)
 # http://192.168.1.94:8000/api/piatti
 @appWebApi.route("/api/piatti")
@@ -26,7 +26,7 @@ def getAllRecipes():
     result = db.fetchAll(query)
     return json.dumps(result)
 
-# api (TUTTI GLI UTENTI)
+# api a2 (TUTTI GLI UTENTI)
 # restituisce tutti i record di entità utenti (id, nome, cognonme, data_nascita, email, username, password)
 # http://192.168.1.117:8000/api/utenti
 @appWebApi.route("/api/utenti")
@@ -35,7 +35,7 @@ def getAllUsers():
     result = db.fetchAll(query)
     return json.dumps(result)
 
-# api LOGIN
+# api a3 LOGIN
 # in caso di richiesta POST (username  + password9) con esito "success" restituisce i dati dello user 
 # http://192.168.1.117:8000/api/login
 @appWebApi.route("/api/login", methods=["POST"])
@@ -51,26 +51,8 @@ def login():
     else:
         return json.dumps({"success": True, "user": user}), 200
     
-@appWebApi.route("/api/login2", methods=["POST"])
-def login2():
-    data = request.get_json()
-    username = data["username"]
-    password = data["password"]
-    query = "select * from utenti where username = %s and password = %s"
-    user = db.fetchOne(query, (username, password))
-    
-    if user is None:
-        return json.dumps({"success": False}), 401
-    else:
-        return json.dumps({"success": True}), 200
-    
-    
-    
 
-
-
-
-# api / RICERCA PER NOME PIATTO  (anche solo una parte del nome)
+# api a4 RICERCA PER NOME PIATTO  (anche solo una parte del nome)
 # restituisce un record di entità piatto (id, nome_piatto, difficoltà, tempo, provenienza, portata, image_name)
 # filtrato per nome_piatto
 # http://192.168.0.110:8000/api/ricercaPerNome/funghi
@@ -85,7 +67,7 @@ def getRecipesfromName(nome):
     return json.dumps(result, default=vars)
 
 
-# api / RICERCA PER NOME PORTATA 
+# api a5 RICERCA PER NOME PORTATA 
 # restituisce un record di entità piatto (id, nome_piatto, difficoltà, tempo, provenienza, portata, image_name)
 # filtrato per portata
 # http://192.168.0.110:8000/api/ricercaPerPortata/primo
@@ -98,8 +80,8 @@ def getRecipesfromPortata(portata):
     return json.dumps(result, default=vars)
 
 
-# api / ELENCO PORTATE
-# restituisce un array di portate prese dalla tabella piatti (piatti.portate), senza duplicati
+# api a6 ELENCO PORTATE
+# restituisce una lista di portate (primo, secondo..) con relativo url immagine, prese dalla tabella piatti, senza duplicati
 # http://192.168.0.110:8000/api/portate
 @appWebApi.route("/api/portate")
 def getPortate():
@@ -112,17 +94,21 @@ def getPortate():
             
         
         resultWithUrl = []
+
         for record in queryResult:
             portata = record["portata"]
             url_portata = f"/static/img/{portata.lower()}.jpg"
             resultWithUrl.append({"portata": portata, "urlportata": url_portata})  
                 
         return jsonify(resultWithUrl) 
+    
     except Exception as e:
         return jsonify({"error": str(e)})
     
-# api / 5 piatti random
-# restituisce 5 piatti (id, nome_piatto, image_name) a random dal database
+
+    
+# api a7 piatti random
+# restituisce una lista di piatti casuali con id, nome_piatto e url immagine (image_name) senza duplicati
 # http://192.168.0.110:8000/api/randomPiattoIdNomeImg
 @appWebApi.route("/api/randomPiattoIdNomeImg")
 def getPiattiImmagini():
@@ -135,13 +121,11 @@ def getPiattiImmagini():
         queryResult = db.fetchAll(query)
         timeFin = time.time()
 
-
         print(queryResult)
         ricetteCasuali = []
 
         if queryResult is None:
             return jsonify([])
-
 
         for record in queryResult:
             id = record["id"]
@@ -150,9 +134,7 @@ def getPiattiImmagini():
             url_portata = f"/static/recipes/{imgName.lower()}"
             ricetteCasuali.append({"id": id, "nome_piatto": nome,"image_name": url_portata}) 
         return jsonify(ricetteCasuali)
-        
-        
-
+    
     except Exception as e:
         print("An error occurred:", str(e))
         return jsonify({'error': 'Errore'}), 500
@@ -162,8 +144,8 @@ def getPiattiImmagini():
 
 
 
-# api / RICETTA COMPLETA DA ID
-# restituisce un piatto/ricetta con tutti i campi di piatto ma con in più con un elenco (lista) di ingredienti
+# api a8 RICETTA COMPLETA DA ID
+# restituisce un piatto/ricetta con tutti i campi di piatto (modellato con calsse Piatto) ma con in più con un elenco (lista) di ingredienti (modellato con la classe Ricettario)
 # http://192.168.0.110:8000/api/ricerca/ricettaFromId?id_piatto=5
 @appWebApi.route("/api/ricerca/ricettaFromId")
 def getRicettaCompletaFromId():
@@ -173,22 +155,50 @@ def getRicettaCompletaFromId():
                FROM piatti p WHERE p.id = %s"""
     
     result = db.fetchOne(query, (idPiatto))
-    
-    piatto = Piatto(**result)
 
-    query = """SELECT i.nome_ingrediente, r.quantita_ingrediente
-               FROM piatti p JOIN ricettario r ON p.id = r.id_piatto
-               JOIN ingredienti i ON r.id_ingrediente = i.id WHERE p.id = %s;""" 
+    if result is not None:
+
+        piatto = Piatto(**result)
+        
+        query = """SELECT i.nome_ingrediente, r.quantita_ingrediente
+                FROM piatti p JOIN ricettario r ON p.id = r.id_piatto
+                JOIN ingredienti i ON r.id_ingrediente = i.id WHERE p.id = %s;""" 
+        
+        result = db.fetchAll(query, (idPiatto))
+        
+        for row in result:
+            ricettario = Ricettario(**row)
+            piatto.ricettario.append(ricettario)
+            
+        return json.dumps(piatto, default=vars)
     
-    result = db.fetchAll(query, (idPiatto))
+    else:
+        return json.dumps([])
     
+
+# api a9  REGISTRAZIONE
+# http://192.168.1.117:8000/api/signup
+@appWebApi.route("/api/signup", methods=["POST"])
+def register():
+
+    newUser = User (**request.get_json())
+    print(newUser.name + " " + newUser.password)
+    return newUser
+   
+    # query = "select * from utenti where username = %s and password = %s"
+    # user = db.fetchOne(query, (username, password))
     
     for row in result:
         ricettario = Ricettario(**row)
         piatto.ricettario.append(ricettario)
         
+    # if user is None:
+    #     return json.dumps({"success": False, "message": "Utente non trovato"}), 401
+    # else:
+    #     return json.dumps({"success": True, "user": user}), 200
 
-    return json.dumps(piatto, default=vars)
+
+
 
 
 

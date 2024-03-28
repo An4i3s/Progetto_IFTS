@@ -32,24 +32,9 @@
                 <li>Frutta</li>
                 <li>Verdure</li>
             </ul>
-            
+           <button id="clear-checked">Elimina gli ingredienti barrati</button> 
         </div>
     </div>
-    <script>
-        // Aggiungi un event listener alla lista della spesa
-        document.getElementById('shopping-list').addEventListener('click', function(event) {
-            // Verifica se l'elemento cliccato è un ingrediente (elemento <li>)
-            if (event.target.tagName === 'LI') {
-                // Chiama la funzione per barrare l'ingrediente
-                toggleIngredient(event.target);
-            }
-        });
-    
-        // Funzione per barrare o sbarrare un ingrediente
-        function toggleIngredient(ingredient) {
-            ingredient.style.textDecoration = (ingredient.style.textDecoration === 'line-through') ? 'none' : 'line-through';
-        }
-    </script>
-    
+    <script src="../static/js/spesa.js"></script>
 </body>
 </html>
