@@ -101,33 +101,33 @@ public class RegistrazioneFragment extends Fragment {
             }
         });
 
-        signupBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                name = nameEt.getText().toString();
-                surname = surnameEt.getText().toString();
-                username = usernameEt.getText().toString();
-                birthdate = new Date(dataNascita);
-                email = emailEt.getText().toString();
-                password = passwordEt.getText().toString();
-
-                User userRequest = new User(name, surname, username, email, birthdate, password);
-                Call<User> call = apiService.register(userRequest);
-
-                call.enqueue(new Callback<User>() {
-                    @Override
-                    public void onResponse(Call<User> call, Response<User> response) {
-
-                    }
-
-                    @Override
-                    public void onFailure(Call<User> call, Throwable t) {
-
-                    }
-                });
-
-            }
-        });
+//        signupBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                name = nameEt.getText().toString();
+//                surname = surnameEt.getText().toString();
+//                username = usernameEt.getText().toString();
+//                birthdate = new Date(dataNascita);
+//                email = emailEt.getText().toString();
+//                password = passwordEt.getText().toString();
+//
+//                User userRequest = new User(name, surname, username, email, birthdate, password);
+//                Call<User> call = apiService.register(userRequest);
+//
+//                call.enqueue(new Callback<User>() {
+//                    @Override
+//                    public void onResponse(Call<User> call, Response<User> response) {
+//
+//                    }
+//
+//                    @Override
+//                    public void onFailure(Call<User> call, Throwable t) {
+//
+//                    }
+//                });
+//
+//            }
+//        });
 
         return rootView;
     }
