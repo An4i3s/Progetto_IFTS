@@ -67,7 +67,7 @@ public class RegistrazioneFragment extends Fragment {
 
         nameEt = rootView.findViewById(R.id.nameEditText);
         surnameEt = rootView.findViewById(R.id.surnameEditText);
-        usernameEt = rootView.findViewById(R.id.regUsernameEditText);
+        //usernameEt = rootView.findViewById(R.id.regUsernameEditText);
         emailEt = rootView.findViewById(R.id.email);
         passwordEt = rootView.findViewById(R.id.passwordEditText);
 
@@ -101,33 +101,36 @@ public class RegistrazioneFragment extends Fragment {
             }
         });
 
-//        signupBtn.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                name = nameEt.getText().toString();
-//                surname = surnameEt.getText().toString();
-//                username = usernameEt.getText().toString();
-//                birthdate = new Date(dataNascita);
-//                email = emailEt.getText().toString();
-//                password = passwordEt.getText().toString();
-//
-//                User userRequest = new User(name, surname, username, email, birthdate, password);
-//                Call<User> call = apiService.register(userRequest);
-//
-//                call.enqueue(new Callback<User>() {
-//                    @Override
-//                    public void onResponse(Call<User> call, Response<User> response) {
-//
-//                    }
-//
-//                    @Override
-//                    public void onFailure(Call<User> call, Throwable t) {
-//
-//                    }
-//                });
-//
-//            }
-//        });
+       signupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                name = nameEt.getText().toString();
+                surname = surnameEt.getText().toString();
+                username = usernameEt.getText().toString();
+                birthdate = new Date(dataNascita);
+                email = emailEt.getText().toString();
+                password = passwordEt.getText().toString();
+
+                User userRequest = new User(name, surname, username, email, birthdate, password);
+                Call<User> call = null;
+                        //apiService.register(userRequest);
+
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+
+                    }
+                });
+
+            }
+        });
+
+
 
         return rootView;
     }

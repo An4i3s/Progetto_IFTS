@@ -28,6 +28,7 @@ import com.example.cookidea_app.Fragments.MenuPageFragment;
 import com.example.cookidea_app.Fragments.ProfiloFragment;
 import com.example.cookidea_app.Fragments.RecipePageFragment;
 import com.example.cookidea_app.Fragments.RicettePreferiteFragment;
+import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.R;
 import com.example.cookidea_app.Fragments.RegistrazioneFragment;
 import com.example.cookidea_app.Fragments.SearchPageFragment;
@@ -42,6 +43,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener   {
+
     /*
     toggle button ricetta singola per preferiti //edo
     layout pagina lista della spesa //edo
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     collegre pagina profile utente con dati presi da db //anais
     per il momento niente SQLite
     */
+
 
     //TODO fixare immagini errate nella ricerca
     BottomNavigationView bottomNavigationView;
@@ -74,10 +77,18 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     String search = "";
     SharedPreferences sharedPreferences;
 
+    User user;
 
 
+    public void onLoginSuccess(User user) {
+        ((CookIdeaApp)getApplication()).setLoggedUser(user);
 
-    public static final String BASE_URL = "http://192.168.0.113:8000";
+        SharedPrefManager.setLoggedIn(MainActivity.this,true);
+        updateNavigationDrawer();
+        changeFrameByNavigationTab(R.id.homePage);
+    }
+
+    public static final String BASE_URL = "http://192.168.49.85:8000";
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -97,6 +108,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        user = ((CookIdeaApp)getApplication()).getLoggedUser();
 
 
         bottomNavigationView = findViewById((R.id.bottomNavBar));
@@ -225,8 +237,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             navigationView.getMenu().clear();
             navigationView.inflateMenu(R.menu.drawer_nav_menu);
         }
-;
+
     }
+
 
 
 }

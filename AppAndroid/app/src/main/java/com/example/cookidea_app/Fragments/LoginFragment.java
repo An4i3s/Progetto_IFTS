@@ -1,5 +1,6 @@
 package com.example.cookidea_app.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.renderscript.ScriptGroup;
@@ -18,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.example.cookidea_app.Activities.CookIdeaApp;
 import com.example.cookidea_app.Activities.MainActivity;
 import com.example.cookidea_app.Activities.SharedPrefManager;
 import com.example.cookidea_app.Backend.CookIdeaApiEndpointInterface;
@@ -34,6 +36,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginFragment extends Fragment {
 
+    Context ctx;
     EditText username;
     EditText password;
     CheckBox checkBox;
@@ -46,7 +49,11 @@ public class LoginFragment extends Fragment {
 
     }
 
-
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        ctx = context;
+    }
 
     @Nullable
     @Override
@@ -77,9 +84,9 @@ public class LoginFragment extends Fragment {
                         //if StatusCode = 200
                         if (response.isSuccessful()){
                             Toast.makeText(getContext(), "Utente Trovato", Toast.LENGTH_LONG).show();
-                            // TODO: 27/03/2024 Creare classe Wrapper
+
                             user = response.body();
-                            onLoginSuccess();
+                            ((MainActivity)ctx).onLoginSuccess(user);
                         }else {
                             Toast.makeText(getContext(), "Utente non Trovato", Toast.LENGTH_LONG).show();
 
@@ -126,16 +133,9 @@ public class LoginFragment extends Fragment {
     }
 
 
-    public void onLoginSuccess(){
-        SharedPrefManager.setLoggedIn(getContext(),true);
-        MainActivity activity = (MainActivity) getActivity();
-        assert activity != null;
-        activity.updateNavigationDrawer();
-        activity.changeFrameByNavigationTab(R.id.homePage);
-    }
-
     public User getUser(){
         return user;
     }
+
 
 }
