@@ -6,6 +6,7 @@
   margin-right: 10%;
   scale: 100%;
   height: 350px;
+  
 }
 
 .carousel-cell {
@@ -14,6 +15,7 @@
   margin-right: 10px;
   border-radius: 20px;
   counter-increment: gallery-cell;
+  box-shadow:3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 /* cell number */
 /* .carousel-cell:before {
