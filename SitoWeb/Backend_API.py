@@ -101,17 +101,6 @@ def getRecipesfromPortata(portata):
 # api / ELENCO PORTATE
 # restituisce un array di portate prese dalla tabella piatti (piatti.portate), senza duplicati
 # http://192.168.0.110:8000/api/portate
-'''
-@appWebApi.route("/api/portate")
-def getPortate():
-    query = "SELECT DISTINCT piatti.portata FROM piatti"
-    result = db.fetchAll(query)
-    nomi_portate = []
-    for record in result:
-        nomi_portate.append(record["portata"])
-    return jsonify(nomi_portate)
-'''
-
 @appWebApi.route("/api/portate")
 def getPortate():
     query = "SELECT DISTINCT piatti.portata FROM piatti"
@@ -135,16 +124,6 @@ def getPortate():
 # api / 5 piatti random
 # restituisce 5 piatti (id, nome_piatto, image_name) a random dal database
 # http://192.168.0.110:8000/api/randomPiattoIdNomeImg
-'''
-@appWebApi.route("/api/randomPiattoIdNomeImg")
-def getPiattiImmagini():
-    piattiDaRestituire = 5
-    query = """SELECT id, nome_piatto, image_name
-               FROM piatti ORDER BY RAND() LIMIT %s"""
-    result = db.fetchAll(query, (piattiDaRestituire,))
-    return jsonify(result)
-'''
-
 @appWebApi.route("/api/randomPiattoIdNomeImg")
 def getPiattiImmagini():
     try:

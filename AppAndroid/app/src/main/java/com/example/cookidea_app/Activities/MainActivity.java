@@ -26,6 +26,7 @@ import com.example.cookidea_app.Fragments.ListaSpesaFragmentPage;
 import com.example.cookidea_app.Fragments.LoginFragment;
 import com.example.cookidea_app.Fragments.MenuPageFragment;
 import com.example.cookidea_app.Fragments.ProfiloFragment;
+import com.example.cookidea_app.Fragments.RecipePageFragment;
 import com.example.cookidea_app.Fragments.RicettePreferiteFragment;
 import com.example.cookidea_app.R;
 import com.example.cookidea_app.Fragments.RegistrazioneFragment;
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     implementare fragment profiloUtente
     collegre pagina profile utente con dati presi da db
     per il momento niente SQLite*/
+
+    //TODO fixare immagini errate nella ricerca
     BottomNavigationView bottomNavigationView;
     NavigationView navigationView;
     HomePageFragment homeFragment = new HomePageFragment();
@@ -59,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     LoginFragment loginFragment = new LoginFragment();
     ProfiloFragment profiloFragment = new ProfiloFragment();
     RicettePreferiteFragment ricettePreferFrag = new RicettePreferiteFragment();
+    RecipePageFragment recipePageFragment = new RecipePageFragment();
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
     List<String> listPortate;
@@ -141,6 +145,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             Bundle b = new Bundle();
             b.putString("filterByCategory", search);
             fragment = searchFragment;
+            fragment.setArguments(b);
+        }
+        if (id_tab == R.id.recipePage){
+            Bundle b = new Bundle();
+            b.putString("recipeId", search);
+            fragment = recipePageFragment;
             fragment.setArguments(b);
         }
         if (id_tab == R.id.shoppingListPage)

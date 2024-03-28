@@ -16,8 +16,12 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:textColor="@color/white"
-        android:textSize="50sp"
-        android:textStyle="bold"/>
+        android:textColor="#ececec"
+        android:shadowColor="#333333"
+        android:textSize="70sp"
+        android:shadowDx="8"
+        android:shadowDy="8"
+        android:shadowRadius="8"
+        android:fontFamily="@font/passion_one"/>
 
 </FrameLayout>

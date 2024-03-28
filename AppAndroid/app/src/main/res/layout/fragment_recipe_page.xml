@@ -6,6 +6,7 @@
     tools:context=".Fragments.RecipePageFragment">
 
     <RelativeLayout
+        android:id="@+id/recipePage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -14,7 +15,7 @@
             android:id="@+id/imageRecipeView"
             android:layout_width="175dp"
             android:layout_height="175dp"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
             android:layout_margin="20dp" />
 
         <TextView
@@ -22,19 +23,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/imageRecipeView"
-            android:text="Pasta alla carbonara"
             android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginTop="20dp"
-
             />
+
+        <TextView
+            android:id="@+id/timeText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nameRecipeTextView"
+            android:layout_toEndOf="@id/imageRecipeView"
+            android:text="@string/tempo"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
 
         <TextView
             android:id="@+id/timeRecipeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tempo: "
             android:layout_below="@+id/nameRecipeTextView"
+            android:layout_toEndOf="@+id/timeText"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/difficultyText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/difficolt"
+            android:layout_below="@+id/timeText"
             android:layout_toEndOf="@+id/imageRecipeView"
             android:textStyle="bold"
             android:textSize="20sp"/>
@@ -43,8 +60,17 @@
             android:id="@+id/difficultyRecipeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Difficoltà: 😥"
             android:layout_below="@+id/timeRecipeTextView"
+            android:layout_toEndOf="@+id/difficultyText"
+            android:textStyle="bold"
+            android:textSize="20sp"/>
+
+        <TextView
+            android:id="@+id/provenienceText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/provenienza"
+            android:layout_below="@+id/difficultyText"
             android:layout_toEndOf="@+id/imageRecipeView"
             android:textStyle="bold"
             android:textSize="20sp"/>
@@ -53,31 +79,53 @@
             android:id="@+id/provenienceRecipeTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Provenienza: "
             android:layout_below="@+id/difficultyRecipeTextView"
-            android:layout_toEndOf="@+id/imageRecipeView"
-            android:textStyle="bold"
+            android:layout_toEndOf="@+id/provenienceText"
             android:textSize="20sp"/>
 
         <TextView
-            android:id="@+id/ingredientsRecipeListView"
+            android:id="@+id/ingredientsText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/imageRecipeView"
-            android:nestedScrollingEnabled="true"
-            android:text="Ingredienti:"
+            android:text="@string/ingredienti"
+            android:textStyle="bold"
             android:textSize="17sp"
-            android:padding="15dp"
-            />
+            android:paddingTop="15dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"/>
 
         <TextView
-            android:id="@+id/recipeGuideTextView"
+            android:id="@+id/ingredientsRecipeTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/ingredientsRecipeListView"
-            android:text="Procedimento:\n"
+            android:layout_below="@+id/ingredientsText"
             android:textSize="17sp"
-            android:padding="15dp"/>
+            android:paddingTop="5dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"/>
+
+        <TextView
+            android:id="@+id/guideText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ingredientsRecipeTextView"
+            android:text="@string/procedimento"
+            android:textSize="17sp"
+            android:textStyle="bold"
+            android:paddingTop="15dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"/>
+
+        <TextView
+            android:id="@+id/guideRecipeTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/guideText"
+            android:textSize="17sp"
+            android:paddingTop="5dp"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"/>
 
 
 

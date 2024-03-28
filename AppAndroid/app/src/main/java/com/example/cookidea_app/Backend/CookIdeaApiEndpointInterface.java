@@ -24,10 +24,13 @@ public interface CookIdeaApiEndpointInterface {
     Call<List<Recipe>> getRandomRecipe();
 
     @GET("/api/ricercaPerNome/{nome}")
-    Call<List<Recipe>> getRecipeByName(@Path("nome") String nome);
+    Call<List<Recipe>> getRecipeByName(@Path("nome") String recipeName);
 
     @GET("/api/ricercaPerPortata/{portata}")
-    Call<List<Recipe>> getRecipeByServing(@Path("portata") String portata);
+    Call<List<Recipe>> getRecipeByServing(@Path("portata") String serving);
+
+    @GET("/api/ricerca/ricettaFromId")
+    Call<Recipe> getRecipeById(@Query("id_piatto") String recipeId);
 
     @POST("api/login")
     Call<User> login(@Body LoginRequest request);

@@ -3,6 +3,7 @@ package com.example.cookidea_app.ModelClasses;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class Recipe {
     @SerializedName("id")
@@ -21,9 +22,10 @@ public class Recipe {
     private final String provenance;
     @SerializedName("portata")
     private final String serving;
-    private final HashMap<String, Integer> ingredients;
+    @SerializedName("ricettario")
+    private final List<Ingredients> ingredients;
 
-    public Recipe(int recipeId, String img_name, String name, String method, int time, int difficulty, String provenance, String serving, HashMap<String, Integer> ingredients) {
+    public Recipe(int recipeId, String img_name, String name, String method, int time, int difficulty, String provenance, String serving, List<Ingredients> ingredients) {
         this.recipeId = recipeId;
         this.img_name = img_name;
         this.name = name;
@@ -46,7 +48,7 @@ public class Recipe {
         return name;
     }
 
-    public String getMethod() {
+    public String getGuide() {
         return method;
     }
 
@@ -57,17 +59,17 @@ public class Recipe {
     public String getDifficulty() {
         switch (difficulty){
             case 1:
-                return "😃";
+                return " 😃";
             case 2:
-                return "😥";
+                return " 😥";
             case 3:
-                return "🥵";
+                return " 🥵";
             default:
-                return "NoDifficulty";
+                return " Error";
         }
     }
 
-    public String getProvenance() {
+    public String getProvenience() {
         return provenance;
     }
 
@@ -75,7 +77,7 @@ public class Recipe {
         return serving;
     }
 
-    public HashMap<String, Integer> getIngredients() {
+    public List<Ingredients> getIngredients() {
         return ingredients;
     }
 }

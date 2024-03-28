@@ -15,10 +15,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.cookidea_app.Activities.MainActivity;
 import com.example.cookidea_app.Adapters.SearchPageListAdapter;
 import com.example.cookidea_app.R;
 import com.example.cookidea_app.ModelClasses.Recipe;
@@ -66,7 +69,6 @@ public class SearchPageFragment extends Fragment {
         resultListView.setAdapter(searchPageListAdapter);
 
 
-        //aggiungere on click listener alla lista e capire come passare i dati all'altro fragment
         searchEditText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,6 +88,16 @@ public class SearchPageFragment extends Fragment {
                 }
             }
         });
+
+        resultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(ctx, searchPageListAdapter.getItem(position).getName(), Toast.LENGTH_LONG).show();
+                ((MainActivity)ctx).changeTabById(R.id.searchPage, searchPageListAdapter.getItem(position).getRecipeId());
+                ((MainActivity)ctx).changeFrameByNavigationTab(R.id.recipePage);
+            }
+        });
+
         return rootView;
 
 
