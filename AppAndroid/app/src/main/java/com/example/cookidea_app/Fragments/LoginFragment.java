@@ -56,6 +56,7 @@ public class LoginFragment extends Fragment {
 
         username = rootView.findViewById(R.id.usernameEditText);
         password = rootView.findViewById(R.id.passwordEditText);
+        password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
         checkBox = rootView.findViewById(R.id.checkbox);
         loginBtn = rootView.findViewById(R.id.signinButton);
 
