@@ -101,7 +101,7 @@ public class RegistrazioneFragment extends Fragment {
             }
         });
 
-        signupBtn.setOnClickListener(new View.OnClickListener() {
+       signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 name = nameEt.getText().toString();

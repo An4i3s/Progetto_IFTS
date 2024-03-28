@@ -1,4 +1,5 @@
-from flask import Flask, jsonify, request, json
+from flask import Flask, jsonify, request
+import json
 import pymysql
 import random
 from models import *
@@ -40,17 +41,28 @@ def getAllUsers():
 # http://192.168.1.117:8000/api/login
 @appWebApi.route("/api/login", methods=["POST"])
 def login():
-    data = request.get_json()
-    username = data["username"]
-    password = data["password"]
-    query = "select * from utenti where username = %s and password = %s"
-    user = db.fetchOne(query, (username, password))
+    try:
+        data = request.get_json()
+        username = data["username"]
+        password = data["password"]
+
+        query = "select * from utenti where username = %s and password = %s"
+        result = db.fetchOne(query, (username, password))
+
+        user = User(**result)
+        
+        if user is None:
+            return json.dumps({"success": False, "message": "Utente non trovato"}), 401
+        else:
+            return json.dumps(user, default=vars), 200
+        
+    except Exception as e:
+        print("Errore durante il login:", e)
+        return jsonify({"success": False, "message": "Errore durante il login"}), 500
+
     
-    if user is None:
-        return json.dumps({"success": False, "message": "Utente non trovato"}), 401
-    else:
-        return json.dumps({"success": True, "user": user}), 200
-    
+
+
 
 # api a4 RICERCA PER NOME PIATTO  (anche solo una parte del nome)
 # restituisce un record di entità piatto (id, nome_piatto, difficoltà, tempo, provenienza, portata, image_name)
@@ -181,9 +193,8 @@ def getRicettaCompletaFromId():
 @appWebApi.route("/api/signup", methods=["POST"])
 def register():
 
-    newUser = User (**request.get_json())
-    print(newUser.name + " " + newUser.password)
-    return newUser
+    newUser = UserRegister (**request.get_json())
+   
    
     # query = "select * from utenti where username = %s and password = %s"
     # user = db.fetchOne(query, (username, password))
@@ -208,7 +219,7 @@ def register():
 if __name__ == "__main__":
     try:
         db = Database()
-        appWebApi.run(host='0.0.0.0', port=8000, debug=True)
+        appWebApi.run(host='0.0.0.0', port=8000)
     except KeyboardInterrupt:
         db.close()
 

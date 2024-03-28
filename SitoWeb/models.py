@@ -8,22 +8,44 @@ class Portata:
 
 class User:
     id = None
-    name = None
-    surname = None
-    birthdate = None
+    nome = None
+    cognome = None
+    data_nascita = None
     email = None
     username = None
     password = None
 
-    def __init__(self, name, surname, birthdate, email, username, password):
-        self.id = None
-        self.name = name
-        self.surname = surname
-        self.birthdate = birthdate
-        self.email = email
-        self.username = username
-        self.password = password
+    def __init__(self, **data):
+        #self.__dict__ = data
+        self.id = data['id']
+        self.nome = data['nome']
+        self.cognome = data['cognome']
+        self.data_nascita = data['data_nascita'].strftime('%Y-%m-%d')
+        #self.data_nascita = str(data['data_nascita']) 
+        #self.data_nascita = data['data_nascita']
+        self.email = data['email']
+        self.username = data['username']
+        self.password = data['password']
 
+
+
+
+class UserRegister:
+    nome = None
+    cognome = None
+    data_nascita = None
+    username = None
+    email = None
+    password = None
+
+    def __init__(self, **data):
+        #self.__dict__ = data
+        self.nome = data['nome']
+        self.cognome = data['cognome']
+        self.data_nascita = data['data_nascita']
+        self.username = data['username']
+        self.email = data['email']
+        self.password = data['password']
 
 
 class Piatto:
