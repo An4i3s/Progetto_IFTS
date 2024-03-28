@@ -6,25 +6,26 @@
   margin-right: 10%;
   scale: 100%;
   height: 350px;
+  
 }
 
 .carousel-cell {
   width: 100%;
   height: 350px;
   margin-right: 10px;
-  background: #8C8;
   border-radius: 20px;
   counter-increment: gallery-cell;
+  box-shadow:3px 3px 3px rgba(0, 0, 0, 0.5);
 }
 /* cell number */
-.carousel-cell:before {
+/* .carousel-cell:before {
   display: block;
   text-align: center;
   content: counter(gallery-cell);
   line-height: 300px;
   font-size: 80px;
   color: white;
-}
+} */
 @media screen and ( min-width: 768px ) {
   /* half-width cells for larger devices */
   .carousel-cell { width: 50%; }

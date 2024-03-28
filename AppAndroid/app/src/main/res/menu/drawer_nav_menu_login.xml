@@ -8,12 +8,13 @@
          android:visible="true" />
      <item
          android:id="@+id/ricettePrefe"
-         android:icon="@drawable/heart_24"
-         android:title="Ricette Preferite"
-         android:visible="true" />
+         android:icon="@drawable/heart"
+         android:title="Ricette /n Preferite"
+         android:visible="true"
+         />
      <item
          android:id="@+id/logout"
-         android:icon="@drawable/signout"
+         android:icon="@drawable/logout"
          android:title="Logout"
          android:visible="true" />
  </group>

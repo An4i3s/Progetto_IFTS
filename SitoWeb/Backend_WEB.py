@@ -23,7 +23,17 @@ def homepage():
         image_url = f"/static/img/{nomePortata.lower()}.jpg"
         portata = Portata(nomePortata, image_url)
         listaPortate.append(portata)
-    return render_template("index.html", listaPortate=listaPortate)
+    
+    piattiDaRestituire = 5
+    query = """SELECT image_name
+               FROM piatti ORDER BY RAND() LIMIT %s"""
+    result = db.fetchAll(query, (piattiDaRestituire))
+    listaImmagini =[]
+    for record in result:
+        immagine = record["image_name"]
+        listaImmagini.append(immagine)
+
+    return render_template("index.html", listaPortate=listaPortate, listaImmagini=listaImmagini)
 
 
 
@@ -81,11 +91,10 @@ def getPortate():
 # @appWebApi.route("/web/randomPiattoIdNomeImg")
 # def webGetPiattiImmagini():
 #     piattiDaRestituire = 5
-#     query = """SELECT id, nome_piatto, image_name
+#     query = """SELECT image_name
 #                FROM piatti ORDER BY RAND() LIMIT %s"""
-#     cursor.execute(query, (piattiDaRestituire))
-#     result = cursor.fetchall()
-#     return jsonify(result)
+#     result = db.fetchAll(query, (piattiDaRestituire))
+#     return result
 
 
 

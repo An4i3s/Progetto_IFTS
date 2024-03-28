@@ -2,11 +2,15 @@ package com.example.cookidea_app.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.renderscript.ScriptGroup;
+import android.text.InputType;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -32,6 +36,7 @@ public class LoginFragment extends Fragment {
 
     EditText username;
     EditText password;
+    CheckBox checkBox;
     Button loginBtn;
 
    Retrofit retrofit = new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
@@ -51,6 +56,8 @@ public class LoginFragment extends Fragment {
 
         username = rootView.findViewById(R.id.usernameEditText);
         password = rootView.findViewById(R.id.passwordEditText);
+        password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        checkBox = rootView.findViewById(R.id.checkbox);
         loginBtn = rootView.findViewById(R.id.signinButton);
 
 
@@ -91,7 +98,16 @@ public class LoginFragment extends Fragment {
         });
 
 
-
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (!isChecked){
+                    password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                }else {
+                    password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+                }
+            }
+        });
 
 
         Button button = rootView.findViewById(R.id.signupButton);

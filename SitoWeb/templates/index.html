@@ -20,7 +20,7 @@
     <!-- Inizio Nav / Login -->
     <header>
       <nav class="navigation">
-        <img src="../static/img/1.png" alt="logo cook Idea" height="100px" width="100px">
+        <img src="/static/img/1.png" alt="logo cook Idea" height="100px" width="100px">
         <input class="cerca" type="text" id="searchBar" placeholder="CERCA...">
         <a href="#">Home</a>
         <button class="btnLogin-popup">Login</button>
@@ -28,11 +28,9 @@
     </header>
     <!-- Inizio Flickity -->
     <div class="carousel"data-flickity='{ "freeScroll": true }'>
-    <div class="carousel-cell"></div>
-    <div class="carousel-cell"></div>
-    <div class="carousel-cell"></div>
-    <div class="carousel-cell"></div>
-    <div class="carousel-cell"></div>
+        {% for immagine in listaImmagini %}
+    <div class="carousel-cell" style="background-image: url(/static/recipes/{{immagine}}); background-size: cover;"></div>
+        {% endfor %}
     </div>
     <!-- Inizio Schede -->
     <div id="container">
