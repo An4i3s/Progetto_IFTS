@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CookIdea</title>
+
+    <link rel="stylesheet" href="../static/css/spesa.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Passion+One&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1>Lista della Spesa</h1>
+
+        <!-- Anteprima della ricetta -->
+        <div class="recipe-preview">
+            <h2>Ricetta: NOME_RICETTA</h2>
+            <img src="URL_IMMAGINE_RICETTA" alt="Immagine della ricetta">
+           
+        </div>
+
+        <!-- Lista della spesa -->
+        <div id="container">
+            <ul id="shopping-list">
+                <li>Pasta</li>
+                <li>Pomodori</li>
+                <li>Mozzarella</li>
+                <li>Pane</li>
+                <li>Frutta</li>
+                <li>Verdure</li>
+            </ul>
+            
+        </div>
+    </div>
+    <script>
+        // Aggiungi un event listener alla lista della spesa
+        document.getElementById('shopping-list').addEventListener('click', function(event) {
+            // Verifica se l'elemento cliccato è un ingrediente (elemento <li>)
+            if (event.target.tagName === 'LI') {
+                // Chiama la funzione per barrare l'ingrediente
+                toggleIngredient(event.target);
+            }
+        });
+    
+        // Funzione per barrare o sbarrare un ingrediente
+        function toggleIngredient(ingredient) {
+            ingredient.style.textDecoration = (ingredient.style.textDecoration === 'line-through') ? 'none' : 'line-through';
+        }
+    </script>
+    
+</body>
+</html>
