@@ -8,21 +8,31 @@ class Portata:
 
 class User:
     id = None
-    name = None
-    surname = None
-    birthdate = None
+    nome = None
+    cognome = None
+    data_nascita = None
     email = None
     username = None
     password = None
 
-    def __init__(self, name, surname, birthdate, email, username, password):
-        self.id = None
-        self.name = name
-        self.surname = surname
-        self.birthdate = birthdate
+    def __init__(self, **data):
+        #self.__dict__ = data
+        self.id = data['id']
+        self.nome = data['nome']
+        self.cognome = data['cognome']
+        #self.data_nascita = data['data_nascita']
+        self.email = data['email']
+        self.username = data['username']
+        self.password = data['password']
+
+"""    def __init__(self, id, nome, cognome, data_nascita, email, username, password):
+        self.id = id
+        self.nome = nome
+        self.cognome = cognome
+        self.data_nascita = data_nascita
         self.email = email
         self.username = username
-        self.password = password
+        self.password = password"""
 
 
 

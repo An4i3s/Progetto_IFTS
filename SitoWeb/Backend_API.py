@@ -1,4 +1,5 @@
-from flask import Flask, jsonify, request, json
+from flask import Flask, jsonify, request
+import json
 import pymysql
 import random
 from models import *
@@ -43,14 +44,19 @@ def login():
     data = request.get_json()
     username = data["username"]
     password = data["password"]
+    print(data, type (data))
     query = "select * from utenti where username = %s and password = %s"
-    user = db.fetchOne(query, (username, password))
+    result = db.fetchOne(query, (username, password))
+    print ("risultato db", result, type(result))
+    user = User(**result)
     
     if user is None:
         return json.dumps({"success": False, "message": "Utente non trovato"}), 401
     else:
-        return json.dumps({"success": True, "user": user}), 200
+        return json.dumps(user, default=vars), 200
     
+
+
 
 # api a4 RICERCA PER NOME PIATTO  (anche solo una parte del nome)
 # restituisce un record di entità piatto (id, nome_piatto, difficoltà, tempo, provenienza, portata, image_name)
@@ -208,7 +214,7 @@ def register():
 if __name__ == "__main__":
     try:
         db = Database()
-        appWebApi.run(host='0.0.0.0', port=8000, debug=True)
+        appWebApi.run(host='0.0.0.0', port=8000)
     except KeyboardInterrupt:
         db.close()
 
