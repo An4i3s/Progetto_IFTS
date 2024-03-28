@@ -13,7 +13,7 @@ body {
     max-width: 600px;
     margin: 50px auto;
     /* background-color: #fff; */
-    background-image: url("../img/download.jpg");
+    background-image: url("../img/lista_spesa.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     padding: 20px;
@@ -57,14 +57,18 @@ ul {
 
 li {
     margin-bottom: 10px;
-    font-size: 18px;
+    font-size: 29px;
     color: #555;
 }
 
 li::before {
-    content: "\2022";
-    color: #F44336;
+    content:url('../img/light-bulb\ \(1\).png') ;
+   
     display: inline-block;
-    width: 1em;
-    margin-left: -1em;
+    width: 0.8em;
+    margin-left: -0.5em;
+}
+
+.toggle-ingrdient{
+    height: 15px;
 }
