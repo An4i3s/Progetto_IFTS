@@ -10,6 +10,7 @@ body {
 }
 
 .container {
+    position: relative;
     max-width: 600px;
     margin: 50px auto;
     /* background-color: #fff; */
@@ -59,6 +60,7 @@ li {
     margin-bottom: 10px;
     font-size: 29px;
     color: #555;
+    position: relative;
 }
 
 li::before {
@@ -70,5 +72,20 @@ li::before {
 }
 
 .toggle-ingrdient{
-    height: 15px;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    position:absolute;
+    right: 0; /* Allineamento al margine destro del container */
+    top: 50%; /* Posizionamento al centro verticalmente */
+    transform: translateY(-50%); /* Centro verticalmente */
+    
+}
+
+#clear-checked{
+    border-radius: 8px;
+    height: fit-content;
+    font-size: 20px;
+    font-family: 'Passion One', sans-serif;
+    font-weight: 400;
 }
