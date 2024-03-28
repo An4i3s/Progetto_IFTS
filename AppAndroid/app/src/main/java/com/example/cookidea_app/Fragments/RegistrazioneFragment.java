@@ -67,7 +67,7 @@ public class RegistrazioneFragment extends Fragment {
 
         nameEt = rootView.findViewById(R.id.nameEditText);
         surnameEt = rootView.findViewById(R.id.surnameEditText);
-        usernameEt = rootView.findViewById(R.id.regUsernameEditText);
+        //usernameEt = rootView.findViewById(R.id.regUsernameEditText);
         emailEt = rootView.findViewById(R.id.email);
         passwordEt = rootView.findViewById(R.id.passwordEditText);
 
@@ -112,7 +112,8 @@ public class RegistrazioneFragment extends Fragment {
                 password = passwordEt.getText().toString();
 
                 User userRequest = new User(name, surname, username, email, birthdate, password);
-                Call<User> call = apiService.register(userRequest);
+                Call<User> call = null;
+                        //apiService.register(userRequest);
 
                 call.enqueue(new Callback<User>() {
                     @Override
@@ -128,6 +129,8 @@ public class RegistrazioneFragment extends Fragment {
 
             }
         });
+
+
 
         return rootView;
     }

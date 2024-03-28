@@ -17,6 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.CookIdea"
+        android:name=".Activities.CookIdeaApp"
         tools:targetApi="31">
         <activity
             android:name=".Activities.MainActivity"

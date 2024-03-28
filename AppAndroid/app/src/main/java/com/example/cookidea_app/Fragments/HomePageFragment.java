@@ -20,11 +20,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.cookidea_app.Activities.CookIdeaApp;
 import com.example.cookidea_app.Activities.MainActivity;
 import com.example.cookidea_app.Adapters.CarouselPagerAdapter;
 import com.example.cookidea_app.Adapters.HomePageListAdapter;
 import com.example.cookidea_app.ModelClasses.Recipe;
 import com.example.cookidea_app.ModelClasses.Serving;
+import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.R;
 
 import java.util.ArrayList;
@@ -61,6 +63,8 @@ public class HomePageFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_home_page, container, false);
+
+        User u = ((CookIdeaApp)ctx.getApplicationContext()).getLoggedUser();
 
         listView = rootView.findViewById(R.id.categoryListHomeFragment);
         homePageListAdapter = new HomePageListAdapter(ctx, listServing);
