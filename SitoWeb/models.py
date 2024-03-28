@@ -20,20 +20,32 @@ class User:
         self.id = data['id']
         self.nome = data['nome']
         self.cognome = data['cognome']
+        self.data_nascita = data['data_nascita'].strftime('%Y-%m-%d')
+        #self.data_nascita = str(data['data_nascita']) 
         #self.data_nascita = data['data_nascita']
         self.email = data['email']
         self.username = data['username']
         self.password = data['password']
 
-"""    def __init__(self, id, nome, cognome, data_nascita, email, username, password):
-        self.id = id
-        self.nome = nome
-        self.cognome = cognome
-        self.data_nascita = data_nascita
-        self.email = email
-        self.username = username
-        self.password = password"""
 
+
+
+class UserRegister:
+    nome = None
+    cognome = None
+    data_nascita = None
+    username = None
+    email = None
+    password = None
+
+    def __init__(self, **data):
+        #self.__dict__ = data
+        self.nome = data['nome']
+        self.cognome = data['cognome']
+        self.data_nascita = data['data_nascita']
+        self.username = data['username']
+        self.email = data['email']
+        self.password = data['password']
 
 
 class Piatto:

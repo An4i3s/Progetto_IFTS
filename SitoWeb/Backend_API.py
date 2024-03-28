@@ -41,19 +41,25 @@ def getAllUsers():
 # http://192.168.1.117:8000/api/login
 @appWebApi.route("/api/login", methods=["POST"])
 def login():
-    data = request.get_json()
-    username = data["username"]
-    password = data["password"]
-    print(data, type (data))
-    query = "select * from utenti where username = %s and password = %s"
-    result = db.fetchOne(query, (username, password))
-    print ("risultato db", result, type(result))
-    user = User(**result)
-    
-    if user is None:
-        return json.dumps({"success": False, "message": "Utente non trovato"}), 401
-    else:
-        return json.dumps(user, default=vars), 200
+    try:
+        data = request.get_json()
+        username = data["username"]
+        password = data["password"]
+
+        query = "select * from utenti where username = %s and password = %s"
+        result = db.fetchOne(query, (username, password))
+
+        user = User(**result)
+        
+        if user is None:
+            return json.dumps({"success": False, "message": "Utente non trovato"}), 401
+        else:
+            return json.dumps(user, default=vars), 200
+        
+    except Exception as e:
+        print("Errore durante il login:", e)
+        return jsonify({"success": False, "message": "Errore durante il login"}), 500
+
     
 
 
@@ -187,9 +193,8 @@ def getRicettaCompletaFromId():
 @appWebApi.route("/api/signup", methods=["POST"])
 def register():
 
-    newUser = User (**request.get_json())
-    print(newUser.name + " " + newUser.password)
-    return newUser
+    newUser = UserRegister (**request.get_json())
+   
    
     # query = "select * from utenti where username = %s and password = %s"
     # user = db.fetchOne(query, (username, password))
