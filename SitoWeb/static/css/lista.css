@@ -4,19 +4,26 @@
 }
 
 .page{
-    display: flex;
-}
-
-.recipes-list{
-    display: grid;
-}
-
-.teaser-top{
-    display: flex;
-}
-
-a{
-    display: flex;
-    flex-direction: column;
     align-items: center;
 }
+
+.recipes-teaser{
+    display: flex;
+    flex-direction: column;
+    margin-top: 2%;
+    margin-right: 5%;
+    margin-left: 10%;
+}
+
+.teaser1{
+    display: flex;
+    flex-direction: column;
+    position:static;
+}
+
+.recipes-teaser .teaser.image,
+.recipes-teaser .teaser1.text {
+    display: inline-block;
+    vertical-align: top; /* Assicura l'allineamento verticale */
+}
+
