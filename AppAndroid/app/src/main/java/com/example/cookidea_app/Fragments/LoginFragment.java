@@ -38,10 +38,9 @@ public class LoginFragment extends Fragment {
     EditText password;
     CheckBox checkBox;
     Button loginBtn;
+    Retrofit retrofit = new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
-   Retrofit retrofit = new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
-
-
+    User user = null;
 
     public LoginFragment(){
 
@@ -79,7 +78,7 @@ public class LoginFragment extends Fragment {
                         if (response.isSuccessful()){
                             Toast.makeText(getContext(), "Utente Trovato", Toast.LENGTH_LONG).show();
                             // TODO: 27/03/2024 Creare classe Wrapper
-                            User user = response.body();
+                            user = response.body();
                             onLoginSuccess();
                         }else {
                             Toast.makeText(getContext(), "Utente non Trovato", Toast.LENGTH_LONG).show();
@@ -133,6 +132,10 @@ public class LoginFragment extends Fragment {
         assert activity != null;
         activity.updateNavigationDrawer();
         activity.changeFrameByNavigationTab(R.id.homePage);
+    }
+
+    public User getUser(){
+        return user;
     }
 
 }

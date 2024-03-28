@@ -1,5 +1,6 @@
 package com.example.cookidea_app.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,10 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.cookidea_app.Backend.LoginRequest;
 import com.example.cookidea_app.R;
 
 
 public class ListaSpesaFragmentPage extends Fragment {
+    Context ctx = null;
+    View rootView = null;
+
 
     public ListaSpesaFragmentPage(){
 
@@ -22,5 +27,8 @@ public class ListaSpesaFragmentPage extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_lista_spesa_page, container, false);    }
+        rootView = inflater.inflate(R.layout.fragment_lista_spesa_page, container, false);
+
+        return rootView;
+    }
 }

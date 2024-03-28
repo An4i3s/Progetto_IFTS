@@ -42,15 +42,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener   {
-    /*fare activity di login
-    implementare splashpage
-    collegare gli endpoint
-    modificare risorse homePageFragment con dati presi da db
-    implementare funzione di login
-    implementare funzione di logout
-    implementare fragment profiloUtente
-    collegre pagina profile utente con dati presi da db
-    per il momento niente SQLite*/
+    /*
+    toggle button ricetta singola per preferiti //edo
+    layout pagina lista della spesa //edo
+    collegamento lista della spesa al backend
+    layout ricette preferite //anais
+    collegamento ricette preferite al backend
+    layout menu settimanale //edo
+    collegamento menu settimanale al backend
+    implementare fragment profiloUtente //anais
+    collegre pagina profile utente con dati presi da db //anais
+    per il momento niente SQLite
+    */
 
     //TODO fixare immagini errate nella ricerca
     BottomNavigationView bottomNavigationView;
@@ -74,7 +77,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
 
 
-    public static final String BASE_URL = "http://192.168.118.85:8000";
+    public static final String BASE_URL = "http://192.168.0.113:8000";
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
