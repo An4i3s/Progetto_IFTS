@@ -31,6 +31,20 @@ class Database:
             except:
                 result = None
         return result
+    
+    def insert(self, query, params=None):
+        with self.connection.cursor() as cursor:
+            try:
+                cursor.execute(query, params)
+                self.connection.commit()
+                return True
+            except Exception as e:
+                print("Errore durante la registrazione dell'utente:", e)
+                self.connection.rollback()
+                return False
+
+
+
  
     def close(self):
         self.connection.close()
