@@ -14,12 +14,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
-            android:textSize="20sp"
+            android:fontFamily="@font/passion_one"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textSize="50sp"
+            android:paddingBottom="@dimen/margin"
+            android:paddingStart="@dimen/margin"
+            android:textAllCaps="true"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="I Tuoi Dati"/>
+            android:textSize="20dp"
+            android:text="I tuoi Dati"
+            android:paddingBottom="@dimen/margin"
+           android:paddingStart="@dimen/margin"
+            android:fontFamily="@font/alatsi"
+        />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -30,11 +40,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text=""
+                android:textSize="20sp"
+                android:fontFamily="@font/alatsi"
+                android:paddingBottom="@dimen/margin"
+                android:paddingStart="@dimen/margin"
                 />
-            <Button
+            <ImageButton
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_toEndOf="@+id/nomeUtente"
+                android:src="@drawable/edit"
+
                 />
 
         </RelativeLayout>

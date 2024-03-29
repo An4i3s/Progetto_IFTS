@@ -56,9 +56,9 @@ public class ProfiloFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_profilo, container, false);
 
 
-       User u = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
+         user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
         usernameTV = rootView.findViewById(R.id.usernameTV);
-        usernameTV.setText(u.getUsername());
+        usernameTV.setText(user.getUsername());
 
         return rootView;
     }

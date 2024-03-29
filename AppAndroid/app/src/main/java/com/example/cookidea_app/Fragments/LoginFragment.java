@@ -84,7 +84,6 @@ public class LoginFragment extends Fragment {
                         //if StatusCode = 200
                         if (response.isSuccessful()){
                             Toast.makeText(getContext(), "Utente Trovato", Toast.LENGTH_LONG).show();
-
                             user = response.body();
                             ((MainActivity)ctx).onLoginSuccess(user);
                         }else {
@@ -133,9 +132,11 @@ public class LoginFragment extends Fragment {
     }
 
 
-    public User getUser(){
+  /*  public User getUser(){
         return user;
     }
+
+   */
 
 
 }

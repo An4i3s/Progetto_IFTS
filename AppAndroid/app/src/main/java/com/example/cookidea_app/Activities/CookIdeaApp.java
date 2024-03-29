@@ -8,6 +8,8 @@ import com.example.cookidea_app.ModelClasses.User;
 public class CookIdeaApp extends Application {
 
     //retrofit da inserire qui la sua inizializzazione ecc
+
+    //+ sharedPred e API
     User loggedUser = null;
 
     public void saveSaredPref(String info) {
