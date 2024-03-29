@@ -47,13 +47,33 @@
                 android:paddingStart="@dimen/margin"
 
                 />
+
+            <EditText
+                android:id="@+id/editNome"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:hint=""
+                />
             <ImageButton
+                android:id="@+id/btnEditNome"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_toEndOf="@+id/nomeUtente"
                 android:src="@drawable/edit"
 
                 />
+            <ImageButton
+                android:id="@+id/btnConfNome"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_toEndOf="@+id/editNome"
+                android:src="@drawable/check"
+                android:visibility="invisible"
+                android:backgroundTint="@color/verde"
+                />
+
+
 
         </RelativeLayout>
 

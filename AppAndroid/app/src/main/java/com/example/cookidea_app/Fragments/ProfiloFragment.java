@@ -7,6 +7,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -33,7 +35,10 @@ public class ProfiloFragment extends Fragment {
     TextView nomeTv;
     TextView cognomeTv;
     TextView dataNascitaTv;
-    Button modNomeTv;
+
+    EditText editNome;
+    ImageButton btnNome;
+    ImageButton btnConfNome;
     SharedPreferences sharedPreferences;
 
     Retrofit retrofit = new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
@@ -61,13 +66,29 @@ public class ProfiloFragment extends Fragment {
          user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
         usernameTV = rootView.findViewById(R.id.usernameTV);
         usernameTV.setText(user.getUsername());
+
         nomeTv = rootView.findViewById(R.id.nomeUtente);
         nomeTv.setText(user.getName());
         cognomeTv = rootView.findViewById(R.id.cognomeUtente);
         cognomeTv.setText(user.getSurname());
         dataNascitaTv = rootView.findViewById(R.id.dataNascita);
         dataNascitaTv.setText(user.getDate2());
+        editNome = rootView.findViewById(R.id.editNome);
 
+        btnNome = rootView.findViewById(R.id.btnEditNome);
+        btnConfNome = rootView.findViewById(R.id.btnConfNome);
+
+
+        btnNome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                nomeTv.setVisibility(View.GONE);
+                editNome.setVisibility(View.VISIBLE);
+                btnNome.setVisibility(View.GONE);
+                btnConfNome.setVisibility(View.VISIBLE);
+                editNome.setText(nomeTv.getText().toString());
+            }
+        });
 
         return rootView;
     }
