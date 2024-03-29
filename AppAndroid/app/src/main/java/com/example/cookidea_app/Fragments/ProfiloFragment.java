@@ -30,8 +30,10 @@ public class ProfiloFragment extends Fragment {
     User user;
 
     TextView usernameTV;
-    TextView nome;
-    Button modNome;
+    TextView nomeTv;
+    TextView cognomeTv;
+    TextView dataNascitaTv;
+    Button modNomeTv;
     SharedPreferences sharedPreferences;
 
     Retrofit retrofit = new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
@@ -59,6 +61,13 @@ public class ProfiloFragment extends Fragment {
          user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
         usernameTV = rootView.findViewById(R.id.usernameTV);
         usernameTV.setText(user.getUsername());
+        nomeTv = rootView.findViewById(R.id.nomeUtente);
+        nomeTv.setText(user.getName());
+        cognomeTv = rootView.findViewById(R.id.cognomeUtente);
+        cognomeTv.setText(user.getSurname());
+        dataNascitaTv = rootView.findViewById(R.id.dataNascita);
+        dataNascitaTv.setText(user.getDate2());
+
 
         return rootView;
     }
