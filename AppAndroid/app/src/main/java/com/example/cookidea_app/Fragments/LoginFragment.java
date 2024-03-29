@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -39,7 +40,9 @@ public class LoginFragment extends Fragment {
     Context ctx;
     EditText username;
     EditText password;
-    CheckBox checkBox;
+
+    ImageButton btnVisibility;
+    ImageButton btnVisibilityOff;
     Button loginBtn;
     Retrofit retrofit = new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
@@ -63,9 +66,29 @@ public class LoginFragment extends Fragment {
         username = rootView.findViewById(R.id.usernameEditText);
         password = rootView.findViewById(R.id.passwordEditText);
         password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        checkBox = rootView.findViewById(R.id.checkbox);
+        btnVisibility = rootView.findViewById(R.id.btnVisibility);
+        btnVisibilityOff = rootView.findViewById(R.id.btnVisibilityOff);
         loginBtn = rootView.findViewById(R.id.signinButton);
 
+
+        btnVisibility.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnVisibility.setVisibility(View.GONE);
+                btnVisibilityOff.setVisibility(View.VISIBLE);
+                password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
+            }
+        });
+
+        btnVisibilityOff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnVisibilityOff.setVisibility(View.GONE);
+                btnVisibility.setVisibility(View.VISIBLE);
+                password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+
+            }
+        });
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -103,16 +126,6 @@ public class LoginFragment extends Fragment {
         });
 
 
-        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (!isChecked){
-                    password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-                }else {
-                    password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD);
-                }
-            }
-        });
 
 
         Button button = rootView.findViewById(R.id.signupButton);
@@ -132,11 +145,7 @@ public class LoginFragment extends Fragment {
     }
 
 
-  /*  public User getUser(){
-        return user;
-    }
 
-   */
 
 
 }
