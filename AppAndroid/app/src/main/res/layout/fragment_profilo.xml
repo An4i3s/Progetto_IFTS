@@ -92,12 +92,29 @@
                 android:paddingStart="@dimen/margin"
 
                 />
+            <EditText
+                android:id="@+id/editCognome"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:hint=""
+                />
             <ImageButton
+                android:id="@+id/btnEditCognome"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_toEndOf="@+id/cognomeUtente"
                 android:src="@drawable/edit"
 
+                />
+            <ImageButton
+                android:id="@+id/btnConfCognome"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_toEndOf="@+id/editCognome"
+                android:src="@drawable/check"
+                android:visibility="invisible"
+                android:backgroundTint="@color/verde"
                 />
         </RelativeLayout>
 
@@ -117,6 +134,7 @@
 
                 />
             <ImageButton
+                android:id="@+id/btnDataNascita"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_toEndOf="@+id/dataNascita"
