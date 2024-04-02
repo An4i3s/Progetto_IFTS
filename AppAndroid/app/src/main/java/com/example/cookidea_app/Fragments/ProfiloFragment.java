@@ -2,6 +2,7 @@ package com.example.cookidea_app.Fragments;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +20,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.cookidea_app.Activities.CookIdeaApp;
+
 import com.example.cookidea_app.Activities.MainActivity;
 import com.example.cookidea_app.Activities.SharedPrefManager;
 import com.example.cookidea_app.Backend.CookIdeaApiEndpointInterface;
@@ -25,6 +28,7 @@ import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.R;
 
 import org.w3c.dom.Text;
+
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -35,6 +39,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ProfiloFragment extends Fragment {
 
     User user;
+
 
     TextView usernameTV;
     TextView nomeTv;
@@ -51,12 +56,17 @@ public class ProfiloFragment extends Fragment {
     ImageButton btnConfCognome;
 
     ImageButton btnDataNascita;
+    TextView username;
+    TextView nome;
+    Button modNome;
+
     SharedPreferences sharedPreferences;
 
     Retrofit retrofit = new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
     CookIdeaApiEndpointInterface endpointInterface = retrofit.create(CookIdeaApiEndpointInterface.class);
 
     Context ctx;
+
 
 
     public ProfiloFragment(){
@@ -73,6 +83,7 @@ public class ProfiloFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_profilo, container, false);
+
 
 
          user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
@@ -161,6 +172,11 @@ public class ProfiloFragment extends Fragment {
                 btnConfCognome.setVisibility(View.GONE);
             }
         });
+
+
+        username = rootView.findViewById(R.id.usernameTV);
+
+
 
         return rootView;
     }

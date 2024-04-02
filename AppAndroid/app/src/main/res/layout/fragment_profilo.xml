@@ -14,6 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""
+
             android:fontFamily="@font/passion_one"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textSize="50sp"
@@ -21,6 +22,7 @@
             android:paddingStart="@dimen/margin"
             android:textAllCaps="true"
             android:textColor="@color/bluScuro"
+
             />
         <TextView
             android:layout_width="wrap_content"
@@ -31,6 +33,7 @@
             android:paddingStart="@dimen/margin"
             android:fontFamily="@font/alatsi"
         />
+
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -139,6 +142,16 @@
                 android:layout_height="48dp"
                 android:layout_toEndOf="@+id/dataNascita"
                 android:src="@drawable/edit"
+
+                android:text=""
+                />
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/dataNascita"
+                android:src="@drawable/check"
+                android:visibility="invisible"
+                android:backgroundTint="@color/verde"
                 />
 
         </RelativeLayout>
