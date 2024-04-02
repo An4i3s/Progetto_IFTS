@@ -1,5 +1,6 @@
 package com.example.cookidea_app.Fragments;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 
@@ -131,6 +132,7 @@ public class ProfiloFragment extends Fragment {
         });
 
         btnDataNascita.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("NewApi")
             @Override
             public void onClick(View v) {
                 DatePickerDialog fragmentDate = new DatePickerDialog(rootView.getContext());

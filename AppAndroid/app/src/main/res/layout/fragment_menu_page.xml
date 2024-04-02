@@ -5,14 +5,16 @@
     android:layout_height="match_parent"
     tools:context=".Fragments.MenuPageFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:id="@+id/menuPage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-
+    <se.emilsjolander.stickylistheaders.StickyListHeadersListView
+        android:id="@+id/weeklyMenuList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
     </LinearLayout>
 

@@ -6,35 +6,48 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="100dp"
+        android:paddingTop="30dp"
         >
         <ImageView
             android:id="@+id/imgCuore"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/heart"
+            android:layout_marginStart="30dp"
             />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ricette Preferite"
-            android:textSize="30sp"
+            android:textSize="40sp"
             android:fontFamily="@font/passion_one"
             android:textColor="@color/bluScuro"
             android:layout_toEndOf="@+id/imgCuore"
-            android:paddingTop="25dp"
+            android:layout_marginStart="20dp"
+            android:paddingTop="10dp"
             />
-    </RelativeLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        >
-
-        <ListView
-            android:id="@+id/ricettePrefeListView"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:layout_below="@+id/imgCuore"
+            android:paddingTop="30dp"
+
+            >
+
+
+                <ListView
+                    android:id="@+id/ricettePrefeListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    />
+
+
+
+
+
+
+        </LinearLayout>
+    </RelativeLayout>
+
 </FrameLayout>
