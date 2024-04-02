@@ -4,9 +4,11 @@ import static com.example.cookidea_app.Activities.MainActivity.apiService;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import com.example.cookidea_app.Activities.MainActivity;
 import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.R;
 import com.google.gson.annotations.SerializedName;
@@ -42,6 +45,8 @@ public class RegistrazioneFragment extends Fragment {
 
     String dataNascita;
 
+    Context ctx;
+    User user;
     private String name;
     private String surname;
     private String username;
@@ -60,6 +65,11 @@ public class RegistrazioneFragment extends Fragment {
 
     }
 
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        ctx = context;
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -67,13 +77,12 @@ public class RegistrazioneFragment extends Fragment {
 
         nameEt = rootView.findViewById(R.id.nameEditText);
         surnameEt = rootView.findViewById(R.id.surnameEditText);
-        //usernameEt = rootView.findViewById(R.id.regUsernameEditText);
+        usernameEt = rootView.findViewById(R.id.regUsernameEditText);
         emailEt = rootView.findViewById(R.id.email);
         passwordEt = rootView.findViewById(R.id.passwordEditText);
-
-
         dateBtn = rootView.findViewById(R.id.btnEta);
         etaTv = rootView.findViewById(R.id.tvEta);
+        signupBtn = rootView.findViewById(R.id.signupButton);
         dateBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,7 +110,7 @@ public class RegistrazioneFragment extends Fragment {
             }
         });
 
-       signupBtn.setOnClickListener(new View.OnClickListener() {
+        signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 name = nameEt.getText().toString();
@@ -111,25 +120,32 @@ public class RegistrazioneFragment extends Fragment {
                 email = emailEt.getText().toString();
                 password = passwordEt.getText().toString();
 
+                assert (name != null && surname != null && username != null && birthdate != null && email != null);
+
                 User userRequest = new User(name, surname, username, email, birthdate, password);
-                Call<User> call = null;
-                        //apiService.register(userRequest);
+                Call<User> call = apiService.signup(userRequest);
 
                 call.enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {
-
+                        if (response.isSuccessful()) {
+                            Toast.makeText(getContext(), "Registrazione completata", Toast.LENGTH_SHORT).show();
+                            user = response.body();
+                            ((MainActivity) ctx).onLoginSuccess(user);
+                        } else {
+                            Toast.makeText(getContext(), "ERRORE DURANTE LA REGISTRAZIONE", Toast.LENGTH_LONG).show();
+                        }
                     }
 
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
+                        Log.i("Errore registrazione", "Errore API signup");
 
                     }
                 });
 
             }
         });
-
 
 
         return rootView;
