@@ -83,6 +83,20 @@
             android:layout_toEndOf="@+id/provenienceText"
             android:textSize="20sp"/>
 
+        <ToggleButton
+            android:id="@+id/favouriteButton"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/toggle_button_selector"
+            android:checked="false"
+            android:layout_toEndOf="@id/imageRecipeView"
+            android:layout_alignBottom="@id/imageRecipeView"
+            android:layout_below="@+id/provenienceRecipeTextView"
+            android:layout_marginTop="15dp"
+            android:textOn=""
+            android:textOff=""
+            />
+
         <TextView
             android:id="@+id/ingredientsText"
             android:layout_width="match_parent"
