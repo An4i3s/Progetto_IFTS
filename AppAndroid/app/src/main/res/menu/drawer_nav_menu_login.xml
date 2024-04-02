@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
- <group android:checkableBehavior="single">
+ <group android:checkableBehavior="single"
+     >
      <item
          android:id="@+id/userProfilePage"
          android:icon="@drawable/settings_24"
@@ -8,14 +9,15 @@
          android:visible="true" />
      <item
          android:id="@+id/ricettePrefe"
-         android:icon="@drawable/heart"
-         android:title="Ricette /n Preferite"
+         android:icon="@drawable/baseline_favorite_24"
+         android:title="Preferiti"
          android:visible="true"
          />
      <item
          android:id="@+id/logout"
-         android:icon="@drawable/logout"
+         android:icon="@drawable/logout2"
          android:title="Logout"
-         android:visible="true" />
+         android:visible="true"
+         />
  </group>
 </menu>

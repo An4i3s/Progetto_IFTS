@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 
 import java.io.Serializable;
+import java.text.DateFormat;
 import java.util.Date;
 
 public class User implements Serializable {
@@ -59,6 +60,12 @@ public class User implements Serializable {
         return birthdate;
     }
 
+    public String getDate2() {
+        String dateFormat = DateFormat.getDateInstance().format(birthdate);
+
+        return dateFormat;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -67,6 +74,8 @@ public class User implements Serializable {
     public String getPassword() {
         return password;
     }
+
+
 
 
 }

@@ -82,13 +82,12 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     public void onLoginSuccess(User user) {
         ((CookIdeaApp)getApplication()).setLoggedUser(user);
-
         SharedPrefManager.setLoggedIn(MainActivity.this,true);
         updateNavigationDrawer();
         changeFrameByNavigationTab(R.id.homePage);
     }
 
-    public static final String BASE_URL = "http://192.168.49.85:8000";
+    public static final String BASE_URL = "http://192.168.1.10:8000";
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -108,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //Problema sta in questa riga? getLoggedUser dovrebbe essere chiamato una sola volta nel codice?
         user = ((CookIdeaApp)getApplication()).getLoggedUser();
 
 

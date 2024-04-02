@@ -30,18 +30,41 @@
 
             android:fontFamily="@font/alatsi"
             android:text="Password:" />
-        <EditText
-            android:id="@+id/passwordEditText"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:hint="Inserisci password"
-            android:layout_margin="@dimen/margin" />
-        <CheckBox
-            android:id="@+id/checkbox"
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="mostra password"
-            />
+            >
+            <EditText
+                android:id="@+id/passwordEditText"
+                android:layout_width="350dp"
+                android:layout_height="40dp"
+                android:hint="Inserisci password"
+                android:fontFamily="@font/alatsi"
+                android:layout_margin="@dimen/margin" />
+
+            <ImageButton
+                android:id="@+id/btnVisibility"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:src="@drawable/visibility"
+                android:layout_toEndOf="@id/passwordEditText"
+                android:backgroundTint="@android:color/background_light"
+                />
+            <ImageButton
+                android:id="@+id/btnVisibilityOff"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:src="@drawable/visibility_off"
+                android:visibility="invisible"
+                android:layout_toEndOf="@id/passwordEditText"
+                android:backgroundTint="@android:color/background_light"
+                />
+        </RelativeLayout>
+
+
+
+
 
         <Button
             android:id="@+id/signinButton"
@@ -51,7 +74,8 @@
             android:backgroundTint="@color/yellow"
             android:fontFamily="@font/passion_one_bold"
             android:text="Login"
-
+            android:textSize="20sp"
+            android:textColor="@color/bluScuro"
             />
 
         <Button
@@ -61,8 +85,9 @@
             android:layout_height="60dp"
             android:layout_margin="@dimen/margin"
             android:text="@string/registrati"
-            android:textColor="@color/black"
             android:fontFamily="@font/passion_one_bold"
+            android:textSize="20sp"
+            android:textColor="@color/bluScuro"
             />
 
     </LinearLayout>
