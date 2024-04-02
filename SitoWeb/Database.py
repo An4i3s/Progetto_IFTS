@@ -14,7 +14,7 @@ class Database:
             cursorclass=pymysql.cursors.DictCursor
         )
 
-    def fetchAll(self, query, params=None):
+    def getAllData(self, query, params=None):
         with self.connection.cursor() as cursor:
             try:
                 cursor.execute(query, params)
@@ -23,7 +23,7 @@ class Database:
                 result = None
         return result
 
-    def fetchOne(self, query, params=None):
+    def getSingleData(self, query, params=None):
         with self.connection.cursor() as cursor:
             try:                    
                 cursor.execute(query, params)
