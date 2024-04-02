@@ -34,7 +34,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProfiloFragment extends Fragment {
 
-
+    User user;
 
     TextView usernameTV;
     TextView nomeTv;
@@ -74,33 +74,26 @@ public class ProfiloFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_profilo, container, false);
 
-        //Serve??
-        if (MainActivity.user ==null){
-            SharedPrefManager.setLoggedIn(ctx, true);
-            MainActivity.user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
-        }
-        if (MainActivity.user!= null) {
 
-            //MainActivity.user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
-            usernameTV = rootView.findViewById(R.id.usernameTV);
-            usernameTV.setText(MainActivity.user.getUsername());
+         user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
+        usernameTV = rootView.findViewById(R.id.usernameTV);
+        usernameTV.setText(user.getUsername());
 
-            nomeTv = rootView.findViewById(R.id.nomeUtente);
-            nomeTv.setText(MainActivity.user.getName());
-            cognomeTv = rootView.findViewById(R.id.cognomeUtente);
-            cognomeTv.setText(MainActivity.user.getSurname());
-            dataNascitaTv = rootView.findViewById(R.id.dataNascita);
-            dataNascitaTv.setText(MainActivity.user.getDate2());
+        nomeTv = rootView.findViewById(R.id.nomeUtente);
+        nomeTv.setText(user.getName());
+        cognomeTv = rootView.findViewById(R.id.cognomeUtente);
+        cognomeTv.setText(user.getSurname());
+        dataNascitaTv = rootView.findViewById(R.id.dataNascita);
+        dataNascitaTv.setText(user.getDate2());
 
-            editNome = rootView.findViewById(R.id.editNome);
-            editCognome = rootView.findViewById(R.id.editCognome);
+        editNome = rootView.findViewById(R.id.editNome);
+        editCognome = rootView.findViewById(R.id.editCognome);
 
-            btnNome = rootView.findViewById(R.id.btnEditNome);
-            btnConfNome = rootView.findViewById(R.id.btnConfNome);
-            btnCognome = rootView.findViewById(R.id.btnEditCognome);
-            btnConfCognome = rootView.findViewById(R.id.btnConfCognome);
-            btnDataNascita = rootView.findViewById(R.id.btnDataNascita);
-
+        btnNome = rootView.findViewById(R.id.btnEditNome);
+        btnConfNome = rootView.findViewById(R.id.btnConfNome);
+        btnCognome = rootView.findViewById(R.id.btnEditCognome);
+        btnConfCognome = rootView.findViewById(R.id.btnConfCognome);
+        btnDataNascita = rootView.findViewById(R.id.btnDataNascita);
 
 
 
@@ -144,7 +137,6 @@ public class ProfiloFragment extends Fragment {
                 });
             }
         });
-        //qui
 
 
         // TODO: 29/03/2024 Implemnetare collegamento a API per update dati utenti in DB 
@@ -169,7 +161,6 @@ public class ProfiloFragment extends Fragment {
                 btnConfCognome.setVisibility(View.GONE);
             }
         });
-        }
 
         return rootView;
     }
