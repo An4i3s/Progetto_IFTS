@@ -71,11 +71,16 @@ def login():
 @appWebApi.route("/api/ricercaPerNome/<nome>")
 def getRecipesfromName(nome):
 
-    query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE nome_piatto LIKE %s"
+    idUtente = request.args.get("id_utente")
+
+    if idUtente is None:
+        query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE nome_piatto LIKE %s"
+        
+    else:
+        query = """select pref.id_utente as favFromUser, p.id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti p
+                   LEFT OUTER JOIN preferiti pref ON p.id = pref.id_piatto WHERE nome_piatto LIKE %s"""
+    
     result = db.getAllData(query, ('%' + nome+ '%',))
-
-    print(result)
-
     return json.dumps(result, default=vars)
 
 
@@ -194,32 +199,34 @@ def getRicettaCompletaFromId():
 def register():
 
     newUser = UserRegister (**request.get_json())
-   
-   
-    # query = "select * from utenti where username = %s and password = %s"
-    # user = db.getSingleData(query, (username, password))
-    
-    for row in result:
-        ricettario = Ricettario(**row)
-        piatto.ricettario.append(ricettario)
-        
-    # if user is None:
-    #     return json.dumps({"success": False, "message": "Utente non trovato"}), 401
-    # else:
-    #     return json.dumps({"success": True, "user": user}), 200
-        
 
-# api 10 (Anais) ELENCO PREFERITI
-# restituisce una lista di portate (primo, secondo..) con relativo url immagine, prese dalla tabella piatti, senza duplicati
-# http://192.168.0.110:8000/api/preferiti/
-@appWebApi.route("/api/preferitiFromId")
+
+
+# api 10 ELENCO PREFERITI
+# http://192.168.0.110:8000/api/preferiti?id_utente=1
+@appWebApi.route("/api/preferitiFromIdUtente")
 def getPreferiti():
     idUtente = request.args.get("id_utente")
     query = """select p.id, nome_piatto, difficolta, tempo, portata, provenienza,image_name
                from piatti p JOIN preferiti pref ON p.id = pref.id_piatto WHERE pref.id_utente = %s"""
     result = db.getAllData (query, (idUtente))
     return json.dumps(result, default=vars)
-         
+
+
+# api 11 CONTROLLA SE PREFERITO IN BASE A ID_UTENTE E ID_PIATTO
+# restituisce una lista di portate (primo, secondo..) con relativo url immagine, prese dalla tabella piatti, senza duplicati
+# http://192.168.0.110:8000/api/preferiti/
+@appWebApi.route("/api/checkPreferito")
+def checkPreferiti():
+    idUtente = request.args.get("id_utente")
+    idPiatto = request.args.get("id_piatto")
+    query = "select * from preferiti WHERE id_utente = % AND id_piatto = %;"
+    result = db.getAllData (query, (idUtente))
+    return json.dumps(result, default=vars)
+
+
+
+
 
 
 

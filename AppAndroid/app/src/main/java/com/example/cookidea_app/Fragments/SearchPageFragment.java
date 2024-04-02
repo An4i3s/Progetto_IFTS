@@ -21,8 +21,10 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.example.cookidea_app.Activities.CookIdeaApp;
 import com.example.cookidea_app.Activities.MainActivity;
 import com.example.cookidea_app.Adapters.SearchPageListAdapter;
+import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.R;
 import com.example.cookidea_app.ModelClasses.Recipe;
 
@@ -44,6 +46,8 @@ public class SearchPageFragment extends Fragment {
     SearchPageListAdapter searchPageListAdapter;
     Button searchButton;
     View rootView = null;
+
+    long loggedUserID = 0;
 
 
     public SearchPageFragment(){
@@ -84,7 +88,7 @@ public class SearchPageFragment extends Fragment {
                 String searchEditTextStr = searchEditText.getText().toString();
                 if(!searchEditTextStr.isEmpty()) {
                     searchPageListAdapter.clear();
-                    downloadBackEndInfo(searchEditText.getText().toString(), 0);
+                    downloadBackEndInfo(searchEditText.getText().toString(), loggedUserID,0);
                 }
             }
         });
@@ -109,17 +113,21 @@ public class SearchPageFragment extends Fragment {
         Bundle b = getArguments();
         String category = "";
 
+        User user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
+        if (user != null)
+            loggedUserID = user.getId();
+
         if(b.get("filterByCategory") != "") {
             category = b.getString("filterByCategory");
-            downloadBackEndInfo(category, 1);
+            downloadBackEndInfo(category, loggedUserID, 1);
         }
     }
 
-    private void downloadBackEndInfo(String filter, int function){
+    private void downloadBackEndInfo(String filter, long loggedUserID, int function){
         Call<List<Recipe>> listCall = null;
         switch (function){
             case 0:
-                listCall = apiService.getRecipeByName(filter);
+                listCall = apiService.getRecipeByName(filter, loggedUserID);
                 break;
             case 1:
                 searchEditText.setText("");

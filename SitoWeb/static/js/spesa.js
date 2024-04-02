@@ -19,11 +19,3 @@ document.querySelectorAll('.toggle-ingrdient').forEach(function(button){
     });
 });
 
-document.getElementById('clear-checked').addEventListener('click', function(){
-    var ingredients = document.querySelectorAll('#shopping-list li');
-    ingredients.forEach(function(ingredient){
-        if (ingredient.style.textDecoration == 'line-through'){
-            ingredient.remove();
-        }
-    });
-});
