@@ -207,6 +207,23 @@ def register():
     #     return json.dumps({"success": False, "message": "Utente non trovato"}), 401
     # else:
     #     return json.dumps({"success": True, "user": user}), 200
+        
+
+# api 10 (Anais) ELENCO PREFERITI
+# restituisce una lista di portate (primo, secondo..) con relativo url immagine, prese dalla tabella piatti, senza duplicati
+# http://192.168.0.110:8000/api/preferiti/
+@appWebApi.route("/api/preferitiFromId")
+def getPreferiti():
+    idUtente = request.args.get("id_utente")
+    query = """select p.id, nome_piatto, difficolta, tempo, portata, provenienza,image_name
+               from piatti p JOIN preferiti pref ON p.id = pref.id_piatto WHERE pref.id_utente = %s"""
+    result = db.getAllData (query, (idUtente))
+    return json.dumps(result, default=vars)
+         
+
+
+
+
 
 
 
