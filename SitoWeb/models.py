@@ -43,8 +43,8 @@ class UserRegister:
         self.nome = data['nome']
         self.cognome = data['cognome']
         self.data_nascita = data['data_nascita']
-        self.username = data['username']
         self.email = data['email']
+        self.username = data['username']
         self.password = data['password']
 
 

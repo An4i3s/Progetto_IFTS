@@ -5,6 +5,9 @@ import random
 from models import *
 from Database import *
 import time
+from datetime import datetime
+
+
 
 
 appWebApi = Flask(__name__)
@@ -54,11 +57,47 @@ def login():
         if user is None:
             return json.dumps({"success": False, "message": "Utente non trovato"}), 401
         else:
+            print(result)
             return json.dumps(user, default=vars), 200
         
     except Exception as e:
         print("Errore durante il login:", e)
         return jsonify({"success": False, "message": "Errore durante il login"}), 500
+    
+
+    
+# api a9  REGISTRAZIONE
+# http://192.168.1.117:8000/api/signup
+@appWebApi.route("/api/signup", methods=["POST"])
+def register():
+    user_data = request.get_json()
+
+    nome = user_data.get('nome')
+    cognome = user_data.get('cognome')
+    data_nascita_str = user_data.get('data_nascita')
+    data_nascita = datetime.strptime(data_nascita_str, '%b %d, %Y %I:%M:%S %p')
+    email = user_data.get('email')
+    username = user_data.get('username')
+    password = user_data.get('password')
+
+    query = """INSERT INTO utenti (nome, cognome, data_nascita, email, username, password)
+               VALUES (%s, %s, %s, %s, %s, %s);"""
+    values = (nome, cognome, data_nascita, email, username, password)
+
+    try:
+        db.insert(query, values)
+        query = "select * from utenti order by id desc limit 1"
+        result = db.getSingleData(query)
+        newUser = User(**result)
+        return json.dumps(newUser, default=vars), 201
+        # da capire perche, nonostante non inserisca utente perche duplicato, finisca nell'exception ma continua a mandare il codice 201
+        # Errore durante la registrazione dell'utente: (1062, "Duplicate entry 'qqqq' for key 'utenti.username'")
+        # 192.168.1.129 - - [02/Apr/2024 23:53:18] "POST /api/signup HTTP/1.1" 201 -
+
+    except Exception as e:
+        return f"Errore durante la registrazione dell'utente: {str(e)}", 500 
+
+
 
     
 
@@ -193,12 +232,6 @@ def getRicettaCompletaFromId():
         return json.dumps([])
     
 
-# api a9  REGISTRAZIONE
-# http://192.168.1.117:8000/api/signup
-@appWebApi.route("/api/signup", methods=["POST"])
-def register():
-
-    newUser = UserRegister (**request.get_json())
 
 
 
