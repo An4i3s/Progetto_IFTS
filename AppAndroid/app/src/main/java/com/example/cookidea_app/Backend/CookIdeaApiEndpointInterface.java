@@ -39,6 +39,9 @@ public interface CookIdeaApiEndpointInterface {
     @POST("api/login")
     Call<User> login(@Body LoginRequest request);
 
-    @GET("/api/preferitiFromId")
-    Call<List<Recipe>> getPreferiti(@Query("id_utente") String recipeId);
+  //  @GET("/api/preferitiFromId")
+  //  Call<List<Recipe>> getPreferiti(@Query("id_utente") long utenteId);
+
+    @GET("api/preferitiFromIdUtente")
+    Call<List<Recipe>> getPreferitiFromId(@Query("id_utente") long idUtente);
 }

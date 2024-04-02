@@ -46,7 +46,7 @@ public class LoginFragment extends Fragment {
     Button loginBtn;
     Retrofit retrofit = new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
-    User user = null;
+    User user;
 
     public LoginFragment(){
 
