@@ -190,23 +190,24 @@ def getRicettaCompletaFromId():
 
 # api a9  REGISTRAZIONE
 # http://192.168.1.117:8000/api/signup
-@appWebApi.route("/api/signup", methods=["POST"])
-def register():
+# @appWebApi.route("/api/signup", methods=["POST"])
+# def register():
 
-    newUser = UserRegister (**request.get_json())
+#     newUser = UserRegister (**request.get_json())
+
+#     try:
+#         query = f"""INSERT INTO `utenti` ("nome", "cognome", "data_nascita", "email", "username", "password")
+#                 VALUES ({newUser.nome},{newUser.cognome},{newUser.data_nascita}, {newUser.email}, {newUser.username}, {newUser.password}mple.com','mario123','password123');"""
    
    
-    # query = "select * from utenti where username = %s and password = %s"
-    # user = db.fetchOne(query, (username, password))
-    
-    for row in result:
-        ricettario = Ricettario(**row)
-        piatto.ricettario.append(ricettario)
+#     # query = "select * from utenti where username = %s and password = %s"
+#     # user = db.fetchOne(query, (username, password))
+
         
-    # if user is None:
-    #     return json.dumps({"success": False, "message": "Utente non trovato"}), 401
-    # else:
-    #     return json.dumps({"success": True, "user": user}), 200
+#     # if user is None:
+#     #     return json.dumps({"success": False, "message": "Utente non trovato"}), 401
+#     # else:
+#     #     return json.dumps({"success": True, "user": user}), 200
 
 
 
