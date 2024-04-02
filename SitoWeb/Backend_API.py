@@ -24,7 +24,7 @@ def principale():
 @appWebApi.route("/api/piatti")
 def getAllRecipes():
     query = "select * from piatti"
-    result = db.fetchAll(query)
+    result = db.getAllData(query)
     return json.dumps(result)
 
 # api a2 (TUTTI GLI UTENTI)
@@ -33,7 +33,7 @@ def getAllRecipes():
 @appWebApi.route("/api/utenti")
 def getAllUsers():
     query = "select * from utenti"
-    result = db.fetchAll(query)
+    result = db.getAllData(query)
     return json.dumps(result)
 
 # api a3 LOGIN
@@ -47,7 +47,7 @@ def login():
         password = data["password"]
 
         query = "select * from utenti where username = %s and password = %s"
-        result = db.fetchOne(query, (username, password))
+        result = db.getSingleData(query, (username, password))
 
         user = User(**result)
         
@@ -72,7 +72,7 @@ def login():
 def getRecipesfromName(nome):
 
     query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE nome_piatto LIKE %s"
-    result = db.fetchAll(query, ('%' + nome+ '%',))
+    result = db.getAllData(query, ('%' + nome+ '%',))
 
     print(result)
 
@@ -87,7 +87,7 @@ def getRecipesfromName(nome):
 def getRecipesfromPortata(portata):
 
     query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE portata = %s"
-    result = db.fetchAll(query, (portata,))
+    result = db.getAllData(query, (portata,))
 
     return json.dumps(result, default=vars)
 
@@ -99,7 +99,7 @@ def getRecipesfromPortata(portata):
 def getPortate():
     query = "SELECT DISTINCT piatti.portata FROM piatti"
     try:
-        queryResult = db.fetchAll(query)
+        queryResult = db.getAllData(query)
         print(queryResult)
         if queryResult is None:
             return jsonify([])
@@ -130,7 +130,7 @@ def getPiattiImmagini():
 
         print(query)
         timeIniz = time.time()
-        queryResult = db.fetchAll(query)
+        queryResult = db.getAllData(query)
         timeFin = time.time()
 
         print(queryResult)
@@ -166,7 +166,7 @@ def getRicettaCompletaFromId():
     query = """SELECT p.id, p.difficolta, p.tempo, p.nome_piatto, p.portata, p.provenienza, p.procedimento, p.image_name
                FROM piatti p WHERE p.id = %s"""
     
-    result = db.fetchOne(query, (idPiatto))
+    result = db.getSingleData(query, (idPiatto))
 
     if result is not None:
 
@@ -176,7 +176,7 @@ def getRicettaCompletaFromId():
                 FROM piatti p JOIN ricettario r ON p.id = r.id_piatto
                 JOIN ingredienti i ON r.id_ingrediente = i.id WHERE p.id = %s;""" 
         
-        result = db.fetchAll(query, (idPiatto))
+        result = db.getAllData(query, (idPiatto))
         
         for row in result:
             ricettario = Ricettario(**row)
@@ -197,7 +197,7 @@ def register():
    
    
     # query = "select * from utenti where username = %s and password = %s"
-    # user = db.fetchOne(query, (username, password))
+    # user = db.getSingleData(query, (username, password))
     
     for row in result:
         ricettario = Ricettario(**row)
@@ -207,6 +207,26 @@ def register():
     #     return json.dumps({"success": False, "message": "Utente non trovato"}), 401
     # else:
     #     return json.dumps({"success": True, "user": user}), 200
+        
+
+# api 10 (Anais) ELENCO PREFERITI
+# restituisce una lista di portate (primo, secondo..) con relativo url immagine, prese dalla tabella piatti, senza duplicati
+# http://192.168.0.110:8000/api/preferiti/
+@appWebApi.route("/api/preferitiFromId")
+def getPreferiti():
+    idUtente = request.args.get("id_utente")
+    query = """select p.id, nome_piatto, difficolta, tempo, portata, provenienza,image_name
+               from piatti p JOIN preferiti pref ON p.id = pref.id_piatto WHERE pref.id_utente = %s"""
+    result = db.getAllData (query, (idUtente))
+    return json.dumps(result, default=vars)
+         
+
+
+
+
+
+
+
 
 
 
