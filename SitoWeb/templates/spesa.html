@@ -7,11 +7,55 @@
 
     <link rel="stylesheet" href="../static/css/spesa.css">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="..\static\css\navbar.css">
+    <link rel="stylesheet" href="\static\css\navbar.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Passion+One&display=swap" rel="stylesheet">
 </head>
+
 <body>
+    <nav class="navbar custom-navbar">
+        <div class="custom-container">
+            <div class="left-section">
+                <h1 class="logo">CookIdea</h1>
+            </div>
+            <form class="search-form" action="#" method="GET">
+                <input id="searchBar" type="text" name="search" placeholder="Cerca...">
+                <button type="submit">Cerca</button>
+            </form>
+            <div class="right-section">
+                <div class="dropdown">
+                    <button id="dropdownBtn" class="dropbtn">MyCookIdea</button>
+                    <div id="dropdownContent" class="dropdown-content">
+                        <a href="#">My List</a>
+                        <a href="#">My Menu</a>
+                        <a href="#">My Preference</a>
+                     
+                    </div>
+                </div>
+                
+          
+    <button id="loginButton" class="btnLogin-popup">Accedi</button>
+
+<div id="loginPopup" class="popup">
+  <div class="popup-content">
+    <h2>Accesso</h2>
+    <form>
+      <label for="username">Nome utente:</label>
+      <input type="text" id="username" name="username"><br><br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password"><br><br>
+      <input type="submit" value="Accedi">
+    </form>
+    <span class="close" id="closePopup">&times;</span>
+  </div>
+</div>
+</div>
+</div>
+</nav>
+    
+    
     <div class="container">
         <h1>Lista della Spesa</h1>
 
@@ -35,6 +79,8 @@
            <button id="clear-checked">Elimina i selezionati</button> 
         </div>
     </div>
+    
     <script src="../static/js/spesa.js"></script>
+    <script src="../static/js/dropdown.js"></script>
 </body>
 </html>
