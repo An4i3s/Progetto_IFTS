@@ -4,6 +4,7 @@ import static com.example.cookidea_app.Activities.MainActivity.apiService;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -49,6 +50,8 @@ public class RegistrazioneFragment extends Fragment {
     private String email;
     private String password;
 
+
+
     EditText nameEt;
     EditText surnameEt;
     EditText usernameEt;
@@ -59,6 +62,7 @@ public class RegistrazioneFragment extends Fragment {
     public RegistrazioneFragment() {
 
     }
+
 
     @Nullable
     @Override
@@ -101,6 +105,7 @@ public class RegistrazioneFragment extends Fragment {
             }
         });
 
+        signupBtn = rootView.findViewById(R.id.signupButton);
        signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

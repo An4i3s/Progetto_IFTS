@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:hint="Inserisci username"
+            android:fontFamily="@font/alatsi"
             android:layout_margin="@dimen/margin" />
 
         <TextView
@@ -46,7 +47,7 @@
             <ImageButton
                 android:id="@+id/btnVisibility"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="60dp"
                 android:src="@drawable/visibility"
                 android:layout_toEndOf="@id/passwordEditText"
                 android:backgroundTint="@android:color/background_light"
@@ -63,7 +64,17 @@
         </RelativeLayout>
 
 
-
+        <TextView
+            android:id="@+id/erroreLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Errore: Utente non trovato!"
+            android:textColor="@color/rosso"
+            android:visibility="invisible"
+            android:layout_marginStart="25dp"
+            android:fontFamily="@font/passion_one"
+            android:textSize="10dp"
+            />
 
 
         <Button

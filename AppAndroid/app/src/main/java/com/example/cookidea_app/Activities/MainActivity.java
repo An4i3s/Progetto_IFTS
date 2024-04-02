@@ -1,6 +1,7 @@
 package com.example.cookidea_app.Activities;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -77,12 +78,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     String search = "";
     SharedPreferences sharedPreferences;
 
-    User user;
+   public static User user;
 
 
     public void onLoginSuccess(User user) {
         ((CookIdeaApp)getApplication()).setLoggedUser(user);
         SharedPrefManager.setLoggedIn(MainActivity.this,true);
+        //????
         updateNavigationDrawer();
         changeFrameByNavigationTab(R.id.homePage);
     }
@@ -108,7 +110,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
 
         //Problema sta in questa riga? getLoggedUser dovrebbe essere chiamato una sola volta nel codice?
-        user = ((CookIdeaApp)getApplication()).getLoggedUser();
+        //user = ((CookIdeaApp)getApplication()).getLoggedUser();
 
 
         bottomNavigationView = findViewById((R.id.bottomNavBar));

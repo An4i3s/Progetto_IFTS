@@ -23,6 +23,9 @@ public interface CookIdeaApiEndpointInterface {
     @GET("/api/randomPiattoIdNomeImg")
     Call<List<Recipe>> getRandomRecipe();
 
+    @GET("/api/preferiti/id_utente")
+    Call<List<Recipe>> getPreferiti(@Query("id_utente") String id_utente);
+
     @GET("/api/ricercaPerNome/{nome}")
     Call<List<Recipe>> getRecipeByName(@Path("nome") String recipeName);
 
@@ -34,4 +37,6 @@ public interface CookIdeaApiEndpointInterface {
 
     @POST("api/login")
     Call<User> login(@Body LoginRequest request);
+
+
 }

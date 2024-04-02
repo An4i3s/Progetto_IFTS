@@ -8,11 +8,35 @@
         android:orientation="vertical"
         android:paddingTop="100dp"
         >
-        <TextView
-            android:layout_width="wrap_content"
+
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Fragment Ricette Preferite"
-            android:textSize="50sp"
+            >
+            <ImageView
+                android:id="@+id/cuoreIv"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/heart"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ricette Preferite"
+                android:textSize="40sp"
+                android:textColor="@color/bluScuro"
+                android:layout_toEndOf="@id/cuoreIv"
+                android:layout_marginStart="20dp"
+                android:fontFamily="@font/passion_one_bold"
+                android:paddingTop="25dp"
+                />
+        </RelativeLayout>
+
+        <ListView
+            android:id="@+id/listaRicettePreferite"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
             />
+
     </LinearLayout>
 </FrameLayout>

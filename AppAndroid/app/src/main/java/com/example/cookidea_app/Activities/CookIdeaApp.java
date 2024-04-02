@@ -10,7 +10,7 @@ public class CookIdeaApp extends Application {
     //retrofit da inserire qui la sua inizializzazione ecc
 
     //+ sharedPred e API
-    User loggedUser = null;
+    User loggedUser;
 
     public void saveSaredPref(String info) {
         Log.i("CookIdeaApp", info);

@@ -14,6 +14,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,6 +30,8 @@ import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.R;
 import com.google.gson.JsonObject;
 
+import org.w3c.dom.Text;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,12 +44,14 @@ public class LoginFragment extends Fragment {
     EditText username;
     EditText password;
 
+    TextView textErroreLogin;
+
     ImageButton btnVisibility;
     ImageButton btnVisibilityOff;
     Button loginBtn;
     Retrofit retrofit = new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
-    User user = null;
+
 
     public LoginFragment(){
 
@@ -69,6 +74,8 @@ public class LoginFragment extends Fragment {
         btnVisibility = rootView.findViewById(R.id.btnVisibility);
         btnVisibilityOff = rootView.findViewById(R.id.btnVisibilityOff);
         loginBtn = rootView.findViewById(R.id.signinButton);
+
+        textErroreLogin = rootView.findViewById(R.id.erroreLogin);
 
 
         btnVisibility.setOnClickListener(new View.OnClickListener() {
@@ -107,10 +114,13 @@ public class LoginFragment extends Fragment {
                         //if StatusCode = 200
                         if (response.isSuccessful()){
                             Toast.makeText(getContext(), "Utente Trovato", Toast.LENGTH_LONG).show();
-                            user = response.body();
-                            ((MainActivity)ctx).onLoginSuccess(user);
+                            MainActivity.user = response.body();
+                            ((MainActivity)ctx).onLoginSuccess(MainActivity.user);
+                            textErroreLogin.setVisibility(View.GONE);
                         }else {
                             Toast.makeText(getContext(), "Utente non Trovato", Toast.LENGTH_LONG).show();
+                            //Mostrate Editext di Errore Login
+                            textErroreLogin.setVisibility(View.VISIBLE);
 
                         }
                     }
