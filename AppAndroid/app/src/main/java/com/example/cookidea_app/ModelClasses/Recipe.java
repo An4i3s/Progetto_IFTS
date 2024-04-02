@@ -22,10 +22,14 @@ public class Recipe {
     private final String provenance;
     @SerializedName("portata")
     private final String serving;
+
+    @SerializedName("favFromUser")
+    private final long favFromUserId;
+
     @SerializedName("ricettario")
     private final List<Ingredients> ingredients;
 
-    public Recipe(int recipeId, String img_name, String name, String method, int time, int difficulty, String provenance, String serving, List<Ingredients> ingredients) {
+    public Recipe(int recipeId, String img_name, String name, String method, int time, int difficulty, String provenance, String serving, long favFromUserId, List<Ingredients> ingredients) {
         this.recipeId = recipeId;
         this.img_name = img_name;
         this.name = name;
@@ -35,11 +39,13 @@ public class Recipe {
         this.provenance = provenance;
         this.serving = serving;
         this.ingredients = ingredients;
+        this.favFromUserId = favFromUserId;
     }
 
-    public String getRecipeId(){
+    public String getRecipeId() {
         return String.valueOf(recipeId);
     }
+
     public String getImg_name() {
         return img_name;
     }
@@ -57,7 +63,7 @@ public class Recipe {
     }
 
     public String getDifficulty() {
-        switch (difficulty){
+        switch (difficulty) {
             case 1:
                 return " 😃";
             case 2:
