@@ -150,8 +150,15 @@ UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'parmigianamelanzane.jpg' WHERE (`
 UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'spaghettivongole.jpg' WHERE (`id` = '9');
 UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'tiramisu.jpg' WHERE (`id` = '10');
 
+INSERT INTO `cookidea`.`preferiti` (`id`, `id_utente`, `id_piatto`) VALUES ('1', '1', '2');
+INSERT INTO `cookidea`.`preferiti` (`id`, `id_utente`, `id_piatto`) VALUES ('2', '1', '3');
+INSERT INTO `cookidea`.`preferiti` (`id`, `id_utente`, `id_piatto`) VALUES ('3', '1', '4');
+INSERT INTO `cookidea`.`preferiti` (`id`, `id_utente`, `id_piatto`) VALUES ('4', '1', '5');
+INSERT INTO `cookidea`.`preferiti` (`id`, `id_utente`, `id_piatto`) VALUES ('5', '2', '4');
+INSERT INTO `cookidea`.`preferiti` (`id`, `id_utente`, `id_piatto`) VALUES ('6', '2', '8');
+
 
 
 
  --
-select * from piatti;
+select * from preferiti;
