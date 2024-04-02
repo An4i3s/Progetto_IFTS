@@ -5,6 +5,7 @@ import android.icu.text.UnicodeSet;
 import com.example.cookidea_app.ModelClasses.Recipe;
 import com.example.cookidea_app.ModelClasses.Serving;
 import com.example.cookidea_app.ModelClasses.User;
+import com.example.cookidea_app.ModelClasses.WeeklyMenu;
 
 import java.util.List;
 
@@ -31,6 +32,9 @@ public interface CookIdeaApiEndpointInterface {
 
     @GET("/api/ricerca/ricettaFromId")
     Call<Recipe> getRecipeById(@Query("id_piatto") String recipeId);
+
+    @GET("/api/menuSettimanale")
+    Call<List<WeeklyMenu>> getWeeklyMenu(@Query("id_utente") int userId);
 
     @POST("api/login")
     Call<User> login(@Body LoginRequest request);
