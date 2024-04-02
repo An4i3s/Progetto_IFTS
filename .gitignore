@@ -4,3 +4,4 @@
 /SitoWeb/__pycache__
 AppAndroid/.idea/misc.xml
 *.pyc
+.vscode/settings.json
