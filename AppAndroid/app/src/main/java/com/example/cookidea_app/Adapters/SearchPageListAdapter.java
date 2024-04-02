@@ -38,6 +38,7 @@ public class SearchPageListAdapter extends ArrayAdapter<Recipe> {
         TextView difficultyRecipeVH;
         TextView servingRecipeVH;
         Bitmap recipeImage;
+        String imageUrl;
     }
 
     @NonNull
@@ -55,18 +56,20 @@ public class SearchPageListAdapter extends ArrayAdapter<Recipe> {
             resultsViewHolder.difficultyRecipeVH = (TextView) convertView.findViewById(R.id.difficultyRecipeSearchedTextView);
             resultsViewHolder.servingRecipeVH = (TextView) convertView.findViewById(R.id.servingRecipeSearchedTextView);
 
-            String imgUrl = BASE_URL + "/static/recipes/" + getItem(position).getImg_name().toLowerCase();
+            resultsViewHolder.imageUrl = BASE_URL + "/static/recipes/" + getItem(position).getImg_name().toLowerCase();
 
             new DownloadImageAsyncTask(resultsViewHolder.imgRecipeVh, new DownloadImageAsyncTask.ImageDownloadCallback() {
                 @Override
-                public void downloaded(Bitmap img) {
-                    resultsViewHolder.recipeImage = img;
+                public void downloaded(String imageUrl, Bitmap img) {
+                    if (!imageUrl.equals(resultsViewHolder.imageUrl))
+                        resultsViewHolder.recipeImage = img;
                 }
-            }).execute(imgUrl);
+            }).execute(resultsViewHolder.imageUrl);
 
             convertView.setTag(resultsViewHolder);
         }else{
             resultsViewHolder = (SearchPageListAdapter.ResultsViewHolder) convertView.getTag();
+
         }
         //TODO controllare perchè entra più volte nell'adapter
         resultsViewHolder.imgRecipeVh.setImageBitmap(resultsViewHolder.recipeImage);

@@ -53,7 +53,7 @@ public class HomePageListAdapter extends ArrayAdapter<Serving> {
             String imgUrl = BASE_URL + getItem(position).getImgUrl();
             new DownloadImageAsyncTask(categoryViewHolder.imageViewVH, new DownloadImageAsyncTask.ImageDownloadCallback() {
                 @Override
-                public void downloaded(Bitmap img) {
+                public void downloaded(String imageUrl, Bitmap img) {
                     categoryViewHolder.image = img;
                 }
             }).execute(imgUrl);
