@@ -11,11 +11,10 @@ import java.io.InputStream;
 public class DownloadImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
 
     public interface ImageDownloadCallback {
-        public void downloaded(String imageUrl, Bitmap img);
+        public void downloaded(Bitmap img);
     }
 
     ImageView imgView = null;
-    String imageUrl = null;
     ImageDownloadCallback callback = null;
 
     public DownloadImageAsyncTask(ImageView imgView, ImageDownloadCallback callback) {
@@ -24,10 +23,10 @@ public class DownloadImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
     }
 
     protected Bitmap doInBackground(String... urls) {
-        imageUrl = urls[0];
+        String urldisplay = urls[0];
         Bitmap mIcon11 = null;
         try {
-            InputStream in = new  java.net.URL(imageUrl).openStream();
+            InputStream in = new  java.net.URL(urldisplay).openStream();
             mIcon11 = BitmapFactory.decodeStream(in);
         } catch (Exception e) {
             Log.e("Error", e.getMessage());
@@ -40,6 +39,6 @@ public class DownloadImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
         imgView.setImageBitmap(result);
 
         if(this.callback != null)
-            callback.downloaded(imageUrl, result);
+            callback.downloaded(result);
     }
 }
