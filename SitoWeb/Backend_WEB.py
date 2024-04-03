@@ -46,19 +46,39 @@ def webGetAllRecipes():
     query = "select * from piatti"
     result = db.getAllData(query)
 
-    return render_template("piatti_esempio.html", piatti = result)
+    return render_template("piatto_singolo.html", piatti = result)
 
 
 
 # WEB / RICERCA PER NOME PIATTO  (anche solo una parte del nome)
 # http://192.168.0.110:8000/ricercaPerNome/Funghi
-@appWebApi.route("/web/ricercaPerNome/<nome>")
-def webGetRecipesfromName(nome):
+@appWebApi.route("/web/ricerca/ricercaPerNome")
+def webGetRecipesfromName():
+    nomePiatto = request.args.get("nome_piatto")
 
-    query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE nome_piatto LIKE %s"
-    result = db.getAllData(query,('%' + nome+ '%',) )
 
-    return render_template("piatti_esempio.html", piatti = result)
+    query = """SELECT p.id, p.difficolta, p.tempo, p.nome_piatto, p.portata, p.provenienza, p.procedimento, p.image_name
+               FROM piatti p WHERE p.nome_piatto LIKE %s"""
+    
+    result = db.getSingleData(query,('%' + nomePiatto + '%',) )
+
+    piatto = Piatto(**result)
+
+    currentIdPiatto = piatto.id
+
+    query = """SELECT i.nome_ingrediente, r.quantita_ingrediente
+               FROM piatti p JOIN ricettario r ON p.id = r.id_piatto
+               JOIN ingredienti i ON r.id_ingrediente = i.id WHERE p.id = %s;""" 
+    
+    result = db.getAllData(query, (currentIdPiatto,))
+   
+    
+    for row in result:
+        ricettario = Ricettario(**row)
+        piatto.ricettario.append(ricettario)
+        
+
+    return render_template("piatto_singolo.html", piatto=piatto)
 
 # WEB / RICERCA PER PORTATA
 # http://192.168.0.110:8000/ricercaPerNome/Funghi
@@ -68,7 +88,7 @@ def webGetRecipesfromPortata(portata):
     query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE portata = %s"
     result = db.getAllData(query,(portata,) )
 
-    return render_template("piatti_esempio.html", piatti = result)
+    return render_template("piatto_singolo.html", piatti = result)
 
 
     
@@ -99,7 +119,7 @@ def getPortate():
 
 
 # web / RESTITUISCE UNA RICETTA COMPLETA (CON JOIN VARI) IN BASE ALL'ID
-@appWebApi.route("/web/ricerca/ricettaFromId")
+@appWebApi.route("/web/ricerca/ricercaFromId")
 def webGetRicettaCompletaFromId():
     idPiatto = request.args.get("id_piatto")
 
@@ -122,7 +142,7 @@ def webGetRicettaCompletaFromId():
         piatto.ricettario.append(ricettario)
         
 
-    return render_template("piatti_esempio.html", piatto=piatto)
+    return render_template("piatto_singolo.html", piatto=piatto)
 
 
 
@@ -134,7 +154,7 @@ def webGetRicettaCompletaFromId():
 if __name__ == "__main__":
     try:
         db = Database()
-        appWebApi.run(host='0.0.0.0', port=8000, debug=True)
+        appWebApi.run(host='0.0.0.0', port=8000)
     except KeyboardInterrupt:
         db.close()
 
