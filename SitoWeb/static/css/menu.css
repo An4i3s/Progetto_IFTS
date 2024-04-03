@@ -1,0 +1,85 @@
+body {
+    background-image: url('../img/background_blur.jpg');
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;  
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    font-family: 'Passion One', sans-serif;
+    margin: 0%;
+}
+
+.container {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: relative;
+    max-width: 900px;
+    margin: 50px auto;
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center; /* Aggiunto per centrare i blocchi */
+}
+
+.block {
+    width: 100%; /* Modificato per coprire l'intero container */
+    height: 150px;
+    background-color: lightblue;
+    margin:1px; /* Modificato per centrare il blocco verticalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    position: relative; /* Aggiunto per posizionare il menu a tendina */
+    transition: trasform 0.3s ease;
+   
+  
+}
+
+.block:hover{
+    transform: scale(1.05);
+}
+.dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 10px); /* Posizionato sotto il blocco */
+    left: 0;
+    background-color: lightgray;
+    width: 100%;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    z-index: 1;
+    border-radius: -10px;
+}
+.dropdown ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.dropdown li {
+    padding: 5px 0;
+    cursor: pointer;
+    position: relative;
+    border: 2px;
+    border-color: red;
+}
+
+.nested-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: lightgray;
+    width: 100%;
+    padding: 10px;
+    z-index: 1;
+}
+
+.dropdown li:hover .nested-dropdown {
+    display: block;
+}
+
+.dropdown li:hover {
+    background-color: lightblue;
+}

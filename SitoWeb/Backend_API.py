@@ -5,6 +5,9 @@ import random
 from models import *
 from Database import *
 import time
+from datetime import datetime
+
+
 
 
 appWebApi = Flask(__name__)
@@ -54,11 +57,45 @@ def login():
         if user is None:
             return json.dumps({"success": False, "message": "Utente non trovato"}), 401
         else:
+            print(result)
             return json.dumps(user, default=vars), 200
         
     except Exception as e:
         print("Errore durante il login:", e)
         return jsonify({"success": False, "message": "Errore durante il login"}), 500
+    
+
+    
+# api a9  REGISTRAZIONE
+# http://192.168.1.117:8000/api/signup
+@appWebApi.route("/api/signup", methods=["POST"])
+def register():
+    user_data = request.get_json()
+
+    nome = user_data.get('nome')
+    cognome = user_data.get('cognome')
+    data_nascita_str = user_data.get('data_nascita')
+    data_nascita = datetime.strptime(data_nascita_str, '%b %d, %Y %I:%M:%S %p')
+    email = user_data.get('email')
+    username = user_data.get('username')
+    password = user_data.get('password')
+
+    query = """INSERT INTO utenti (nome, cognome, data_nascita, email, username, password)
+               VALUES (%s, %s, %s, %s, %s, %s);"""
+    values = (nome, cognome, data_nascita, email, username, password)
+
+    
+    if db.insert(query, values) == True:
+        query = "select * from utenti order by id desc limit 1"
+        result = db.getSingleData(query)
+        newUser = User(**result)
+        return json.dumps(newUser, default=vars), 201
+    else:
+        return "Errore: Username i email già esistente.", 500
+
+
+
+
 
     
 
@@ -193,12 +230,6 @@ def getRicettaCompletaFromId():
         return json.dumps([])
     
 
-# api a9  REGISTRAZIONE
-# http://192.168.1.117:8000/api/signup
-@appWebApi.route("/api/signup", methods=["POST"])
-def register():
-
-    newUser = UserRegister (**request.get_json())
 
 
 
@@ -220,8 +251,9 @@ def getPreferiti():
 def checkPreferiti():
     idUtente = request.args.get("id_utente")
     idPiatto = request.args.get("id_piatto")
-    query = "select * from preferiti WHERE id_utente = % AND id_piatto = %;"
-    result = db.getAllData (query, (idUtente))
+    query = """select p.id, nome_piatto, difficolta, tempo, portata, provenienza,image_name
+               from piatti p JOIN preferiti pref ON p.id = pref.id_piatto WHERE id_utente = %s AND id_piatto = %s;"""
+    result = db.getAllData (query, (idPiatto, idUtente))
     return json.dumps(result, default=vars)
 
 

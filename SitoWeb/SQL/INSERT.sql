@@ -37,7 +37,11 @@ INSERT INTO `piatti` (`nome_piatto`, `difficolta`, `tempo`, `provenienza`, `port
 ('Risotto alla Milanese', 2, 30, 'Lombardia', 'Primo', 'Rosolare la cipolla, tostare il riso, sfumare con vino bianco, cuocere aggiungendo brodo e zafferano.'),
 ('Parmigiana di Melanzane', 2, 60, 'Sicilia', 'Secondo', 'Friggere le melanzane, alternare strati di melanzane, salsa di pomodoro e formaggio, cuocere al forno.'),
 ('Spaghetti alle Vongole', 2, 25, 'Campania', 'Primo', 'Rosolare aglio e peperoncino, aggiungere vongole e vino bianco, cuocere la pasta e mantecare con le vongole.'),
-('Tiramisù', 3, 60, 'Veneto', 'Dolce', 'Preparare una crema con uova, zucchero e mascarpone, inzuppare i biscotti nel caffè, alternare strati di biscotti e crema, spolverare con cacao amaro in polvere.');
+('Tiramisù', 3, 60, 'Veneto', 'Dolce', 'Preparare una crema con uova, zucchero e mascarpone, inzuppare i biscotti nel caffè, alternare strati di biscotti e crema, spolverare con cacao amaro in polvere.'),
+
+('Gnocchi di riso con verdure', 1, 60, 'Cina', 'Primo', 'Cuocere gli gnocchi e aggiungere le verdure'),
+('Lasagna', 2, 55, 'Emilia Romagna', 'Primo', 'Assemblare la pasta con tutto il resto e cuocerla'),
+('Pasta in bianco', 3, 10, 'Lombardia', 'Primo', 'Cuocere la pasta e aggiungere olio e poarmigiano.');
 
 
 -- Inserimento dei dati nel ricettario per il piatto 'Pasta alla Carbonara'
@@ -130,6 +134,33 @@ INSERT INTO ricettario (id_piatto, id_ingrediente, quantita_ingrediente) VALUES
 (10, 7, 1),   -- Sale
 (10, 8, 1);   -- Pepe
 
+-- Inserimento dei dati nel ricettario per il piatto 'Pasta in bianco'
+INSERT INTO ricettario (id_piatto, id_ingrediente, quantita_ingrediente) VALUES 
+(13, 13, 2),  -- Pomodoro
+(13, 14, 200), -- Mozzarella
+(13, 5, 5),   -- Basilico
+(13, 19, 30), -- Olio extravergine d'oliva
+(13, 7, 1),   -- Sale
+(13, 8, 1);   -- Pepe
+
+-- Inserimento dei dati nel ricettario per il piatto 'Gnocchi di riso'
+INSERT INTO ricettario (id_piatto, id_ingrediente, quantita_ingrediente) VALUES 
+(11, 13, 2),  -- Pomodoro
+(11, 14, 200), -- Mozzarella
+(11, 5, 5),   -- Basilico
+(11, 19, 30), -- Olio extravergine d'oliva
+(11, 7, 1),   -- Sale
+(11, 8, 1);   -- Pepe
+
+-- Inserimento dei dati nel ricettario per il piatto 'Lasagna'
+INSERT INTO ricettario (id_piatto, id_ingrediente, quantita_ingrediente) VALUES 
+(12, 13, 2),  -- Pomodoro
+(12, 14, 200), -- Mozzarella
+(12, 5, 5),   -- Basilico
+(12, 19, 30), -- Olio extravergine d'oliva
+(12, 7, 1),   -- Sale
+(12, 8, 1);   -- Pepe
+
 
 
 INSERT INTO `utenti` VALUES (1,'Mario','Rossi','1990-05-15','mario.rossi@example.com','mario123','password123'),(2,'Laura','Bianchi','1985-09-20','laura.bianchi@example.com','laura456','password456'),(3,'Giovanni','Verdi','1988-07-10','giovanni.verdi@example.com','giovanni789','password789');
@@ -149,6 +180,10 @@ UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'risottomilanese.jpg' WHERE (`id` 
 UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'parmigianamelanzane.jpg' WHERE (`id` = '8');
 UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'spaghettivongole.jpg' WHERE (`id` = '9');
 UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'tiramisu.jpg' WHERE (`id` = '10');
+
+UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'gnocchidiriso.jpg' WHERE (`id` = '11');
+UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'lasagna.jpg' WHERE (`id` = '12');
+UPDATE `COOKIDEA`.`piatti` SET `image_name` = 'pastainbianco.jpg' WHERE (`id` = '13');
 
 INSERT INTO `cookidea`.`preferiti` (`id`, `id_utente`, `id_piatto`) VALUES ('1', '1', '2');
 INSERT INTO `cookidea`.`preferiti` (`id`, `id_utente`, `id_piatto`) VALUES ('2', '1', '3');

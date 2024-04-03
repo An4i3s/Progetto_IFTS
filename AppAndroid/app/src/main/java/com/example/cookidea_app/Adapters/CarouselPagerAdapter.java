@@ -26,8 +26,8 @@ public class CarouselPagerAdapter extends PagerAdapter {
     public List<Recipe> carouselRecipes;
     private Context context;
     private LayoutInflater layoutInflater;
-
-    private static int COUNTER = 0;
+    private static boolean changeDirection = false;
+    private static int counter = 0;
 
     public CarouselPagerAdapter(Context context, List<Recipe> carouselRecipes){
         this.context = context;
@@ -76,10 +76,16 @@ public class CarouselPagerAdapter extends PagerAdapter {
         final Runnable update = new Runnable() {
             public void run() {
                 int currentItem = 0;
-                if (!carouselRecipes.isEmpty())
-                    currentItem = COUNTER % carouselRecipes.size();//viewPager.getCurrentItem();
-                viewPager.setCurrentItem(currentItem, true);
-                COUNTER++;
+                if (!carouselRecipes.isEmpty()) {
+                    //currentItem = counter % carouselRecipes.size();//viewPager.getCurrentItem();
+                    viewPager.setCurrentItem(counter, true);
+                    if (counter == carouselRecipes.size()-1 || counter == 0)
+                        changeDirection = !changeDirection;
+                    if (changeDirection)
+                        counter++;
+                    else
+                        counter--;
+                }
             }
         };
 
