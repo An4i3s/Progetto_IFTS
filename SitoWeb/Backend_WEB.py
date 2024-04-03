@@ -16,7 +16,7 @@ db = None
 def homepage():
     
     query = "SELECT DISTINCT piatti.portata FROM piatti"
-    result = db.fetchAll(query)
+    result = db.getAllData(query)
     listaPortate = []
     for record in result:
         nomePortata = record["portata"]
@@ -27,13 +27,13 @@ def homepage():
     piattiDaRestituire = 5
     query = """SELECT image_name
                FROM piatti ORDER BY RAND() LIMIT %s"""
-    result = db.fetchAll(query, (piattiDaRestituire))
+    result = db.getAllData(query, (piattiDaRestituire))
     listaImmagini =[]
     for record in result:
         immagine = record["image_name"]
         listaImmagini.append(immagine)
 
-    return render_template("index.html", listaPortate=listaPortate, listaImmagini=listaImmagini, id= idutente)
+    return render_template("index.html", listaPortate=listaPortate, listaImmagini=listaImmagini)
 
 
 
@@ -44,7 +44,7 @@ def homepage():
 def webGetAllRecipes():
 
     query = "select * from piatti"
-    result = db.fetchAll(query)
+    result = db.getAllData(query)
 
     return render_template("piatti_esempio.html", piatti = result)
 
@@ -56,7 +56,7 @@ def webGetAllRecipes():
 def webGetRecipesfromName(nome):
 
     query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE nome_piatto LIKE %s"
-    result = db.fetchAll(query,('%' + nome+ '%',) )
+    result = db.getAllData(query,('%' + nome+ '%',) )
 
     return render_template("piatti_esempio.html", piatti = result)
 
@@ -66,7 +66,7 @@ def webGetRecipesfromName(nome):
 def webGetRecipesfromPortata(portata):
 
     query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE portata = %s"
-    result = db.fetchAll(query,(portata,) )
+    result = db.getAllData(query,(portata,) )
 
     return render_template("piatti_esempio.html", piatti = result)
 
@@ -76,7 +76,7 @@ def webGetRecipesfromPortata(portata):
 @appWebApi.route("/api/portate")
 def getPortate():
     query = "SELECT DISTINCT piatti.portata FROM piatti"
-    result = db.fetchAll(query)
+    result = db.getAllData(query)
     nomi_portate = []
     for record in result:
         nomi_portate.append(record["portata"])
@@ -93,7 +93,7 @@ def getPortate():
 #     piattiDaRestituire = 5
 #     query = """SELECT image_name
 #                FROM piatti ORDER BY RAND() LIMIT %s"""
-#     result = db.fetchAll(query, (piattiDaRestituire))
+#     result = db.getAllData(query, (piattiDaRestituire))
 #     return result
 
 
@@ -106,7 +106,7 @@ def webGetRicettaCompletaFromId():
     query = """SELECT p.id, p.difficolta, p.tempo, p.nome_piatto, p.portata, p.provenienza, p.procedimento, p.image_name
                FROM piatti p WHERE p.id = %s"""
     
-    result = db.fetchOne(query, (idPiatto,))
+    result = db.getSingleData(query, (idPiatto,))
 
     piatto = Piatto(**result)
 
@@ -114,7 +114,7 @@ def webGetRicettaCompletaFromId():
                FROM piatti p JOIN ricettario r ON p.id = r.id_piatto
                JOIN ingredienti i ON r.id_ingrediente = i.id WHERE p.id = %s;""" 
     
-    result = db.fetchAll(query, (idPiatto,))
+    result = db.getAllData(query, (idPiatto,))
    
     
     for row in result:
