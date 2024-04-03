@@ -55,7 +55,8 @@
 
                 android:src="@drawable/visibility2"
                 android:layout_toEndOf="@id/passwordEditText"
-                android:backgroundTint="@color/white"
+                android:background="@android:color/transparent"
+
 
                 />
             <ImageButton
@@ -65,7 +66,8 @@
                 android:src="@drawable/visibility_off"
                 android:visibility="invisible"
                 android:layout_toEndOf="@id/passwordEditText"
-                android:backgroundTint="@android:color/background_light"
+                android:background="@android:color/transparent"
+
                 />
         </RelativeLayout>
 
