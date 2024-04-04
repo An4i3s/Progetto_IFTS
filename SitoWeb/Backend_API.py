@@ -257,17 +257,88 @@ def checkPreferiti():
     return json.dumps(result, default=vars)
 
 
+# api 12 UPDATE DATI UTENTE
+# gfg
+
+@appWebApi.route("/api/eee", methods=["POST"])
+def update_data_endpoint():
+    # Ottieni i dati dalla richiesta
+    data = request.get_json()
+    id = request.args.get("id")
+    #data["id"]
+    nome = request.args.get("nome")
+    cognome = request.args.get("cognome")
+    data_nascita = request.args.get("data_nascita")
+
+    try:
+        # Crea una connessione al database
+        
+            # Crea una query per aggiornare la tabella
+            query = """
+                UPDATE utenti
+                SET nome = '{nome}',
+                    cognome = '{cognome}',
+                    data_nascita = '{data_nascita}'
+                WHERE id = {id}
+            """
+            # Esegui la query
+            result = db.getAllData(query, (id, nome, cognome, data_nascita))
+        
+        # Restituisci un messaggio di successo
+            return json.dumps(result, default=vars)
+    except Exception as e:
+        # Restituisci un messaggio di errore
+            return jsonify({"success": False, "message": f"Errore durante l'aggiornamento dei dati: {str(e)}"})
+
+    # Aggiorna i dati
+    # response = update_data(id, nome, cognome, data_nascita)
+
+    # Restituisci la risposta
+   # return response
 
 
 
 
+# api 12 bis UPDATE DATI UTENTE
+@appWebApi.route("/api/agg_DatiUtente", methods=["PUT"])
+def update_dati():
+    user_data = request.get_json()
 
+    id = user_data.get("id")
+    nome = user_data.get("nome")
+    cognome = user_data.get("cognome")
+    data_nascita_str = user_data.get("data_nascita")
+    data_nascita = datetime.strptime(data_nascita_str, "%b %d, %Y %I:%M:%S %p")
 
+    try:
+        query = """
+            UPDATE utenti
+            SET nome = %s,
+                cognome = %s,
+                data_nascita = %s
+            WHERE id = %s
+        """
+        values = (nome, cognome, data_nascita, id)
 
+        cursor = db.connection.cursor()
+        cursor.execute(query, values)
+        db.connection.commit()  # Commit changes
 
+        query = "SELECT * FROM utenti WHERE id = %s"
+        cursor.execute(query, (id,))
+        result = cursor.fetchone()
 
+        if result:
+            new_user = User(**result)
+            return json.dumps(new_user, default=vars), 201
+        else:
+            return "User not found after update", 404
 
-
+    except Exception as e:
+        return f"Error updating user data: {str(e)}", 500
+    finally:
+        if cursor:
+            cursor.close()
 
 
 

@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
 
+import static com.example.cookidea_app.Activities.MainActivity.apiService;
+
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -15,6 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,6 +29,7 @@ import com.example.cookidea_app.Activities.CookIdeaApp;
 import com.example.cookidea_app.Activities.MainActivity;
 import com.example.cookidea_app.Activities.SharedPrefManager;
 import com.example.cookidea_app.Backend.CookIdeaApiEndpointInterface;
+import com.example.cookidea_app.Backend.UpdateRequest;
 import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.R;
 
@@ -32,8 +37,12 @@ import org.w3c.dom.Text;
 
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.Calendar;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
@@ -58,13 +67,10 @@ public class ProfiloFragment extends Fragment {
 
     ImageButton btnDataNascita;
     TextView username;
-    TextView nome;
-    Button modNome;
+
 
     SharedPreferences sharedPreferences;
 
-    Retrofit retrofit = new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
-    CookIdeaApiEndpointInterface endpointInterface = retrofit.create(CookIdeaApiEndpointInterface.class);
 
     Context ctx;
 
@@ -85,9 +91,13 @@ public class ProfiloFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_profilo, container, false);
 
+        //Retrofit retrofit = new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        //CookIdeaApiEndpointInterface endpointInterface = retrofit.create(CookIdeaApiEndpointInterface.class);
+
 
 
          user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
+
         usernameTV = rootView.findViewById(R.id.usernameTV);
         usernameTV.setText(user.getUsername());
 
@@ -161,6 +171,44 @@ public class ProfiloFragment extends Fragment {
                 btnNome.setVisibility(View.VISIBLE);
                 editNome.setVisibility(View.GONE);
                 btnConfNome.setVisibility(View.GONE);
+
+                UpdateRequest updateRequest = new UpdateRequest(user.getId(), nomeTv.getText().toString(),cognomeTv.getText().toString(),dataNascitaTv.getText().toString());
+
+               // updateRequest.setId(user.getId());
+               // updateRequest.setNome(nomeTv.getText().toString());
+               // updateRequest.setCognome(cognomeTv.getText().toString());
+               // updateRequest.setData_nascita(dataNascitaTv.getText().toString());
+                user.setName(nomeTv.getText().toString());
+                user.setSurname(cognomeTv.getText().toString());
+                try {
+                    user.setBirthdate(DateFormat.getDateInstance().parse(dataNascitaTv.getText().toString()));
+                } catch (ParseException e) {
+                    throw new RuntimeException(e);
+                }
+                Call<User> call = apiService.updateDatiUtente(user);
+                        //endpointInterface.updateDatiUtente(updateRequest);
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+
+                        if (response.isSuccessful()){
+                             User updateUser =  response.body();
+                            // Toast.makeText(ctx, "Response Body = "+ response.body().toString(), Toast.LENGTH_LONG);
+                            // ((MainActivity)ctx).onLoginSuccess(user);
+                            //((CookIdeaApp)((MainActivity)ctx).getApplication()).setLoggedUser(user);
+                            ((MainActivity) ctx).onLoginSuccess(updateUser);
+                        }else {
+                            Toast.makeText(ctx, "Errore!!!", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        Toast.makeText(ctx, "Throwable = "+ t.getMessage(), Toast.LENGTH_LONG);
+
+                    }
+                });
             }
         });
 
@@ -176,7 +224,7 @@ public class ProfiloFragment extends Fragment {
         });
 
 
-        username = rootView.findViewById(R.id.usernameTV);
+      //  username = rootView.findViewById(R.id.usernameTV);
 
 
 
