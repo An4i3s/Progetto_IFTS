@@ -1,6 +1,7 @@
 package com.example.cookidea_app.Fragments;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 
@@ -12,6 +13,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -41,7 +43,7 @@ import retrofit2.Response;
 
 public class ProfiloFragment extends Fragment {
 
-    User user;
+
 
 
     TextView usernameTV;
@@ -59,8 +61,8 @@ public class ProfiloFragment extends Fragment {
     ImageButton btnConfCognome;
 
     ImageButton btnDataNascita;
- 
 
+    Button btnModPassword;
 
     Context ctx;
 
@@ -84,7 +86,7 @@ public class ProfiloFragment extends Fragment {
 
 
 
-         user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
+        User user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
 
         usernameTV = rootView.findViewById(R.id.usernameTV);
         usernameTV.setText(user.getUsername());
@@ -105,6 +107,7 @@ public class ProfiloFragment extends Fragment {
         btnConfCognome = rootView.findViewById(R.id.btnConfCognome);
         btnDataNascita = rootView.findViewById(R.id.btnDataNascita);
 
+        btnModPassword = rootView.findViewById(R.id.btnModPassword);
 
 
         btnNome.setOnClickListener(new View.OnClickListener() {
@@ -178,7 +181,6 @@ public class ProfiloFragment extends Fragment {
         });
 
 
-        // TODO: 29/03/2024 Implemnetare collegamento a API per update dati utenti in DB 
         btnConfNome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -250,7 +252,14 @@ public class ProfiloFragment extends Fragment {
         });
 
 
-
+        btnModPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity activity = (MainActivity) getActivity();
+                assert activity != null;
+                activity.apriPasswordFragmnent();
+            }
+        });
 
 
 

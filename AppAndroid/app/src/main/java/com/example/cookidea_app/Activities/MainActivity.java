@@ -25,6 +25,7 @@ import com.example.cookidea_app.Fragments.HomePageFragment;
 import com.example.cookidea_app.Fragments.ListaSpesaFragmentPage;
 import com.example.cookidea_app.Fragments.LoginFragment;
 import com.example.cookidea_app.Fragments.MenuPageFragment;
+import com.example.cookidea_app.Fragments.PasswordFragment;
 import com.example.cookidea_app.Fragments.ProfiloFragment;
 import com.example.cookidea_app.Fragments.RecipePageFragment;
 import com.example.cookidea_app.Fragments.RicettePreferiteFragment;
@@ -77,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     String search = "";
     SharedPreferences sharedPreferences;
 
-    User user;
+  //   User user = ((CookIdeaApp)getApplication()).getLoggedUser();;
 
 
     public void onLoginSuccess(User user) {
@@ -87,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         changeFrameByNavigationTab(R.id.homePage);
     }
 
-    public static final String BASE_URL = "http://192.168.1.141:8000";
+    public static final String BASE_URL = "http://192.168.1.10:8000";
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -108,7 +109,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
 
         //Problema sta in questa riga? getLoggedUser dovrebbe essere chiamato una sola volta nel codice?
-        user = ((CookIdeaApp)getApplication()).getLoggedUser();
+      //  user = ((CookIdeaApp)getApplication()).getLoggedUser();
 
 
         bottomNavigationView = findViewById((R.id.bottomNavBar));
@@ -221,6 +222,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     }
 
+    public void apriPasswordFragmnent(){
+
+        Fragment fragment = new PasswordFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.mainContent, fragment).commit();
+
+    }
+
 
     @Override
     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
@@ -239,6 +247,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         }
 
     }
+
 
 
 

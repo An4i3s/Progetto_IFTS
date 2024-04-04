@@ -76,9 +76,6 @@ public class User implements Serializable {
     }
 
 
-    //Setters ma i field sono privati??
-
-
 
 
     public void setName(String name) {

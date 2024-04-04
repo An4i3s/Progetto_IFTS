@@ -64,6 +64,7 @@ public class RicettePreferiteFragment extends Fragment {
 
         preferitiLV = rootview.findViewById(R.id.ricettePrefeListView);
 
+        // TODO: 04/04/2024 togliere retorift e apiInterface e usare apiService 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         apiInterface = retrofit.create(CookIdeaApiEndpointInterface.class);
 
