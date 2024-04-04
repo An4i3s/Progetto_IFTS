@@ -42,6 +42,17 @@ class Database:
                 print("Errore durante la registrazione dell'utente:", e)
                 self.connection.rollback()
                 return False
+    
+    def update(self, query, params=None):
+        with self.connection.cursor() as cursor:
+            try:
+                cursor.execute(query, params)
+                self.connection.commit()
+                return True
+            except Exception as e:
+                print("Errore durante l'update dei dati':", e)
+                self.connection.rollback()
+                return False
 
 
 
