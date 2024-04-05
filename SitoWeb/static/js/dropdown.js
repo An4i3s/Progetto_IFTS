@@ -19,7 +19,6 @@ window.addEventListener("click", function(event) {
     }
 });
 
-
 // Ottieni il pulsante di accesso e il popup
 var loginButton = document.getElementById("loginButton");
 var loginPopup = document.getElementById("loginPopup");

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/logreg.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="form-box register">
+        <h2>Crea account</h2>
+        <form action="/registrazione" method="POST">
+            <!-- Aggiungi il campo del token CSRF -->
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="person"></ion-icon>
+                </span>
+                <input type="text" name="nome" required>
+                <label>Nome</label> 
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="person"></ion-icon>
+                </span>
+                <input type="text" required name="cognome">
+                <label>Cognome</label>
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="person"></ion-icon>
+                </span>
+                <input type="date" required name="data_nascita">
+                <label>Data di Nascita</label>
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="person"></ion-icon>
+                </span>
+                <input type="text" required name="username">
+                <label>Username</label>
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="mail"></ion-icon>
+                </span>
+                <input type="email" required name="email">
+                <label>Indirizzo email</label>
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="lock-closed"></ion-icon>
+                </span>
+                <input type="password" required name="password">
+                <label>Password</label> 
+            </div>
+            <div class="remember-forgot">
+                <label><input type="checkbox"> Accetto termini e condizioni</label>
+            </div>
+            <div class="button-container">
+                <button type="button" class="btn" onclick="window.history.back()">Indietro</button>
+                <button type="submit" class="btn">Registrati</button>
+            </div>
+            <div class="login-register">
+                <p>Hai già un account?<a href="{{ url_for('login') }}" class="login-link"> Accedi</a></p>
+            </div>
+        </form>
+        </div>
+    </div>
+
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>  
+
+</body>
+</html>
