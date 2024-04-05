@@ -23,7 +23,7 @@ public class SplashPage extends AppCompatActivity {
             @Override
             public void run() {
                 startActivity(new Intent(SplashPage.this, MainActivity.class));
-
+                SplashPage.this.finish();
             }
         }, splashTimer);
     }
