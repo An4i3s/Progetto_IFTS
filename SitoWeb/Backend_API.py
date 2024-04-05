@@ -241,7 +241,6 @@ def checkPreferiti():
     idPiatto = request.args.get("id_piatto")
     query = """select preferiti.id FROM preferiti WHERE id_utente = %s AND id_piatto = %s;"""
     result = db.getSingleData (query, (idUtente, idPiatto,))
-    print(result)
     if result is None:
         return json.dumps(0)
     else:

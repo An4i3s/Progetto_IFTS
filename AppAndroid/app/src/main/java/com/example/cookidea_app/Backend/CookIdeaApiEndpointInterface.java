@@ -44,9 +44,11 @@ public interface CookIdeaApiEndpointInterface {
     @POST("api/signup")
     Call<User> signup(@Body User request);
 
-
     @GET("/api/checkPreferito")
     Call<Integer> checkPreferito(@Query("id_utente") long idUtente, @Query("id_piatto") String idPiatto);
+
+    @GET("/api/updatePreferito")
+    Call<Integer> updatePreferito(@Query("id_utente") long idUtente, @Query("id_piatto") String idPiatto);
 
     @GET("api/preferitiFromIdUtente")
     Call<List<Recipe>> getPreferitiFromId(@Query("id_utente") long idUtente);

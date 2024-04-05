@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.cookidea_app.Activities.CookIdeaApp;
@@ -38,6 +39,7 @@ public class RecipePageFragment extends Fragment {
     Recipe recipe;
     View rootView = null;
     boolean favouriteChecked = false;
+    User user = null;
 
     ImageView imageViewRecipe;
     ToggleButton favoriteButton;
@@ -76,7 +78,18 @@ public class RecipePageFragment extends Fragment {
         favoriteButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                Call<Integer> call = apiService.updatePreferito(user.getId(), recipe.getRecipeId());
+                call.enqueue(new Callback<Integer>() {
+                    @Override
+                    public void onResponse(Call<Integer> call, Response<Integer> response) {
+                        Toast.makeText(ctx, "Tutto Ok", Toast.LENGTH_SHORT).show();
+                    }
 
+                    @Override
+                    public void onFailure(Call<Integer> call, Throwable t) {
+                        Toast.makeText(ctx, "Molto Male", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
         });
 
@@ -110,7 +123,7 @@ public class RecipePageFragment extends Fragment {
         String imgUrl = BASE_URL + "/static/recipes/" + recipe.getImg_name();
         new DownloadImageAsyncTask(imageViewRecipe, null).execute(imgUrl);
 
-        User user = ((CookIdeaApp)ctx.getApplicationContext()).getLoggedUser();
+        user = ((CookIdeaApp)ctx.getApplicationContext()).getLoggedUser();
         if(user == null){
             favoriteButton.setVisibility(View.GONE);
         }else{
