@@ -27,3 +27,16 @@
     vertical-align: top; /* Assicura l'allineamento verticale */
 }
 
+.recipes-teaser {
+    border: 2px solid black;
+}
+
+.teaser.image{
+    border: 2px solid white;
+    max-width: ;
+}
+
+img{
+    max-width: 200px;
+    max-height: 100px;
+}
