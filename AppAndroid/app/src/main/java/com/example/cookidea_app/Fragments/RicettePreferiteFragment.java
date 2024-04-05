@@ -6,7 +6,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -62,6 +64,7 @@ public class RicettePreferiteFragment extends Fragment {
 
         preferitiLV = rootview.findViewById(R.id.ricettePrefeListView);
 
+        // TODO: 04/04/2024 togliere retorift e apiInterface e usare apiService 
         Retrofit retrofit = new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         apiInterface = retrofit.create(CookIdeaApiEndpointInterface.class);
 
@@ -89,6 +92,14 @@ public class RicettePreferiteFragment extends Fragment {
             }
         });
 
+        preferitiLV.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(ctx, searchPageListAdapter.getItem(position).getName(), Toast.LENGTH_LONG).show();
+                ((MainActivity)ctx).changeTabById(R.id.searchPage, searchPageListAdapter.getItem(position).getRecipeId());
+                ((MainActivity)ctx).changeFrameByNavigationTab(R.id.recipePage);
+            }
+        });
         return rootview;
     }
 }

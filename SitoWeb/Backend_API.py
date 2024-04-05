@@ -84,18 +84,16 @@ def register():
                VALUES (%s, %s, %s, %s, %s, %s);"""
     values = (nome, cognome, data_nascita, email, username, password)
 
-    try:
-        db.insert(query, values)
+    
+    if db.insert(query, values) == True:
         query = "select * from utenti order by id desc limit 1"
         result = db.getSingleData(query)
         newUser = User(**result)
         return json.dumps(newUser, default=vars), 201
-        # da capire perche, nonostante non inserisca utente perche duplicato, finisca nell'exception ma continua a mandare il codice 201
-        # Errore durante la registrazione dell'utente: (1062, "Duplicate entry 'qqqq' for key 'utenti.username'")
-        # 192.168.1.129 - - [02/Apr/2024 23:53:18] "POST /api/signup HTTP/1.1" 201 -
+    else:
+        return "Errore: Username i email già esistente.", 500
 
-    except Exception as e:
-        return f"Errore durante la registrazione dell'utente: {str(e)}", 500 
+
 
 
 
@@ -253,22 +251,55 @@ def getPreferiti():
 def checkPreferiti():
     idUtente = request.args.get("id_utente")
     idPiatto = request.args.get("id_piatto")
-    query = "select * from preferiti WHERE id_utente = % AND id_piatto = %;"
-    result = db.getAllData (query, (idUtente))
+    query = """select p.id, nome_piatto, difficolta, tempo, portata, provenienza,image_name
+               from piatti p JOIN preferiti pref ON p.id = pref.id_piatto WHERE id_utente = %s AND id_piatto = %s;"""
+    result = db.getAllData (query, (idPiatto, idUtente))
     return json.dumps(result, default=vars)
 
 
 
 
+# api 12 bis UPDATE DATI UTENTE
+@appWebApi.route("/api/agg_DatiUtente", methods=["PUT"])
+def update_dati():
+    user_data = request.get_json()
 
+    id = user_data.get("id")
+    nome = user_data.get("nome")
+    cognome = user_data.get("cognome")
+    data_nascita_str = user_data.get("data_nascita")
+    data_nascita = datetime.strptime(data_nascita_str, "%b %d, %Y %I:%M:%S %p")
 
+    try:
+        query = """
+            UPDATE utenti
+            SET nome = %s,
+                cognome = %s,
+                data_nascita = %s
+            WHERE id = %s
+        """
+        values = (nome, cognome, data_nascita, id)
 
+       # cursor = db.connection.cursor()
+       # cursor.execute(query, values)
+       # db.connection.commit()  # Commit changes
 
+        db.update(query, values)
 
+        query = "SELECT * FROM utenti WHERE id = %s"
+        #cursor.execute(query, (id,))
+        #result = cursor.fetchone()
+        result = db.getSingleData(query, (id,))
 
+        if result:
+            new_user = User(**result)
+            return json.dumps(new_user, default=vars), 201
+        else:
+            return "User not found after update", 404
 
-
-
+    except Exception as e:
+        return f"Error updating user data: {str(e)}", 500
+    
 
 
 

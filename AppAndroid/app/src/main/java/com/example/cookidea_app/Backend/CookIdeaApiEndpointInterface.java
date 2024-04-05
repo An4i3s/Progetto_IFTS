@@ -7,6 +7,7 @@ import com.example.cookidea_app.ModelClasses.Serving;
 import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.ModelClasses.WeeklyMenu;
 
+
 import java.util.List;
 
 import retrofit2.Call;
@@ -14,6 +15,7 @@ import retrofit2.Response;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -46,4 +48,11 @@ public interface CookIdeaApiEndpointInterface {
 
     @GET("api/preferitiFromIdUtente")
     Call<List<Recipe>> getPreferitiFromId(@Query("id_utente") long idUtente);
+
+    @PUT("api/agg_DatiUtente")
+    Call<User> updateDatiUtente(@Body User updateUser);
+    // Call<User> updateDatiUtente(@Body UpdateRequest request);
+
+
+
 }

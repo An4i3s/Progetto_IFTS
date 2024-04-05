@@ -10,13 +10,13 @@ import java.util.Date;
 public class User implements Serializable {
     private long id;
     @SerializedName("nome")
-    private final String name;
+    private  String name;
     @SerializedName("cognome")
-    private final String surname;
+    private  String surname;
     @SerializedName("username")
     private final String username;
     @SerializedName("data_nascita")
-    private final Date birthdate;
+    private  Date birthdate;
     private final String email;
     @SerializedName("password")
     private final String password;
@@ -78,4 +78,15 @@ public class User implements Serializable {
 
 
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
+    }
 }

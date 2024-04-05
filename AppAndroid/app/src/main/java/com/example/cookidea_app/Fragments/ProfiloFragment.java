@@ -1,8 +1,12 @@
 package com.example.cookidea_app.Fragments;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
+
+import static com.example.cookidea_app.Activities.MainActivity.apiService;
+
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,23 +28,22 @@ import androidx.fragment.app.Fragment;
 import com.example.cookidea_app.Activities.CookIdeaApp;
 
 import com.example.cookidea_app.Activities.MainActivity;
-import com.example.cookidea_app.Activities.SharedPrefManager;
-import com.example.cookidea_app.Backend.CookIdeaApiEndpointInterface;
 import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.R;
 
-import org.w3c.dom.Text;
-
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.util.Calendar;
+import java.util.Date;
 
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProfiloFragment extends Fragment {
 
-    User user;
+
 
 
     TextView usernameTV;
@@ -57,14 +61,8 @@ public class ProfiloFragment extends Fragment {
     ImageButton btnConfCognome;
 
     ImageButton btnDataNascita;
-    TextView username;
-    TextView nome;
-    Button modNome;
 
-    SharedPreferences sharedPreferences;
-
-    Retrofit retrofit = new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
-    CookIdeaApiEndpointInterface endpointInterface = retrofit.create(CookIdeaApiEndpointInterface.class);
+    Button btnModPassword;
 
     Context ctx;
 
@@ -87,7 +85,9 @@ public class ProfiloFragment extends Fragment {
 
 
 
-         user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
+
+        User user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
+
         usernameTV = rootView.findViewById(R.id.usernameTV);
         usernameTV.setText(user.getUsername());
 
@@ -107,6 +107,7 @@ public class ProfiloFragment extends Fragment {
         btnConfCognome = rootView.findViewById(R.id.btnConfCognome);
         btnDataNascita = rootView.findViewById(R.id.btnDataNascita);
 
+        btnModPassword = rootView.findViewById(R.id.btnModPassword);
 
 
         btnNome.setOnClickListener(new View.OnClickListener() {
@@ -144,15 +145,42 @@ public class ProfiloFragment extends Fragment {
                         mCalendar.set(Calendar.YEAR, year);
                         mCalendar.set(Calendar.MONTH, month);
                         mCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-                        String selectedDate = DateFormat.getDateInstance(DateFormat.SHORT).format(mCalendar.getTime());
+                        String selectedDate = DateFormat.getDateInstance(DateFormat.LONG).format(mCalendar.getTime());
+                        try {
+                            Date data = DateFormat.getDateInstance().parse(selectedDate);
+                            user.setBirthdate(data);
+                        } catch (ParseException e) {
+                            throw new RuntimeException(e);
+                        }
                         dataNascitaTv.setText(selectedDate);
+
+
+                        Call<User> call = apiService.updateDatiUtente(user);
+                        call.enqueue(new Callback<User>() {
+                            @Override
+                            public void onResponse(Call<User> call, Response<User> response) {
+
+                                if (response.isSuccessful()){
+                                    ((CookIdeaApp)((MainActivity)ctx).getApplication()).setLoggedUser(user);
+
+                                }else {
+                                    Toast.makeText(ctx, "Errore!!!", Toast.LENGTH_LONG).show();
+                                }
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<User> call, Throwable t) {
+                                Toast.makeText(ctx, "Throwable = "+ t.getMessage(), Toast.LENGTH_LONG);
+
+                            }
+                        });
                     }
                 });
             }
         });
 
 
-        // TODO: 29/03/2024 Implemnetare collegamento a API per update dati utenti in DB 
         btnConfNome.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -161,6 +189,30 @@ public class ProfiloFragment extends Fragment {
                 btnNome.setVisibility(View.VISIBLE);
                 editNome.setVisibility(View.GONE);
                 btnConfNome.setVisibility(View.GONE);
+
+
+                user.setName(nomeTv.getText().toString());
+
+                Call<User> call = apiService.updateDatiUtente(user);
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+
+                        if (response.isSuccessful()){
+                            ((CookIdeaApp)((MainActivity)ctx).getApplication()).setLoggedUser(user);
+
+                        }else {
+                            Toast.makeText(ctx, "Errore!!!", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        Toast.makeText(ctx, "Throwable = "+ t.getMessage(), Toast.LENGTH_LONG);
+
+                    }
+                });
             }
         });
 
@@ -172,11 +224,42 @@ public class ProfiloFragment extends Fragment {
                 btnCognome.setVisibility(View.VISIBLE);
                 editCognome.setVisibility(View.GONE);
                 btnConfCognome.setVisibility(View.GONE);
+
+                user.setSurname(cognomeTv.getText().toString());
+
+                Call<User> call = apiService.updateDatiUtente(user);
+
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+
+                        if (response.isSuccessful()){
+                            ((CookIdeaApp)((MainActivity)ctx).getApplication()).setLoggedUser(user);
+
+                        }else {
+                            Toast.makeText(ctx, "Errore!!!", Toast.LENGTH_LONG).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        Toast.makeText(ctx, "Throwable = "+ t.getMessage(), Toast.LENGTH_LONG);
+
+                    }
+                });
             }
         });
 
 
-        username = rootView.findViewById(R.id.usernameTV);
+        btnModPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MainActivity activity = (MainActivity) getActivity();
+                assert activity != null;
+                activity.apriPasswordFragmnent();
+            }
+        });
 
 
 

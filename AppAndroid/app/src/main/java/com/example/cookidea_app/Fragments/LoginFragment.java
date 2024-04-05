@@ -120,6 +120,8 @@ public class LoginFragment extends Fragment {
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
                         Log.i("Errore login", "Errore API login");
+                        // TODO: 02/04/2024 fare apparire messaggio TextView rosso
+
                     }
                 });
             }

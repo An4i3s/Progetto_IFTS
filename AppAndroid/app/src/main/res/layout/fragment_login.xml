@@ -15,21 +15,26 @@
             android:layout_height="40dp"
             android:layout_margin="@dimen/margin"
             android:fontFamily="@font/alatsi"
-            android:text="Username:" />
+            android:text="Username:"
+            android:textSize="20sp"
+            />
         <EditText
             android:id="@+id/usernameEditText"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
             android:hint="Inserisci username"
-            android:layout_margin="@dimen/margin" />
+            android:layout_margin="@dimen/margin"
+            android:fontFamily="@font/alatsi"
+            />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_margin="@dimen/margin"
-
             android:fontFamily="@font/alatsi"
-            android:text="Password:" />
+            android:text="Password:"
+            android:textSize="20sp"
+            />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -37,8 +42,8 @@
             >
             <EditText
                 android:id="@+id/passwordEditText"
-                android:layout_width="350dp"
-                android:layout_height="40dp"
+                android:layout_width="330dp"
+                android:layout_height="60dp"
                 android:hint="Inserisci password"
                 android:fontFamily="@font/alatsi"
                 android:layout_margin="@dimen/margin" />
@@ -46,19 +51,23 @@
             <ImageButton
                 android:id="@+id/btnVisibility"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:src="@drawable/visibility"
+                android:layout_height="wrap_content"
+
+                android:src="@drawable/visibility2"
                 android:layout_toEndOf="@id/passwordEditText"
-                android:backgroundTint="@android:color/background_light"
+                android:background="@android:color/transparent"
+
+
                 />
             <ImageButton
                 android:id="@+id/btnVisibilityOff"
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="wrap_content"
                 android:src="@drawable/visibility_off"
                 android:visibility="invisible"
                 android:layout_toEndOf="@id/passwordEditText"
-                android:backgroundTint="@android:color/background_light"
+                android:background="@android:color/transparent"
+
                 />
         </RelativeLayout>
 
