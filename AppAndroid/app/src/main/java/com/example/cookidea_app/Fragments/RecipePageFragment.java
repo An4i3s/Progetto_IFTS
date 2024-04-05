@@ -120,11 +120,12 @@ public class RecipePageFragment extends Fragment {
             checkFavouriteCall.enqueue(new Callback<Integer>() {
                 @Override
                 public void onResponse(Call<Integer> call, Response<Integer> response) {
-                    int checkFavourite = response.body();
+                    Integer checkFavourite = response.body();
                     if(checkFavourite == 1){
                         favouriteChecked = true;
                     }
                     favoriteButton.setChecked(favouriteChecked);
+                    favouriteChecked = false;
                 }
 
                 @Override
@@ -132,7 +133,6 @@ public class RecipePageFragment extends Fragment {
 
                 }
             });
-            favoriteButton.setChecked(favouriteChecked);
         }
 
 
