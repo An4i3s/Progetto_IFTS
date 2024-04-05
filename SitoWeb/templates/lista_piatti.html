@@ -24,12 +24,45 @@
 <body>
        <!-- Inizio Nav / Login -->
        <header>
-        <nav class="navigation">
-          <img src="/static/img/1.png" alt="logo cook Idea" height="100px" width="100px">
-          <input class="cerca" type="text" id="searchBar" placeholder="CERCA...">
-          <a href="#">Home</a>
-          <button class="btnLogin-popup">Login</button>
-        </nav>
+        <nav class="navbar custom-navbar">
+            <div class="custom-container">
+                <div class="left-section">
+                    <h1 class="logo">CookIdea</h1>
+                </div>
+                <form class="search-form" action="#" method="GET">
+                    <input id="searchBar" type="text" name="search" placeholder="Cerca...">
+                    <button type="submit">Cerca</button>
+                </form>
+                <div class="right-section">
+                    <div class="dropdown">
+                        <button id="dropdownBtn" class="dropbtn">MyCookIdea</button>
+                        <div id="dropdownContent" class="dropdown-content">
+                            <a href="#">My List</a>
+                            <a href="#">My Menu</a>
+                            <a href="#">My Preference</a>
+                         
+                        </div>
+                    </div>
+                    
+              
+        <button id="loginButton" class="btnLogin-popup">Accedi</button>
+    
+    <div id="loginPopup" class="popup">
+      <div class="popup-content">
+        <h2>Accesso</h2>
+        <form>
+          <label for="username">Nome utente:</label>
+          <input type="text" id="username" name="username"><br><br>
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password"><br><br>
+          <input type="submit" value="Accedi">
+        </form>
+        <span class="close" id="closePopup">&times;</span>
+      </div>
+    </div>
+    </div>
+    </div>
+    </nav>
       </header>
       
        <!-- Lista Ricette -->
@@ -41,97 +74,36 @@
                         <a href="https://www.fattoincasadabenedetta.it/ricetta/penne-al-baffo/">
                             <div class="teaser image">
                                 <div class="img-spacer">
-                                    <img src="https://www.fattoincasadabenedetta.it/wp-content/uploads/2023/12/PENNE_AL_BAFFO_SITO-3-450x300.jpg" 
-                                    alt="Penne al baffo" class="'lazyloaded" data-ll-status="loaded">
+                                    <img src="" 
+                                    alt=" " class="'lazyloaded" data-ll-status="loaded">
                                 </div>
                             </div>
                             <div class="teaser1 text">
                                 <div class="teaser-top">
                                     <div class="teaser-intro">
-                                        <h3 class="title">Penne al baffo</h3>
+                                        <h1 class="title">{{titolo piatto}} </h1>
+                                    </br>
                                     </div>
                                 </div>
                                 <div class="teaser-bottom">
                                 <div class="outro">
-                                    <p class="info"> 15 minuti, 8 ingredienti</p>
+                                    <h2 class="info" id="tempo">Tempo:{{tempo}} </h2>
+                                </br>
+                                    <h2 class="info" id="difficolta">Difficoltà:{{difficolta}} </h2>
+                                </br>
+                                    <h2 class="info" id="portata">Portata: {{portata}}</h2>
+                                </br>
+                                   <h2 class="info" id="provenienza">Provenienza:{{provenienza}} </h2>
                                 </div>
                                 </div>
                             </div>
                         </a>
                     </div>
-                    <div class="recipes-teaser">
-                        <a href="https://www.fattoincasadabenedetta.it/ricetta/penne-al-baffo/">
-                            <div class="teaser image">
-                                <div class="img-spacer">
-                                    <img src="https://www.fattoincasadabenedetta.it/wp-content/uploads/2023/12/PENNE_AL_BAFFO_SITO-3-450x300.jpg" 
-                                    alt="Penne al baffo" class="'lazyloaded" data-ll-status="loaded">
-                                </div>
-                            </div>
-                            <div class="teaser1 text">
-                                <div class="teaser-top">
-                                    <div class="teaser-intro">
-                                        <h3 class="title">Penne al baffo</h3>
-                                    </div>
-                                </div>
-                                <div class="teaser-bottom">
-                                <div class="outro">
-                                    <p class="info"> 15 minuti, 8 ingredienti</p>
-                                </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="recipes-teaser">
-                        <a href="https://www.fattoincasadabenedetta.it/ricetta/penne-al-baffo/">
-                            <div class="teaser image">
-                                <div class="img-spacer">
-                                    <img src="https://www.fattoincasadabenedetta.it/wp-content/uploads/2023/12/PENNE_AL_BAFFO_SITO-3-450x300.jpg" 
-                                    alt="Penne al baffo" class="'lazyloaded" data-ll-status="loaded">
-                                </div>
-                            </div>
-                            <div class="teaser1 text">
-                                <div class="teaser-top">
-                                    <div class="teaser-intro">
-                                        <h3 class="title">Penne al baffo</h3>
-                                    </div>
-                                </div>
-                                <div class="teaser-bottom">
-                                <div class="outro">
-                                    <p class="info"> 15 minuti, 8 ingredienti</p>
-                                </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="recipes-teaser">
-                        <a href="https://www.fattoincasadabenedetta.it/ricetta/penne-al-baffo/">
-                            <div class="teaser image">
-                                <div class="img-spacer">
-                                    <img src="https://www.fattoincasadabenedetta.it/wp-content/uploads/2023/12/PENNE_AL_BAFFO_SITO-3-450x300.jpg" 
-                                    alt="Penne al baffo" class="'lazyloaded" data-ll-status="loaded">
-                                </div>
-                            </div>
-                            <div class="teaser1 text">
-                                <div class="teaser-top">
-                                    <div class="teaser-intro">
-                                        <h3 class="title">Penne al baffo</h3>
-                                    </div>
-                                </div>
-                                <div class="teaser-bottom">
-                                <div class="outro">
-                                    <p class="info"> 15 minuti, 8 ingredienti</p>
-                                </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-      </div>
+                
       <footer id="footer">
         <div class="container">   
         </div>
       </footer>
+      <script src="../static/js/dropdown.js"></script>
 </body>
 </html>
