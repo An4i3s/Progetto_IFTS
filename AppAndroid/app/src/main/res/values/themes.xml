@@ -8,7 +8,7 @@
     </style>
 
     <style name="Theme.CookIdea" parent="Base.Theme.CookIdea">
-        <item name="colorPrimary">@color/bluScuro</item>
+        <item name="colorPrimary">@color/yellow</item>
         <item name="colorButtonNormal">@color/yellow</item>
         <item name="textAppearanceBody1">@style/TextAppearance.MaterialComponents.Body1</item>
         <item name="textAppearanceHeadline1">@style/TextAppearance.MaterialComponents.Headline1</item>
