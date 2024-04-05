@@ -14,8 +14,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import com.example.cookidea_app.Backend.DownloadImageAsyncTask;
 import com.example.cookidea_app.ModelClasses.Ingredients;
@@ -34,6 +36,7 @@ public class RecipePageFragment extends Fragment {
     Recipe recipe;
     View rootView = null;
     ImageView imageViewRecipe;
+    ToggleButton favoriteButton;
     TextView textViewName, textViewTime, textViewDifficulty, textViewProvenience, textViewIngredients, textViewGuide;
     public RecipePageFragment(){
 
@@ -56,6 +59,7 @@ public class RecipePageFragment extends Fragment {
         textViewProvenience = rootView.findViewById(R.id.provenienceRecipeTextView);
         textViewIngredients = rootView.findViewById(R.id.ingredientsRecipeTextView);
         textViewGuide = rootView.findViewById(R.id.guideRecipeTextView);
+        favoriteButton = rootView.findViewById(R.id.favouriteButton);
 
         Bundle b = getArguments();
         String recipeId = "";
@@ -64,6 +68,13 @@ public class RecipePageFragment extends Fragment {
             recipeId = b.getString("recipeId");
             downloadRecipeById(recipeId);
         }
+
+        favoriteButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+            }
+        });
 
         return rootView;
     }
