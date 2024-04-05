@@ -1,5 +1,5 @@
 import pymysql
-from db import *
+from DB_PERSONAL import *
 
 
 
