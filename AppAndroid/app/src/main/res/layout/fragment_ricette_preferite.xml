@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingTop="100dp"
+        android:paddingTop="70dp"
         >
         <ImageView
             android:id="@+id/imgCuore"
@@ -21,10 +21,10 @@
             android:text="Ricette Preferite"
             android:textSize="40sp"
             android:fontFamily="@font/passion_one"
-            android:textColor="@color/bluScuro"
+            android:textColor="@color/grigio"
             android:layout_toEndOf="@+id/imgCuore"
             android:layout_marginStart="20dp"
-            android:paddingTop="25dp"
+            android:paddingTop="10dp"
             />
         <LinearLayout
             android:layout_width="match_parent"
