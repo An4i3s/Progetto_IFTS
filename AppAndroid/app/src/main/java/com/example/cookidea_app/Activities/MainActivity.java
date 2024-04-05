@@ -88,7 +88,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         changeFrameByNavigationTab(R.id.homePage);
     }
 
-    public static final String BASE_URL = "http://192.168.1.10:8000";
+    public static final String BASE_URL = "http://192.168.0.103:8000";
+
 
     public static final Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BASE_URL)
