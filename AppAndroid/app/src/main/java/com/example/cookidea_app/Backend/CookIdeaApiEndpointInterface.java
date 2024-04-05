@@ -46,7 +46,7 @@ public interface CookIdeaApiEndpointInterface {
 
 
     @GET("/api/checkPreferito")
-    Call<Integer> checkPreferito(@Query("id_utente") int idUtente, @Query("id_piatto") int idPiatto);
+    Call<Integer> checkPreferito(@Query("id_utente") long idUtente, @Query("id_piatto") String idPiatto);
 
     @GET("api/preferitiFromIdUtente")
     Call<List<Recipe>> getPreferitiFromId(@Query("id_utente") long idUtente);
