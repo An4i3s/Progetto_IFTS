@@ -17,34 +17,30 @@ db = None
 
 # web w1 - homepage - 
 @appWebApi.route("/")
-def homepage():
-    
-    query = "SELECT DISTINCT piatti.portata FROM piatti"
-    result = db.getAllData(query)
-    listaPortate = []
-    for record in result:
-        nomePortata = record["portata"]
-        image_url = f"/static/img/{nomePortata.lower()}.jpg"
-        portata = Portata(nomePortata, image_url)
-        listaPortate.append(portata)
-    
-    piattiDaRestituire = 5
-    query = """SELECT image_name
-               FROM piatti ORDER BY RAND() LIMIT %s"""
-    result = db.getAllData(query, (piattiDaRestituire))
-    listaImmagini =[]
-    for record in result:
-        immagine = record["image_name"]
-        listaImmagini.append(immagine)
-
-    return render_template("index.html", listaPortate=listaPortate, listaImmagini=listaImmagini)
-
-
 def index():
     if 'username' in session:
-        return render_template('/connect.html', username = session['username'])
+        return render_template('/connect.html', username=session['username'])
     else:
-        return render_template('index.html')
+        query = "SELECT DISTINCT piatti.portata FROM piatti"
+        result = db.getAllData(query)
+        listaPortate = []
+        for record in result:
+            nomePortata = record["portata"]
+            image_url = f"/static/img/{nomePortata.lower()}.jpg"
+            portata = Portata(nomePortata, image_url)
+            listaPortate.append(portata)
+        
+        piattiDaRestituire = 5
+        query = """SELECT image_name
+                   FROM piatti ORDER BY RAND() LIMIT %s"""
+        result = db.getAllData(query, (piattiDaRestituire))
+        listaImmagini = []
+        for record in result:
+            immagine = record["image_name"]
+            listaImmagini.append(immagine)
+
+        return render_template("index.html", listaPortate=listaPortate, listaImmagini=listaImmagini)
+
 
 
 @appWebApi.route('/registrazione', methods =['GET', 'POST'])
@@ -231,6 +227,3 @@ if __name__ == "__main__":
         appWebApi.run(host='0.0.0.0', port=8000)
     except KeyboardInterrupt:
         db.close()
-
-
-
