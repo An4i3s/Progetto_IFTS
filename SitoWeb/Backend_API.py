@@ -245,6 +245,27 @@ def checkPreferiti():
         return json.dumps(0)
     else:
         return json.dumps(1)
+    
+    
+# api  Aggiungi / togli da preferiti
+# http://192.168.0.110:8000/api/preferiti/
+@appWebApi.route("/api/updatePreferito")
+def updatePreferiti():
+
+    idUtente = request.args.get("id_utente")
+    idPiatto = request.args.get("id_piatto")
+    query = """select preferiti.id FROM preferiti WHERE id_utente = %s AND id_piatto = %s;"""
+    result = db.getSingleData (query, (idUtente, idPiatto,))
+
+    if result is None:
+        query = "INSERT into preferiti (id_utente, id_piatto) VALUES (%s, %s)"
+        db.insert(query,(idUtente, idPiatto))
+        return json.dumps(1)
+    
+    else:
+        query = "delete from preferiti where id_utente = %s and id_piatto = %s;"
+        db.delete(query, (idUtente, idPiatto))
+
 
 
 
