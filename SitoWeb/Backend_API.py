@@ -108,15 +108,9 @@ def register():
 @appWebApi.route("/api/ricercaPerNome/<nome>")
 def getRecipesfromName(nome):
 
-    idUtente = request.args.get("id_utente")
 
-    if idUtente is None:
-        query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE nome_piatto LIKE %s"
-        
-    else:
-        query = """select pref.id_utente as favFromUser, p.id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti p
-                   LEFT OUTER JOIN preferiti pref ON p.id = pref.id_piatto WHERE nome_piatto LIKE %s"""
-    
+    query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE nome_piatto LIKE %s"
+
     result = db.getAllData(query, ('%' + nome+ '%',))
     return json.dumps(result, default=vars)
 
