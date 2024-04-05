@@ -96,11 +96,6 @@ def register():
 
 
 
-
-    
-
-
-
 # api a4 RICERCA PER NOME PIATTO  (anche solo una parte del nome)
 # restituisce un record di entità piatto (id, nome_piatto, difficoltà, tempo, provenienza, portata, image_name)
 # filtrato per nome_piatto
@@ -239,17 +234,17 @@ def getPreferiti():
 
 
 # api 11 CONTROLLA SE PREFERITO IN BASE A ID_UTENTE E ID_PIATTO
-# restituisce una lista di portate (primo, secondo..) con relativo url immagine, prese dalla tabella piatti, senza duplicati
 # http://192.168.0.110:8000/api/preferiti/
 @appWebApi.route("/api/checkPreferito")
 def checkPreferiti():
     idUtente = request.args.get("id_utente")
     idPiatto = request.args.get("id_piatto")
-    query = """select p.id, nome_piatto, difficolta, tempo, portata, provenienza,image_name
-               from piatti p JOIN preferiti pref ON p.id = pref.id_piatto WHERE id_utente = %s AND id_piatto = %s;"""
-    result = db.getAllData (query, (idPiatto, idUtente))
-    return json.dumps(result, default=vars)
-
+    query = """select preferiti.id FROM preferiti WHERE id_utente = %s AND id_piatto = %s;"""
+    result = db.getSingleData (query, (idUtente, idPiatto,))
+    if result is None:
+        return json.dumps(0)
+    else:
+        return json.dumps(1)
 
 
 
