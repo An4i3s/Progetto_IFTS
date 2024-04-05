@@ -18,11 +18,11 @@
     <nav class="navbar custom-navbar">
         <div class="custom-container">
             <div class="left-section">
-                <h1 class="logo">CookIdea</h1>
+                <h1 class="logo"> <img src="../static/img/1.png" alt="logo"></h1>
             </div>
-            <form class="search-form" action="#" method="GET">
-                <input id="searchBar" type="text" name="search" placeholder="Cerca...">
-                <button type="submit">Cerca</button>
+            <form class="search-form" action="/web/ricerca/ricercaPerNome" method="GET">
+                <input id="searchBar" type="text" name="nome_piatto" placeholder="Cerca...">
+                <button type="submit" id = "search"> <img src="../static/img/magnifying-glass.png" alt="Cerca"></button>
             </form>
             <div class="right-section">
                 <div class="dropdown">
@@ -31,29 +31,13 @@
                         <a href="#">My List</a>
                         <a href="#">My Menu</a>
                         <a href="#">My Preference</a>
-                     
                     </div>
                 </div>
-                
-          
-    <button id="loginButton" class="btnLogin-popup">Accedi</button>
-
-<div id="loginPopup" class="popup">
-  <div class="popup-content">
-    <h2>Accesso</h2>
-    <form>
-      <label for="username">Nome utente:</label>
-      <input type="text" id="username" name="username"><br><br>
-      <label for="password">Password:</label>
-      <input type="password" id="password" name="password"><br><br>
-      <input type="submit" value="Accedi">
-    </form>
-    <span class="close" id="closePopup">&times;</span>
-  </div>
-</div>
-</div>
-</div>
-</nav>
+                <a href="{{ url_for('register') }}" class="link-menu">Registrati</a>
+                <a href="{{ url_for('login') }}" class="link-menu">Login</a>
+            </div>
+        </div>
+    </nav>
     
     
     <div class="container">
