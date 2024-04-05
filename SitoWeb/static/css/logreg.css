@@ -1,0 +1,172 @@
+body{
+    background-image: url('../img/background_blur.jpg');
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center;  
+    background-size: cover; /* Per adattare l'immagine alla dimensione dell'intera finestra del browser */
+    background-repeat: no-repeat; /* Per evitare la ripetizione dell'immagine */
+    font-family: 'Passion One', sans-serif;
+  }
+
+
+  .wrapper {
+    display: flex;
+    justify-content: center; /* Centra il contenuto orizzontalmente */
+    align-items: flex-start; /* Centra il contenuto verticalmente */
+    padding-top: 0px;
+    height: 100vh; /* Altezza al 100% della viewport, se necessario */
+  }
+
+.wrapper .form-box{
+    margin-top: 10px;
+    width: 400px;
+    height: 440px;
+  }  
+  
+  .wrapper .form-box .register{
+    width: 100%;
+    position: absolute;
+    transition: none;
+  }
+  
+  .wrapper .icon-close{
+    position: absolute;
+    top:  0;
+    right: 0;
+    width: 45px;
+    height: 45px;
+    background: #ffffff;
+    font-size: 2em;
+    color: #162938;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-left-radius: 20px;
+    cursor: pointer;
+    z-index: 1;
+  }
+  
+  .form-box h2{
+    font-size: 2em;
+    color: #fff;
+    text-align: center;
+  }
+  
+  .input-box{
+    position: relative;
+    width: 100%;
+    height: 50px;
+    border-bottom:  2px solid #fff;
+    margin: 30px 0;
+  }
+  
+  .input-box label{
+    position: absolute;
+    top: 50%;
+    left: 5px;
+    transform: translateY(-50%);
+    font-size: 1em;
+    color: #fff;
+    font-weight: 500;
+    pointer-events: none;
+    transition: 0s;
+  }
+  
+  .input-box input:focus~label,
+  .input-box input:valid~label{
+    top: -5px;
+  }
+  
+  .input-box input{
+    width: 100%;
+    height: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    font-weight: 600;
+  }
+  
+  .input-box .icon{
+    position: absolute;
+    right: 8px;
+    font-size: 1.2em;
+    color: #fff; 
+    line-height: 57px;
+  }
+  
+  .remember-forgot{
+    font-size: .9em;
+    color: #fff;
+    font-weight: 500;
+    margin: -15px 0 15px;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .remember-forgot label input{
+    accent-color: #fff;
+    margin-right: 3px;
+  }
+  
+  .remember-forgot a{
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .remember-forgot a:hover{
+    text-decoration: underline;
+  }
+  
+  .btn{
+    padding: 10px 24px;
+    border-radius: 30px;
+    background-color: #241f20;;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    justify-content: center;
+    display: flex;
+    margin-right: 10px;
+    flex: 1;
+  }
+  .btn:last-child {
+    margin-right: 10px;
+  }
+  .btn:hover{
+    background-color: #000000;
+  }
+  .link-menu {
+    text-decoration: none; /* Rimuove il sottolineatura */
+    color: #ffffff; /* Imposta il colore del testo a bianco */
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px; /* Altezza al 100% della viewport, se necessario */
+  }
+  
+  .login-register{
+    font-size: .9em;
+    color: #fff;
+    text-align: center;
+    font-weight: 500;
+    margin: 25px 0 10px;
+  }
+  
+  .login-register p a{
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+    
+  }
+  
+  .login-register p a:hover{
+    text-decoration: underline;
+  }

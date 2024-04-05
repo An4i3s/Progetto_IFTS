@@ -49,7 +49,7 @@ CREATE TABLE `utenti` (
   `data_nascita` date NOT NULL,
   `email` varchar(45) NOT NULL UNIQUE,
   `username` varchar(45) NOT NULL UNIQUE,
-  `password` varchar(45) NOT NULL,
+  `password` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `email_UNIQUE` (`email`)

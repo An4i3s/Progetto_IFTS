@@ -19,9 +19,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.example.cookidea_app.Activities.CookIdeaApp;
 import com.example.cookidea_app.Backend.DownloadImageAsyncTask;
 import com.example.cookidea_app.ModelClasses.Ingredients;
 import com.example.cookidea_app.ModelClasses.Recipe;
+import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.R;
 
 import java.util.List;
@@ -35,6 +37,8 @@ public class RecipePageFragment extends Fragment {
     Context ctx = null;
     Recipe recipe;
     View rootView = null;
+    boolean favouriteChecked = false;
+
     ImageView imageViewRecipe;
     ToggleButton favoriteButton;
     TextView textViewName, textViewTime, textViewDifficulty, textViewProvenience, textViewIngredients, textViewGuide;
@@ -105,6 +109,35 @@ public class RecipePageFragment extends Fragment {
     void fillPage(){
         String imgUrl = BASE_URL + "/static/recipes/" + recipe.getImg_name();
         new DownloadImageAsyncTask(imageViewRecipe, null).execute(imgUrl);
+
+        User user = ((CookIdeaApp)ctx.getApplicationContext()).getLoggedUser();
+        if(user == null){
+            favoriteButton.setVisibility(View.GONE);
+        }else{
+            favoriteButton.setVisibility(View.VISIBLE);
+
+            Call<Integer> checkFavouriteCall = apiService.checkPreferito(user.getId(), recipe.getRecipeId());
+            checkFavouriteCall.enqueue(new Callback<Integer>() {
+                @Override
+                public void onResponse(Call<Integer> call, Response<Integer> response) {
+                    int checkFavourite = response.body();
+                    if(checkFavourite == 1){
+                        favouriteChecked = true;
+                    }
+                    favoriteButton.setChecked(favouriteChecked);
+                }
+
+                @Override
+                public void onFailure(Call<Integer> call, Throwable t) {
+
+                }
+            });
+            favoriteButton.setChecked(favouriteChecked);
+        }
+
+
+
+
 
         textViewName.setText(recipe.getName());
         String time = " " + recipe.getTime() + "min";

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="./static/css/logreg.css" media="screen">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="form-box login">
+            <h2>Login</h2>
+            <form action="/login" method="POST">
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="person"></ion-icon>
+                </span>
+                <input type="text" required name="username">
+                <label>Username</label> 
+            </div>
+            <div class="input-box">
+                <span class="icon">
+                    <ion-icon name="lock-closed"></ion-icon>
+                </span>
+                <input type="password" required name="password">
+                <label>Password</label> 
+            </div>
+            <div class="remember-forgot">
+                <label><input type="checkbox" name="remember"> Ricordami</label>
+                <a href="#">Password dimenticata?</a>
+            </div>
+            <div class="button-container">
+                <button type="button" class="btn" onclick="window.history.back()">Indietro</button>
+                <button type="submit" class="btn">Accedi</button>
+            </div>
+            <div class="login-register">
+                <p>Non hai ancora un account?<a href="{{url_for('register')}}" class="register-link"> Registrati</a></p>
+            </div>
+
+                <!-- Aggiunta del token CSRF -->
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <!-- Gestione degli errori -->
+                {% if error %}
+                    <p class="error">{{ error }}</p>
+                {% endif %}
+
+            </form>
+        </div>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    
+</body>
+</html>
