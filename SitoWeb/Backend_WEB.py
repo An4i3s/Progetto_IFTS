@@ -175,7 +175,7 @@ def webGetRecipesfromPortata(portata):
     query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE portata = %s"
     result = db.getAllData(query,(portata,) )
 
-    return render_template("piatto_singolo.html", piatti = result)
+    return render_template("lista_piatti.html", piatti = result)
 
 
     
@@ -235,7 +235,7 @@ def webGetRicettaCompletaFromId():
 if __name__ == "__main__":
     try:
         db = Database()
-        appWebApi.run(host='0.0.0.0', port=8000, debug= True)
+        appWebApi.run(host='0.0.0.0', port=8000)
     except KeyboardInterrupt:
         db.close()
 
