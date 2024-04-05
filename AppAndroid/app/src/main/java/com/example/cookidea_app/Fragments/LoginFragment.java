@@ -71,6 +71,7 @@ public class LoginFragment extends Fragment {
         loginBtn = rootView.findViewById(R.id.signinButton);
 
 
+
         btnVisibility.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,7 +107,6 @@ public class LoginFragment extends Fragment {
 
                         //if StatusCode = 200
                         if (response.isSuccessful()){
-                            Toast.makeText(getContext(), "Utente Trovato", Toast.LENGTH_LONG).show();
                             user = response.body();
                             ((MainActivity)ctx).onLoginSuccess(user);
                         }else {

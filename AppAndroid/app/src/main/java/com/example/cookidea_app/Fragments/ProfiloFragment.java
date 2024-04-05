@@ -137,6 +137,7 @@ public class ProfiloFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 DatePickerDialog fragmentDate = new DatePickerDialog(rootView.getContext());
+                fragmentDate.getDatePicker().setMaxDate(new Date().getTime());
                 fragmentDate.show();
                 fragmentDate.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
                     @Override

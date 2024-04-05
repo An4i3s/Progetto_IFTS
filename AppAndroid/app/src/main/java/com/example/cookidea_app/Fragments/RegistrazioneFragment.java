@@ -89,6 +89,7 @@ public class RegistrazioneFragment extends Fragment {
 
                 Activity activity = getActivity();
                 DatePickerDialog fragment = new DatePickerDialog(rootView.getContext());
+                fragment.getDatePicker().setMaxDate(new Date().getTime());
                 if (activity != null && isAdded()) {
                     fragment.show();
                     fragment.setOnDateSetListener(new DatePickerDialog.OnDateSetListener() {
