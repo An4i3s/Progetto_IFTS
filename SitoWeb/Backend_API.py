@@ -260,11 +260,12 @@ def updatePreferiti():
     if result is None:
         query = "INSERT into preferiti (id_utente, id_piatto) VALUES (%s, %s)"
         db.insert(query,(idUtente, idPiatto))
-        return json.dumps(1)
+        return json.dumps([])
     
     else:
         query = "delete from preferiti where id_utente = %s and id_piatto = %s;"
         db.delete(query, (idUtente, idPiatto))
+        return json.dumps([])
 
 
 
