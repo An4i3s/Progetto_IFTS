@@ -75,9 +75,9 @@ public class RecipePageFragment extends Fragment {
             downloadRecipeById(recipeId);
         }
 
-        favoriteButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        favoriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+            public void onClick(View v) {
                 Call<Integer> call = apiService.updatePreferito(user.getId(), recipe.getRecipeId());
                 call.enqueue(new Callback<Integer>() {
                     @Override
