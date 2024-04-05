@@ -16,12 +16,19 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.cookidea_app.Activities.CookIdeaApp;
 import com.example.cookidea_app.Activities.MainActivity;
 import com.example.cookidea_app.Activities.SharedPrefManager;
 import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.R;
+
+import static com.example.cookidea_app.Activities.MainActivity.apiService;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PasswordFragment extends Fragment {
 
@@ -113,8 +120,34 @@ public class PasswordFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (isOldPassTrue() && passCorretta()){
-                    // TODO: 04/04/2024 Implemnta endpoint update Password
                     erroreConferma.setVisibility(View.GONE);
+                    user.setPassword(nuovaPassET.getText().toString());
+                    Call<User> call = apiService.updateDatiUtente(user);
+
+                    call.enqueue(new Callback<User>() {
+                        @Override
+                        public void onResponse(Call<User> call, Response<User> response) {
+
+                            if (response.isSuccessful()){
+                                ((CookIdeaApp)((MainActivity)ctx).getApplication()).setLoggedUser(user);
+                                MainActivity main = (MainActivity) getActivity();
+                                main.changeFrameByNavigationTab(R.id.userProfilePage);
+
+
+
+                            }else {
+                                Toast.makeText(ctx, "Errore nella modifica password!!", Toast.LENGTH_LONG).show();
+                            }
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<User> call, Throwable t) {
+                            Toast.makeText(ctx, "Throwable = "+ t.getMessage(), Toast.LENGTH_LONG).show();
+
+                        }
+                    });
+
                 }else {
                     erroreConferma.setVisibility(View.VISIBLE);
                 }

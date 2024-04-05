@@ -269,16 +269,18 @@ def update_dati():
     cognome = user_data.get("cognome")
     data_nascita_str = user_data.get("data_nascita")
     data_nascita = datetime.strptime(data_nascita_str, "%b %d, %Y %I:%M:%S %p")
+    password = user_data.get("password")
 
     try:
         query = """
             UPDATE utenti
             SET nome = %s,
                 cognome = %s,
-                data_nascita = %s
+                data_nascita = %s,
+                password = %s
             WHERE id = %s
         """
-        values = (nome, cognome, data_nascita, id)
+        values = (nome, cognome, data_nascita, password, id)
 
        # cursor = db.connection.cursor()
        # cursor.execute(query, values)

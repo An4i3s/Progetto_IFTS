@@ -19,7 +19,7 @@ public class User implements Serializable {
     private  Date birthdate;
     private final String email;
     @SerializedName("password")
-    private final String password;
+    private String password;
 
 
     public User(long id, String name, String surname, String username, String email, Date birthdate, String password) {
@@ -73,6 +73,10 @@ public class User implements Serializable {
 
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password){
+        this.password = password;
     }
 
 
