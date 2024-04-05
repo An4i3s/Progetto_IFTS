@@ -290,6 +290,10 @@ body{
   flex-grow: 0; /* Imposta il valore di flessibilità */
 }
 
+.box a {
+  text-decoration: none;
+}
+
 .box:hover {
   transform: scale(1.05); /* Effetto di ingrandimento al passaggio del mouse */
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Effetto di ombreggiatura leggermente più marcato */

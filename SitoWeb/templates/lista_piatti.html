@@ -27,7 +27,9 @@
         <nav class="navbar custom-navbar">
             <div class="custom-container">
                 <div class="left-section">
-                    <h1 class="logo"> <img src="/static/img/1.png" alt="logo"></h1>
+                    <a href="/">
+                        <h1 class="logo"> <img src="/static/img/1.png" alt="logo"></h1>
+                    </a>
                 </div>
                 <form class="search-form" action="/web/ricerca/ricercaPerNome" method="GET">
                     <input id="searchBar" type="text" name="nome_piatto" placeholder="Cerca...">
@@ -57,7 +59,7 @@
 
                     {% for piatto in piatti %}
                     <div class="recipes-teaser">
-                        <a href="#">
+                        <a href="/web/ricerca/ricercaFromId?id_piatto={{piatto.id}}">
                             <div class="teaser image">
                                 <div class="img-spacer">
                                     <img src="/static/recipes/{{piatto.image_name}}" 

@@ -24,7 +24,7 @@
         <nav class="navbar custom-navbar">
             <div class="custom-container">
                 <div class="left-section">
-                    <h1 class="logo"> <img src="../static/img/1.png" alt="logo"></h1>
+                    <h1 class="logo"> <img src="/static/img/1.png" alt="logo"></h1>
                 </div>
                 <form class="search-form" action="/web/ricerca/ricercaPerNome" method="GET">
                     <input id="searchBar" type="text" name="nome_piatto" placeholder="Cerca...">
@@ -49,7 +49,7 @@
     <!-- Inizio Schede -->
     <div id="container">
         {% for portata in listaPortate %}
-        <a href="/web/ricercaPerPortata/{{portata.nome.lower()}}">
+        <a href="/web/ricercaPerPortata/{{portata.nome.lower()}}" style="text-decoration: none;">
         <div id="{{ portata.nome.lower() }}" class="box" style="background-image: url({{portata.image_url}});">{{ portata.nome }}</div>
         </a>
         {% endfor %}        
