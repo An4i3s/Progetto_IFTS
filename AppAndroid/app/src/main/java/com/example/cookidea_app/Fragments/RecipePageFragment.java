@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,12 +22,16 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.cookidea_app.Activities.CookIdeaApp;
+import com.example.cookidea_app.Adapters.HomePageListAdapter;
 import com.example.cookidea_app.Backend.DownloadImageAsyncTask;
 import com.example.cookidea_app.ModelClasses.Ingredients;
+import com.example.cookidea_app.ModelClasses.Meal;
 import com.example.cookidea_app.ModelClasses.Recipe;
+import com.example.cookidea_app.ModelClasses.Serving;
 import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -44,6 +49,10 @@ public class RecipePageFragment extends Fragment {
     ImageView imageViewRecipe;
     ToggleButton favoriteButton;
     TextView textViewName, textViewTime, textViewDifficulty, textViewProvenience, textViewIngredients, textViewGuide;
+
+    List<Meal> listMeals = new ArrayList<>();
+    ArrayAdapter mealsAdapter;
+
     public RecipePageFragment(){
 
     }
@@ -146,6 +155,30 @@ public class RecipePageFragment extends Fragment {
 
                 }
             });
+
+
+            Call<List<Meal>> callListMeals = apiService.getMeals();
+            callListMeals.enqueue(new Callback<List<Meal>>() {
+                @Override
+                public void onResponse(Call<List<Meal>> call, Response<List<Meal>> response) {
+                    listMeals = response.body();
+                    if(listMeals != null) {
+                        mealsAdapter.clear();
+                        mealsAdapter.addAll(listMeals);
+
+                        mealsAdapter.notifyDataSetChanged();
+                        mealsSpinner.invalidate();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<Meal>> call, Throwable t) {
+                    Log.e("RecipePageFragment", t.getMessage());
+                }
+            });
+
+
+
         }
 
 
