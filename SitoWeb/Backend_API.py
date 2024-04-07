@@ -269,7 +269,6 @@ def updatePreferiti():
 
 
 
-
 # api 12 bis UPDATE DATI UTENTE
 @appWebApi.route("/api/agg_DatiUtente", methods=["PUT"])
 def update_dati():
@@ -312,6 +311,9 @@ def update_dati():
 
     except Exception as e:
         return f"Error updating user data: {str(e)}", 500
+    
+
+
     
 
 
