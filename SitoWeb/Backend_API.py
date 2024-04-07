@@ -313,8 +313,12 @@ def update_dati():
         return f"Error updating user data: {str(e)}", 500
     
 
+@appWebApi.route("/api/getTipoPasto", methods=["GET"])
+def getTipoPasto():
+    query = "select * from tipo_pasto"
+    result = db.getAllData(query)
+    return json.dumps(result)
 
-    
 
 
 

@@ -59,7 +59,8 @@ public interface CookIdeaApiEndpointInterface {
     // Call<User> updateDatiUtente(@Body UpdateRequest request);
 
     @GET("/api/getTipoPasto")
-    Call<Meal> getMeal();
+    Call<List<Meal>> getMeals();
+
 
 
 
