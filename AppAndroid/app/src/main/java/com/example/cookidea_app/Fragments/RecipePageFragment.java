@@ -16,12 +16,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.cookidea_app.Activities.CookIdeaApp;
 import com.example.cookidea_app.Adapters.MenuDateSpinnerAdapter;
+import com.example.cookidea_app.Adapters.HomePageListAdapter;
+import com.example.cookidea_app.Adapters.MealArrayAdapter;
 import com.example.cookidea_app.Backend.DownloadImageAsyncTask;
 import com.example.cookidea_app.ModelClasses.Ingredients;
 import com.example.cookidea_app.ModelClasses.Meal;
@@ -51,10 +54,15 @@ public class RecipePageFragment extends Fragment {
     ToggleButton favoriteButton;
     TextView textViewName, textViewTime, textViewDifficulty, textViewProvenience, textViewIngredients, textViewGuide;
 
+    Spinner mealsSpinner;
+
     List<Meal> listMeals = new ArrayList<>();
     ArrayAdapter mealsAdapter;
     ArrayList<Date> dateList = new ArrayList<>();
     MenuDateSpinnerAdapter menuDateSpinnerAdapter;
+
+    MealArrayAdapter mealsAdapter;
+
 
     public RecipePageFragment(){
 
@@ -78,6 +86,19 @@ public class RecipePageFragment extends Fragment {
         textViewIngredients = rootView.findViewById(R.id.ingredientsRecipeTextView);
         textViewGuide = rootView.findViewById(R.id.guideRecipeTextView);
         favoriteButton = rootView.findViewById(R.id.favouriteButton);
+
+        mealsSpinner = rootView.findViewById((R.id.mealsSpinner));
+        mealsAdapter = new MealArrayAdapter(ctx, listMeals);
+
+        mealsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mealsSpinner.setAdapter(mealsAdapter);
+
+
+
+
+
+
+
 
         Bundle b = getArguments();
         String recipeId = "";
@@ -184,8 +205,8 @@ public class RecipePageFragment extends Fragment {
                     if(listMeals != null) {
                         mealsAdapter.clear();
                         mealsAdapter.addAll(listMeals);
-
                         mealsAdapter.notifyDataSetChanged();
+
                         //mealsSpinner.invalidate();
                     }
                 }
