@@ -2,6 +2,7 @@ package com.example.cookidea_app.Backend;
 
 import android.icu.text.UnicodeSet;
 
+import com.example.cookidea_app.ModelClasses.Meal;
 import com.example.cookidea_app.ModelClasses.Recipe;
 import com.example.cookidea_app.ModelClasses.Serving;
 import com.example.cookidea_app.ModelClasses.User;
@@ -56,6 +57,9 @@ public interface CookIdeaApiEndpointInterface {
     @PUT("api/agg_DatiUtente")
     Call<User> updateDatiUtente(@Body User updateUser);
     // Call<User> updateDatiUtente(@Body UpdateRequest request);
+
+    @GET("/api/getTipoPasto")
+    Call<Meal> getMeal();
 
 
 
