@@ -38,4 +38,6 @@ public class MealArrayAdapter extends ArrayAdapter<Meal> {
 
         return convertView;
     }
+
+
 }
