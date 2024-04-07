@@ -15,23 +15,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import com.example.cookidea_app.Activities.CookIdeaApp;
-import com.example.cookidea_app.Adapters.HomePageListAdapter;
+import com.example.cookidea_app.Adapters.MenuDateSpinnerAdapter;
 import com.example.cookidea_app.Backend.DownloadImageAsyncTask;
 import com.example.cookidea_app.ModelClasses.Ingredients;
 import com.example.cookidea_app.ModelClasses.Meal;
 import com.example.cookidea_app.ModelClasses.Recipe;
-import com.example.cookidea_app.ModelClasses.Serving;
 import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.R;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -52,6 +53,8 @@ public class RecipePageFragment extends Fragment {
 
     List<Meal> listMeals = new ArrayList<>();
     ArrayAdapter mealsAdapter;
+    ArrayList<Date> dateList = new ArrayList<>();
+    MenuDateSpinnerAdapter menuDateSpinnerAdapter;
 
     public RecipePageFragment(){
 
@@ -83,6 +86,22 @@ public class RecipePageFragment extends Fragment {
             recipeId = b.getString("recipeId");
             downloadRecipeById(recipeId);
         }
+
+        Date currentDate = new Date();
+        dateList.add(currentDate);
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(currentDate);
+
+        for(int i = 0; i <=5; i++){
+            calendar.add(Calendar.DAY_OF_MONTH, 1);
+            Date nextDate = calendar.getTime();
+            dateList.add(nextDate);
+        }
+
+        menuDateSpinnerAdapter = new MenuDateSpinnerAdapter(ctx, dateList);
+
+
 
         favoriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,7 +186,7 @@ public class RecipePageFragment extends Fragment {
                         mealsAdapter.addAll(listMeals);
 
                         mealsAdapter.notifyDataSetChanged();
-                        mealsSpinner.invalidate();
+                        //mealsSpinner.invalidate();
                     }
                 }
 
@@ -209,4 +228,6 @@ public class RecipePageFragment extends Fragment {
         }
         return stringIngredients;
     }
+
+
 }

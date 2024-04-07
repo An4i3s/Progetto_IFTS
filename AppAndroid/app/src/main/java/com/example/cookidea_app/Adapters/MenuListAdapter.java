@@ -120,7 +120,7 @@ public class MenuListAdapter extends BaseAdapter implements StickyListHeadersAda
     String convertWeekDay(Date date){
         Calendar c = Calendar.getInstance();
         c.setTime(date);
-        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK); // this will for example return 3 for tuesday
+        int dayOfWeek = c.get(Calendar.DAY_OF_WEEK);
 
         switch (dayOfWeek){
             case 1:
