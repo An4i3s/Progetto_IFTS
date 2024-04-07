@@ -211,27 +211,27 @@ public class RecipePageFragment extends Fragment {
                 }
             });
 
+            if(listMeals.isEmpty()) {
+                Call<List<Meal>> callListMeals = apiService.getMeals();
+                callListMeals.enqueue(new Callback<List<Meal>>() {
+                    @Override
+                    public void onResponse(Call<List<Meal>> call, Response<List<Meal>> response) {
+                        listMeals = response.body();
+                        if (listMeals != null) {
+                            mealsAdapter.clear();
+                            mealsAdapter.addAll(listMeals);
+                            mealsAdapter.notifyDataSetChanged();
 
-            Call<List<Meal>> callListMeals = apiService.getMeals();
-            callListMeals.enqueue(new Callback<List<Meal>>() {
-                @Override
-                public void onResponse(Call<List<Meal>> call, Response<List<Meal>> response) {
-                    listMeals = response.body();
-                    if(listMeals != null) {
-                        mealsAdapter.clear();
-                        mealsAdapter.addAll(listMeals);
-                        mealsAdapter.notifyDataSetChanged();
-
-                        //mealsSpinner.invalidate();
+                            //mealsSpinner.invalidate();
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<List<Meal>> call, Throwable t) {
-                    Log.e("RecipePageFragment", t.getMessage());
-                }
-            });
-
+                    @Override
+                    public void onFailure(Call<List<Meal>> call, Throwable t) {
+                        Log.e("RecipePageFragment", t.getMessage());
+                    }
+                });
+            }
 
 
         }
