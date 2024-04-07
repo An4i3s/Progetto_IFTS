@@ -38,6 +38,21 @@ public class MenuDateSpinnerAdapter extends ArrayAdapter<Date> {
         return convertView;
     }
 
+    @Override
+    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        if (convertView == null) {
+            convertView = LayoutInflater.from(ctx).inflate(android.R.layout.simple_spinner_item, parent, false);
+        }
+
+        Date date = getItem(position);
+        String weekDay = convertWeekDay(date);
+
+        ((TextView) convertView.findViewById(android.R.id.text1)).setText(weekDay);
+
+
+        return convertView;
+    }
+
     String convertWeekDay(Date date){
         Calendar c = Calendar.getInstance();
         c.setTime(date);

@@ -120,8 +120,10 @@ public class RecipePageFragment extends Fragment {
             dateList.add(nextDate);
         }
 
+        Spinner dateSpinner = rootView.findViewById(R.id.weekDaysSpinner);
         menuDateSpinnerAdapter = new MenuDateSpinnerAdapter(ctx, dateList);
-
+        menuDateSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        dateSpinner.setAdapter(menuDateSpinnerAdapter);
 
 
         favoriteButton.setOnClickListener(new View.OnClickListener() {
