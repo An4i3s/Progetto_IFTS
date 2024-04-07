@@ -95,11 +95,42 @@
             android:textOff=""
             />
 
+        <LinearLayout
+            android:id="@+id/addRecipeToMenu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageRecipeView"
+            android:orientation="horizontal"
+            >
+            <Spinner
+                android:id="@+id/weekDaysSpinner"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="4"
+                android:layout_gravity="center"/>
+            <Spinner
+                android:id="@+id/mealsSpinner"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_weight="4"
+                android:layout_gravity="center"/>
+            <Button
+                android:id="@+id/addRecipeToMenuButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:text="@string/add"
+                android:textSize="17sp"
+                android:layout_gravity="center"/>
+
+        </LinearLayout>
+
+
         <TextView
             android:id="@+id/ingredientsText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/imageRecipeView"
+            android:layout_below="@+id/addRecipeToMenu"
             android:text="@string/ingredienti"
             android:textStyle="bold"
             android:textSize="17sp"
