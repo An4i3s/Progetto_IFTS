@@ -57,7 +57,7 @@ public class RecipePageFragment extends Fragment {
     Spinner mealsSpinner;
 
     List<Meal> listMeals = new ArrayList<>();
-    ArrayAdapter mealsAdapter;
+
     ArrayList<Date> dateList = new ArrayList<>();
     MenuDateSpinnerAdapter menuDateSpinnerAdapter;
 

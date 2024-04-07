@@ -317,7 +317,7 @@ def update_dati():
 def getTipoPasto():
     query = "select * from tipo_pasto"
     result = db.getAllData(query)
-    return json.dumps(result)
+    return json.dumps(result, default=vars)
 
 
 
