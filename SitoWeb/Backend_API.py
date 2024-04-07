@@ -177,7 +177,7 @@ def getPiattiImmagini():
             url_portata = f"/static/recipes/{imgName.lower()}"
             ricetteCasuali.append({"id": id, "nome_piatto": nome,"image_name": url_portata}) 
         return jsonify(ricetteCasuali)
-    
+        
     except Exception as e:
         print("An error occurred:", str(e))
         return jsonify({'error': 'Errore'}), 500
