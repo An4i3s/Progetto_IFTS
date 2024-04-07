@@ -5,10 +5,12 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -20,6 +22,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 
 import com.example.cookidea_app.Backend.CookIdeaApiEndpointInterface;
+import com.example.cookidea_app.Backend.LoginRequest;
 import com.example.cookidea_app.Fragments.DatePickerDialogFragment;
 import com.example.cookidea_app.Fragments.HomePageFragment;
 import com.example.cookidea_app.Fragments.ListaSpesaFragmentPage;
@@ -39,11 +42,18 @@ import com.google.android.material.navigation.NavigationView;
 import java.util.List;
 import java.util.Objects;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener, NavigationView.OnNavigationItemSelectedListener, DatePickerDialog.OnDateSetListener   {
+public class MainActivity extends AppCompatActivity
+        implements
+        BottomNavigationView.OnNavigationItemSelectedListener,
+        NavigationView.OnNavigationItemSelectedListener,
+        DatePickerDialog.OnDateSetListener {
 
     /*
     toggle button ricetta singola per preferiti //edo
@@ -77,19 +87,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     DatePickerDialogFragment datePicker;
     String search = "";
     SharedPreferences sharedPreferences;
-
+    User loggedUser = null;
 
 
     public void onLoginSuccess(User user) {
-        ((CookIdeaApp)getApplication()).setLoggedUser(user);
-        SharedPrefManager.setLoggedIn(MainActivity.this,true);
-        updateNavigationDrawer();
-        changeFrameByNavigationTab(R.id.homePage);
+        ((CookIdeaApp) getApplication()).setLoggedUser(user);
+        loggedUser = user;
     }
 
-    public void onLogout() {
-        SharedPrefManager.setLoggedIn(MainActivity.this,false);
-    }
 
     public static final String BASE_URL = "http://192.168.1.136:8000";
 
@@ -100,10 +105,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             .build();
 
 
-
     public static final CookIdeaApiEndpointInterface apiService = retrofit.create(CookIdeaApiEndpointInterface.class);
-
-
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -113,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
 
         //Problema sta in questa riga? getLoggedUser dovrebbe essere chiamato una sola volta nel codice?
-      //  user = ((CookIdeaApp)getApplication()).getLoggedUser();
+        //  user = ((CookIdeaApp)getApplication()).getLoggedUser();
 
 
         bottomNavigationView = findViewById((R.id.bottomNavBar));
@@ -123,7 +125,6 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("");
-
 
 
         drawerLayout = findViewById(R.id.drawerLayout);
@@ -169,7 +170,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             fragment = searchFragment;
             fragment.setArguments(b);
         }
-        if (id_tab == R.id.recipePage){
+        if (id_tab == R.id.recipePage) {
             Bundle b = new Bundle();
             b.putString("recipeId", search);
             fragment = recipePageFragment;
@@ -185,10 +186,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             fragment = profiloFragment;
         if (id_tab == R.id.ricettePrefe)
             fragment = ricettePreferFrag;
-        if(id_tab == R.id.logout){
-            SharedPrefManager.setLoggedIn(this, false);
-            ((CookIdeaApp)getApplication()).logout();
-            onLogout();
+        if (id_tab == R.id.logout) {
+            SharedPrefManager.logout(this);
+            loggedUser = null;
+            ((CookIdeaApp) getApplication()).logout();
             updateNavigationDrawer();
             fragment = homeFragment;
         }
@@ -202,12 +203,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
 
-   @Override
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         return true;
     }
-
-
 
 
     @Override
@@ -221,14 +220,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
 
-    public void apriRegistrazione(){
+    public void apriRegistrazione() {
 
         Fragment fragment = new RegistrazioneFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.mainContent, fragment).commit();
 
     }
 
-    public void apriPasswordFragmnent(){
+    public void apriPasswordFragmnent() {
 
         Fragment fragment = new PasswordFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.mainContent, fragment).commit();
@@ -238,23 +237,44 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     @Override
     public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
-       // RegistrazioneFragment registrazioneFragment = new RegistrazioneFragment();
-       // registrazioneFragment.onDateSet(view, year, month, dayOfMonth);
+        // RegistrazioneFragment registrazioneFragment = new RegistrazioneFragment();
+        // registrazioneFragment.onDateSet(view, year, month, dayOfMonth);
     }
 
-    public void updateNavigationDrawer(){
+    public void updateNavigationDrawer() {
         boolean isLoggedIn = SharedPrefManager.isLoggedIn(this);
-        if (isLoggedIn){
+        if (isLoggedIn && loggedUser == null) {
+            LoginRequest loginRequest = SharedPrefManager.getLoginRequestFromSharedPref(this);
+            Call<User> call = apiService.login(loginRequest);
+            call.enqueue(new Callback<User>() {
+                @Override
+                public void onResponse(Call<User> call, Response<User> response) {
+                    if (response.isSuccessful()) {
+                        loggedUser = response.body();
+                        onLoginSuccess(loggedUser); // da lasciare
+                    } else {
+                        Toast.makeText(MainActivity.this, "Utente non Trovato", Toast.LENGTH_LONG).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<User> call, Throwable t) {
+                    Log.i("Errore login", "Errore API login");
+                }
+            });
             navigationView.getMenu().clear();
             navigationView.inflateMenu(R.menu.drawer_nav_menu_login);
+
+        } else if (isLoggedIn){
+            navigationView.getMenu().clear();
+            navigationView.inflateMenu(R.menu.drawer_nav_menu_login);
+
         }else {
             navigationView.getMenu().clear();
             navigationView.inflateMenu(R.menu.drawer_nav_menu);
         }
 
     }
-
-
 
 
 }

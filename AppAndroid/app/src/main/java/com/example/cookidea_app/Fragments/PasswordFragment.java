@@ -131,6 +131,7 @@ public class PasswordFragment extends Fragment {
                             if (response.isSuccessful()){
                                 ((CookIdeaApp)((MainActivity)ctx).getApplication()).setLoggedUser(user);
                                 MainActivity main = (MainActivity) getActivity();
+                                SharedPrefManager.setLoggedIn(ctx, user, true);
                                 main.changeFrameByNavigationTab(R.id.userProfilePage);
 
 

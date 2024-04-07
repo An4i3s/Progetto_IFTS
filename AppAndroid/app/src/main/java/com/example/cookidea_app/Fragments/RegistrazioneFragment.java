@@ -24,6 +24,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.example.cookidea_app.Activities.MainActivity;
+import com.example.cookidea_app.Activities.SharedPrefManager;
 import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.R;
 import com.google.gson.annotations.SerializedName;
@@ -133,6 +134,9 @@ public class RegistrazioneFragment extends Fragment {
                             Toast.makeText(getContext(), "Registrazione completata", Toast.LENGTH_SHORT).show();
                             user = response.body();
                             ((MainActivity) ctx).onLoginSuccess(user);
+                            SharedPrefManager.setLoggedIn(ctx, user, true);
+                            ((MainActivity)ctx).updateNavigationDrawer();
+                            ((MainActivity)ctx).changeFrameByNavigationTab(R.id.homePage);
                         } else {
                             Toast.makeText(getContext(), "ERRORE DURANTE LA REGISTRAZIONE", Toast.LENGTH_LONG).show();
                         }

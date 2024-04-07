@@ -12,7 +12,7 @@ public class CookIdeaApp extends Application {
     //+ sharedPred e API
 
     //provo a togliere == null
-     User loggedUser;
+     User loggedUser = null;
 
     public void saveSaredPref(String info) {
         Log.i("CookIdeaApp", info);

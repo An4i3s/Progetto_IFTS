@@ -109,6 +109,9 @@ public class LoginFragment extends Fragment {
                         if (response.isSuccessful()){
                             user = response.body();
                             ((MainActivity)ctx).onLoginSuccess(user);
+                            SharedPrefManager.setLoggedIn(ctx, user, true);
+                            ((MainActivity)ctx).updateNavigationDrawer();
+                            ((MainActivity)ctx).changeFrameByNavigationTab(R.id.homePage);
                         }else {
                             Toast.makeText(getContext(), "Utente non Trovato", Toast.LENGTH_LONG).show();
 
