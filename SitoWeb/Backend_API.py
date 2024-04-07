@@ -131,7 +131,7 @@ def getPortate():
     query = "SELECT DISTINCT piatti.portata FROM piatti"
     try:
         queryResult = db.getAllData(query)
-        print(queryResult)
+        print(query, queryResult)
         if queryResult is None:
             return jsonify([])
             
@@ -241,6 +241,7 @@ def checkPreferiti():
     idPiatto = request.args.get("id_piatto")
     query = """select preferiti.id FROM preferiti WHERE id_utente = %s AND id_piatto = %s;"""
     result = db.getSingleData (query, (idUtente, idPiatto,))
+    print(query, result)
     if result is None:
         return json.dumps(0)
     else:
@@ -317,6 +318,7 @@ def update_dati():
 def getTipoPasto():
     query = "select * from tipo_pasto"
     result = db.getAllData(query)
+    print(query, result)
     return json.dumps(result, default=vars)
 
 
