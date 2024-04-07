@@ -138,10 +138,5 @@ public class HomePageFragment extends Fragment {
 
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        downloadRandomRecipes();
-    }
 }
 

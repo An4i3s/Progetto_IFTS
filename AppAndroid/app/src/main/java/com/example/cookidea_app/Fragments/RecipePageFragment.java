@@ -104,24 +104,20 @@ public class RecipePageFragment extends Fragment {
 
 
 
-        Bundle b = getArguments();
-        String recipeId = "";
 
-        if(b.get("recipeId") != "") {
-            recipeId = b.getString("recipeId");
-            downloadRecipeById(recipeId);
-        }
 
-        Date currentDate = new Date();
-        dateList.add(currentDate);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(currentDate);
+        if(dateList.size()!=7) {
+            Date currentDate = new Date();
+            dateList.add(currentDate);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(currentDate);
 
-        for(int i = 0; i <=5; i++){
-            calendar.add(Calendar.DAY_OF_MONTH, 1);
-            Date nextDate = calendar.getTime();
-            dateList.add(nextDate);
+            for (int i = 0; i <= 5; i++) {
+                calendar.add(Calendar.DAY_OF_MONTH, 1);
+                Date nextDate = calendar.getTime();
+                dateList.add(nextDate);
+            }
         }
 
         dateSpinner = rootView.findViewById(R.id.weekDaysSpinner);
@@ -154,7 +150,14 @@ public class RecipePageFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        Bundle b = getArguments();
 
+        String recipeId = "";
+
+        if(b.get("recipeId") != "") {
+            recipeId = b.getString("recipeId");
+            downloadRecipeById(recipeId);
+        }
     }
 
     void downloadRecipeById(String recipeId){
@@ -261,6 +264,7 @@ public class RecipePageFragment extends Fragment {
         }
         return stringIngredients;
     }
+
 
 
 }

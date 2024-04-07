@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         changeFrameByNavigationTab(R.id.homePage);
     }
 
-    public static final String BASE_URL = "http://192.168.0.103:8000";
+    public static final String BASE_URL = "http://192.168.1.141:8000";
 
 
     public static final Retrofit retrofit = new Retrofit.Builder()
@@ -184,6 +184,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
             fragment = ricettePreferFrag;
         if(id_tab == R.id.logout){
             SharedPrefManager.setLoggedIn(this, false);
+            ((CookIdeaApp)getApplication()).logout();
             updateNavigationDrawer();
             fragment = homeFragment;
         }
