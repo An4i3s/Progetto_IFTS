@@ -15,7 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -54,7 +56,8 @@ public class RecipePageFragment extends Fragment {
     ToggleButton favoriteButton;
     TextView textViewName, textViewTime, textViewDifficulty, textViewProvenience, textViewIngredients, textViewGuide;
 
-    Spinner mealsSpinner;
+    Spinner mealsSpinner, dateSpinner;
+    Button addRecipeToWeeklyMenu;
 
     List<Meal> listMeals = new ArrayList<>();
 
@@ -62,6 +65,7 @@ public class RecipePageFragment extends Fragment {
     MenuDateSpinnerAdapter menuDateSpinnerAdapter;
 
     MealArrayAdapter mealsAdapter;
+
 
 
     public RecipePageFragment(){
@@ -86,10 +90,10 @@ public class RecipePageFragment extends Fragment {
         textViewIngredients = rootView.findViewById(R.id.ingredientsRecipeTextView);
         textViewGuide = rootView.findViewById(R.id.guideRecipeTextView);
         favoriteButton = rootView.findViewById(R.id.favouriteButton);
+        addRecipeToWeeklyMenu = rootView.findViewById(R.id.addRecipeToMenuButton);
 
         mealsSpinner = rootView.findViewById((R.id.mealsSpinner));
         mealsAdapter = new MealArrayAdapter(ctx, listMeals);
-
         mealsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mealsSpinner.setAdapter(mealsAdapter);
 
@@ -120,7 +124,7 @@ public class RecipePageFragment extends Fragment {
             dateList.add(nextDate);
         }
 
-        Spinner dateSpinner = rootView.findViewById(R.id.weekDaysSpinner);
+        dateSpinner = rootView.findViewById(R.id.weekDaysSpinner);
         menuDateSpinnerAdapter = new MenuDateSpinnerAdapter(ctx, dateList);
         menuDateSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         dateSpinner.setAdapter(menuDateSpinnerAdapter);
@@ -177,8 +181,14 @@ public class RecipePageFragment extends Fragment {
         user = ((CookIdeaApp)ctx.getApplicationContext()).getLoggedUser();
         if(user == null){
             favoriteButton.setVisibility(View.GONE);
+            mealsSpinner.setVisibility(View.GONE);
+            dateSpinner.setVisibility(View.GONE);
+            addRecipeToWeeklyMenu.setVisibility(View.GONE);
         }else{
             favoriteButton.setVisibility(View.VISIBLE);
+            mealsSpinner.setVisibility(View.VISIBLE);
+            dateSpinner.setVisibility(View.VISIBLE);
+            addRecipeToWeeklyMenu.setVisibility(View.VISIBLE);
 
             Call<Integer> checkFavouriteCall = apiService.checkPreferito(user.getId(), recipe.getRecipeId());
             checkFavouriteCall.enqueue(new Callback<Integer>() {
