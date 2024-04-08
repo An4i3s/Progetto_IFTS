@@ -343,7 +343,7 @@ def insertWeeklyMenu():
                 return json.dumps(1), 201
     else:
          return json.dumps(0), 500
-    
+
 
 def convert_to_serializable(obj):
     if isinstance(obj, date):
