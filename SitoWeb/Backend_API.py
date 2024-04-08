@@ -372,7 +372,18 @@ def getWeeklyMenu():
 
 
 
-
+# API 13 RETURN USER BY ID
+@appWebApi.route("/api/getUserById")
+def getUser():
+    id_utente = request.args.get("id_utente")
+    query = """select * FROM utenti WHERE id = %s"""
+    result = db.getSingleData (query, (id_utente,))
+    if result:
+        new_user = User(**result)
+        return json.dumps(new_user, default=vars), 201
+    else:
+        return "User not found", 404
+    
 
 
 if __name__ == "__main__":

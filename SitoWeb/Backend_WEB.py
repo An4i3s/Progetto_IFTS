@@ -54,7 +54,6 @@ def index():
 
         return render_template("index.html", listaPortate=listaPortate, listaImmagini=listaImmagini)
 
-
 @appWebApi.route('/connect')
 def connected():
     if 'logged_in' in session and session['logged_in']:
@@ -79,8 +78,6 @@ def connected():
         return render_template("connect.html", listaPortate=listaPortate, listaImmagini=listaImmagini)
     else:
         return redirect('/login')
-
-
 
 @appWebApi.route('/registrazione', methods =['GET', 'POST'])
 def register():
@@ -132,7 +129,6 @@ def login():
         
     return render_template('login.html')
 
-    
 @appWebApi.route('/logout')
 def logout():
     # Rimuovi l'utente dalla sessione
@@ -140,9 +136,80 @@ def logout():
     session.pop('username', None)
     return redirect('/')
 
+@appWebApi.route("/web/ricercaPerPortata/<portata>")
+def webGetRecipesfromPortata(portata):
+    if 'logged_in' in session and session['logged_in']:
+        query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE portata = %s"
+        result = db.getAllData(query,(portata,) )
+        return render_template('lista_piattiCon.html', piatti = result)
+    else: 
+        query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE portata = %s"
+        result = db.getAllData(query,(portata,) )
+        return render_template('lista_piatti.html', piatti = result)
 
+# web / RESTITUISCE UNA RICETTA COMPLETA (CON JOIN VARI) IN BASE ALL'ID
+@appWebApi.route("/web/ricerca/ricercaFromId")
+def webGetRicettaCompletaFromId():
+    if 'logged_in' in session and session['logged_in']:
+        idPiatto = request.args.get("id_piatto")
 
+        query = """SELECT p.id, p.difficolta, p.tempo, p.nome_piatto, p.portata, p.provenienza, p.procedimento, p.image_name
+                   FROM piatti p WHERE p.id = %s"""
+    
+        result = db.getSingleData(query, (idPiatto,))
 
+        piatto = Piatto(**result)
+
+        query = """SELECT i.nome_ingrediente, r.quantita_ingrediente
+                   FROM piatti p JOIN ricettario r ON p.id = r.id_piatto
+                   JOIN ingredienti i ON r.id_ingrediente = i.id WHERE p.id = %s;""" 
+    
+        result = db.getAllData(query, (idPiatto,))
+    
+        for row in result:
+            ricettario = Ricettario(**row)
+            piatto.ricettario.append(ricettario)
+
+        return render_template("piatto_singoloCon.html", piatto=piatto)
+    else:
+        idPiatto = request.args.get("id_piatto")
+
+        query = """SELECT p.id, p.difficolta, p.tempo, p.nome_piatto, p.portata, p.provenienza, p.procedimento, p.image_name
+                   FROM piatti p WHERE p.id = %s"""
+    
+        result = db.getSingleData(query, (idPiatto,))
+
+        piatto = Piatto(**result)
+
+        query = """SELECT i.nome_ingrediente, r.quantita_ingrediente
+                   FROM piatti p JOIN ricettario r ON p.id = r.id_piatto
+                   JOIN ingredienti i ON r.id_ingrediente = i.id WHERE p.id = %s;""" 
+    
+        result = db.getAllData(query, (idPiatto,))
+   
+        for row in result:
+            ricettario = Ricettario(**row)
+            piatto.ricettario.append(ricettario)
+        
+        return render_template("piatto_singolo.html", piatto=piatto)
+
+# listapiatti per nome o parte del nome
+@appWebApi.route("/web/ricerca/ricercaPerNome")
+def webGetRecipesfromName():
+    if 'logged_in' in session and session['logged_in']:
+        nomePiatto = request.args.get("nome_piatto")
+
+        query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE nome_piatto LIKE %s"
+        result = db.getAllData(query,('%' + nomePiatto + '%',) )
+
+        return render_template("lista_piattiCon.html", piatti = result)
+    else:
+        nomePiatto = request.args.get("nome_piatto")
+
+        query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE nome_piatto LIKE %s"
+        result = db.getAllData(query,('%' + nomePiatto + '%',) )
+
+        return render_template("lista_piatti.html", piatti = result)
 
 # WEB   (TUTTI I PIATTI)
 # http://192.168.1.94:8000/piatti
@@ -153,7 +220,6 @@ def webGetAllRecipes():
     result = db.getAllData(query)
 
     return render_template("piatto_singolo.html", piatti = result)
-
 
 
             # # WEB / RICERCA PER NOME PIATTO  (anche solo una parte del nome)
@@ -185,62 +251,6 @@ def webGetAllRecipes():
                     
 
             #     return render_template("piatto_singolo.html", piatto=piatto)
-
-# WEB / RICERCA PER PORTATA
-# http://192.168.0.110:8000/ricercaPerNome/Funghi
-@appWebApi.route("/web/ricercaPerPortata/<portata>")
-def webGetRecipesfromPortata(portata):
-
-    query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE portata = %s"
-    result = db.getAllData(query,(portata,) )
-
-    return render_template("lista_piatti.html", piatti = result)
-
-
-
-
-# listapiatti per nome o parte del nome
-@appWebApi.route("/web/ricerca/ricercaPerNome")
-def webGetRecipesfromName():
-
-    nomePiatto = request.args.get("nome_piatto")
-
-    query = "select id, nome_piatto, difficolta, tempo, portata, provenienza, image_name from piatti WHERE nome_piatto LIKE %s"
-    result = db.getAllData(query,('%' + nomePiatto + '%',) )
-
-    return render_template("lista_piatti.html", piatti = result)
-
-
-
-
-
-# web / RESTITUISCE UNA RICETTA COMPLETA (CON JOIN VARI) IN BASE ALL'ID
-@appWebApi.route("/web/ricerca/ricercaFromId")
-def webGetRicettaCompletaFromId():
-    idPiatto = request.args.get("id_piatto")
-
-    query = """SELECT p.id, p.difficolta, p.tempo, p.nome_piatto, p.portata, p.provenienza, p.procedimento, p.image_name
-               FROM piatti p WHERE p.id = %s"""
-    
-    result = db.getSingleData(query, (idPiatto,))
-
-    piatto = Piatto(**result)
-
-    query = """SELECT i.nome_ingrediente, r.quantita_ingrediente
-               FROM piatti p JOIN ricettario r ON p.id = r.id_piatto
-               JOIN ingredienti i ON r.id_ingrediente = i.id WHERE p.id = %s;""" 
-    
-    result = db.getAllData(query, (idPiatto,))
-   
-    
-    for row in result:
-        ricettario = Ricettario(**row)
-        piatto.ricettario.append(ricettario)
-        
-
-    return render_template("piatto_singolo.html", piatto=piatto)
-
-
 
 
 
