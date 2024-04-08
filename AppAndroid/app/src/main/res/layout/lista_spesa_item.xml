@@ -17,7 +17,8 @@
         android:layout_height="wrap_content"
         android:layout_toEndOf="@id/cbListaItem"
         android:fontFamily="@font/alatsi"
-        android:textAppearance="@style/TextAppearance.Material3.BodyMedium"
+        android:textAppearance="@style/TextAppearance.Material3.HeadlineSmall"
+        android:paddingTop="10dp"
         />
 
 </RelativeLayout>

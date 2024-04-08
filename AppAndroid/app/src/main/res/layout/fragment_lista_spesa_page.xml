@@ -29,6 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginBottom="15dp"
             >
 
             <TextView
@@ -37,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/bluScuro"
-                android:textAppearance="@android:style/TextAppearance.Material.Title"
+                android:textAppearance="@android:style/TextAppearance.Material.Headline"
                 android:fontFamily="@font/alatsi"
                 android:textAllCaps="true"
                 android:paddingBottom="15dp"
@@ -57,6 +58,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginBottom="15dp"
             >
 
             <TextView
@@ -65,12 +67,46 @@
                 android:layout_height="wrap_content"
                 android:text=""
                 android:textColor="@color/bluScuro"
-                android:textAppearance="@android:style/TextAppearance.Material.Title"
+                android:textAppearance="@android:style/TextAppearance.Material.Headline"
                 android:fontFamily="@font/alatsi"
                 android:textAllCaps="true"
                 android:paddingBottom="15dp"
                 />
+
+            <ListView
+                android:id="@+id/twoLv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
         </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="15dp"
+            >
+
+            <TextView
+                android:id="@+id/three"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/bluScuro"
+                android:textAppearance="@android:style/TextAppearance.Material.Headline"
+                android:fontFamily="@font/alatsi"
+                android:textAllCaps="true"
+                android:paddingBottom="15dp"
+                />
+
+            <ListView
+                android:id="@+id/threeLv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+
 
 
     </LinearLayout>
