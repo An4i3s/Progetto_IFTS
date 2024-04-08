@@ -18,11 +18,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import com.example.cookidea_app.Activities.CookIdeaApp;
+import com.example.cookidea_app.Activities.MainActivity;
 import com.example.cookidea_app.Activities.SharedPrefManager;
 import com.example.cookidea_app.Adapters.MenuListAdapter;
 import com.example.cookidea_app.Adapters.SearchPageListAdapter;
 import com.example.cookidea_app.Backend.LoginRequest;
 import com.example.cookidea_app.ModelClasses.Recipe;
+import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.ModelClasses.WeeklyMenu;
 import com.example.cookidea_app.R;
 
@@ -43,6 +46,7 @@ public class MenuPageFragment extends Fragment {
     MenuListAdapter menuListAdapter;
     View rootView = null;
 
+    User user = null;
     public MenuPageFragment() {
 
     }
@@ -62,12 +66,13 @@ public class MenuPageFragment extends Fragment {
         menuListAdapter = new MenuListAdapter(ctx, results);
         stickyListView.setAdapter(menuListAdapter);
 
-
+        user = ((CookIdeaApp)ctx.getApplicationContext()).getLoggedUser();
+        downloadBackEndInfo();
         return rootView;
     }
 
     private void downloadBackEndInfo() {
-        Call<List<WeeklyMenu>> listCall = apiService.getWeeklyMenu(0); //TODO implementare ricerca per id utente
+        Call<List<WeeklyMenu>> listCall = apiService.getWeeklyMenu(user.getId());
 
         listCall.enqueue(new Callback<List<WeeklyMenu>>() {
             @Override

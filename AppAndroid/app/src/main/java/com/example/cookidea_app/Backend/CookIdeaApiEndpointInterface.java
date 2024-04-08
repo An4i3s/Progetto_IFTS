@@ -37,9 +37,6 @@ public interface CookIdeaApiEndpointInterface {
     @GET("/api/ricerca/ricettaFromId")
     Call<Recipe> getRecipeById(@Query("id_piatto") String recipeId);
 
-    @GET("/api/menuSettimanale")
-    Call<List<WeeklyMenu>> getWeeklyMenu(@Query("id_utente") int userId);
-
     @POST("api/login")
     Call<User> login(@Body LoginRequest request);
 
@@ -65,6 +62,7 @@ public interface CookIdeaApiEndpointInterface {
     @PUT("/api/insertWeeklyMenu")
     Call<Integer> addWeeklyMenu(@Query("id_utente") long idUtente, @Query("id_piatto") String idPiatto, @Query("id_pasto") int idPasto, @Query("data") String data);
 
-
+    @GET("/api/getWeeklyMenu")
+    Call<List<WeeklyMenu>> getWeeklyMenu(@Query("id_utente") long userId);
 
 }
