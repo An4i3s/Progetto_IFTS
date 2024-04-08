@@ -65,4 +65,7 @@ public interface CookIdeaApiEndpointInterface {
     @GET("/api/getWeeklyMenu")
     Call<List<WeeklyMenu>> getWeeklyMenu(@Query("id_utente") long userId);
 
+    @GET("api/getUserById")
+    Call<User> getUserById(@Query("id_user") long id);
+
 }

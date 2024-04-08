@@ -330,8 +330,11 @@ def insertWeeklyMenu():
     idUtente = request.args.get("id_utente")
     idPiatto = request.args.get("id_piatto")
     idPasto = request.args.get("id_pasto")
-    StringData = request.args.get("data")
-    data = datetime.strptime(StringData, '%a %b %d %H:%M:%S GMT%z %Y')
+    stringData = request.args.get("data")
+    stringData = stringData.replace(' GMT', '')
+
+    formato_data = '%a %b %d %H:%M:%S %Y'
+    data = datetime.strptime(stringData, formato_data)
 
     query = """insert into menu_settimanale (id_utente, id_piatto, id_pasto, data)
                VALUES (%s, %s, %s, %s)"""
@@ -369,7 +372,18 @@ def getWeeklyMenu():
 
 
 
-
+# API 13 RETURN USER BY ID
+@appWebApi.route("/api/getUserById")
+def getUser():
+    id_utente = request.args.get("id_utente")
+    query = """select * FROM utenti WHERE id = %s"""
+    result = db.getSingleData (query, (id_utente,))
+    if result:
+        new_user = User(**result)
+        return json.dumps(new_user, default=vars), 201
+    else:
+        return "User not found", 404
+    
 
 
 if __name__ == "__main__":

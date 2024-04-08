@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CookIdea</title>
+    <link rel="stylesheet" href="\static\css\ricetta.css">
+    <link rel="stylesheet" href="\static\css\ricetta.css">
+    <link rel="stylesheet" href="\static\css\lista.css">
+    <link rel="stylesheet" href="\static\css\lista.css">
+    <link rel="stylesheet" href="\static\css\navbar.css">
+    <link rel="stylesheet" href="\static\css\navbar.css">
+
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Passion+One&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alatsi&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Inizio Nav -->
+    <header>
+        <nav class="navbar custom-navbar">
+            <div class="custom-container">
+                <div class="left-section">
+                    <a href="/">
+                        <h1 class="logo"> <img src="/static/img/1.png" alt="logo"></h1>
+                    </a>
+                </div>
+                <form class="search-form" action="/web/ricerca/ricercaPerNome" method="GET">
+                    <input id="searchBar" type="text" name="nome_piatto" placeholder="Cerca...">
+                    <button type="submit" id = "search"> <img src="/static/img/magnifying-glass.png" alt="Cerca"></button>
+                </form>
+                <div class="right-section">
+                    <div class="dropdown">
+                        <button id="dropdownBtn" class="dropbtn">MyCookIdea</button>
+                        <div id="dropdownContent" class="dropdown-content">
+                            <a href="#">My List</a>
+                            <a href="#">My Menu</a>
+                            <a href="#">My Preference</a>
+                        </div>
+                    </div>
+                  
+                    <a href="/logout" class="link-menu">Esci</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+      
+       <!-- Lista Ricette -->
+      <div id="page">
+        <div class="page-wrap">
+            <div class="page-main">
+                <div class="recipes-list">
+                    {% for piatto in piatti %}
+                    <div class="recipes-teaser">
+                        <a href="/web/ricerca/ricercaFromId?id_piatto={{piatto.id}}">
+                            <div class="teaser image">
+                                <div class="img-spacer">
+                                    <img src="/static/recipes/{{piatto.image_name}}" 
+                                    alt=" " class="'lazyloaded" data-ll-status="loaded">
+                                </div>
+                            </div>
+                            <div class="teaser1 text">
+                                <div class="teaser-top">
+                                    <div class="teaser-intro">
+                                        <h1 class="title">{{piatto.nome_piatto}} </h1>
+                                    </br>
+                                    </div>
+                                </div>
+                                <div class="teaser-bottom">
+                                <div class="outro">
+                                    <h2 class="info" id="tempo">Tempo:{{piatto.tempo}} </h2>
+                                </br>
+                                    <h2 class="info" id="difficolta">Difficoltà:{{piatto.difficolta}} </h2>
+                                </br>
+                                    <h2 class="info" id="portata">Portata: {{piatto.portata}}</h2>
+                                </br>
+                                   <h2 class="info" id="provenienza">Provenienza:{{piatto.provenienza}} </h2>
+                                </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    {% endfor %}
+
+
+                
+      <footer id="footer">
+        <div class="container">   
+        </div>
+      </footer>
+      <script src="/static/js/dropdown.js"></script>
+</body>
+</html>
