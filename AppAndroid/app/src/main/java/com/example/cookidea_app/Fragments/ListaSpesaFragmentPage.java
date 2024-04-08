@@ -19,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.cookidea_app.Activities.CookIdeaApp;
 import com.example.cookidea_app.Activities.MainActivity;
+import com.example.cookidea_app.Activities.SharedPrefManager;
 import com.example.cookidea_app.Adapters.ListaSpesaAdapter;
 import com.example.cookidea_app.ModelClasses.Ingredients;
 import com.example.cookidea_app.ModelClasses.User;
@@ -74,9 +75,11 @@ public class ListaSpesaFragmentPage extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.fragment_lista_spesa_page, container, false);
-
-
+        if(!SharedPrefManager.isLoggedIn(ctx)){
+            rootView = inflater.inflate(R.layout.fragment_lista_spesa_no_logout, container, false);
+            return rootView;
+        }else {
+            rootView = inflater.inflate(R.layout.fragment_lista_spesa_page, container, false);
 
         User user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
         //Serve?
@@ -116,7 +119,7 @@ public class ListaSpesaFragmentPage extends Fragment {
 
         call1 = apiService.getDailyIngredients(user.getId(),day1String);
        // call2 = apiService.getDailyIngredients(user.getId(), day2String);
-         call3 = apiService.getDailyIngredients(user.getId(), day3String);
+         //call3 = apiService.getDailyIngredients(user.getId(), day3String);
        // makeApiCall();
 
 
@@ -158,7 +161,7 @@ public class ListaSpesaFragmentPage extends Fragment {
         });
 
  */
-
+/*
         call3.enqueue(new Callback<List<Ingredients>>() {
             @Override
             public void onResponse(Call<List<Ingredients>> call, Response<List<Ingredients>> response) {
@@ -171,7 +174,7 @@ public class ListaSpesaFragmentPage extends Fragment {
             }
         });
 
-
+*/
 
 
 
@@ -185,10 +188,10 @@ public class ListaSpesaFragmentPage extends Fragment {
         ListaSpesaAdapter adapter3 = new ListaSpesaAdapter(ctx, R.layout.lista_spesa_item, threeIngredients);
         spesaDay3Lv.setAdapter(adapter3);
 
-
-
-
         return rootView;
+        }
+
+
     }
 
     public String convertWeekDay(Date date) {
