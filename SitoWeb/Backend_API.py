@@ -329,7 +329,8 @@ def insertWeeklyMenu():
     idUtente = request.args.get("id_utente")
     idPiatto = request.args.get("id_piatto")
     idPasto = request.args.get("id_pasto")
-    data = request.args.get("data")
+    StringData = request.args.get("data")
+    data = datetime.strptime(StringData, '%b %d, %Y %I:%M:%S %p')
 
     query = """insert into menu_settimanale (id_utente, id_piatto, id_pasto, data)
                VALUES (%s, %s, %s, %s)"""
