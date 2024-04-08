@@ -43,6 +43,12 @@
                 android:paddingBottom="15dp"
                 />
 
+            <ListView
+                android:id="@+id/oneLv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+
 
         </LinearLayout>
 

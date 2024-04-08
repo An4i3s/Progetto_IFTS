@@ -3,6 +3,8 @@ package com.example.cookidea_app.Fragments;
 import android.content.Context;
 import android.os.Bundle;
 
+import static com.example.cookidea_app.Activities.CookIdeaApp.apiService;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -13,19 +15,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.cookidea_app.Activities.CookIdeaApp;
 import com.example.cookidea_app.Activities.MainActivity;
+import com.example.cookidea_app.Adapters.ListaSpesaAdapter;
 import com.example.cookidea_app.Backend.LoginRequest;
 import com.example.cookidea_app.ModelClasses.Ingredients;
+import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.R;
 
 import org.w3c.dom.Text;
 
+import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class ListaSpesaFragmentPage extends Fragment {
@@ -35,6 +48,10 @@ public class ListaSpesaFragmentPage extends Fragment {
     LinearLayout layoutMonday;
     TextView oneTv;
     TextView twoTv;
+    ArrayList<Ingredients> mondayIngredients;
+
+    ListView spesaDay1Lv;
+
 
     public ListaSpesaFragmentPage() {
 
@@ -51,6 +68,9 @@ public class ListaSpesaFragmentPage extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.fragment_lista_spesa_page, container, false);
 
+
+
+        User user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
         layoutMonday = rootView.findViewById(R.id.layoutDay1);
         oneTv = rootView.findViewById(R.id.one);
         twoTv = rootView.findViewById(R.id.two);
@@ -59,6 +79,7 @@ public class ListaSpesaFragmentPage extends Fragment {
 
         // Declare variables to store dates
         Calendar day1 = calendar;
+        String day1String = formatCalendarDate(day1);
         Calendar day2 = (Calendar) calendar.clone();
         day2.add(Calendar.DAY_OF_MONTH, 1);
         Calendar day3 = (Calendar) calendar.clone();
@@ -75,28 +96,39 @@ public class ListaSpesaFragmentPage extends Fragment {
         oneTv.setText(convertWeekDay(day1.getTime()));
         twoTv.setText(convertWeekDay(day2.getTime()));
 
+        mondayIngredients = new ArrayList<>();
 
-        ArrayList<Ingredients> mondayIngredients = new ArrayList<>();
-        // TODO: 08/04/2024 Creare tante Checkbox quando sono gli ingredienti presenti in quel giorno
-        //  - trovare index ingredienti
-        //  -  DB: MenuSettimale> dove data = Lunedì (da trasformare dal backend)
-        //          > da li si recupera il idPiatto
-        //          > da id Piatto si recuperano i dati da ricettario
-        //          > ingredienti
-        // ==> FARE ENDPOINT GET  MENU SETTIMANALE BY DATE (OLTRE CHE X id) E POI RICHIAMARE X OGNI GIORNO
-        //  - Creare un array di ingredienti
-        //  - in base a Array.lenght generare i checkbox
+        Call<List<Ingredients>> call1 = apiService.getDailyIngredients(user.getId(),day1String);
 
-        //   - in base a quello creare checkbox
 
-        //add checkboxes
-        for (int i = 0; i < 6; i++) {
-            CheckBox cb = new CheckBox(ctx);
-            //Qui set Text deve essere uguale a ingrediente, bisonga Loopare mondayIngredientsArrayList
-            cb.setText("Dynamic Checkbox " + i);
-            cb.setId(i + 6);
-            layoutMonday.addView(cb);
-        }
+        call1.enqueue(new Callback<List<Ingredients>>() {
+            @Override
+            public void onResponse(Call<List<Ingredients>> call, Response<List<Ingredients>> response) {
+                assert response.body() != null;
+                mondayIngredients.addAll(response.body());
+
+                Log.i("mondayIngredients", String.valueOf(mondayIngredients.size())+"Success");
+                Log.i("mondayIngredients", mondayIngredients.get(0).toString());
+                Log.i("mondayIngredients", mondayIngredients.get(1).toString());
+                Log.i("mondayIngredients", mondayIngredients.get(2).toString());
+
+
+            }
+
+            @Override
+            public void onFailure(Call<List<Ingredients>> call, Throwable t) {
+                Log.i("mondayIngredients", mondayIngredients.size()+"Failure");
+
+            }
+        });
+
+        spesaDay1Lv = rootView.findViewById(R.id.oneLv);
+        ListaSpesaAdapter adapter = new ListaSpesaAdapter(ctx, R.layout.lista_spesa_item, mondayIngredients);
+        spesaDay1Lv.setAdapter(adapter);
+
+
+
+
 
         return rootView;
     }
@@ -126,4 +158,12 @@ public class ListaSpesaFragmentPage extends Fragment {
         }
 
     }
+
+    public  String formatCalendarDate(Calendar calendar){
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = format.format(calendar.getTime());
+        return formattedDate;
+    }
+
+
 }
