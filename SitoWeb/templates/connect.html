@@ -55,8 +55,10 @@
     <!-- Inizio Schede -->
     <div id="container">
         {% for portata in listaPortate %}
-        <div id="{{ portata.nome.lower() }}" class="box" style="background-image: url({{portata.image_url}});"><a href=""></a>{{ portata.nome }}</div>
-        {% endfor %}
+        <a href="/web/ricercaPerPortata/{{portata.nome.lower()}}" style="text-decoration: none;">
+        <div id="{{ portata.nome.lower() }}" class="box" style="background-image: url({{portata.image_url}});">{{ portata.nome }}</div>
+        </a>
+        {% endfor %} 
         <footer></footer>
     </div>
     <!--Script carosello -->
