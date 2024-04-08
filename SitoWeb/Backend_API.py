@@ -7,6 +7,7 @@ from Database import *
 import time
 from datetime import datetime
 from datetime import date
+from decimal import Decimal
 
 
 
@@ -381,31 +382,24 @@ def getUser():
         return "User not found", 404
     
 
-# API 14 RETURN INGREDIENTS BY DATE
+# API 15 RETURN INGREDIENTS BY DATE
 # http://192.168.0.110:8000/api/getDailyMenu
-@appWebApi.route("/api/getDailyMenu", methods = ["GET"])
+@appWebApi.route("/api/getDailyIngredients", methods = ["GET"])
 
 def getDailyMenu():
 
     idUtente = request.args.get("id_utente")
-    #data = request.args.get("data")
-    stringData = request.args.get("data")
-    stringData = stringData.replace(' GMT', '')
+    data = request.args.get("data")
 
-    formato_data = '%a %b %d %H:%M:%S %Y'
-    
-
-    data = datetime.strptime(stringData, formato_data)
-    #data = datetime.strptime(StringData, '%a %b %d %H:%M:%S GMT%z %Y')
-    #print(data)
-
-    
-    query = """select  nome_piatto, image_name, nome_tipo_pasto from menu_settimanale join piatti
-               on id_piatto = piatti.id join tipo_pasto on id_pasto = tipo_pasto.id where id_utente = %s
-               AND `data` = %s"""
+    query = """select nome_ingrediente, SUM(quantita_ingrediente) as quantita_ingrediente from menu_settimanale join ricettario
+               on menu_settimanale.id_piatto = ricettario.id_piatto join ingredienti on ricettario.id_ingrediente = ingredienti.id
+               WHERE id_utente = %s AND menu_settimanale.data = %s group by nome_ingrediente;"""
     
     result = db.getAllData(query, (idUtente, data))
-    return json.dumps(result, default=vars)
+  
+    converted_result = [{k: float(v) if isinstance(v, Decimal) else v for k, v in row.items()} for row in result]
+
+    return json.dumps(converted_result)
 
 
 

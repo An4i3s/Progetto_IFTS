@@ -2,6 +2,7 @@ package com.example.cookidea_app.Backend;
 
 import android.icu.text.UnicodeSet;
 
+import com.example.cookidea_app.ModelClasses.Ingredients;
 import com.example.cookidea_app.ModelClasses.Meal;
 import com.example.cookidea_app.ModelClasses.Recipe;
 import com.example.cookidea_app.ModelClasses.Serving;
@@ -65,7 +66,11 @@ public interface CookIdeaApiEndpointInterface {
     @GET("/api/getWeeklyMenu")
     Call<List<WeeklyMenu>> getWeeklyMenu(@Query("id_utente") long userId);
 
+    @GET("/api/getDailyIngredients")
+    Call<List<Ingredients>> getDailyIngredients(@Query("id_utente") long userId, @Query("data") String data);
+
     @GET("api/getUserById")
     Call<User> getUserById(@Query("id_user") long id);
+
 
 }
