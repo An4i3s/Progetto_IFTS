@@ -1,11 +1,13 @@
 package com.example.cookidea_app.Fragments;
 
+import static com.example.cookidea_app.Activities.CookIdeaApp.apiService;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 
-import static com.example.cookidea_app.Activities.MainActivity.apiService;
+
 
 
 import android.content.SharedPreferences;
@@ -28,6 +30,7 @@ import androidx.fragment.app.Fragment;
 import com.example.cookidea_app.Activities.CookIdeaApp;
 
 import com.example.cookidea_app.Activities.MainActivity;
+import com.example.cookidea_app.Activities.SharedPrefManager;
 import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.R;
 
@@ -67,6 +70,7 @@ public class ProfiloFragment extends Fragment {
     Context ctx;
     User user;
 
+    User user;
 
 
     public ProfiloFragment(){
@@ -84,7 +88,28 @@ public class ProfiloFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_profilo, container, false);
 
+<<<<<<< Updated upstream
         user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
+=======
+        /*
+
+        boolean isUserLoggedIn = SharedPrefManager.isLoggedIn(ctx);
+        if (isUserLoggedIn){
+
+             user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
+
+        }else {
+            SharedPrefManager.setLoggedIn(ctx, true);
+            user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
+        }
+*/
+        // TODO: 06/04/2024 Chiamare ogni volta un User in base a username
+
+      // user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
+
+
+       user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).callUserFromBackend();
+>>>>>>> Stashed changes
 
         usernameTV = rootView.findViewById(R.id.usernameTV);
         usernameTV.setText(user.getUsername());

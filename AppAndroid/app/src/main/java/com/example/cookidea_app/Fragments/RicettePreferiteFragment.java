@@ -1,5 +1,7 @@
 package com.example.cookidea_app.Fragments;
 
+import static com.example.cookidea_app.Activities.CookIdeaApp.apiService;
+
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -39,8 +41,8 @@ public class RicettePreferiteFragment extends Fragment {
 
     List<Recipe> listaRicettePreferite;
     SearchPageListAdapter searchPageListAdapter;
-    Retrofit retrofit;
-    CookIdeaApiEndpointInterface apiInterface;
+    //Retrofit retrofit;
+    //CookIdeaApiEndpointInterface apiInterface;
     //= new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
     User user;
@@ -65,11 +67,11 @@ public class RicettePreferiteFragment extends Fragment {
         preferitiLV = rootview.findViewById(R.id.ricettePrefeListView);
 
         // TODO: 04/04/2024 togliere retorift e apiInterface e usare apiService 
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
-        apiInterface = retrofit.create(CookIdeaApiEndpointInterface.class);
+        //Retrofit retrofit = new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        //apiInterface = retrofit.create(CookIdeaApiEndpointInterface.class);
 
         user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
-        Call<List<Recipe>> call = apiInterface.getPreferitiFromId(user.getId());
+        Call<List<Recipe>> call = apiService.getPreferitiFromId(user.getId());
 
         searchPageListAdapter = new SearchPageListAdapter(ctx, listaRicettePreferite);
         preferitiLV.setAdapter(searchPageListAdapter);

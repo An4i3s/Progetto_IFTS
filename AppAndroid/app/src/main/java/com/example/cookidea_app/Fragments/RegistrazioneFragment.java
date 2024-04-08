@@ -1,6 +1,6 @@
 package com.example.cookidea_app.Fragments;
 
-import static com.example.cookidea_app.Activities.MainActivity.apiService;
+import static com.example.cookidea_app.Activities.CookIdeaApp.apiService;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
