@@ -368,10 +368,6 @@ def getWeeklyMenu():
 
 
 
-
-
-
-
 # API 13 RETURN USER BY ID
 @appWebApi.route("/api/getUserById")
 def getUser():
@@ -384,6 +380,28 @@ def getUser():
     else:
         return "User not found", 404
     
+
+# API 14 RETURN INGREDIENTS BY DATE
+# http://192.168.0.110:8000/api/getDailyMenu
+@appWebApi.route("/api/getDailyMenu", methods = ["GET"])
+
+def getDailyMenu():
+
+    idUtente = request.args.get("id_utente")
+    #data = request.args.get("data")
+    StringData = request.args.get("data")
+    #data = datetime.strptime(StringData, '%a %b %d %H:%M:%S GMT%z %Y')
+    #print(data)
+
+    
+    query = """select `data`, nome_piatto, image_name, nome_tipo_pasto from menu_settimanale join piatti
+               on id_piatto = piatti.id join tipo_pasto on id_pasto = tipo_pasto.id where id_utente = %s
+               AND `data` = %s"""
+    
+    result = db.getAllData(query, (idUtente, StringData))
+    return json.dumps(result, default=convert_to_serializable)
+
+
 
 
 if __name__ == "__main__":
