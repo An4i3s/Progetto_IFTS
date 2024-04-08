@@ -70,7 +70,6 @@ public class ProfiloFragment extends Fragment {
     Context ctx;
     User user;
 
-    User user;
 
 
     public ProfiloFragment(){
@@ -88,28 +87,8 @@ public class ProfiloFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_profilo, container, false);
 
-<<<<<<< Updated upstream
         user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
-=======
-        /*
 
-        boolean isUserLoggedIn = SharedPrefManager.isLoggedIn(ctx);
-        if (isUserLoggedIn){
-
-             user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
-
-        }else {
-            SharedPrefManager.setLoggedIn(ctx, true);
-            user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
-        }
-*/
-        // TODO: 06/04/2024 Chiamare ogni volta un User in base a username
-
-      // user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
-
-
-       user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).callUserFromBackend();
->>>>>>> Stashed changes
 
         usernameTV = rootView.findViewById(R.id.usernameTV);
         usernameTV.setText(user.getUsername());
