@@ -1,5 +1,7 @@
 package com.example.cookidea_app.Fragments;
 
+import static com.example.cookidea_app.Activities.CookIdeaApp.apiService;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -44,7 +46,6 @@ public class LoginFragment extends Fragment {
     ImageButton btnVisibility;
     ImageButton btnVisibilityOff;
     Button loginBtn;
-    Retrofit retrofit = new Retrofit.Builder().baseUrl(MainActivity.BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
 
     User user;
 
@@ -94,11 +95,10 @@ public class LoginFragment extends Fragment {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CookIdeaApiEndpointInterface apiInterface = retrofit.create(CookIdeaApiEndpointInterface.class);
                 LoginRequest loginRequest = new LoginRequest();
                 loginRequest.setUsername(username.getText().toString());
                 loginRequest.setPassword(password.getText().toString());
-                Call<User> call = apiInterface.login(loginRequest);
+                Call<User> call = apiService.login(loginRequest);
 
 
                 call.enqueue(new Callback<User>() {
