@@ -10,16 +10,29 @@ appWebApi = Flask(__name__)
 appWebApi.secret_key= '123456'
 csrf = CSRFProtect(appWebApi)
 db = None
-
-
-
-db = None
-
-# web w1 - homepage - 
+ 
 @appWebApi.route("/")
 def index():
-    if 'username' in session:
-        return render_template('/connect.html', username=session['username'])
+    if 'logged_in' in session and session['logged_in']:
+        query = "SELECT DISTINCT piatti.portata FROM piatti"
+        result = db.getAllData(query)
+        listaPortate = []
+        for record in result:
+            nomePortata = record["portata"]
+            image_url = f"/static/img/{nomePortata.lower()}.jpg"
+            portata = Portata(nomePortata, image_url)
+            listaPortate.append(portata)
+        
+        piattiDaRestituire = 5
+        query = """SELECT image_name
+                   FROM piatti ORDER BY RAND() LIMIT %s"""
+        result = db.getAllData(query, (piattiDaRestituire))
+        listaImmagini = []
+        for record in result:
+            immagine = record["image_name"]
+            listaImmagini.append(immagine)
+
+        return render_template("connect.html", listaPortate=listaPortate, listaImmagini=listaImmagini)
     else:
         query = "SELECT DISTINCT piatti.portata FROM piatti"
         result = db.getAllData(query)
@@ -42,32 +55,50 @@ def index():
         return render_template("index.html", listaPortate=listaPortate, listaImmagini=listaImmagini)
 
 
+@appWebApi.route('/connect')
+def connected():
+    if 'logged_in' in session and session['logged_in']:
+        query = "SELECT DISTINCT piatti.portata FROM piatti"
+        result = db.getAllData(query)
+        listaPortate = []
+        for record in result:
+            nomePortata = record["portata"]
+            image_url = f"/static/img/{nomePortata.lower()}.jpg"
+            portata = Portata(nomePortata, image_url)
+            listaPortate.append(portata)
+        
+        piattiDaRestituire = 5
+        query = """SELECT image_name
+                   FROM piatti ORDER BY RAND() LIMIT %s"""
+        result = db.getAllData(query, (piattiDaRestituire))
+        listaImmagini = []
+        for record in result:
+            immagine = record["image_name"]
+            listaImmagini.append(immagine)
+
+        return render_template("connect.html", listaPortate=listaPortate, listaImmagini=listaImmagini)
+    else:
+        return redirect('/login')
+
+
 
 @appWebApi.route('/registrazione', methods =['GET', 'POST'])
 def register():
     if request.method == 'POST':
         data = request.form
         nome = data.get('nome')
-        print("Nome Utente:" , nome)
         cognome = data.get('cognome')
-        print("Cognome Utente:" , cognome)
         data_nascita = data.get('data_nascita')
-        print("Data di Nascita:" , data_nascita)
         email = data.get('email')
-        print("Email:" , email)
         username = data.get('username')
-        print("Nome Utente:" , username)
         password = data.get('password')
-        print("Password:" , password)
 
         user = db.getSingleData("SELECT * FROM utenti WHERE username = %s and email = %s", (username, email))
         if user:
             return 'Username già utilizzato. Scegli un altro username! '
         
-        
         hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
-        
         query = "INSERT INTO utenti (nome, cognome, data_nascita, email, username, password) values (%s, %s, %s, %s,  %s, %s)"
         db.insert(query, (nome, cognome, data_nascita, email, username, hashed_password))
         return redirect('/login')
@@ -79,9 +110,7 @@ def login():
     if request.method == 'POST':
         data = request.form
         username = data.get('username')
-        print("Username:" , username)
         password = data.get('password')
-        print("Password:" , password)
         remember = data.get('rememeber')
 
         query = "select * from utenti where username = %s"
@@ -103,12 +132,6 @@ def login():
         
     return render_template('login.html')
 
-@appWebApi.route('/connect')
-def connected():
-    if 'logged_in' in session and session['logged_in']:
-        return render_template('connect.html')
-    else:
-        return redirect('/login')
     
 @appWebApi.route('/logout')
 def logout():
@@ -224,6 +247,6 @@ def webGetRicettaCompletaFromId():
 if __name__ == "__main__":
     try:
         db = Database()
-        appWebApi.run(host='0.0.0.0', port=8000)
+        appWebApi.run(host='0.0.0.0', port=8000, debug=True)
     except KeyboardInterrupt:
         db.close()
