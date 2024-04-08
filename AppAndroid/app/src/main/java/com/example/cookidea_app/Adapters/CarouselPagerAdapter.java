@@ -1,6 +1,7 @@
 package com.example.cookidea_app.Adapters;
 
-import static com.example.cookidea_app.Activities.MainActivity.BASE_URL;
+
+import static com.example.cookidea_app.Activities.CookIdeaApp.BASE_URL;
 
 import android.content.Context;
 import android.os.Handler;

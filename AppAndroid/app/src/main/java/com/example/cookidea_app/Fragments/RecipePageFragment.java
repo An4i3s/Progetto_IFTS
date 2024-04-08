@@ -1,7 +1,9 @@
 package com.example.cookidea_app.Fragments;
 
-import static com.example.cookidea_app.Activities.MainActivity.BASE_URL;
-import static com.example.cookidea_app.Activities.MainActivity.apiService;
+
+
+import static com.example.cookidea_app.Activities.CookIdeaApp.BASE_URL;
+import static com.example.cookidea_app.Activities.CookIdeaApp.apiService;
 
 import android.content.Context;
 import android.os.Bundle;

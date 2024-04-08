@@ -1,11 +1,13 @@
 package com.example.cookidea_app.Fragments;
 
+import static com.example.cookidea_app.Activities.CookIdeaApp.apiService;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.content.Context;
 
-import static com.example.cookidea_app.Activities.MainActivity.apiService;
+
 
 
 import android.content.SharedPreferences;
@@ -28,6 +30,7 @@ import androidx.fragment.app.Fragment;
 import com.example.cookidea_app.Activities.CookIdeaApp;
 
 import com.example.cookidea_app.Activities.MainActivity;
+import com.example.cookidea_app.Activities.SharedPrefManager;
 import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.R;
 
@@ -85,6 +88,7 @@ public class ProfiloFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_profilo, container, false);
 
         user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
+
 
         usernameTV = rootView.findViewById(R.id.usernameTV);
         usernameTV.setText(user.getUsername());
