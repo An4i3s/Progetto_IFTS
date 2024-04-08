@@ -6,6 +6,7 @@ from models import *
 from Database import *
 import time
 from datetime import datetime
+from datetime import date
 
 
 
@@ -339,6 +340,29 @@ def insertWeeklyMenu():
                 return json.dumps(1), 201
     else:
          return json.dumps(0), 500
+    
+
+def convert_to_serializable(obj):
+    if isinstance(obj, date):
+        return obj.strftime('%Y-%m-%d')
+    raise TypeError("Object of type '%s' is not JSON serializable" % type(obj).__name__)
+
+
+# api  GET MENU SETTIMANALE
+# http://192.168.0.110:8000/api/getWeeklyMenu
+@appWebApi.route("/api/getWeeklyMenu", methods = ["GET"])
+
+def getWeeklyMenu():
+
+    idUtente = request.args.get("id_utente")
+    
+    query = """select `data`, nome_piatto, image_name, nome_tipo_pasto from menu_settimanale join piatti
+               on id_piatto = piatti.id join tipo_pasto on id_pasto = tipo_pasto.id where id_utente = %s
+               AND `data` BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 6 DAY);"""
+    
+    result = db.getAllData(query, (idUtente,))
+    return json.dumps(result, default=convert_to_serializable)
+
 
 
 
