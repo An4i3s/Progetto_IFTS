@@ -79,7 +79,7 @@ public class MenuListAdapter extends BaseAdapter implements StickyListHeadersAda
         } else {
             menuViewHolder = (MenuViewHolder) convertView.getTag();
         }
-        String imgUrl = BASE_URL + "/static/recipes" + weeklyMenus.get(position).getRecipe().getImg_name();
+        String imgUrl = BASE_URL + "/static/recipes" + weeklyMenus.get(position).getRecipeName();
         new DownloadImageAsyncTask(menuViewHolder.image, new DownloadImageAsyncTask.ImageDownloadCallback() {
             @Override
             public void downloaded(Bitmap img) {
@@ -87,7 +87,7 @@ public class MenuListAdapter extends BaseAdapter implements StickyListHeadersAda
             }
         }).execute(imgUrl);
 
-        menuViewHolder.name.setText(weeklyMenus.get(position).getRecipe().getName());
+        menuViewHolder.name.setText(weeklyMenus.get(position).getRecipeName());
         menuViewHolder.meal.setText(weeklyMenus.get(position).getMeal());
 
         return convertView;
