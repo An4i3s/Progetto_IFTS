@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:textSize="25sp"
         android:textAlignment="center"
+        android:background="#FDF8FF"
         />
 
     <TextView
@@ -18,6 +19,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textAlignment="center"
+        android:background="#FDF8FF"
         />
 
 </LinearLayout>

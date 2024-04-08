@@ -21,6 +21,7 @@ import com.example.cookidea_app.R;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -105,14 +106,31 @@ public class MenuListAdapter extends BaseAdapter implements StickyListHeadersAda
             headerMenuViewHolder.date = (TextView) convertView.findViewById(R.id.menuDate);
 
             convertView.setTag(headerMenuViewHolder);
-
         } else {
             headerMenuViewHolder = (HeaderMenuViewHolder) convertView.getTag();
         }
 
-        headerMenuViewHolder.weekDay.setText(convertWeekDay(weeklyMenus.get(position).getMenuDate()));
+        Date menuDate = weeklyMenus.get(position).getMenuDate();
+
+        String weekDay = convertWeekDay(menuDate);
+
+        if (position > 0) {
+            Date prevMenuDate = weeklyMenus.get(position - 1).getMenuDate();
+            if (!convertWeekDay(prevMenuDate).equals(weekDay)) {
+                weekDay = convertWeekDay(prevMenuDate);
+            }
+        }
+
+        headerMenuViewHolder.weekDay.setText(weekDay);
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String formattedDate = dateFormat.format(menuDate);
+        headerMenuViewHolder.date.setText(formattedDate);
+
         return convertView;
     }
+
+
 
     @Override
     public long getHeaderId(int position) {

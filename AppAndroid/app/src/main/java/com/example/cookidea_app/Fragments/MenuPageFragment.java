@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -57,6 +58,11 @@ public class MenuPageFragment extends Fragment {
         ctx = context;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -65,6 +71,18 @@ public class MenuPageFragment extends Fragment {
         stickyListView = (StickyListHeadersListView) rootView.findViewById(R.id.weeklyMenuList);
         menuListAdapter = new MenuListAdapter(ctx, results);
         stickyListView.setAdapter(menuListAdapter);
+
+        stickyListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                menuListAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+
+            }
+        });
 
         user = ((CookIdeaApp)ctx.getApplicationContext()).getLoggedUser();
         downloadBackEndInfo();
