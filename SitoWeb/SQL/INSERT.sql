@@ -249,5 +249,8 @@ INSERT INTO `cookidea`.`preferiti` (`id`, `id_utente`, `id_piatto`) VALUES ('6',
 
 
 
+
+
+
  --
 select * from preferiti;

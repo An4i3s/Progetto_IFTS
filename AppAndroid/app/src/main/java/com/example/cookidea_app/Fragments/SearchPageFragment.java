@@ -97,7 +97,7 @@ public class SearchPageFragment extends Fragment {
         resultListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(ctx, searchPageListAdapter.getItem(position).getName(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(ctx, searchPageListAdapter.getItem(position).getName(), Toast.LENGTH_LONG).show();
                 ((MainActivity)ctx).changeTabById(R.id.searchPage, searchPageListAdapter.getItem(position).getRecipeId());
                 ((MainActivity)ctx).changeFrameByNavigationTab(R.id.recipePage);
             }

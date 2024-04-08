@@ -241,7 +241,6 @@ def checkPreferiti():
     idPiatto = request.args.get("id_piatto")
     query = """select preferiti.id FROM preferiti WHERE id_utente = %s AND id_piatto = %s;"""
     result = db.getSingleData (query, (idUtente, idPiatto,))
-    print(query, result)
     if result is None:
         return json.dumps(0)
     else:
@@ -320,6 +319,27 @@ def getTipoPasto():
     result = db.getAllData(query)
     print(query, result)
     return json.dumps(result, default=vars)
+
+
+# api  INSERISCI MENU SETTIMANALE
+# http://192.168.0.110:8000/api/insertWeeklyMenu/
+@appWebApi.route("/api/insertWeeklyMenu", method = ["PUT"])
+def insertWeeklyMenu():
+
+    idUtente = request.args.get("id_utente")
+    idPiatto = request.args.get("id_piatto")
+    idPasto = request.args.get("id_pasto")
+    StringData = request.args.get("data")
+    data = datetime.strptime(StringData, '%b %d, %Y %I:%M:%S %p')
+
+    query = """insert into menu_settimanale (id_utente, id_piatto, id_pasto, data)
+               VALUES (%s, %s, %s, %s)"""
+    
+    if db.insert(query, (idUtente, idPiatto, idPasto, data)) == True:
+                return json.dumps(1), 201
+    else:
+         return json.dumps(0), 500
+
 
 
 
