@@ -63,7 +63,7 @@ public interface CookIdeaApiEndpointInterface {
     Call<List<Meal>> getMeals();
 
     @PUT("api/")
-    Call<Integer> addWeeklyMenu(@Query("id_utente") long idUtente, @Query("id_piatto") String idPiatto, @Query("id_pasto") String idPasto, @Query("data") Date data);
+    Call<Integer> addWeeklyMenu(@Query("id_utente") long idUtente, @Query("id_piatto") String idPiatto, @Query("id_pasto") int idPasto, @Query("data") Date data);
 
 
 
