@@ -1,5 +1,7 @@
 package com.example.cookidea_app.Fragments;
 
+import static com.example.cookidea_app.Activities.CookIdeaApp.apiService;
+
 import android.content.Context;
 import android.os.Bundle;
 
@@ -24,7 +26,6 @@ import com.example.cookidea_app.Activities.SharedPrefManager;
 import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.R;
 
-import static com.example.cookidea_app.Activities.MainActivity.apiService;
 
 import retrofit2.Call;
 import retrofit2.Callback;

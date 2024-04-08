@@ -3,7 +3,11 @@ package com.example.cookidea_app.Activities;
 import android.app.Application;
 import android.util.Log;
 
+import com.example.cookidea_app.Backend.CookIdeaApiEndpointInterface;
 import com.example.cookidea_app.ModelClasses.User;
+
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CookIdeaApp extends Application {
 
@@ -14,6 +18,16 @@ public class CookIdeaApp extends Application {
     //provo a togliere == null
      User loggedUser = null;
 
+    public static final String BASE_URL = "http://192.168.1.136:8000";
+
+
+    public static final Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
+
+    public static final CookIdeaApiEndpointInterface apiService = retrofit.create(CookIdeaApiEndpointInterface.class);
     public void saveSaredPref(String info) {
         Log.i("CookIdeaApp", info);
     }

@@ -92,3 +92,6 @@ CREATE TABLE `preferiti` (
 );
 
 
+ALTER TABLE `cookidea`.`menu_settimanale` 
+CHANGE COLUMN `numero_persone` `numero_persone` INT NOT NULL DEFAULT 1 ;
+

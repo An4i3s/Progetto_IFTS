@@ -1,5 +1,7 @@
 package com.example.cookidea_app.Activities;
 
+import static com.example.cookidea_app.Activities.CookIdeaApp.apiService;
+
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -96,16 +98,10 @@ public class MainActivity extends AppCompatActivity
     }
 
 
+
     public static final String BASE_URL = "http://192.168.0.106:8000";
 
 
-    public static final Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
-
-
-    public static final CookIdeaApiEndpointInterface apiService = retrofit.create(CookIdeaApiEndpointInterface.class);
 
 
     @SuppressLint("ClickableViewAccessibility")
@@ -114,8 +110,6 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Problema sta in questa riga? getLoggedUser dovrebbe essere chiamato una sola volta nel codice?
-        //  user = ((CookIdeaApp)getApplication()).getLoggedUser();
 
 
         bottomNavigationView = findViewById((R.id.bottomNavBar));
