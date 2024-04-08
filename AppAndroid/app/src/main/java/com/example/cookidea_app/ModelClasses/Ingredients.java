@@ -20,4 +20,9 @@ public class Ingredients {
     public String getIngredientQuantity() {
         return ingredientQuantity+"";
     }
+
+    @Override
+    public String toString() {
+        return ingredientName+" - "+ingredientQuantity;
+    }
 }
