@@ -77,16 +77,20 @@ public class MenuListAdapter extends BaseAdapter implements StickyListHeadersAda
             menuViewHolder.meal = (TextView) convertView.findViewById(R.id.mealRecipeMenuTextView);
 
             convertView.setTag(menuViewHolder);
+
+            String imgUrl = BASE_URL + "/static/recipes/" + weeklyMenus.get(position).getRecipeImg();
+            new DownloadImageAsyncTask(menuViewHolder.image, new DownloadImageAsyncTask.ImageDownloadCallback() {
+                @Override
+                public void downloaded(Bitmap img) {
+                    menuViewHolder.image.setImageBitmap(img);
+                }
+            }).execute(imgUrl);
+
+
         } else {
             menuViewHolder = (MenuViewHolder) convertView.getTag();
         }
-        String imgUrl = BASE_URL + "/static/recipes/" + weeklyMenus.get(position).getRecipeImg();
-        new DownloadImageAsyncTask(menuViewHolder.image, new DownloadImageAsyncTask.ImageDownloadCallback() {
-            @Override
-            public void downloaded(Bitmap img) {
-                menuViewHolder.image.setImageBitmap(img);
-            }
-        }).execute(imgUrl);
+
 
         menuViewHolder.name.setText(weeklyMenus.get(position).getRecipeName());
         menuViewHolder.meal.setText(weeklyMenus.get(position).getMeal());
