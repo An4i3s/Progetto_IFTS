@@ -25,16 +25,17 @@
             />
 
         <LinearLayout
-            android:id="@+id/layoutMonday"
+            android:id="@+id/layoutDay1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
 
             <TextView
+                android:id="@+id/one"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Lunedì"
+                android:text=""
                 android:textColor="@color/bluScuro"
                 android:textAppearance="@android:style/TextAppearance.Material.Title"
                 android:fontFamily="@font/alatsi"
@@ -42,15 +43,28 @@
                 android:paddingBottom="15dp"
                 />
 
-            <CheckBox
-                android:id="@+id/check"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="prova"
-                android:textSize="20dp"
-                />
+
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/layoutDay2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/two"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textColor="@color/bluScuro"
+                android:textAppearance="@android:style/TextAppearance.Material.Title"
+                android:fontFamily="@font/alatsi"
+                android:textAllCaps="true"
+                android:paddingBottom="15dp"
+                />
+        </LinearLayout>
 
 
     </LinearLayout>

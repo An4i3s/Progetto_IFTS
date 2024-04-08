@@ -389,17 +389,23 @@ def getDailyMenu():
 
     idUtente = request.args.get("id_utente")
     #data = request.args.get("data")
-    StringData = request.args.get("data")
+    stringData = request.args.get("data")
+    stringData = stringData.replace(' GMT', '')
+
+    formato_data = '%a %b %d %H:%M:%S %Y'
+    
+
+    data = datetime.strptime(stringData, formato_data)
     #data = datetime.strptime(StringData, '%a %b %d %H:%M:%S GMT%z %Y')
     #print(data)
 
     
-    query = """select `data`, nome_piatto, image_name, nome_tipo_pasto from menu_settimanale join piatti
+    query = """select  nome_piatto, image_name, nome_tipo_pasto from menu_settimanale join piatti
                on id_piatto = piatti.id join tipo_pasto on id_pasto = tipo_pasto.id where id_utente = %s
                AND `data` = %s"""
     
-    result = db.getAllData(query, (idUtente, StringData))
-    return json.dumps(result, default=convert_to_serializable)
+    result = db.getAllData(query, (idUtente, data))
+    return json.dumps(result, default=vars)
 
 
 
