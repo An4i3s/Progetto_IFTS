@@ -323,14 +323,14 @@ def getTipoPasto():
 
 # api  INSERISCI MENU SETTIMANALE
 # http://192.168.0.110:8000/api/insertWeeklyMenu/
-@appWebApi.route("/api/insertWeeklyMenu", method = ["PUT"])
+@appWebApi.route("/api/insertWeeklyMenu", methods = ["PUT"])
 def insertWeeklyMenu():
 
     idUtente = request.args.get("id_utente")
     idPiatto = request.args.get("id_piatto")
     idPasto = request.args.get("id_pasto")
     StringData = request.args.get("data")
-    data = datetime.strptime(StringData, '%b %d, %Y %I:%M:%S %p')
+    data = datetime.strptime(StringData, '%a %b %d %H:%M:%S GMT%z %Y')
 
     query = """insert into menu_settimanale (id_utente, id_piatto, id_pasto, data)
                VALUES (%s, %s, %s, %s)"""

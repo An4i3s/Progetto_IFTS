@@ -126,12 +126,12 @@ public class RecipePageFragment extends Fragment {
                 call.enqueue(new Callback<Integer>() {
                     @Override
                     public void onResponse(Call<Integer> call, Response<Integer> response) {
-                        Toast.makeText(ctx, "Tutto Ok", Toast.LENGTH_SHORT).show();
+
                     }
 
                     @Override
                     public void onFailure(Call<Integer> call, Throwable t) {
-                        Toast.makeText(ctx, "Molto Male", Toast.LENGTH_SHORT).show();
+
                     }
                 });
             }
@@ -144,7 +144,7 @@ public class RecipePageFragment extends Fragment {
                 Date selectedDate = (Date) dateSpinner.getSelectedItem();
                 Meal selectedMeal = (Meal) mealsSpinner.getSelectedItem();
                 int selectedMealId = selectedMeal.getId();
-                Call<Integer> addRecipeToMenu = apiService.addWeeklyMenu(user.getId(), recipe.getRecipeId(), selectedMealId, selectedDate);
+                Call<Integer> addRecipeToMenu = apiService.addWeeklyMenu(user.getId(), recipe.getRecipeId(), selectedMealId, selectedDate.toString());
                 addRecipeToMenu.enqueue(new Callback<Integer>() {
                     @Override
                     public void onResponse(Call<Integer> call, Response<Integer> response) {
