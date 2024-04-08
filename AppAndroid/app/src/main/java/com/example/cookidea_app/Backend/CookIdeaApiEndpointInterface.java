@@ -9,6 +9,7 @@ import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.ModelClasses.WeeklyMenu;
 
 
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -61,6 +62,8 @@ public interface CookIdeaApiEndpointInterface {
     @GET("/api/getTipoPasto")
     Call<List<Meal>> getMeals();
 
+    @PUT("api/")
+    Call<Integer> addWeeklyMenu(@Query("id_utente") long idUtente, @Query("id_piatto") String idPiatto, @Query("id_pasto") String idPasto, @Query("data") Date data);
 
 
 

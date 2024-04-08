@@ -53,6 +53,8 @@ public class MenuDateSpinnerAdapter extends ArrayAdapter<Date> {
         return convertView;
     }
 
+
+
     String convertWeekDay(Date date){
         Calendar c = Calendar.getInstance();
         c.setTime(date);

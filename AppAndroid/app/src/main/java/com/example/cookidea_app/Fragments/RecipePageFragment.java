@@ -57,7 +57,7 @@ public class RecipePageFragment extends Fragment {
     TextView textViewName, textViewTime, textViewDifficulty, textViewProvenience, textViewIngredients, textViewGuide;
 
     Spinner mealsSpinner, dateSpinner;
-    Button addRecipeToWeeklyMenu;
+    Button addRecipeToWeeklyMenuButton;
 
     List<Meal> listMeals = new ArrayList<>();
 
@@ -90,21 +90,12 @@ public class RecipePageFragment extends Fragment {
         textViewIngredients = rootView.findViewById(R.id.ingredientsRecipeTextView);
         textViewGuide = rootView.findViewById(R.id.guideRecipeTextView);
         favoriteButton = rootView.findViewById(R.id.favouriteButton);
-        addRecipeToWeeklyMenu = rootView.findViewById(R.id.addRecipeToMenuButton);
+        addRecipeToWeeklyMenuButton = rootView.findViewById(R.id.addRecipeToMenuButton);
 
         mealsSpinner = rootView.findViewById((R.id.mealsSpinner));
         mealsAdapter = new MealArrayAdapter(ctx, listMeals);
         mealsAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mealsSpinner.setAdapter(mealsAdapter);
-
-
-
-
-
-
-
-
-
 
 
         if(dateList.size()!=7) {
@@ -141,6 +132,18 @@ public class RecipePageFragment extends Fragment {
                         Toast.makeText(ctx, "Molto Male", Toast.LENGTH_SHORT).show();
                     }
                 });
+            }
+        });
+
+        addRecipeToWeeklyMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(ctx, "Aggiunta", Toast.LENGTH_SHORT).show();
+                Date selectedDate = (Date) dateSpinner.getSelectedItem();
+                Meal selectedMeal = (Meal) mealsSpinner.getSelectedItem();
+                int selectedMealId = selectedMeal.getId();
+                Call<>
+
             }
         });
 
@@ -186,12 +189,12 @@ public class RecipePageFragment extends Fragment {
             favoriteButton.setVisibility(View.GONE);
             mealsSpinner.setVisibility(View.GONE);
             dateSpinner.setVisibility(View.GONE);
-            addRecipeToWeeklyMenu.setVisibility(View.GONE);
+            addRecipeToWeeklyMenuButton.setVisibility(View.GONE);
         }else{
             favoriteButton.setVisibility(View.VISIBLE);
             mealsSpinner.setVisibility(View.VISIBLE);
             dateSpinner.setVisibility(View.VISIBLE);
-            addRecipeToWeeklyMenu.setVisibility(View.VISIBLE);
+            addRecipeToWeeklyMenuButton.setVisibility(View.VISIBLE);
 
             Call<Integer> checkFavouriteCall = apiService.checkPreferito(user.getId(), recipe.getRecipeId());
             checkFavouriteCall.enqueue(new Callback<Integer>() {

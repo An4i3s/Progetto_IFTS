@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public static final String BASE_URL = "http://192.168.1.136:8000";
+    public static final String BASE_URL = "http://192.168.0.106:8000";
 
 
     public static final Retrofit retrofit = new Retrofit.Builder()
