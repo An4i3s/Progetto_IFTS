@@ -334,7 +334,8 @@ def insertWeeklyMenu():
     stringData = request.args.get("data")
     stringData = stringData.replace(' GMT', '')
 
-    formato_data = '%a %b %d %H:%M:%S %Y'
+    formato_data = '%a %b %d %H:%M:%S%z %Y'
+
     data = datetime.strptime(stringData, formato_data)
 
     query = """insert into menu_settimanale (id_utente, id_piatto, id_pasto, data)
