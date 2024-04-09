@@ -1,42 +1,50 @@
-*body{
+* {
     padding: 0;
-    margin:0;
+    margin: 0;
+    box-sizing: border-box; /* Assicura che il padding e il bordo siano inclusi nelle dimensioni */
 }
 
-.page{
+.page {
+    display: flex;
     align-items: center;
 }
 
-.recipes-teaser{
-    display: flex;
-    flex-direction: column;
-    margin-top: 2%;
-    margin-right: 5%;
-    margin-left: 10%;
-}
-
-.teaser1{
-    display: flex;
-    flex-direction: column;
-    position:static;
-}
-
-.recipes-teaser .teaser.image,
-.recipes-teaser .teaser1.text {
-    display: inline-block;
-    vertical-align: top; /* Assicura l'allineamento verticale */
-}
-
 .recipes-teaser {
+    display: flex;
+    flex-direction: column;
+    margin: 2% 5% 2% 10%; /* Ridotto il margine a una dichiarazione */
     border: 2px solid black;
 }
 
-.teaser.image{
-    border: 2px solid white;
-    max-width: ;
+/* Stili per i container delle ricette */
+.recipes-teaser {
+    background-color: rgba(0, 0, 0, 0.5); /* Sfondo trasparente opacizzato */
+    padding: 20px; /* Spaziatura interna */
+    border-radius: 8px; /* Bordi arrotondati */
+    margin-bottom: 20px; /* Margine inferiore */
 }
 
-img{
-    max-width: 200px;
-    max-height: 100px;
+.teaser.image img {
+    max-width: 100%; /* Larghezza massima dell'immagine al 100% del contenitore */
+    height: auto; /* Altezza automatica per mantenere le proporzioni */
+    border-radius: 8px; /* Bordi arrotondati */
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); /* Ombra */
+    margin-top: 10px; /* Margine superiore */
+    margin-bottom: 20px; /* Margine inferiore */
+}
+
+.teaser1.text {
+    background-color: rgba(255, 255, 255, 0.3); /* Sfondo trasparente opacizzato */
+    border-radius: 8px; /* Bordi arrotondati */
+    padding: 20px; /* Spaziatura interna */
+    margin-bottom: 20px; /* Margine inferiore */
+}
+
+.title {
+    font-family: "Passion One", sans-serif;
+    font-weight: 400;
+    color: #ececec;
+    font-size: 38px;
+    margin-bottom: 10px;
+    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
 }
