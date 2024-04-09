@@ -3,7 +3,7 @@ from flask_wtf import CSRFProtect
 import pymysql
 from models import *
 from Database import *
-import bcrypt
+#import bcrypt
 
 
 appWebApi = Flask(__name__)
@@ -94,10 +94,10 @@ def register():
         if user:
             return 'Username già utilizzato. Scegli un altro username! '
         
-        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        #hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
         query = "INSERT INTO utenti (nome, cognome, data_nascita, email, username, password) values (%s, %s, %s, %s,  %s, %s)"
-        db.insert(query, (nome, cognome, data_nascita, email, username, hashed_password))
+        db.insert(query, (nome, cognome, data_nascita, email, username, password))
         return redirect('/login')
     
     return render_template('register.html')
@@ -118,7 +118,7 @@ def login():
             return render_template('login.html')
         
         #verifica la password hashata
-        if bcrypt.checkpw(password.encode('utf-8'), user['password'].encode('utf-8')):
+        if password == user['password']:
             print("Utente OK!")
             session['logged_in'] = True
             session['username'] = user['username']

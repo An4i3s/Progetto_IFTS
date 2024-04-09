@@ -148,12 +148,14 @@ public class RecipePageFragment extends Fragment {
                 addRecipeToMenu.enqueue(new Callback<Integer>() {
                     @Override
                     public void onResponse(Call<Integer> call, Response<Integer> response) {
-                        int backEndResponse = response.body();
-                        if(backEndResponse == 1)
-                            Toast.makeText(ctx, "Aggiunta", Toast.LENGTH_LONG).show();
-                        else
-                            Toast.makeText(ctx, "Errore", Toast.LENGTH_LONG).show();
-                    }
+                        Integer backEndResponse = response.body();
+                        if(backEndResponse != null) {
+                            if (backEndResponse.equals(1))
+                                Toast.makeText(ctx, "Aggiunta", Toast.LENGTH_LONG).show();
+                            else
+                                Toast.makeText(ctx, "Errore", Toast.LENGTH_LONG).show();
+                            }
+                        }
 
                     @Override
                     public void onFailure(Call<Integer> call, Throwable t) {
