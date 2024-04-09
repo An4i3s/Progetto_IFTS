@@ -72,6 +72,11 @@ public class ListaSpesaFragmentPage extends Fragment {
         ctx = context;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -122,29 +127,39 @@ public class ListaSpesaFragmentPage extends Fragment {
          //call3 = apiService.getDailyIngredients(user.getId(), day3String);
        // makeApiCall();
 
+        spesaDay1Lv = rootView.findViewById(R.id.oneLv);
+        ListaSpesaAdapter adapter1 = new ListaSpesaAdapter(ctx, oneIngredients);
+        spesaDay1Lv.setAdapter(adapter1);
+        spesaDay2Lv = rootView.findViewById(R.id.twoLv);
+        ListaSpesaAdapter adapter2 = new ListaSpesaAdapter(ctx, twoIngredients);
+        spesaDay2Lv.setAdapter(adapter2);
+        spesaDay3Lv = rootView.findViewById(R.id.threeLv);
+        ListaSpesaAdapter adapter3 = new ListaSpesaAdapter(ctx, threeIngredients);
+        spesaDay3Lv.setAdapter(adapter3);
 
-        call1.enqueue(new Callback<List<Ingredients>>() {
-            @Override
-            public void onResponse(Call<List<Ingredients>> call, Response<List<Ingredients>> response) {
-                assert response.body() != null;
-                oneIngredients.addAll(response.body());
-
-                Log.i("mondayIngredients", String.valueOf(oneIngredients.size())+"Success");
-                Log.i("mondayIngredients", oneIngredients.get(0).toString());
-                Log.i("mondayIngredients", oneIngredients.get(1).toString());
-                Log.i("mondayIngredients", oneIngredients.get(2).toString());
-
-
-            }
-
-            @Override
-            public void onFailure(Call<List<Ingredients>> call, Throwable t) {
-                Log.i("mondayIngredients", oneIngredients.size()+"Failure");
-
-            }
-        });
+        if(oneIngredients.isEmpty()) {
+            call1.enqueue(new Callback<List<Ingredients>>() {
+                @Override
+                public void onResponse(Call<List<Ingredients>> call, Response<List<Ingredients>> response) {
+                    assert response.body() != null;
+                    oneIngredients.addAll(response.body());
+                    adapter1.notifyDataSetChanged();
+                    Log.i("mondayIngredients", String.valueOf(oneIngredients.size()) + "Success");
+                    Log.i("mondayIngredients", oneIngredients.get(0).toString());
+                    Log.i("mondayIngredients", oneIngredients.get(1).toString());
+                    Log.i("mondayIngredients", oneIngredients.get(2).toString());
 
 
+                }
+
+                @Override
+                public void onFailure(Call<List<Ingredients>> call, Throwable t) {
+                    Log.i("mondayIngredients", oneIngredients.size() + "Failure");
+
+                }
+            });
+
+        }
 
 /*
         call2.enqueue(new Callback<List<Ingredients>>() {
@@ -178,15 +193,7 @@ public class ListaSpesaFragmentPage extends Fragment {
 
 
 
-        spesaDay1Lv = rootView.findViewById(R.id.oneLv);
-        ListaSpesaAdapter adapter1 = new ListaSpesaAdapter(ctx, R.layout.lista_spesa_item, oneIngredients);
-        spesaDay1Lv.setAdapter(adapter1);
-        spesaDay2Lv = rootView.findViewById(R.id.twoLv);
-        ListaSpesaAdapter adapter2 = new ListaSpesaAdapter(ctx, R.layout.lista_spesa_item, twoIngredients);
-        spesaDay2Lv.setAdapter(adapter2);
-        spesaDay3Lv = rootView.findViewById(R.id.threeLv);
-        ListaSpesaAdapter adapter3 = new ListaSpesaAdapter(ctx, R.layout.lista_spesa_item, threeIngredients);
-        spesaDay3Lv.setAdapter(adapter3);
+
 
         return rootView;
         }

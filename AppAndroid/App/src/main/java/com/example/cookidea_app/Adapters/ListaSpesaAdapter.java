@@ -22,13 +22,11 @@ import java.util.List;
 public class ListaSpesaAdapter extends ArrayAdapter<Ingredients> {
 
     Context context;
-    int res = 0;
 
 
-    public ListaSpesaAdapter(@NonNull Context context, int resource, List<Ingredients> ingredientsList) {
+    public ListaSpesaAdapter(@NonNull Context context, List<Ingredients> ingredientsList) {
         super(context, R.layout.lista_spesa_item, ingredientsList);
         this.context=context;
-        this.res = resource;
     }
 
     @NonNull
@@ -38,7 +36,7 @@ public class ListaSpesaAdapter extends ArrayAdapter<Ingredients> {
 
         if (convertView == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
-            viewContext = inflater.inflate(res, parent, false);
+            viewContext = inflater.inflate(R.layout.lista_spesa_item, parent, false);
         }
 
         Ingredients ingredient = getItem(position);
