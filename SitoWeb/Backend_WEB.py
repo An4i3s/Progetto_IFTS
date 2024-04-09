@@ -287,18 +287,6 @@ def webGetWeeklyMenu():
 
 
 
-@appWebApi.route("/web/listaSpesa", methods = ['GET', 'POST'])
-def webListaSpesa():
-    return render_template('/spesa.html')
-
-@appWebApi.route("/web/menu")
-def webMenu():
-
-
-
-
-
-
 
 
 if __name__ == "__main__":
