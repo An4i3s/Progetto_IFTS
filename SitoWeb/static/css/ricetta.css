@@ -410,6 +410,7 @@ h1{
 }
 
 .favorite-button.favorite ion-icon {
+  
   color: red; /* Cambio colore quando preferito */
 }
 

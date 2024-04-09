@@ -69,6 +69,9 @@ public interface CookIdeaApiEndpointInterface {
     @GET("/api/getDailyIngredients")
     Call<List<Ingredients>> getDailyIngredients(@Query("id_utente") long userId, @Query("data") String data);
 
+    @GET("/api/getWeeklyIngredients")
+    Call<List<Ingredients>> getWeeklyIngredients(@Query("id_utente") long userId);
+
     @GET("api/getUserById")
     Call<User> getUserById(@Query("id_user") long id);
 

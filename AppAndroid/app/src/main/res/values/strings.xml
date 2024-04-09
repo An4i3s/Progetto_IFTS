@@ -16,6 +16,8 @@
     <string name="provenienza">Prov.:</string>
     <string name="ingredienti">Ingredienti: (Le dosi sono in grammi)</string>
     <string name="procedimento">Procedimento:</string>
+    <string name="listadellspesa">Lista Della Spesa</string>
+
     <string name="add">ADD</string>
 
 </resources>

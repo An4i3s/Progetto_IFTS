@@ -60,6 +60,10 @@ public class ListaSpesaFragmentPage extends Fragment {
     Call<List<Ingredients>> call1;
     Call<List<Ingredients>> call2;
     Call<List<Ingredients>> call3;
+    Call<List<Ingredients>> call4;
+    Call<List<Ingredients>> call5;
+    Call<List<Ingredients>> call6;
+    Call<List<Ingredients>> call7;
     //User user;
 
     public ListaSpesaFragmentPage() {
@@ -88,10 +92,9 @@ public class ListaSpesaFragmentPage extends Fragment {
 
         User user = ((CookIdeaApp)((MainActivity)ctx).getApplication()).getLoggedUser();
         //Serve?
-        layoutOne = rootView.findViewById(R.id.layoutDay1);
-        oneTv = rootView.findViewById(R.id.one);
-        twoTv = rootView.findViewById(R.id.two);
-        threeTv = rootView.findViewById(R.id.three);
+        //oneTv = rootView.findViewById(R.id.one);
+        //twoTv = rootView.findViewById(R.id.two);
+        //threeTv = rootView.findViewById(R.id.three);
 
 
         Calendar calendar = Calendar.getInstance();
@@ -114,15 +117,15 @@ public class ListaSpesaFragmentPage extends Fragment {
         Calendar day7 = (Calendar) calendar.clone();
         day7.add(Calendar.DAY_OF_MONTH, 6);
 
-        oneTv.setText(convertWeekDay(day1.getTime()));
-        twoTv.setText(convertWeekDay(day2.getTime()));
-        threeTv.setText(convertWeekDay(day3.getTime()));
+//        oneTv.setText(convertWeekDay(day1.getTime()));
+//        twoTv.setText(convertWeekDay(day2.getTime()));
+  //      threeTv.setText(convertWeekDay(day3.getTime()));
 
         oneIngredients = new ArrayList<>();
         twoIngredients = new ArrayList<>();
         threeIngredients = new ArrayList<>();
 
-        call1 = apiService.getDailyIngredients(user.getId(),day1String);
+        call1 = apiService.getWeeklyIngredients(user.getId());
        // call2 = apiService.getDailyIngredients(user.getId(), day2String);
          //call3 = apiService.getDailyIngredients(user.getId(), day3String);
        // makeApiCall();
@@ -130,12 +133,12 @@ public class ListaSpesaFragmentPage extends Fragment {
         spesaDay1Lv = rootView.findViewById(R.id.oneLv);
         ListaSpesaAdapter adapter1 = new ListaSpesaAdapter(ctx, oneIngredients);
         spesaDay1Lv.setAdapter(adapter1);
-        spesaDay2Lv = rootView.findViewById(R.id.twoLv);
+        //spesaDay2Lv = rootView.findViewById(R.id.twoLv);
         ListaSpesaAdapter adapter2 = new ListaSpesaAdapter(ctx, twoIngredients);
-        spesaDay2Lv.setAdapter(adapter2);
-        spesaDay3Lv = rootView.findViewById(R.id.threeLv);
+//        spesaDay2Lv.setAdapter(adapter2);
+        //spesaDay3Lv = rootView.findViewById(R.id.threeLv);
         ListaSpesaAdapter adapter3 = new ListaSpesaAdapter(ctx, threeIngredients);
-        spesaDay3Lv.setAdapter(adapter3);
+  //      spesaDay3Lv.setAdapter(adapter3);
 
         if(oneIngredients.isEmpty()) {
             call1.enqueue(new Callback<List<Ingredients>>() {
