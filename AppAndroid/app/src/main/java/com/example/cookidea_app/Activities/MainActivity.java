@@ -54,24 +54,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity
         implements
         BottomNavigationView.OnNavigationItemSelectedListener,
-        NavigationView.OnNavigationItemSelectedListener,
-        DatePickerDialog.OnDateSetListener {
-
-    /*
-    toggle button ricetta singola per preferiti //edo
-    layout pagina lista della spesa //edo
-    collegamento lista della spesa al backend
-    layout ricette preferite //anais
-    collegamento ricette preferite al backend
-    layout menu settimanale //edo
-    collegamento menu settimanale al backend
-    implementare fragment profiloUtente //anais
-    collegre pagina profile utente con dati presi da db //anais
-    per il momento niente SQLite
-    */
+        NavigationView.OnNavigationItemSelectedListener {
 
 
-    //TODO fixare immagini errate nella ricerca
     BottomNavigationView bottomNavigationView;
     NavigationView navigationView;
     HomePageFragment homeFragment = new HomePageFragment();
@@ -224,11 +209,6 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    @Override
-    public void onDateSet(android.widget.DatePicker view, int year, int month, int dayOfMonth) {
-        // RegistrazioneFragment registrazioneFragment = new RegistrazioneFragment();
-        // registrazioneFragment.onDateSet(view, year, month, dayOfMonth);
-    }
 
     public void updateNavigationDrawer() {
         boolean isLoggedIn = SharedPrefManager.isLoggedIn(this);
