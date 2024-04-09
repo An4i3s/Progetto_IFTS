@@ -125,7 +125,7 @@ public class ListaSpesaFragmentPage extends Fragment {
         twoIngredients = new ArrayList<>();
         threeIngredients = new ArrayList<>();
 
-        call1 = apiService.getDailyIngredients(user.getId(),day1String);
+        call1 = apiService.getWeeklyIngredients(user.getId());
        // call2 = apiService.getDailyIngredients(user.getId(), day2String);
          //call3 = apiService.getDailyIngredients(user.getId(), day3String);
        // makeApiCall();
