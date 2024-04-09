@@ -148,7 +148,7 @@ public class SearchPageFragment extends Fragment {
             }
             @Override
             public void onFailure(Call<List<Recipe>> call, Throwable t) {
-                Log.i("RicercaRicettaUtente", t.getMessage());
+                //Log.i("RicercaRicettaUtente", t.getMessage());
             }
         });
     }

@@ -108,7 +108,7 @@ public class MenuPageFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<WeeklyMenu>> call, Throwable t) {
-                Log.i("MenuPageFragment", t.getMessage());
+                //Log.i("MenuPageFragment", t.getMessage());
             }
         });
 

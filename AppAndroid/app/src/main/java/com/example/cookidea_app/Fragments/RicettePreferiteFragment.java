@@ -90,7 +90,7 @@ public class RicettePreferiteFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Recipe>> call, Throwable t) {
-                Log.i("Ricette Preferite", t.getMessage());
+                //Log.i("Ricette Preferite", t.getMessage());
             }
         });
 

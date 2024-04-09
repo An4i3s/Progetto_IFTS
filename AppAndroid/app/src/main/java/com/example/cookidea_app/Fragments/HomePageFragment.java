@@ -108,7 +108,7 @@ public class HomePageFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Recipe>> call, Throwable t) {
-                Log.i("carouselDownload", t.getMessage());
+                //Log.i("carouselDownload", t.getMessage());
             }
         });
 
@@ -131,7 +131,7 @@ public class HomePageFragment extends Fragment {
 
             @Override
             public void onFailure(Call<List<Serving>> call, Throwable t) {
-                Log.e("MainActivity", t.getMessage());
+                //Log.e("MainActivity", t.getMessage());
             }
         });
 

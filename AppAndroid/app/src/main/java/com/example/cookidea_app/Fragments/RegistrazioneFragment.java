@@ -144,7 +144,7 @@ public class RegistrazioneFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<User> call, Throwable t) {
-                        Log.i("Errore registrazione", "Errore API signup");
+                        //Log.i("Errore registrazione", "Errore API signup");
 
                     }
                 });

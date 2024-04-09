@@ -194,7 +194,7 @@ public class RecipePageFragment extends Fragment {
 
             @Override
             public void onFailure(Call<Recipe> call, Throwable t) {
-                Log.i("RecipePage", t.getMessage());
+                //Log.i("RecipePage", t.getMessage());
             }
         });
     }
@@ -250,7 +250,7 @@ public class RecipePageFragment extends Fragment {
 
                     @Override
                     public void onFailure(Call<List<Meal>> call, Throwable t) {
-                        Log.e("RecipePageFragment", t.getMessage());
+                        //Log.e("RecipePageFragment", t.getMessage());
                     }
                 });
             }

@@ -57,20 +57,6 @@ public class MainActivity extends AppCompatActivity
         NavigationView.OnNavigationItemSelectedListener,
         DatePickerDialog.OnDateSetListener {
 
-    /*
-    toggle button ricetta singola per preferiti //edo
-    layout pagina lista della spesa //edo
-    collegamento lista della spesa al backend
-    layout ricette preferite //anais
-    collegamento ricette preferite al backend
-    layout menu settimanale //edo
-    collegamento menu settimanale al backend
-    implementare fragment profiloUtente //anais
-    collegre pagina profile utente con dati presi da db //anais
-    per il momento niente SQLite
-    */
-
-
     //TODO fixare immagini errate nella ricerca
     BottomNavigationView bottomNavigationView;
     NavigationView navigationView;
@@ -253,7 +239,7 @@ public class MainActivity extends AppCompatActivity
 
                 @Override
                 public void onFailure(Call<User> call, Throwable t) {
-                    Log.i("Errore login", "Errore API login");
+                    //Log.i("Errore login", "Errore API login");
                 }
             });
             navigationView.getMenu().clear();

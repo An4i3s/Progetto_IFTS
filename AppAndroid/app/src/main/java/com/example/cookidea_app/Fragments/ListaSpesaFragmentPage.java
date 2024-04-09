@@ -147,17 +147,12 @@ public class ListaSpesaFragmentPage extends Fragment {
                     assert response.body() != null;
                     oneIngredients.addAll(response.body());
                     adapter1.notifyDataSetChanged();
-                    Log.i("mondayIngredients", String.valueOf(oneIngredients.size()) + "Success");
-                    Log.i("mondayIngredients", oneIngredients.get(0).toString());
-                    Log.i("mondayIngredients", oneIngredients.get(1).toString());
-                    Log.i("mondayIngredients", oneIngredients.get(2).toString());
-
 
                 }
 
                 @Override
                 public void onFailure(Call<List<Ingredients>> call, Throwable t) {
-                    Log.i("mondayIngredients", oneIngredients.size() + "Failure");
+                    //Log.i("mondayIngredients", oneIngredients.size() + "Failure");
 
                 }
             });
