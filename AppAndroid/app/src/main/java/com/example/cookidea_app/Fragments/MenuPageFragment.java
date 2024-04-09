@@ -90,27 +90,27 @@ public class MenuPageFragment extends Fragment {
     }
 
     private void downloadBackEndInfo() {
-        if(results.isEmpty()) {
 
-            Call<List<WeeklyMenu>> listCall = apiService.getWeeklyMenu(user.getId());
 
-            listCall.enqueue(new Callback<List<WeeklyMenu>>() {
-                @Override
-                public void onResponse(Call<List<WeeklyMenu>> call, Response<List<WeeklyMenu>> response) {
-                    results = response.body();
-                    if (results != null) {
-                        menuListAdapter.weeklyMenus.addAll(results);
-                        menuListAdapter.notifyDataSetChanged();
-                        stickyListView.invalidate();
-                    }
+        Call<List<WeeklyMenu>> listCall = apiService.getWeeklyMenu(user.getId());
 
+        listCall.enqueue(new Callback<List<WeeklyMenu>>() {
+            @Override
+            public void onResponse(Call<List<WeeklyMenu>> call, Response<List<WeeklyMenu>> response) {
+                results = response.body();
+                if (results != null) {
+                    menuListAdapter.weeklyMenus.addAll(results);
+                    menuListAdapter.notifyDataSetChanged();
+                    stickyListView.invalidate();
                 }
 
-                @Override
-                public void onFailure(Call<List<WeeklyMenu>> call, Throwable t) {
-                    Log.i("MenuPageFragment", t.getMessage());
-                }
-            });
-        }
+            }
+
+            @Override
+            public void onFailure(Call<List<WeeklyMenu>> call, Throwable t) {
+                Log.i("MenuPageFragment", t.getMessage());
+            }
+        });
+
     }
 }
