@@ -60,6 +60,9 @@
                     <div class="recipes-teaser">
                         <a href="/web/ricerca/ricercaFromId?id_piatto={{piatto.id}}">
                             <div class="teaser image">
+                                <div class="title-container">
+                                    <h1 class="title">{{piatto.nome_piatto}}</h1>
+                                </div>
                                 <div class="img-spacer">
                                     <img src="/static/recipes/{{piatto.image_name}}" 
                                     alt=" " class="'lazyloaded" data-ll-status="loaded">
@@ -68,8 +71,7 @@
                             <div class="teaser1 text">
                                 <div class="teaser-top">
                                     <div class="teaser-intro">
-                                        <h1 class="title">{{piatto.nome_piatto}} </h1>
-                                    </br>
+                                       
                                     </div>
                                 </div>
                                 <div class="teaser-bottom">
