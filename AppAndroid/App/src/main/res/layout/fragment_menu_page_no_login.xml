@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.MainActivity"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="Menù Settimanale"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:fontFamily="@font/passion_one_bold"
+            android:textSize="40dp"
+            android:paddingBottom="15dp"
+            android:paddingTop="15dp"
+            android:textAllCaps="true"
+            />
+        <ImageView
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/warning_big"
+            android:layout_gravity="center"
+            android:layout_marginBottom="15dp"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fai il Login!"
+            android:fontFamily="@font/passion_one"
+            android:textSize="30dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+            android:textColor="@color/rosso"
+
+            android:textAlignment="center"
+            />
+
+
+    </LinearLayout>
+</FrameLayout>

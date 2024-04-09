@@ -96,10 +96,7 @@ public class ListaSpesaFragmentPage extends Fragment {
                     assert response.body() != null;
                     listaIngredients.addAll(response.body());
                     adapter1.notifyDataSetChanged();
-                    Log.i("mondayIngredients", String.valueOf(listaIngredients.size()) + "Success");
-                    Log.i("mondayIngredients", listaIngredients.get(0).toString());
-                    Log.i("mondayIngredients", listaIngredients.get(1).toString());
-                    Log.i("mondayIngredients", listaIngredients.get(2).toString());
+
 
 
                 }

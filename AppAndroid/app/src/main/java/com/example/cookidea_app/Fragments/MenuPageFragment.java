@@ -67,7 +67,13 @@ public class MenuPageFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.fragment_menu_page, container, false);
+        if (!SharedPrefManager.isLoggedIn(ctx)){
+            rootView = inflater.inflate(R.layout.fragment_menu_page_no_login, container, false);
+            return rootView;
+        }else {
+            rootView = inflater.inflate(R.layout.fragment_menu_page, container, false);
+
+
         stickyListView = (StickyListHeadersListView) rootView.findViewById(R.id.weeklyMenuList);
         menuListAdapter = new MenuListAdapter(ctx, results);
         stickyListView.setAdapter(menuListAdapter);
@@ -87,6 +93,7 @@ public class MenuPageFragment extends Fragment {
         user = ((CookIdeaApp)ctx.getApplicationContext()).getLoggedUser();
         downloadBackEndInfo();
         return rootView;
+        }
     }
 
     private void downloadBackEndInfo() {
