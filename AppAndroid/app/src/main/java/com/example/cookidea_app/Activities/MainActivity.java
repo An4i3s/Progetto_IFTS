@@ -99,11 +99,6 @@ public class MainActivity extends AppCompatActivity
 
 
 
-    public static final String BASE_URL = "http://192.168.0.106:8000";
-
-
-
-
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
