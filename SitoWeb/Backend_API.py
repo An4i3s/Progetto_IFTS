@@ -45,7 +45,7 @@ def getAllUsers():
 # in caso di richiesta POST (username  + password9) con esito "success" restituisce i dati dello user 
 # http://192.168.1.117:8000/api/login
 @appWebApi.route("/api/login", methods=["POST"])
-def login():
+def webLogin():
     try:
         data = request.get_json()
         username = data["username"]
@@ -71,7 +71,7 @@ def login():
 # api a9  REGISTRAZIONE
 # http://192.168.1.117:8000/api/signup
 @appWebApi.route("/api/signup", methods=["POST"])
-def register():
+def webRegister():
     user_data = request.get_json()
 
     nome = user_data.get('nome')

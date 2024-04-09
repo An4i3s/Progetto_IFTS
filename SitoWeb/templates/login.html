@@ -36,14 +36,8 @@
             <div class="login-register">
                 <p>Non hai ancora un account?<a href="{{url_for('webRegister')}}" class="register-link"> Registrati</a></p>
             </div>
-
-                <!-- Aggiunta del token CSRF -->
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
-                <!-- Gestione degli errori -->
-                {% if error %}
-                    <p class="error">{{ error }}</p>
-                {% endif %}
-
+                
+                
             </form>
         </div>
     </div>

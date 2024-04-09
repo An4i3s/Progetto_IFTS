@@ -11,8 +11,7 @@
         <div class="form-box register">
         <h2>Crea account</h2>
         <form action="/registrazione" method="POST">
-            <!-- Aggiungi il campo del token CSRF -->
-            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
             <div class="input-box">
                 <span class="icon">
                     <ion-icon name="person"></ion-icon>

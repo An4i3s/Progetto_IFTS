@@ -67,7 +67,7 @@ def connected():
 
 
 @appWebApi.route('/registrazione', methods =['GET', 'POST'])
-def register():
+def webRegister():
     if request.method == 'POST':
         data = request.form
         nome = data.get('nome')
@@ -92,7 +92,7 @@ def register():
 
 
 @appWebApi.route('/login', methods= ['GET', 'POST'])
-def login():
+def webLogin():
     if request.method == 'POST':
         data = request.form
         username = data.get('username')

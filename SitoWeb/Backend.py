@@ -1,10 +1,10 @@
 from flask import Flask, jsonify, request, render_template, json, redirect, url_for, session
-from flask_wtf import CSRFProtect
+# from flask_wtf import CSRFProtect
 from models import *
 from Database import *
-import bcrypt
 import json
 import pymysql
+# import bcrypt
 import random
 import time
 from datetime import datetime
@@ -14,7 +14,7 @@ from decimal import Decimal
 
 appWebApi = Flask(__name__)
 appWebApi.secret_key= '123456'
-csrf = CSRFProtect(appWebApi)
+# csrf = CSRFProtect(appWebApi)
 
 db = None
 
@@ -411,8 +411,10 @@ def getWeeklyMenu():
 @appWebApi.route("/")
 def index():
     if 'username' in session:
+        print("sono dentro")
         return redirect('/connect?username=' + session['username'])
     else:
+        print("sono fuori")
         query = "SELECT DISTINCT piatti.portata FROM piatti"
         result = db.getAllData(query)
         listaPortate = []
@@ -440,6 +442,7 @@ def index():
 # web - login
 @appWebApi.route('/login', methods= ['GET', 'POST'])
 def webLogin():
+
     if request.method == 'POST':
         data = request.form
         username = data.get('username')
@@ -453,8 +456,9 @@ def webLogin():
             print("utente non trovato nel database!")
             return render_template('login.html')
         
-        #verifica la password hashata
-        if bcrypt.checkpw(password.encode('utf-8'), user['password'].encode('utf-8')):
+            #verifica la password hashata
+            # if bcrypt.checkpw(password.encode('utf-8'), user['password'].encode('utf-8')):
+        if password == user['password']:
             print("Utente OK!")
             session['logged_in'] = True
             session['username'] = user['username']
@@ -513,10 +517,11 @@ def webRegister():
         if user:
             return 'Username già utilizzato. Scegli un altro username! '
         
-        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+            # hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
         query = "INSERT INTO utenti (nome, cognome, data_nascita, email, username, password) values (%s, %s, %s, %s,  %s, %s)"
-        db.insert(query, (nome, cognome, data_nascita, email, username, hashed_password))
+            # db.insert(query, (nome, cognome, data_nascita, email, username, hashed_password))
+        db.insert(query, (nome, cognome, data_nascita, email, username, password))
         return redirect('/login')
     
     return render_template('register.html')

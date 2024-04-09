@@ -1,0 +1,15 @@
+tolti da login.html
+righe da 40 a 45:
+                <!-- Aggiunta del token CSRF -->
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                <!-- Gestione degli errori -->
+                 {% if error %}
+                    <p class="error">{{ error }}</p>
+                {% endif %}
+
+
+tolte da register.html
+righe da 14 a 15
+            <!-- Aggiungi il campo del token CSRF -->
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                
