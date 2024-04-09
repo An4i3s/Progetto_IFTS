@@ -249,6 +249,19 @@ def webUpdatePreferiti():
     return redirect("/web/ricerca/ricercaFromId?id_piatto=" + idPiatto)
     
 
+@appWebApi.route("/web/favorites")
+def webGetPreferiti():
+        
+        username = session['username']
+        query = """select utenti.id from utenti where username = %s"""
+        result = db.getSingleData(query, (username))
+        idUtente = result["id"]
+          
+        query = """select p.id, nome_piatto, difficolta, tempo, portata, provenienza,image_name
+               from piatti p JOIN preferiti pref ON p.id = pref.id_piatto WHERE pref.id_utente = %s"""
+        result = db.getAllData(query,(idUtente,) )
+        return render_template('lista_piattiCon.html', piatti = result)
+
 
 
 

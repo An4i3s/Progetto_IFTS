@@ -36,18 +36,16 @@
                 </form>
                 <div class="right-section">
                     <div class="dropdown">
-                        <button id="dropdownBtn1" class="dropbtn">MyCookIdea</button>
+                        <button id="dropdownBtn" class="dropbtn">MyCookIdea</button>
                         <div id="dropdownContent" class="dropdown-content">
-                            <a href="/web/listaSpesa">My List</a>
                             <a href="/web/menu">My Menu</a>
                             <a href="/web/favorites">My Preference</a>
                         </div>
                     </div>
+                    <a href="/logout" class="link-menu">Esci</a>
                 </div>
-                <a href="/logout" class="link-menu">Esci</a>
             </div>
-        </div>
-    </nav>
+        </nav>
 
 <div id="page">
     <div class="page-wrap">
@@ -65,7 +63,7 @@
                         </div>
                 
                         {% for piatto in piatti if piatto.giornosettimana == giorno.giorno_settimana %}
-                        <a href="/web/ricerca/ricercaFromId?id_piatto={{piatto.id}}"></a>
+                        <a href="/web/ricerca/ricercaFromId?id_piatto={{piatto.id}}">
                         <div class="title-container">
                             <h1 class="title">{{ piatto.nome_piatto }}</h1>
                         </div>
