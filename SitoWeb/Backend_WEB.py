@@ -257,7 +257,7 @@ def webUpdatePreferiti():
 
 
 
-@appWebApi.route("/web/webGetWeeklyMenu")
+@appWebApi.route("/web/menu")
 def webGetWeeklyMenu():
     
         username = session['username']
@@ -265,19 +265,52 @@ def webGetWeeklyMenu():
         result = db.getSingleData(query, (username))
         idUtente = result["id"]
 
+        query = """ SELECT DISTINCT g, giorno_settimana 
+                    FROM (
+                        SELECT 
+                            DAYOFWEEK(`data`) as g, 
+                            CASE 
+                                WHEN DAYOFWEEK(`data`) = 1 THEN 'Domenica'
+                                WHEN DAYOFWEEK(`data`) = 2 THEN 'Lunedì'
+                                WHEN DAYOFWEEK(`data`) = 3 THEN 'Martedì'
+                                WHEN DAYOFWEEK(`data`) = 4 THEN 'Mercoledì'
+                                WHEN DAYOFWEEK(`data`) = 5 THEN 'Giovedì'
+                                WHEN DAYOFWEEK(`data`) = 6 THEN 'Venerdì'
+                                WHEN DAYOFWEEK(`data`) = 7 THEN 'Sabato'
+                            END AS giorno_settimana 
+                        FROM 
+                            menu_settimanale 
+                        WHERE 
+                            id_utente = %s
+                            AND `data` >= CURDATE()
+                    ) AS giorni_unici
+                    ORDER BY 
+                        CASE 
+                            WHEN g - DAYOFWEEK(CURDATE()) < 0 THEN 7 + g - DAYOFWEEK(CURDATE())
+                            ELSE g - DAYOFWEEK(CURDATE())
+                        END;"""
+        
+        giorni_settimana = db.getAllData(query,(idUtente))     
           
-        query = """select piatti.id, `data`, nome_piatto, difficolta, tempo, portata, provenienza, image_name, nome_tipo_pasto from menu_settimanale join piatti
-                   on id_piatto = piatti.id join tipo_pasto on id_pasto = tipo_pasto.id where id_utente = %s
-                   AND `data` BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 6 DAY);"""
+        query = """ select piatti.id, CASE DAYOFWEEK(`data`)
+                    WHEN 1 THEN 'Domenica'
+                    WHEN 2 THEN 'Lunedì'
+                    WHEN 3 THEN 'Martedì'
+                    WHEN 4 THEN 'Mercoledì'
+                    WHEN 5 THEN 'Giovedì'
+                    WHEN 6 THEN 'Venerdì'
+                    WHEN 7 THEN 'Sabato'
+                    END AS giornosettimana,
+                    nome_piatto, difficolta, tempo, portata, provenienza, image_name, nome_tipo_pasto from menu_settimanale join piatti
+                    on id_piatto = piatti.id join tipo_pasto on id_pasto = tipo_pasto.id where id_utente = %s
+                    AND `data` BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 6 DAY);"""
         
-        result = db.getAllData(query,(idUtente,) )
-
-        currentDate = result['data']
-        giorno = currentDate.strftime("%A")
+        result = db.getAllData(query,(idUtente,))
         
+    
 
+        return render_template('menu_settimanale.html', giorni_settimana = giorni_settimana, piatti = result)
 
-        return render_template('menu_settimanale.html', piatti = result, giorno = giorno)
 
 
 

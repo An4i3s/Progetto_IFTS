@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="\static\css\navbar.css">
 
 
-
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Passion+One&display=swap" rel="stylesheet">
@@ -39,63 +38,73 @@
                     <div class="dropdown">
                         <button id="dropdownBtn1" class="dropbtn">MyCookIdea</button>
                         <div id="dropdownContent" class="dropdown-content">
-                            <a href="#">My List</a>
-                            <a href="/web/webGetWeeklyMenu">My Menu</a>
+                            <a href="/web/listaSpesa">My List</a>
+                            <a href="/web/menu">My Menu</a>
                             <a href="/web/favorites">My Preference</a>
                         </div>
                     </div>
-                  
-                    <a href="/logout" class="link-menu">Esci</a>
                 </div>
+                <a href="/logout" class="link-menu">Esci</a>
             </div>
-        </nav>
-    </header>
-      
-       <!-- Lista Ricette -->
-      <div id="page">
-        <div class="page-wrap">
-            <div class="page-main">
-                <div class="recipes-list">
-                    {% for piatto in piatti %}
-                    <div class="recipes-teaser">
-                        <a href="/web/ricerca/ricercaFromId?id_piatto={{piatto.id}}">
-                            <div class="teaser image">
-                                <div class="title-container">
-                                    <h1 class="title">{{piatto.nome_piatto}}</h1>
-                                </div>
-                                <div class="img-spacer">
-                                    <img src="/static/recipes/{{piatto.image_name}}" 
-                                    alt=" " class="'lazyloaded" data-ll-status="loaded">
-                                </div>
-                            </div>
-                            <div class="teaser1 text">
-                                <div class="teaser-top">
-                                    <div class="teaser-intro">
-                                       
-                                    </div>
-                                </div>
-                                <div class="teaser-bottom">
-                                <div class="outro">
-                                    <h2 class="info" id="tempo">Tempo:{{piatto.tempo}} </h2>
-                                </br>
-                                    <h2 class="info" id="difficolta">Difficoltà:{{piatto.difficolta}} </h2>
-                                </br>
-                                    <h2 class="info" id="portata">Portata: {{piatto.portata}}</h2>
-                                </br>
-                                   <h2 class="info" id="provenienza">Provenienza:{{piatto.provenienza}} </h2>
-                                </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    {% endfor %}
-
-
-                
-      <footer id="footer">
-        <div class="container">   
         </div>
-      </footer>
-      <script src="/static/js/dropdown.js"></script>
+    </nav>
+
+<div id="page">
+    <div class="page-wrap">
+        <div class="page-main">
+            <div class="recipes-list">
+
+
+
+                {% for giorno in giorni_settimana %}
+                <div class="recipes-teaser">
+                    
+                        
+                        <div class="week_day">
+                            <h1 class="day" style="text-align: center; font-size: 70px;">{{ giorno.giorno_settimana}}</h1>
+                        </div>
+                
+                        {% for piatto in piatti if piatto.giornosettimana == giorno.giorno_settimana %}
+                        <a href="/web/ricerca/ricercaFromId?id_piatto={{piatto.id}}"></a>
+                        <div class="title-container">
+                            <h1 class="title">{{ piatto.nome_piatto }}</h1>
+                        </div>
+                        <div class="teaser1 text">
+                          
+                            <div class="teaser-top">
+                                <div class="img-container">
+                                    <img src="/static/recipes/{{ piatto.image_name }}" alt="" class="lazyloaded" data-ll-status="loaded">
+                                </div>
+                                <!-- Puoi inserire qui eventuali altri elementi del teaser-top -->
+                            </div>
+                            <div class="teaser-bottom">
+                                <div class="outro">
+                                    <h2 class="info" id="pasto">Pasto: {{ piatto.nome_tipo_pasto }}</h2>
+                                    <h2 class="info" id="tempo">Tempo: {{ piatto.tempo }}</h2>
+                                    <h2 class="info" id="difficolta">Difficoltà: {{ piatto.difficolta }}</h2>
+                                    <h2 class="info" id="portata">Portata: {{ piatto.portata }}</h2>
+                                    <h2 class="info" id="provenienza">Provenienza: {{ piatto.provenienza }}</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                        {% endfor %}
+                   
+                </div>
+                {% endfor %}
+                
+
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer id="footer">
+    <div class="container">   
+    </div>
+</footer>
+<script src="/static/js/dropdown.js"></script>
 </body>
 </html>
