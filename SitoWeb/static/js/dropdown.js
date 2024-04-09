@@ -1,3 +1,4 @@
+// Script per il menu dropdown
 var dropdownBtn = document.getElementById("dropdownBtn");
 var dropdownContent = document.getElementById("dropdownContent");
 
@@ -19,7 +20,7 @@ window.addEventListener("click", function(event) {
     }
 });
 
-// Ottieni il pulsante di accesso e il popup
+// Script per il popup di accesso
 var loginButton = document.getElementById("loginButton");
 var loginPopup = document.getElementById("loginPopup");
 
@@ -28,18 +29,17 @@ var closePopup = document.getElementById("closePopup");
 
 // Mostra il popup quando viene cliccato il pulsante di accesso
 loginButton.onclick = function() {
-  loginPopup.style.display = "block";
+    loginPopup.style.display = "block";
 }
 
 // Nascondi il popup quando viene cliccato il pulsante di chiusura
 closePopup.onclick = function() {
-  loginPopup.style.display = "none";
+    loginPopup.style.display = "none";
 }
 
 // Nascondi il popup quando viene cliccata qualsiasi parte esterna del popup
 window.onclick = function(event) {
-  if (event.target == loginPopup) {
-    loginPopup.style.display = "none";
-  }
+    if (event.target == loginPopup) {
+        loginPopup.style.display = "none";
+    }
 }
-

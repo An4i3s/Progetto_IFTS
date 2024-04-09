@@ -18,7 +18,9 @@
     <nav class="navbar custom-navbar">
         <div class="custom-container">
             <div class="left-section">
-                <h1 class="logo"> <img src="../static/img/1.png" alt="logo"></h1>
+                <a href="/">
+                    <h1 class="logo"> <img src="/static/img/1.png" alt="logo"></h1>
+                </a>
             </div>
             <form class="search-form" action="/web/ricerca/ricercaPerNome" method="GET">
                 <input id="searchBar" type="text" name="nome_piatto" placeholder="Cerca...">
@@ -28,13 +30,12 @@
                 <div class="dropdown">
                     <button id="dropdownBtn" class="dropbtn">MyCookIdea</button>
                     <div id="dropdownContent" class="dropdown-content">
-                        <a href="#">My List</a>
-                        <a href="#">My Menu</a>
-                        <a href="#">My Preference</a>
+                        <a href="/web/listaSpesa">My List</a>
+                        <a href="/web/menu">My Menu</a>
+                        <a href="/web/favorites">My Preference</a>
                     </div>
                 </div>
-                <a href="{{ url_for('register') }}" class="link-menu">Registrati</a>
-                <a href="{{ url_for('login') }}" class="link-menu">Login</a>
+                <a href="/logout" class="link-menu">Esci</a>
             </div>
         </div>
     </nav>

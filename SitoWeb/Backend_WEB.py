@@ -220,7 +220,6 @@ def webGetRecipesfromName():
         return render_template("lista_piatti.html", piatti = result)
     
 
-
 @appWebApi.route("/web/updatePreferito", methods = ['GET'])
 def webUpdatePreferiti():
 
@@ -262,13 +261,13 @@ def webGetPreferiti():
         return render_template('lista_piattiCon.html', piatti = result)
 
 
+@appWebApi.route("/web/listaSpesa", methods = ['GET', 'POST'])
+def webListaSpesa():
+    return render_template('/spesa.html')
 
-
-
-
-
-
-
+@appWebApi.route("/web/menu")
+def webMenu():
+    return render_template('/menuCon.html')
 
 
 if __name__ == "__main__":
