@@ -18,7 +18,7 @@ public class CookIdeaApp extends Application {
     //provo a togliere == null
      User loggedUser = null;
 
-    public static final String BASE_URL = "http://192.168.0.114:8000";
+    public static final String BASE_URL = "http://192.168.0.106:8000";
 
 
     public static final Retrofit retrofit = new Retrofit.Builder()
@@ -29,7 +29,7 @@ public class CookIdeaApp extends Application {
 
     public static final CookIdeaApiEndpointInterface apiService = retrofit.create(CookIdeaApiEndpointInterface.class);
     public void saveSaredPref(String info) {
-        Log.i("CookIdeaApp", info);
+        //Log.i("CookIdeaApp", info);
     }
 
     public void setLoggedUser(User u) {
