@@ -1,6 +1,8 @@
+/* Reset CSS */
 * {
     padding: 0;
     margin: 0;
+<<<<<<< Updated upstream
     box-sizing: border-box; /* Assicura che il padding e il bordo siano inclusi nelle dimensioni */
 }
 
@@ -32,15 +34,22 @@
     margin-top: 10px; /* Margine superiore */
     margin-bottom: 20px; /* Margine inferiore */
 
+=======
+    box-sizing: border-box;
+>>>>>>> Stashed changes
 }
 
+/* Nuove regole per l'elemento con classe "teaser1 text" */
 .teaser1.text {
+    display: flex; /* Utilizza flexbox */
+    flex-direction: column; /* Disponi i figli in colonna */
     background-color: rgba(255, 255, 255, 0.3); /* Sfondo trasparente opacizzato */
     border-radius: 8px; /* Bordi arrotondati */
     padding: 20px; /* Spaziatura interna */
     margin-bottom: 20px; /* Margine inferiore */
 }
 
+<<<<<<< Updated upstream
 .title {
     font-family: "Passion One", sans-serif;
     font-weight: 400;
@@ -63,4 +72,46 @@ h2{
 
 .recipes-teaser a {
     text-decoration: none;
+=======
+
+
+
+
+
+
+.teaser1.text {
+    display: flex;
+    flex-direction: row;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.teaser1.text .teaser-top,
+.teaser1.text .teaser-bottom {
+    flex: 1; 
+}
+.teaser1.text .teaser-bottom {
+    display: flex; /* Utilizza flexbox */
+    flex-direction: column; /* Disponi i figli in colonna */
+    justify-content: space-around; /* Allineamento verticale uniforme */
+    padding-left: 20px; /* Spaziatura a sinistra */
+}
+
+#page img{
+    width: 250px;
+    height: 142px;
+    border-radius: 8px;
+    box-shadow:2px 2px 2px rgba(0, 0, 0, 0.3);
+}
+.img-container {
+    width: 100px; /* Modifica la larghezza desiderata */
+    margin-right: 20px; /* Mantieni lo spazio tra l'immagine e il testo delle informazioni */
+}
+
+.teaser-top{
+    width: 100px; /* Modifica la larghezza desiderata */
+    margin-right: -350px; /* Mantieni lo spazio tra l'immagine e il testo delle informazioni */
+>>>>>>> Stashed changes
 }
