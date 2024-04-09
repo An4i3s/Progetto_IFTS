@@ -2,41 +2,7 @@
 * {
     padding: 0;
     margin: 0;
-<<<<<<< Updated upstream
-    box-sizing: border-box; /* Assicura che il padding e il bordo siano inclusi nelle dimensioni */
-}
-
-.page {
-    display: flex;
-    align-items: center;
-}
-
-.recipes-teaser {
-    display: flex;
-    flex-direction: column;
-    margin: 2% 5% 2% 10%; /* Ridotto il margine a una dichiarazione */
-    border: 2px solid black;
-}
-
-/* Stili per i container delle ricette */
-.recipes-teaser {
-    background-color: rgba(0, 0, 0, 0.5); /* Sfondo trasparente opacizzato */
-    padding: 20px; /* Spaziatura interna */
-    border-radius: 8px; /* Bordi arrotondati */
-    margin-bottom: 20px; /* Margine inferiore */
-}
-
-.teaser.image img {
-    max-width: 100%; /* Larghezza massima dell'immagine al 100% del contenitore */
-    height: auto; /* Altezza automatica per mantenere le proporzioni */
-    border-radius: 8px; /* Bordi arrotondati */
-    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); /* Ombra */
-    margin-top: 10px; /* Margine superiore */
-    margin-bottom: 20px; /* Margine inferiore */
-
-=======
     box-sizing: border-box;
->>>>>>> Stashed changes
 }
 
 /* Nuove regole per l'elemento con classe "teaser1 text" */
@@ -49,30 +15,6 @@
     margin-bottom: 20px; /* Margine inferiore */
 }
 
-<<<<<<< Updated upstream
-.title {
-    font-family: "Passion One", sans-serif;
-    font-weight: 400;
-    color: #ececec;
-    font-size: 38px;
-    margin-bottom: 10px;
-    text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
-    text-align: center;
-}
-
-.teaser-bottom{
-    text-align: center;
-}
-
-h2{
-    position: center;
-    color: aliceblue; 
-    text-decoration: none;
-}
-
-.recipes-teaser a {
-    text-decoration: none;
-=======
 
 
 
@@ -113,5 +55,4 @@ h2{
 .teaser-top{
     width: 100px; /* Modifica la larghezza desiderata */
     margin-right: -350px; /* Mantieni lo spazio tra l'immagine e il testo delle informazioni */
->>>>>>> Stashed changes
 }
