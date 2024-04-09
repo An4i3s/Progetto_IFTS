@@ -106,6 +106,7 @@ public class MenuPageFragment extends Fragment {
             public void onResponse(Call<List<WeeklyMenu>> call, Response<List<WeeklyMenu>> response) {
                 results = response.body();
                 if (results != null) {
+                    menuListAdapter.weeklyMenus.clear();
                     menuListAdapter.weeklyMenus.addAll(results);
                     menuListAdapter.notifyDataSetChanged();
                     stickyListView.invalidate();
