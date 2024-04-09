@@ -38,6 +38,7 @@ public class MenuListAdapter extends BaseAdapter implements StickyListHeadersAda
     }
 
     public static class MenuViewHolder {
+        TextView dayOfWeek;
         ImageView image;
         TextView name;
         TextView meal;
@@ -72,6 +73,7 @@ public class MenuListAdapter extends BaseAdapter implements StickyListHeadersAda
             menuViewHolder = new MenuViewHolder();
             convertView = inflater.inflate(R.layout.menu_page_recipe_list, parent, false);
 
+            menuViewHolder.dayOfWeek = (TextView) convertView.findViewById(R.id.dayOfWeek);
             menuViewHolder.image = (ImageView) convertView.findViewById(R.id.imageRecipeMenuImageView);
             menuViewHolder.name = (TextView) convertView.findViewById(R.id.nameRecipeMenuTextView);
             menuViewHolder.meal = (TextView) convertView.findViewById(R.id.mealRecipeMenuTextView);
@@ -91,7 +93,16 @@ public class MenuListAdapter extends BaseAdapter implements StickyListHeadersAda
             menuViewHolder = (MenuViewHolder) convertView.getTag();
         }
 
+        Date menuDate = weeklyMenus.get(position).getMenuDate();
+        String dayOfWeek = convertWeekDay(menuDate);
+        if (position > 0) {
+            Date prevMenuDate = weeklyMenus.get(position).getMenuDate();
+            if (!convertWeekDay(prevMenuDate).equals(dayOfWeek)) {
+                dayOfWeek = convertWeekDay(prevMenuDate);
+            }
+        }
 
+        menuViewHolder.dayOfWeek.setText(dayOfWeek);
         menuViewHolder.name.setText(weeklyMenus.get(position).getRecipeName());
         menuViewHolder.meal.setText(weeklyMenus.get(position).getMeal());
 
@@ -119,7 +130,7 @@ public class MenuListAdapter extends BaseAdapter implements StickyListHeadersAda
         String weekDay = convertWeekDay(menuDate);
 
         if (position > 0) {
-            Date prevMenuDate = weeklyMenus.get(position - 1).getMenuDate();
+            Date prevMenuDate = weeklyMenus.get(position).getMenuDate();
             if (!convertWeekDay(prevMenuDate).equals(weekDay)) {
                 weekDay = convertWeekDay(prevMenuDate);
             }
@@ -138,7 +149,8 @@ public class MenuListAdapter extends BaseAdapter implements StickyListHeadersAda
 
     @Override
     public long getHeaderId(int position) {
-        return weeklyMenus.get(position).getId();
+        //return weeklyMenus.get(position).getId();
+        return 0;
     }
 
     String convertWeekDay(Date date){

@@ -392,9 +392,9 @@ def getWeeklyMenu():
 
     idUtente = request.args.get("id_utente")
     
-    query = """select `data`, nome_piatto, image_name, nome_tipo_pasto from menu_settimanale join piatti
+    query = """select `data`, nome_piatto, image_name, tipo_pasto.id, nome_tipo_pasto from menu_settimanale join piatti
                on id_piatto = piatti.id join tipo_pasto on id_pasto = tipo_pasto.id where id_utente = %s
-               AND `data` BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 6 DAY);"""
+               AND `data` BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 6 DAY) order by `data`, tipo_pasto.id;"""
     
     result = db.getAllData(query, (idUtente,))
     return json.dumps(result, default=convert_to_serializable)

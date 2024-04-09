@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.SimpleTimeZone;
 
 public class WeeklyMenu {
+    @SerializedName("id_tipo_pasto")
+    int id_tipo_pasto;
     @SerializedName("id")
     int Id;
     @SerializedName("data")
