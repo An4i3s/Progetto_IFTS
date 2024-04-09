@@ -26,15 +26,6 @@ document.addEventListener("DOMContentLoaded", function() {
             console.error('Si è verificato un errore durante la richiesta al backend:', error);
         });
 
-        // httpRequest = XMLHttpRequest();
-        // httpRequest.open("PUT", "/web/updatePreferito");
-        // httpRequest.send(JSON.stringify({
-        //   currentClass: currentClass,
-        //   username: username,
-        //   piattoId: piattoId
-          
-      // }));
-
     });
 
   

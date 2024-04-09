@@ -83,8 +83,10 @@ body{
     background: transparent;
     border: none;
     outline: none;
-    font-size: 1em;
+    font-size: 1.2em;
     font-weight: 600;
+    color: rgb(255, 255, 255);
+
   }
   
   .input-box .icon{

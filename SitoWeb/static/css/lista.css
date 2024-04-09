@@ -15,10 +15,10 @@
     margin-bottom: 20px; /* Margine inferiore */
 }
 
-
-
-
-
+.recipes-list{
+    margin-left: 10%;
+    margin-right: 10%;
+}
 
 
 .teaser1.text {
@@ -55,4 +55,16 @@
 .teaser-top{
     width: 100px; /* Modifica la larghezza desiderata */
     margin-right: -350px; /* Mantieni lo spazio tra l'immagine e il testo delle informazioni */
+}
+
+h1{
+    font-size: 40px;
+    color: rgb(228, 222, 222);
+}
+h2{
+    color: rgb(23, 23, 23);
+}
+
+a {
+    text-decoration: none; /* Rimuove la sottolineatura dai link */
 }

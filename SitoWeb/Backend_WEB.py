@@ -257,6 +257,31 @@ def webUpdatePreferiti():
 
 
 
+@appWebApi.route("/web/webGetWeeklyMenu")
+def webGetWeeklyMenu():
+    
+        username = session['username']
+        query = """select utenti.id from utenti where username = %s"""
+        result = db.getSingleData(query, (username))
+        idUtente = result["id"]
+
+          
+        query = """select piatti.id, `data`, nome_piatto, difficolta, tempo, portata, provenienza, image_name, nome_tipo_pasto from menu_settimanale join piatti
+                   on id_piatto = piatti.id join tipo_pasto on id_pasto = tipo_pasto.id where id_utente = %s
+                   AND `data` BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 6 DAY);"""
+        
+        result = db.getAllData(query,(idUtente,) )
+
+        currentDate = result['data']
+        giorno = currentDate.strftime("%A")
+        
+
+
+        return render_template('menu_settimanale.html', piatti = result, giorno = giorno)
+
+
+
+
 
 if __name__ == "__main__":
     try:
