@@ -230,7 +230,6 @@ def webUpdatePreferiti():
     query = """select utenti.id from utenti where username = %s"""
     result = db.getSingleData(query, (username))
     idUtente = result["id"]
-    print(idUtente)
 
     query = """select utenti.id, utenti.username, preferiti.id FROM preferiti join utenti on preferiti.id_utente = utenti.id
                WHERE username = %s AND id_piatto = %s;"""
@@ -247,7 +246,21 @@ def webUpdatePreferiti():
         #return json.dumps([])
 
     return redirect("/web/ricerca/ricercaFromId?id_piatto=" + idPiatto)
-    
+
+
+@appWebApi.route("/web/favorites")
+def webGetPreferiti():
+        
+        username = session['username']
+        query = """select utenti.id from utenti where username = %s"""
+        result = db.getSingleData(query, (username))
+        idUtente = result["id"]
+          
+        query = """select p.id, nome_piatto, difficolta, tempo, portata, provenienza,image_name
+               from piatti p JOIN preferiti pref ON p.id = pref.id_piatto WHERE pref.id_utente = %s"""
+        result = db.getAllData(query,(idUtente,) )
+        return render_template('lista_piattiCon.html', piatti = result)
+
 
 
 
