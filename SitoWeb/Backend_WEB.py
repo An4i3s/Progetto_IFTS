@@ -3,36 +3,19 @@ from flask_wtf import CSRFProtect
 import pymysql
 from models import *
 from Database import *
-#import bcrypt
+import bcrypt
 
 
 appWebApi = Flask(__name__)
 appWebApi.secret_key= '123456'
 csrf = CSRFProtect(appWebApi)
 db = None
- 
+
+
 @appWebApi.route("/")
 def index():
-    if 'logged_in' in session and session['logged_in']:
-        query = "SELECT DISTINCT piatti.portata FROM piatti"
-        result = db.getAllData(query)
-        listaPortate = []
-        for record in result:
-            nomePortata = record["portata"]
-            image_url = f"/static/img/{nomePortata.lower()}.jpg"
-            portata = Portata(nomePortata, image_url)
-            listaPortate.append(portata)
-        
-        piattiDaRestituire = 5
-        query = """SELECT image_name
-                   FROM piatti ORDER BY RAND() LIMIT %s"""
-        result = db.getAllData(query, (piattiDaRestituire))
-        listaImmagini = []
-        for record in result:
-            immagine = record["image_name"]
-            listaImmagini.append(immagine)
-
-        return render_template("connect.html", listaPortate=listaPortate, listaImmagini=listaImmagini)
+    if 'username' in session:
+        return redirect('/connect?username=' + session['username'])
     else:
         query = "SELECT DISTINCT piatti.portata FROM piatti"
         result = db.getAllData(query)
@@ -54,9 +37,11 @@ def index():
 
         return render_template("index.html", listaPortate=listaPortate, listaImmagini=listaImmagini)
 
+
 @appWebApi.route('/connect')
 def connected():
     if 'logged_in' in session and session['logged_in']:
+        
         query = "SELECT DISTINCT piatti.portata FROM piatti"
         result = db.getAllData(query)
         listaPortate = []
@@ -76,8 +61,10 @@ def connected():
             listaImmagini.append(immagine)
 
         return render_template("connect.html", listaPortate=listaPortate, listaImmagini=listaImmagini)
+
     else:
         return redirect('/login')
+
 
 @appWebApi.route('/registrazione', methods =['GET', 'POST'])
 def register():
@@ -94,13 +81,14 @@ def register():
         if user:
             return 'Username già utilizzato. Scegli un altro username! '
         
-        #hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        hashed_password = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
 
         query = "INSERT INTO utenti (nome, cognome, data_nascita, email, username, password) values (%s, %s, %s, %s,  %s, %s)"
-        db.insert(query, (nome, cognome, data_nascita, email, username, password))
+        db.insert(query, (nome, cognome, data_nascita, email, username, hashed_password))
         return redirect('/login')
     
     return render_template('register.html')
+
 
 @appWebApi.route('/login', methods= ['GET', 'POST'])
 def login():
@@ -118,7 +106,7 @@ def login():
             return render_template('login.html')
         
         #verifica la password hashata
-        if password == user['password']:
+        if bcrypt.checkpw(password.encode('utf-8'), user['password'].encode('utf-8')):
             print("Utente OK!")
             session['logged_in'] = True
             session['username'] = user['username']
@@ -128,13 +116,15 @@ def login():
             return render_template('login.html')
         
     return render_template('login.html')
-
+  
+    
 @appWebApi.route('/logout')
 def logout():
     # Rimuovi l'utente dalla sessione
     session.pop('logged_in', None)
     session.pop('username', None)
     return redirect('/')
+
 
 @appWebApi.route("/web/ricercaPerPortata/<portata>")
 def webGetRecipesfromPortata(portata):
@@ -211,15 +201,17 @@ def webGetRecipesfromName():
 
         return render_template("lista_piatti.html", piatti = result)
 
+
+
 # WEB   (TUTTI I PIATTI)
 # http://192.168.1.94:8000/piatti
 @appWebApi.route("/piatti")
 def webGetAllRecipes():
-
     query = "select * from piatti"
     result = db.getAllData(query)
 
     return render_template("piatto_singolo.html", piatti = result)
+    
 
 
             # # WEB / RICERCA PER NOME PIATTO  (anche solo una parte del nome)
@@ -257,6 +249,6 @@ def webGetAllRecipes():
 if __name__ == "__main__":
     try:
         db = Database()
-        appWebApi.run(host='0.0.0.0', port=8000, debug=True)
+        appWebApi.run(host='0.0.0.0', port=8000)
     except KeyboardInterrupt:
         db.close()

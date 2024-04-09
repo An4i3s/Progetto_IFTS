@@ -31,6 +31,7 @@
     box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.5); /* Ombra */
     margin-top: 10px; /* Margine superiore */
     margin-bottom: 20px; /* Margine inferiore */
+
 }
 
 .teaser1.text {
@@ -47,4 +48,18 @@
     font-size: 38px;
     margin-bottom: 10px;
     text-shadow: 5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.teaser-bottom{
+    text-align: center;
+}
+
+h2{
+    position: center;
+    color: aliceblue; 
+    text-decoration: none;
+}
+
+.recipes-teaser a {
+    text-decoration: none;
 }
