@@ -403,6 +403,27 @@ def getDailyMenu():
     return json.dumps(converted_result)
 
 
+# API 16 RETURN INGREDIENTS BY WEEKLY MENU
+# http://192.168.0.110:8000/api/getDailyMenu
+@appWebApi.route("/api/getWeeklyIngredients", methods = ["GET"])
+
+def getDailyMenu():
+
+    idUtente = request.args.get("id_utente")
+    data = request.args.get("data")
+
+    query = """select nome_ingrediente, SUM(quantita_ingrediente) as quantita_ingrediente from menu_settimanale join ricettario
+               on menu_settimanale.id_piatto = ricettario.id_piatto join ingredienti on ricettario.id_ingrediente = ingredienti.id
+               WHERE id_utente = %s  AND `data` BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 6 DAY) group by nome_ingrediente;"""
+    
+    result = db.getAllData(query, (idUtente, data))
+  
+    converted_result = [{k: float(v) if isinstance(v, Decimal) else v for k, v in row.items()} for row in result]
+
+    return json.dumps(converted_result)
+
+
+
 
 
 if __name__ == "__main__":
