@@ -80,7 +80,6 @@ public class HomePageFragment extends Fragment {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener(){
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Toast.makeText(ctx, homePageListAdapter.getItem(position).getServing(), Toast.LENGTH_LONG).show();
                 ((MainActivity)ctx).changeTabById(R.id.searchPage, homePageListAdapter.getItem(position).getServing());
             }
         });

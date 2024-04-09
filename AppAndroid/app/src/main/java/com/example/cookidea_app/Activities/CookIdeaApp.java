@@ -11,14 +11,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CookIdeaApp extends Application {
 
-    //retrofit da inserire qui la sua inizializzazione ecc
-
-    //+ sharedPred e API
-
-    //provo a togliere == null
      User loggedUser = null;
 
-    public static final String BASE_URL = "http://192.168.0.114:8000";
+    public static final String BASE_URL = "http://192.168.1.10:8000";
 
 
     public static final Retrofit retrofit = new Retrofit.Builder()
