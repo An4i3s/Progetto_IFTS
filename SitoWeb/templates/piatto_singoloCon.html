@@ -50,7 +50,7 @@
     <div id="container"> 
         <div class="recipe">
             <h1 class="recipe_name">{{piatto.nome_piatto}}</h1>
-            <button id="favoriteButton" class="favorite-button"><ion-icon name="heart-outline"></ion-icon></button>
+            <button id="favoriteButton" class="{{favoriteClass}}" username ="{{session['username']}}" id_piatto="{{piatto.id}}"><ion-icon name="heart-outline"></ion-icon></button>
             <img src="\static\recipes\{{piatto.image_name}}" alt="Ricetta" class="recipe_image">
             <div class="recipe_details_box">
                 <div class="recipe_details">
