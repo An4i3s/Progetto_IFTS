@@ -116,11 +116,13 @@
                 android:layout_gravity="center"/>
             <Button
                 android:id="@+id/addRecipeToMenuButton"
-                android:layout_width="0dp"
+                android:layout_width="18dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
+                android:textAlignment="center"
                 android:text="@string/add"
                 android:textSize="17sp"
+                android:textStyle="bold"
                 android:layout_gravity="center"/>
 
         </LinearLayout>
