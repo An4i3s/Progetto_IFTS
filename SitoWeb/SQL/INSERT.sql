@@ -247,7 +247,8 @@ INSERT INTO `cookidea`.`preferiti` (`id`, `id_utente`, `id_piatto`) VALUES ('5',
 INSERT INTO `cookidea`.`preferiti` (`id`, `id_utente`, `id_piatto`) VALUES ('6', '2', '8');
 
 
-
+ALTER TABLE `cookidea`.`menu_settimanale` 
+CHANGE COLUMN `numero_persone` `numero_persone` INT NOT NULL DEFAULT '1' ;
 
 
 

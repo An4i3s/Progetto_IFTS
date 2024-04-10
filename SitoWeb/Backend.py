@@ -364,6 +364,7 @@ def insertWeeklyMenu():
     stringData = request.args.get("data")
     stringData = stringData.replace(' GMT', '')
     print(stringData)
+
     #formato_data = '%a %b %d %H:%M:%S %Y'
     formato_data = '%a %b %d %H:%M:%S%z %Y'
 
