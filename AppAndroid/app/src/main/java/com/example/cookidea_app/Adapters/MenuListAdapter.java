@@ -32,14 +32,14 @@ public class MenuListAdapter extends BaseAdapter implements StickyListHeadersAda
     public  List<WeeklyMenu> weeklyMenus;
     LayoutInflater inflater;
     //MenuViewHolder menuViewHolder;
-    HeaderMenuViewHolder headerMenuViewHolder;
+    //HeaderMenuViewHolder headerMenuViewHolder;
 
 
 
-    public static class HeaderMenuViewHolder {
+    /*public static class HeaderMenuViewHolder {
         TextView weekDay;
         TextView date;
-    }
+    }*/
 
     /*public static class MenuViewHolder {
         TextView dayOfWeek;
@@ -112,32 +112,32 @@ public class MenuListAdapter extends BaseAdapter implements StickyListHeadersAda
     @Override
     public View getHeaderView(int position, View convertView, ViewGroup parent) {
 
-        headerMenuViewHolder = new HeaderMenuViewHolder();
+        //headerMenuViewHolder = new HeaderMenuViewHolder();
         convertView = inflater.inflate(R.layout.menu_header_recipe_page_list, parent, false);
 
-        headerMenuViewHolder.weekDay = (TextView) convertView.findViewById(R.id.menuWeekDay);
-        headerMenuViewHolder.date = (TextView) convertView.findViewById(R.id.menuDate);
+        TextView weekDay = (TextView) convertView.findViewById(R.id.menuWeekDay);
+        TextView date = (TextView) convertView.findViewById(R.id.menuDate);
 
-        convertView.setTag(headerMenuViewHolder);
-        headerMenuViewHolder = (HeaderMenuViewHolder) convertView.getTag();
+        //convertView.setTag(headerMenuViewHolder);
+        //headerMenuViewHolder = (HeaderMenuViewHolder) convertView.getTag();
 
 
         Date menuDate = weeklyMenus.get(position).getMenuDate();
 
-        String weekDay = convertWeekDay(menuDate);
+        String weekDays = convertWeekDay(menuDate);
 
         if (position > 0) {
             Date prevMenuDate = weeklyMenus.get(position).getMenuDate();
-            if (!convertWeekDay(prevMenuDate).equals(weekDay)) {
-                weekDay = convertWeekDay(prevMenuDate);
+            if (!convertWeekDay(prevMenuDate).equals(weekDays)) {
+                weekDays = convertWeekDay(prevMenuDate);
             }
         }
 
-        headerMenuViewHolder.weekDay.setText(weekDay);
+        weekDay.setText(weekDays);
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         String formattedDate = dateFormat.format(menuDate);
-        headerMenuViewHolder.date.setText(formattedDate);
+        date.setText(formattedDate);
 
         return convertView;
     }
