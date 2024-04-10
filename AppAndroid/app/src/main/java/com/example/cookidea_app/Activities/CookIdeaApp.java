@@ -13,7 +13,7 @@ public class CookIdeaApp extends Application {
 
      User loggedUser = null;
 
-    public static final String BASE_URL = "http://192.168.1.10:8000";
+    public static final String BASE_URL = "http://192.168.0.106:8000";
 
 
     public static final Retrofit retrofit = new Retrofit.Builder()

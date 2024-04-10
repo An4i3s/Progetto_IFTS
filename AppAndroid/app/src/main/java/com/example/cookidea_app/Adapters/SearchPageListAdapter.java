@@ -25,6 +25,8 @@ public class SearchPageListAdapter extends ArrayAdapter<Recipe> {
 
     Context ctx;
     //public List<Recipe> recipes;
+    ResultsViewHolder resultsViewHolder;
+
 
 
     public SearchPageListAdapter(@NonNull Context context, @NonNull List<Recipe> recipes) {
@@ -39,36 +41,36 @@ public class SearchPageListAdapter extends ArrayAdapter<Recipe> {
         TextView difficultyRecipeVH;
         TextView servingRecipeVH;
         Bitmap recipeImage;
+
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        ResultsViewHolder resultsViewHolder;
 
-        if(convertView == null){
-            resultsViewHolder = new ResultsViewHolder();
-            LayoutInflater inflater = LayoutInflater.from(ctx);
-            convertView = inflater.inflate(R.layout.search_page_recipe_list, parent, false);
-            resultsViewHolder.imgRecipeVh = (ImageView) convertView.findViewById(R.id.imageRecipeSearchedImageView);
-            resultsViewHolder.nameRecipeVH = (TextView) convertView.findViewById(R.id.nameRecipeSearchedTextView);
-            resultsViewHolder.timeRecipeVH = (TextView) convertView.findViewById(R.id.timeRecipeSearchedTextView);
-            resultsViewHolder.difficultyRecipeVH = (TextView) convertView.findViewById(R.id.difficultyRecipeSearchedTextView);
-            resultsViewHolder.servingRecipeVH = (TextView) convertView.findViewById(R.id.servingRecipeSearchedTextView);
 
-            String imgUrl = BASE_URL + "/static/recipes/" + getItem(position).getImg_name().toLowerCase();
+        resultsViewHolder = new ResultsViewHolder();
+        LayoutInflater inflater = LayoutInflater.from(ctx);
+        convertView = inflater.inflate(R.layout.search_page_recipe_list, parent, false);
+        resultsViewHolder.imgRecipeVh = (ImageView) convertView.findViewById(R.id.imageRecipeSearchedImageView);
+        resultsViewHolder.nameRecipeVH = (TextView) convertView.findViewById(R.id.nameRecipeSearchedTextView);
+        resultsViewHolder.timeRecipeVH = (TextView) convertView.findViewById(R.id.timeRecipeSearchedTextView);
+        resultsViewHolder.difficultyRecipeVH = (TextView) convertView.findViewById(R.id.difficultyRecipeSearchedTextView);
+        resultsViewHolder.servingRecipeVH = (TextView) convertView.findViewById(R.id.servingRecipeSearchedTextView);
 
-            new DownloadImageAsyncTask(resultsViewHolder.imgRecipeVh, new DownloadImageAsyncTask.ImageDownloadCallback() {
-                @Override
-                public void downloaded(Bitmap img) {
-                    resultsViewHolder.recipeImage = img;
-                }
-            }).execute(imgUrl);
+        String imgUrl = BASE_URL + "/static/recipes/" + getItem(position).getImg_name().toLowerCase();
 
-            convertView.setTag(resultsViewHolder);
-        }else{
-            resultsViewHolder = (SearchPageListAdapter.ResultsViewHolder) convertView.getTag();
-        }
+        new DownloadImageAsyncTask(resultsViewHolder.imgRecipeVh, new DownloadImageAsyncTask.ImageDownloadCallback() {
+            @Override
+            public void downloaded(Bitmap img) {
+                resultsViewHolder.recipeImage = img;
+            }
+        }).execute(imgUrl);
+
+        convertView.setTag(resultsViewHolder);
+
+        resultsViewHolder = (SearchPageListAdapter.ResultsViewHolder) convertView.getTag();
+
         //TODO controllare perchè entra più volte nell'adapter
         resultsViewHolder.imgRecipeVh.setImageBitmap(resultsViewHolder.recipeImage);
         resultsViewHolder.nameRecipeVH.setText(getItem(position).getName());

@@ -31,19 +31,23 @@ import se.emilsjolander.stickylistheaders.StickyListHeadersAdapter;
 public class MenuListAdapter extends BaseAdapter implements StickyListHeadersAdapter {
     public  List<WeeklyMenu> weeklyMenus;
     LayoutInflater inflater;
+    //MenuViewHolder menuViewHolder;
+    HeaderMenuViewHolder headerMenuViewHolder;
+
+
 
     public static class HeaderMenuViewHolder {
         TextView weekDay;
         TextView date;
     }
 
-    public static class MenuViewHolder {
+    /*public static class MenuViewHolder {
         TextView dayOfWeek;
         ImageView image;
         TextView name;
         TextView meal;
 
-    }
+    }*/
 
     public MenuListAdapter(Context context, List<WeeklyMenu> weeklyMenus){
         inflater = LayoutInflater.from(context);
@@ -67,63 +71,56 @@ public class MenuListAdapter extends BaseAdapter implements StickyListHeadersAda
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        MenuViewHolder menuViewHolder;
 
-        if (convertView == null) {
-            menuViewHolder = new MenuViewHolder();
-            convertView = inflater.inflate(R.layout.menu_page_recipe_list, parent, false);
+        convertView = inflater.inflate(R.layout.menu_page_recipe_list, parent, false);
 
-            menuViewHolder.dayOfWeek = (TextView) convertView.findViewById(R.id.dayOfWeek);
-            menuViewHolder.image = (ImageView) convertView.findViewById(R.id.imageRecipeMenuImageView);
-            menuViewHolder.name = (TextView) convertView.findViewById(R.id.nameRecipeMenuTextView);
-            menuViewHolder.meal = (TextView) convertView.findViewById(R.id.mealRecipeMenuTextView);
+        TextView dayOfWeek = (TextView) convertView.findViewById(R.id.dayOfWeek);
+        ImageView image = (ImageView) convertView.findViewById(R.id.imageRecipeMenuImageView);
+        TextView name = (TextView) convertView.findViewById(R.id.nameRecipeMenuTextView);
+        TextView meal = (TextView) convertView.findViewById(R.id.mealRecipeMenuTextView);
 
-            convertView.setTag(menuViewHolder);
+        //convertView.setTag(menuViewHolder);
 
-            String imgUrl = BASE_URL + "/static/recipes/" + weeklyMenus.get(position).getRecipeImg();
-            new DownloadImageAsyncTask(menuViewHolder.image, new DownloadImageAsyncTask.ImageDownloadCallback() {
-                @Override
-                public void downloaded(Bitmap img) {
-                    menuViewHolder.image.setImageBitmap(img);
-                }
-            }).execute(imgUrl);
+        String imgUrl = BASE_URL + "/static/recipes/" + weeklyMenus.get(position).getRecipeImg();
+        new DownloadImageAsyncTask(image, new DownloadImageAsyncTask.ImageDownloadCallback() {
+            @Override
+            public void downloaded(Bitmap img) {
+                image.setImageBitmap(img);
+            }
+        }).execute(imgUrl);
 
 
-        } else {
-            menuViewHolder = (MenuViewHolder) convertView.getTag();
-        }
+        //menuViewHolder = (MenuViewHolder) convertView.getTag();
+
 
         Date menuDate = weeklyMenus.get(position).getMenuDate();
-        String dayOfWeek = convertWeekDay(menuDate);
+        String daysOfWeek = convertWeekDay(menuDate);
         if (position > 0) {
             Date prevMenuDate = weeklyMenus.get(position).getMenuDate();
-            if (!convertWeekDay(prevMenuDate).equals(dayOfWeek)) {
-                dayOfWeek = convertWeekDay(prevMenuDate);
+            if (!convertWeekDay(prevMenuDate).equals(daysOfWeek)) {
+                daysOfWeek = convertWeekDay(prevMenuDate);
             }
         }
 
-        menuViewHolder.dayOfWeek.setText(dayOfWeek);
-        menuViewHolder.name.setText(weeklyMenus.get(position).getRecipeName());
-        menuViewHolder.meal.setText(weeklyMenus.get(position).getMeal());
+        dayOfWeek.setText(daysOfWeek);
+        name.setText(weeklyMenus.get(position).getRecipeName());
+        meal.setText(weeklyMenus.get(position).getMeal());
 
         return convertView;
     }
 
     @Override
     public View getHeaderView(int position, View convertView, ViewGroup parent) {
-        HeaderMenuViewHolder headerMenuViewHolder;
 
-        if (convertView == null) {
-            headerMenuViewHolder = new HeaderMenuViewHolder();
-            convertView = inflater.inflate(R.layout.menu_header_recipe_page_list, parent, false);
+        headerMenuViewHolder = new HeaderMenuViewHolder();
+        convertView = inflater.inflate(R.layout.menu_header_recipe_page_list, parent, false);
 
-            headerMenuViewHolder.weekDay = (TextView) convertView.findViewById(R.id.menuWeekDay);
-            headerMenuViewHolder.date = (TextView) convertView.findViewById(R.id.menuDate);
+        headerMenuViewHolder.weekDay = (TextView) convertView.findViewById(R.id.menuWeekDay);
+        headerMenuViewHolder.date = (TextView) convertView.findViewById(R.id.menuDate);
 
-            convertView.setTag(headerMenuViewHolder);
-        } else {
-            headerMenuViewHolder = (HeaderMenuViewHolder) convertView.getTag();
-        }
+        convertView.setTag(headerMenuViewHolder);
+        headerMenuViewHolder = (HeaderMenuViewHolder) convertView.getTag();
+
 
         Date menuDate = weeklyMenus.get(position).getMenuDate();
 
