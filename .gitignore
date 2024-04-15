@@ -7,3 +7,5 @@ AppAndroid/.idea/misc.xml
 .vscode/settings.json
 AppAndroid/gradle/libs.versions.toml
 AppAndroid/.idea/deploymentTargetDropDown.xml
+AppAndroid/.idea/deploymentTargetDropDown.xml
+AppAndroid/gradle/libs.versions.toml
