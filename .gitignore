@@ -5,3 +5,5 @@
 AppAndroid/.idea/misc.xml
 *.pyc
 .vscode/settings.json
+AppAndroid/gradle/libs.versions.toml
+AppAndroid/.idea/deploymentTargetDropDown.xml

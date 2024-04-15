@@ -1,8 +1,9 @@
 package com.example.cookidea_app.ModelClasses;
 
+import android.graphics.Bitmap;
+
 import com.google.gson.annotations.SerializedName;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class Recipe {
@@ -10,6 +11,7 @@ public class Recipe {
     private final int recipeId;
     @SerializedName("image_name")
     private final String img_name;
+    private Bitmap bitmap;
     @SerializedName("nome_piatto")
     private final String name;
     @SerializedName("procedimento")
@@ -29,9 +31,10 @@ public class Recipe {
     @SerializedName("ricettario")
     private final List<Ingredients> ingredients;
 
-    public Recipe(int recipeId, String img_name, String name, String method, int time, int difficulty, String provenance, String serving, long favFromUserId, List<Ingredients> ingredients) {
+    public Recipe(int recipeId, String img_name, Bitmap bitmap, String name, String method, int time, int difficulty, String provenance, String serving, long favFromUserId, List<Ingredients> ingredients) {
         this.recipeId = recipeId;
         this.img_name = img_name;
+        this.bitmap = bitmap;
         this.name = name;
         this.method = method;
         this.time = time;
@@ -41,6 +44,7 @@ public class Recipe {
         this.ingredients = ingredients;
         this.favFromUserId = favFromUserId;
     }
+
 
     public String getRecipeId() {
         return String.valueOf(recipeId);
@@ -86,4 +90,12 @@ public class Recipe {
     public List<Ingredients> getIngredients() {
         return ingredients;
     }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
+
 }

@@ -4,7 +4,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+
+import com.example.cookidea_app.ModelClasses.Recipe;
 
 import java.io.InputStream;
 
@@ -16,10 +19,12 @@ public class DownloadImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
 
     ImageView imgView = null;
     ImageDownloadCallback callback = null;
+    ArrayAdapter<Recipe> aa;
 
     public DownloadImageAsyncTask(ImageView imgView, ImageDownloadCallback callback) {
         this.imgView = imgView;
         this.callback = callback;
+        this.aa= aa;
     }
 
     protected Bitmap doInBackground(String... urls) {
@@ -36,9 +41,13 @@ public class DownloadImageAsyncTask extends AsyncTask<String, Void, Bitmap> {
     }
 
     protected void onPostExecute(Bitmap result) {
-        imgView.setImageBitmap(result);
+        if (imgView!=null)
+            imgView.setImageBitmap(result);
 
-        if(this.callback != null)
+        if(this.callback != null){
             callback.downloaded(result);
+
+        }
+
     }
 }

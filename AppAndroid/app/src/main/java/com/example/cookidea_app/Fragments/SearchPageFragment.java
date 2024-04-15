@@ -1,9 +1,11 @@
 package com.example.cookidea_app.Fragments;
 
 
+import static com.example.cookidea_app.Activities.CookIdeaApp.BASE_URL;
 import static com.example.cookidea_app.Activities.CookIdeaApp.apiService;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 import com.example.cookidea_app.Activities.CookIdeaApp;
 import com.example.cookidea_app.Activities.MainActivity;
 import com.example.cookidea_app.Adapters.SearchPageListAdapter;
+import com.example.cookidea_app.Backend.DownloadImageAsyncTask;
 import com.example.cookidea_app.ModelClasses.User;
 import com.example.cookidea_app.R;
 import com.example.cookidea_app.ModelClasses.Recipe;
@@ -40,7 +43,7 @@ import retrofit2.Response;
 public class SearchPageFragment extends Fragment {
 
     Context ctx = null;
-    List<Recipe> results = new ArrayList<>();
+
 
     static EditText searchEditText;
     ListView resultListView;
@@ -64,14 +67,12 @@ public class SearchPageFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        results = new ArrayList<>();
 
         rootView = inflater.inflate(R.layout.fragment_search_page, container, false);
         searchEditText = rootView.findViewById(R.id.searchEditText);
         searchButton = rootView.findViewById(R.id.startSearchButton);
         resultListView = rootView.findViewById(R.id.serachResultListView);
-        searchPageListAdapter = new SearchPageListAdapter(ctx, results);
-        resultListView.setAdapter(searchPageListAdapter);
+
 
 
         searchEditText.setOnClickListener(new View.OnClickListener() {
@@ -88,7 +89,7 @@ public class SearchPageFragment extends Fragment {
             public void onClick(View v) {
                 String searchEditTextStr = searchEditText.getText().toString();
                 if(!searchEditTextStr.isEmpty()) {
-                    searchPageListAdapter.clear();
+                    //searchPageListAdapter.clear();
                     downloadBackEndInfo(searchEditText.getText().toString(), loggedUserID,0);
                 }
             }
@@ -138,12 +139,24 @@ public class SearchPageFragment extends Fragment {
         listCall.enqueue(new Callback<List<Recipe>>() {
             @Override
             public void onResponse(Call<List<Recipe>> call, Response<List<Recipe>> response) {
-                results = response.body();
+                List<Recipe>results = response.body();
                 if(results != null) {
-                    searchPageListAdapter.addAll(results);
-                    searchPageListAdapter.notifyDataSetChanged();
-                    resultListView.invalidate();
-                }
+
+                    for (Recipe recipe : results){
+                        String imgUrl = BASE_URL + "/static/recipes/" + recipe.getImg_name().toLowerCase();
+                        new DownloadImageAsyncTask(null, new DownloadImageAsyncTask.ImageDownloadCallback() {
+                            @Override
+                            public void downloaded(Bitmap img) {
+                                recipe.setBitmap(img);
+
+                            }
+                        }).execute(imgUrl);
+                    }
+                    searchPageListAdapter = new SearchPageListAdapter(ctx, results);
+                    resultListView.setAdapter(searchPageListAdapter);
+
+
+                    }
 
             }
             @Override

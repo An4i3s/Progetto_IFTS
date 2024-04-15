@@ -24,14 +24,14 @@ import java.util.List;
 public class SearchPageListAdapter extends ArrayAdapter<Recipe> {
 
     Context ctx;
-    //public List<Recipe> recipes;
-    ResultsViewHolder resultsViewHolder;
+    List<Recipe> recipeList;
 
 
 
     public SearchPageListAdapter(@NonNull Context context, @NonNull List<Recipe> recipes) {
         super(context, R.layout.search_page_recipe_list, recipes);
         this.ctx = context;
+        this.recipeList = recipes;
     }
 
     private static class ResultsViewHolder{
@@ -40,7 +40,6 @@ public class SearchPageListAdapter extends ArrayAdapter<Recipe> {
         TextView timeRecipeVH;
         TextView difficultyRecipeVH;
         TextView servingRecipeVH;
-        Bitmap recipeImage;
 
     }
 
@@ -48,39 +47,49 @@ public class SearchPageListAdapter extends ArrayAdapter<Recipe> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
+        ResultsViewHolder holder;
 
-        resultsViewHolder = new ResultsViewHolder();
-        LayoutInflater inflater = LayoutInflater.from(ctx);
-        convertView = inflater.inflate(R.layout.search_page_recipe_list, parent, false);
-        resultsViewHolder.imgRecipeVh = (ImageView) convertView.findViewById(R.id.imageRecipeSearchedImageView);
-        resultsViewHolder.nameRecipeVH = (TextView) convertView.findViewById(R.id.nameRecipeSearchedTextView);
-        resultsViewHolder.timeRecipeVH = (TextView) convertView.findViewById(R.id.timeRecipeSearchedTextView);
-        resultsViewHolder.difficultyRecipeVH = (TextView) convertView.findViewById(R.id.difficultyRecipeSearchedTextView);
-        resultsViewHolder.servingRecipeVH = (TextView) convertView.findViewById(R.id.servingRecipeSearchedTextView);
+        View rowView = convertView;
+
+        if (rowView==null){
+            holder = new ResultsViewHolder();
+            rowView = LayoutInflater.from(ctx).inflate(R.layout.search_page_recipe_list, parent, false);
+
+            holder.imgRecipeVh = (ImageView) rowView.findViewById(R.id.imageRecipeSearchedImageView);
+            holder.nameRecipeVH = (TextView) rowView.findViewById(R.id.nameRecipeSearchedTextView);
+            holder.timeRecipeVH = (TextView) rowView.findViewById(R.id.timeRecipeSearchedTextView);
+            holder.difficultyRecipeVH = (TextView) rowView.findViewById(R.id.difficultyRecipeSearchedTextView);
+            holder.servingRecipeVH = (TextView) rowView.findViewById(R.id.servingRecipeSearchedTextView);
+
+            rowView.setTag(holder);
+
+        } else {
+            holder = (ResultsViewHolder) rowView.getTag();
+        }
+
+        Recipe recipe = getItem(position);
+
+        holder.nameRecipeVH.setText(recipe.getName());
+        holder.timeRecipeVH.setText(" " + recipe.getTime() + "min");
+        holder.difficultyRecipeVH.setText(" " + recipe.getDifficulty());
+        holder.servingRecipeVH.setText(" " + recipe.getServing());
 
         String imgUrl = BASE_URL + "/static/recipes/" + getItem(position).getImg_name().toLowerCase();
+        if (recipe.getBitmap() != null) {
+            holder.imgRecipeVh.setImageBitmap(recipe.getBitmap());
+        } else {
+            new DownloadImageAsyncTask(holder.imgRecipeVh, new DownloadImageAsyncTask.ImageDownloadCallback() {
+                @Override
+                public void downloaded(Bitmap img) {
+                    recipe.setBitmap(img);
+                    holder.imgRecipeVh.setImageBitmap(recipe.getBitmap());
+                    notifyDataSetChanged();
+                }
+            }).execute(imgUrl);
+        }
 
-        new DownloadImageAsyncTask(resultsViewHolder.imgRecipeVh, new DownloadImageAsyncTask.ImageDownloadCallback() {
-            @Override
-            public void downloaded(Bitmap img) {
-                resultsViewHolder.recipeImage = img;
-            }
-        }).execute(imgUrl);
+        return rowView;
 
-        convertView.setTag(resultsViewHolder);
-
-        resultsViewHolder = (SearchPageListAdapter.ResultsViewHolder) convertView.getTag();
-
-        //TODO controllare perchè entra più volte nell'adapter
-        resultsViewHolder.imgRecipeVh.setImageBitmap(resultsViewHolder.recipeImage);
-        resultsViewHolder.nameRecipeVH.setText(getItem(position).getName());
-        String time = " " + getItem(position).getTime() + "min";
-        resultsViewHolder.timeRecipeVH.setText(time);
-        String difficulty = " " + getItem(position).getDifficulty();
-        resultsViewHolder.difficultyRecipeVH.setText(difficulty);
-        String serving = " " + getItem(position).getServing();
-        resultsViewHolder.servingRecipeVH.setText(serving);
-
-        return convertView;
     }
+
 }
